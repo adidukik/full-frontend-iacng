@@ -1,23 +1,27 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Button } from 'primereact/button';
 import 'primereact/resources/primereact.min.css';
-import { PrimeIcons } from 'primereact/api';
 import 'primeicons/primeicons.css';
 import './ChatBot.css';
-import {sendMessage} from '../../utils/chatMessages'
+import { sendMessage } from '../../utils/chatMessages'; // Assuming sendMessage function is properly exported
+
+interface ChatLogType {
+    sender: string;
+    message: string;
+}
 
 const ChatBot = () => {
-    const [userMessage, setUserMessage] = useState("");
-    const [chatLog, setChatLog] = useState([]);
-    const [isBotResponding, setIsBotResponding] = useState(false);
-    const messagesEndRef = useRef(null);
+    const [userMessage, setUserMessage] = useState<string>("");
+    const [chatLog, setChatLog] = useState<Array<ChatLogType>>([]);
+    const [isBotResponding, setIsBotResponding] = useState<boolean>(false);
+    const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
-    const handleInputChange = (event) => {
+    const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setUserMessage(event.target.value);
     };
 
-    const handleSendMessage = (sender, message) => {
+    const handleSendMessage = (sender: string, message: string) => {
         if (message.trim() !== "") {
             setChatLog(chatLog => [...chatLog, {sender: sender, message: message}]);
             setUserMessage("");
@@ -25,7 +29,7 @@ const ChatBot = () => {
     };
 
     const sendBotResponse = () => {
-        sendMessage()
+        sendMessage(); // This should probably be done differently if sendMessage is asynchronous
         setTimeout(
             ()=>{
                 handleSendMessage("bot", "I am SkyNet");
@@ -57,7 +61,7 @@ const ChatBot = () => {
                     if (!isBotResponding) {
                         handleSendMessage("user", userMessage);
                         setIsBotResponding(true);
-                        sendMessage(userMessage);
+                        sendBotResponse();
                     }
                 }} className="chat-button"/>
             </div>
