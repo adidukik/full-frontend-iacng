@@ -7,24 +7,34 @@ import 'primeicons/primeicons.css';
 import './ChatBot.css';
 
 const ChatBot = () => {
-    const [message, setMessage] = useState("");
+    const [userMessage, setUserMessage] = useState("");
     const [chatLog, setChatLog] = useState([]);
+    const [isBotResponding, setIsBotResponding] = useState(false);
     const messagesEndRef = useRef(null);
 
     const handleInputChange = (event) => {
-        setMessage(event.target.value);
+        setUserMessage(event.target.value);
     };
 
-    const handleSendMessage = () => {
+    const handleSendMessage = (sender, message) => {
         if (message.trim() !== "") {
-            setChatLog([...chatLog, {sender: "user", message: message}]);
-            setMessage("");
+            setChatLog(chatLog => [...chatLog, {sender: sender, message: message}]);
+            setUserMessage("");
         }
+    };
+
+    const sendBotResponse = () => {
+        setTimeout(
+            ()=>{
+                handleSendMessage("bot", "I am SkyNet");
+                setIsBotResponding(false);
+            }, 1500
+        );
     };
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    }
+    };
 
     useEffect(scrollToBottom, [chatLog]);
 
@@ -40,8 +50,14 @@ const ChatBot = () => {
             </div>
             <div className="chat-input-area">
                 <Button icon="pi-file-import" className="chat-button"/>
-                <InputTextarea value={message} onChange={handleInputChange} placeholder="Введите запрос" className="chat-input" rows={2}/>
-                <Button label="Отправить" onClick={handleSendMessage} className="chat-button"/>
+                <InputTextarea value={userMessage} onChange={handleInputChange} placeholder="Введите запрос" className="chat-input" rows={2}/>
+                <Button label="Отправить" onClick={() => {
+                    if (!isBotResponding) {
+                        handleSendMessage("user", userMessage);
+                        setIsBotResponding(true);
+                        sendBotResponse();
+                    }
+                }} className="chat-button"/>
             </div>
         </div>
     );
