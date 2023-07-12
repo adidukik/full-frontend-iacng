@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import ChatBot from './components/ChatBot';
+import ChatBot from './components/ChatBot/ChatBot.tsx';
 import 'primereact/resources/themes/lara-light-blue/theme.css';
 
 function App() {
