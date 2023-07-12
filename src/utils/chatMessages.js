@@ -1,8 +1,7 @@
 import { collection, addDoc } from "firebase/firestore";
-import {db} from "firebase";
+import {db} from "./firebase";
    
-export const sendMessage = async (e, message) => {
-        e.preventDefault();  
+export const sendMessage = async ( message) => {
        
         try {
             const docRef = await addDoc(collection(db, "incoming_messages"), {
