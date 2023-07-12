@@ -5,6 +5,7 @@ import 'primereact/resources/primereact.min.css';
 import { PrimeIcons } from 'primereact/api';
 import 'primeicons/primeicons.css';
 import './ChatBot.css';
+import {sendMessage} from '../../utils/chatMessages'
 
 const ChatBot = () => {
     const [userMessage, setUserMessage] = useState("");
@@ -24,6 +25,7 @@ const ChatBot = () => {
     };
 
     const sendBotResponse = () => {
+        sendMessage()
         setTimeout(
             ()=>{
                 handleSendMessage("bot", "I am SkyNet");
@@ -55,7 +57,7 @@ const ChatBot = () => {
                     if (!isBotResponding) {
                         handleSendMessage("user", userMessage);
                         setIsBotResponding(true);
-                        sendBotResponse();
+                        sendMessage(userMessage);
                     }
                 }} className="chat-button"/>
             </div>
