@@ -1,6 +1,6 @@
-.chat-card {
+.chat-container {
     width: 550px;
-    height: 250px;
+    height: 350px;
     display: flex;
     flex-direction: column;
 }
@@ -11,7 +11,7 @@
     padding: 1em;
     display: flex;
     flex-direction: column;
-    background-color: #f8f8f8;
+    background-color: white;
     border-bottom: 1px solid #ddd;
 }
 
@@ -33,20 +33,12 @@
     line-height: 20px;
     word-break: break-all;
 }
-/* 
-.chat-message::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: -7px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    border-right-color: transparent;
-    border-top-color: transparent;
-    box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
-} */
+
+.chat-message.left {
+    background-color: #f4f4f4;
+    color: #333;
+    align-self: flex-start;
+}
 
 .chat-input-area {
     display: flex;
@@ -72,5 +64,22 @@
     border: none;
     border-radius: 3px;
     margin-left: 5px;
+    margin-right: 5px;
     cursor: pointer;
+}
+
+/* Overriding PrimeReact styles */
+.p-button {
+    background-color: #007ad9;
+    color: white;
+}
+
+.p-button:enabled:hover {
+    background-color: #005999;
+}
+
+.p-inputtextarea {
+    border: 1px solid #ddd;
+    background-color: white;
+    color: #333;
 }

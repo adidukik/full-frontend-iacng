@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Card } from 'primereact/card';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Button } from 'primereact/button';
+import 'primereact/resources/primereact.min.css';
+import { PrimeIcons } from 'primereact/api';
+import 'primeicons/primeicons.css';
 import './ChatBot.css';
 
 const ChatBot = () => {
@@ -27,7 +29,7 @@ const ChatBot = () => {
     useEffect(scrollToBottom, [chatLog]);
 
     return (
-        <Card className="chat-card">
+        <div className="chat-container">
             <div className="chat-content">
                 {chatLog.map((chat, index) => (
                     <div key={index} className={`chat-message ${chat.sender === 'user' ? 'right' : 'left'}`}>
@@ -37,10 +39,11 @@ const ChatBot = () => {
                 <div ref={messagesEndRef} />
             </div>
             <div className="chat-input-area">
+                <Button icon="pi-file-import" className="chat-button"/>
                 <InputTextarea value={message} onChange={handleInputChange} placeholder="Введите запрос" className="chat-input" rows={2}/>
                 <Button label="Отправить" onClick={handleSendMessage} className="chat-button"/>
             </div>
-        </Card>
+        </div>
     );
 };
 
