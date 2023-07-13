@@ -55,7 +55,6 @@ const ChatBot = () => {
                 <div ref={messagesEndRef} />
             </div>
             <div className="chat-input-area">
-                <Button icon="pi-file-import" className="chat-button"/>
                 <InputTextarea value={userMessage} onChange={handleInputChange} placeholder="Введите запрос" className="chat-input" rows={2}/>
                 <Button label="Отправить" onClick={() => {
                     if (!isBotResponding) {
