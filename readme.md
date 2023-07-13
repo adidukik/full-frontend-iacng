@@ -1,7 +1,15 @@
-don't touch firebase.js!!
+# ИАЦНГ Аналитическая панель
 
 
-Tutorial on how to send requests to firestore:
-https://www.freecodecamp.org/news/how-to-use-the-firebase-database-in-react/
+## 13.07.2023: Объединение чатбота и карты
 
-Collection name: "incoming-messages"
+### Технологии
+* [![React][React.js]][React-url]
+
+* [![PrimeReact][PrimeReact]][https://primereact.org]
+* [![Vite][Vite]][https://vitejs.dev]
+
+
+<p align="right">(<a href="#readme-top">вверх</a>)</p>
+
+[React-url]: https://reactjs.org/
