@@ -23,10 +23,10 @@ const Regions = () => {
 // 14	Павлодарская область
 // 15	Северо-Казахстанская область
 // 16	Восточно-Казахстанская область
-        { code: <Button  onClick={()=>alert("You clicked on Astana")}>'Астана'</Button>, name: 'Product 1', category: 'Category 1', quantity: 10 },
-        { code: <Button>'Алматы'</Button>, name: 'Product 2', category: 'Category 2', quantity: 20 },
-        { code: <Button>Северо-Казахстанская область</Button>, name: 'Product 1', category: 'Category 1', quantity: 10 },
-        { code: <Button>'Павлодарская область'</Button>, name: 'Product 2', category: 'Category 2', quantity: 20 },
+        { code: <Button className="p-button-outlined p-button-text">'Астана'</Button>, name: 'Product 1', category: 'Category 1', quantity: 10 },
+        { code: <Button className="p-button-outlined p-button-text">'Алматы'</Button>, name: 'Product 2', category: 'Category 2', quantity: 20 },
+        { code: <Button className="p-button-outlined p-button-text">Северо-Казахстанская область</Button>, name: 'Product 1', category: 'Category 1', quantity: 10 },
+        { code: <Button className="p-button-outlined p-button-text">'Павлодарская область'</Button>, name: 'Product 2', category: 'Category 2', quantity: 20 },
     ];
 
     return (
