@@ -1,13 +1,7 @@
-.chat-container {
-    width: 550px;
-    height: 350px;
-    display: flex;
-    flex-direction: column;
-}
 
 .chat-content {
     overflow-y: auto;
-    flex-grow: 1;
+    height: 180px;
     padding: 1em;
     display: flex;
     flex-direction: column;

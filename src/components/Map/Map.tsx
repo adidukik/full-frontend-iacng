@@ -5,7 +5,7 @@ const Map = () => {
 
     return (
         <Card title="Карта" >
-        <Skeleton width="23rem" height="10rem"></Skeleton>  
+        {/* <Skeleton width="23rem" height="10rem"></Skeleton>   */}
     </Card>
     );
 };

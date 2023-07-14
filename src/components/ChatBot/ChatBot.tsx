@@ -2,10 +2,11 @@ import { useState, useEffect, useRef } from 'react';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Button } from 'primereact/button';
 import { Card } from 'primereact/card';
+import { ScrollPanel } from 'primereact/scrollpanel';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import './ChatBot.css';
-import { sendMessage } from '../../utils/chatMessages'; // Assuming sendMessage function is properly exported
+import { sendMessage } from '../../utils/chatMessages'; 
 
 interface ChatLogType {
     sender: string;
@@ -49,6 +50,7 @@ const ChatBot = () => {
         <Card title="Чат-бот" className='chat-bot'> 
         <div className="chat-container">
             <div className="chat-content">
+                
                 {chatLog.map((chat, index) => (
                     <div key={index} className={`chat-message ${chat.sender === 'user' ? 'right' : 'left'}`}>
                         <p>{chat.message}</p>
