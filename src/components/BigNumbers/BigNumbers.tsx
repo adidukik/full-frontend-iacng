@@ -27,10 +27,14 @@ const BigNumbers: React.FC<BigNumbersProps> = (props) => {
   return (
     <Card title="Сводка" className='big-numbers'>
       <ul>
-      {labels.map(label => <li key = {label}><Button label={label} /></li>)}
+        {labels.map
+              (label => 
+              <li key = {label}>
+                <Button label={label} className="p-button-info"/>
+              </li>)}
       </ul>
-      
     </Card>
+    
   );
 };
 

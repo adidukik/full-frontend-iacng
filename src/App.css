@@ -1,3 +1,24 @@
+.App {
+    display: grid;
+    height: 100vh;
+    grid-gap: 10px;
+    justify-content: start;
+    display: grid; 
+    grid-auto-columns: 1fr; 
+    grid-template-columns: 0.6fr 1.5fr 0.9fr; 
+    grid-template-rows: 0.2fr 1.6fr 1.2fr; 
+    grid-template-areas: 
+    "NavBar NavBar NavBar"
+    "BigNumbers Map Regions"
+    "BigNumbers Graph ChatBot"; 
+  }
+
+.NavBar { grid-area: NavBar; }
+.BigNumbers { grid-area: BigNumbers; }
+.Map { grid-area: Map; }
+.Graph { grid-area: Graph; }
+.Regions { grid-area: Regions; }
+.ChatBot { grid-area: ChatBot; }
 ul{
     list-style-type: none;
     padding: 0;
