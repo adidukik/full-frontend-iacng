@@ -1,3 +1,11 @@
+
+.Regions table{
+    display: block;
+    height: 200px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
 .Regions button{
     width: 100%;
+
 }

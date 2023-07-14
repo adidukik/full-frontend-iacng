@@ -1,7 +1,9 @@
 import { Card } from 'primereact/card';
-import { Button } from 'primereact/button';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 
-import './Regions.css'
+import './Regions.css';
+import { Button } from 'primereact/button';
 
 const Regions = () => {
     const products = [
@@ -21,80 +23,21 @@ const Regions = () => {
 // 14	Павлодарская область
 // 15	Северо-Казахстанская область
 // 16	Восточно-Казахстанская область
-        { code: 'Астана', name: 'Product 1', category: 'Category 1', quantity: 10 },
-        { code: 'Алматы', name: 'Product 2', category: 'Category 2', quantity: 20 },
-        { code: 'Акмолинская область', name: 'Product 1', category: 'Category 1', quantity: 10 },
-        { code: 'Алматинская область', name: 'Product 2', category: 'Category 2', quantity: 20 },
-        { code: 'A001', name: 'Product 1', category: 'Category 1', quantity: 10 },
-        { code: 'A002', name: 'Product 2', category: 'Category 2', quantity: 20 },
-        { code: 'A001', name: 'Product 1', category: 'Category 1', quantity: 10 },
-        { code: 'A002', name: 'Product 2', category: 'Category 2', quantity: 20 },
-        { code: 'A001', name: 'Product 1', category: 'Category 1', quantity: 10 },
-        { code: 'A002', name: 'Product 2', category: 'Category 2', quantity: 20 },
-        { code: 'A001', name: 'Product 1', category: 'Category 1', quantity: 10 },
-        { code: 'A002', name: 'Product 2', category: 'Category 2', quantity: 20 },
-        { code: 'A001', name: 'Product 1', category: 'Category 1', quantity: 10 },
-        { code: 'A002', name: 'Product 2', category: 'Category 2', quantity: 20 },
-        { code: 'A001', name: 'Product 1', category: 'Category 1', quantity: 10 },
-        { code: 'A002', name: 'Product 2', category: 'Category 2', quantity: 20 },
-        { code: 'A001', name: 'Product 1', category: 'Category 1', quantity: 10 },
-        { code: 'A002', name: 'Product 2', category: 'Category 2', quantity: 20 },
+        { code: <Button  onClick={()=>alert("You clicked on Astana")}>'Астана'</Button>, name: 'Product 1', category: 'Category 1', quantity: 10 },
+        { code: <Button>'Алматы'</Button>, name: 'Product 2', category: 'Category 2', quantity: 20 },
+        { code: <Button>Северо-Казахстанская область</Button>, name: 'Product 1', category: 'Category 1', quantity: 10 },
+        { code: <Button>'Павлодарская область'</Button>, name: 'Product 2', category: 'Category 2', quantity: 20 },
     ];
 
     return (
         <Card title="Области" >
-         <table>
-            <thead>
-                <tr>
-                    <th>
-                        <Button label="Область" severity="secondary" />
-                    </th>
-              
-                    <th>
-                        <Button label="Показатель 1" severity="secondary" />
-                    </th>
-              
-                    <th>
-                        <Button label="Показатель 2" severity="secondary" />
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <Button label="Астана"/>
-                    </td>
-                    <td>
-                        1234
-                    </td>
-                    <td>
-                        3232
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <Button label="Павлодарская область"/>
-                    </td>
-                    <td>
-                        1234
-                    </td>
-                    <td>
-                        3232
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <Button label="Северо-Казахстанская область"/>
-                    </td>
-                    <td>
-                        1234
-                    </td>
-                    <td>
-                        3232
-                    </td>
-                </tr>
-            </tbody>
-         </table>
+            <DataTable value={products} tableStyle={{ minWidth: '50rem' }}>
+                <Column field="code" header="Code" sortable style={{ width: '25%' }}></Column>
+                <Column field="name" header="Name" sortable style={{ width: '25%' }}></Column>
+                <Column field="category" header="Category" sortable style={{ width: '25%' }}></Column>
+                <Column field="quantity" header="Quantity" sortable style={{ width: '25%' }}></Column>
+            </DataTable>
+
     </Card>
     );
 };
