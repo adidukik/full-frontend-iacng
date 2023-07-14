@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Button } from 'primereact/button';
+import { Card } from 'primereact/card';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import './ChatBot.css';
@@ -44,7 +45,8 @@ const ChatBot = () => {
 
     useEffect(scrollToBottom, [chatLog]);
 
-    return (
+    return ( 
+        <Card title="Чат-бот" className='chat-bot'> 
         <div className="chat-container">
             <div className="chat-content">
                 {chatLog.map((chat, index) => (
@@ -65,6 +67,7 @@ const ChatBot = () => {
                 }} className="chat-button"/>
             </div>
         </div>
+        </Card>
     );
 };
 
