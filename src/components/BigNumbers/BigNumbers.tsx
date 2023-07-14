@@ -11,19 +11,26 @@ import { Demo } from '../types/types';
 import { ChartData, ChartOptions } from 'chart.js';
 
 import { Card } from 'primereact/card';
-        
+import './BigNumbers.css';
 
 interface BigNumbersProps {
 }
 
 const BigNumbers: React.FC<BigNumbersProps> = (props) => {
+  const labels = [
+    "Добыча нефти",
+    "Добыча газа",
+    "Переработка нефти",
+    "Биржевая цена"
+  ];
+
   return (
-    <Card title="Title">
-    <p className="m-0">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae 
-        numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque quas!
-    </p>
-</Card>
+    <Card title="Сводка" className='big-numbers'>
+      <ul>
+      {labels.map(label => <li key = {label}><Button label={label} /></li>)}
+      </ul>
+      
+    </Card>
   );
 };
 
