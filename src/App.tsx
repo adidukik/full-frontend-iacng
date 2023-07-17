@@ -6,12 +6,15 @@ import ChatBot from './components/ChatBot/ChatBot.jsx';
 import 'primereact/resources/themes/lara-light-blue/theme.css';
 import NavBar from './components/NavBar/NavBar.tsx';
 import Regions from './components/Regions/Regions.tsx';
+import CategoriesMenu from './components/CategoriesMenu/CategoriesMenu.tsx';
 
 function App() {
   return (
     <div className="App">
     <div className="Title" style={{background: "red"}}></div>
-    <div className="TabMenu" style={{background: "green"}}></div>
+    <div className="TabMenu">
+      <CategoriesMenu></CategoriesMenu>
+    </div>
     <div className="BigNumbers" style={{background: "yellow"}}></div>
     <div className="ScrollingText" style={{background: "magenta"}}></div>
     <div className="Regions" style={{background: "blue"}}></div>
