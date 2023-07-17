@@ -6,16 +6,16 @@
   grid-auto-rows: 1fr; 
   grid-template-columns: 1fr 2.24fr 1.11fr 1.35fr; 
   grid-template-rows: 1.73fr 1fr 2.25fr 11.8fr 3.96fr; 
-  gap: 0px 0px; 
+  gap: 10px; 
   grid-template-areas: 
     "Title Title Title Title"
-    "TabMenu TabMenu TabMenu TabMenu"
+    "CategoriesMenu CategoriesMenu CategoriesMenu CategoriesMenu"
     "BigNumbers ScrollingText ScrollingText ScrollingText"
     "BigNumbers Map Map Regions"
     "BigNumbers Graph ChatBot ChatBot"; 
 }
 .Title { grid-area: Title; }
-.TabMenu { grid-area: TabMenu; }
+.CategiruesNeby { grid-area: TabMenu; }
 .BigNumbers { grid-area: BigNumbers; }
 .ScrollingText { grid-area: ScrollingText; }
 .Regions { grid-area: Regions; }

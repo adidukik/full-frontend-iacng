@@ -14,7 +14,7 @@ function App() {
     <div className="Title" style={{background: "red"}}>
       <Title />
     </div>
-    <div className="TabMenu" style={{background: "green"}}></div>
+    <div className="CategoriesMenu" style={{background: "green"}}></div>
     <div className="BigNumbers" style={{background: "yellow"}}></div>
     <div className="ScrollingText" style={{background: "magenta"}}></div>
     <div className="Regions" style={{background: "blue"}}></div>

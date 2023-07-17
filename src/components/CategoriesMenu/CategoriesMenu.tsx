@@ -5,9 +5,9 @@ import React, { useState } from 'react'
 const CategoriesMenu = () => {
     const [activeIndex, setActiveIndex] = useState(3);
     const items = [
-        {label: 'нефтегазовая отрасль', icon: 'pi pi-fw pi-home'},
+        {label: 'Нефтегазовая отрасль', icon: 'pi pi-fw pi-home'},
         {label: 'Электроэнергетика', icon: 'pi pi-fw pi-calendar'},
-        {label: 'урановая промышленность', icon: 'pi pi-fw pi-pencil'},
+        {label: 'Урановая промышленность', icon: 'pi pi-fw pi-pencil'},
     ];
 
     return (
