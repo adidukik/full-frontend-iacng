@@ -7,15 +7,16 @@
   grid-template-columns: 1fr 2.24fr 1.11fr 1.35fr; 
   grid-template-rows: 1.73fr 1fr 2.25fr 11.8fr 3.96fr; 
   gap: 10px; 
-  grid-template-areas: 
+  grid-template-areas:  
     "Title Title Title Title"
     "CategoriesMenu CategoriesMenu CategoriesMenu CategoriesMenu"
     "BigNumbers ScrollingText ScrollingText ScrollingText"
     "BigNumbers Map Map Regions"
     "BigNumbers Graph ChatBot ChatBot"; 
 }
+
 .Title { grid-area: Title; }
-.CategiruesNeby { grid-area: TabMenu; }
+.CategoriesMenu { grid-area: CategoriesMenu ; }
 .BigNumbers { grid-area: BigNumbers; }
 .ScrollingText { grid-area: ScrollingText; }
 .Regions { grid-area: Regions; }
@@ -24,3 +25,9 @@
 .Graph { grid-area: Graph; }
 
 ul { list-style-type: none; padding: 0; }
+
+
+.Title { 
+  grid-area: Title; 
+  height: 100%;
+}

@@ -14,29 +14,29 @@ function App() {
     <div className="App">
     <div className="Title" style={{background:"yellow"}}>
       {/* <Title /> */}
+      <p>СИТУАЦИОННО-АНАЛИТИЧЕСКИЙ ЦЕНТР ТОПЛИВНО-ЭНЕРГЕТИЧЕСКОГО КОМПЛЕКСА РЕСПУБЛИКИ КАЗАХСТАН</p>
     </div>
-    <div className="TabMenu">
-      <CategoriesMenu></CategoriesMenu>
+    <div className="CategoriesMenu">
+      {/* <CategoriesMenu /> */}
     </div>
     <div className="BigNumbers">
-      <BigNumbers></BigNumbers>
+      <BigNumbers />
     </div>
     <div className="ScrollingText"></div>
     <div className="Regions" style={{background:"green"}}>
       {/* <Regions></Regions> */}
     </div>
     <div className="CategoriesMenu" style={{background: "green"}}></div>
-    <div className="BigNumbers" style={{background: "yellow"}}></div>
     <div className="ScrollingText" style={{background: "magenta"}}></div>
     <div className="Regions" style={{background: "blue"}}></div>
     <div className="Map" style={{background: "#e5e5e5"}}>
       <Map />
     </div>
     <div className="ChatBot" style={{background:"magenta"}}>
-      {/* <ChatBot /> */}
+        <ChatBot />
     </div>
     <div className="Graph" style={{background:"red"}}>
-      {/* <Graph /> */}
+      <Graph />
     </div>
 </div>
   );

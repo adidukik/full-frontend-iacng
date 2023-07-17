@@ -25,7 +25,7 @@ const Graph = () => {
         };
         const options = {
             maintainAspectRatio: true,
-            aspectRatio: 0.6,
+            aspectRatio: 1.0,
             plugins: {
                 legend: {
                     labels: {
@@ -58,7 +58,9 @@ const Graph = () => {
     }, []);
     return (
         <Card title="График" >
-            <Chart type="line" data={chartData} options={chartOptions} />
+             <div style={{width: '14.5%', height: '20%'}}>
+                <Chart type="line" data={chartData} options={chartOptions} />
+            </div>
 
         </Card>
     );

@@ -47,7 +47,7 @@ const ChatBot = () => {
     useEffect(scrollToBottom, [chatLog]);
 
     return ( 
-        <Card title="Чат-бот" className='chat-bot'> 
+        <Card className='chat-bot'> 
         <div className="chat-container">
             <div className="chat-content">
                 

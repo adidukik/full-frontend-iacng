@@ -1,12 +1,9 @@
 import { Card } from 'primereact/card';
-import { Skeleton } from 'primereact/skeleton';
 
 const Title = () => {
-
     return (
-        <Card title="">
+        <Card className="title-card" title="СИТУАЦИОННО-АНАЛИТИЧЕСКИЙ ЦЕНТР ТОПЛИВНО-ЭНЕРГЕТИЧЕСКОГО КОМПЛЕКСА РЕСПУБЛИКИ КАЗАХСТАН">
         </Card>
-
     );
 };
 
