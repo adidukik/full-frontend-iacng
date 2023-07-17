@@ -19,11 +19,9 @@ const CategoriesMenu = () => {
     //     </div>
     // )
     const items: MenuItem[] = [
-        {label: 'Home', icon: 'pi pi-fw pi-home'},
-        {label: 'Calendar', icon: 'pi pi-fw pi-calendar'},
-        {label: 'Edit', icon: 'pi pi-fw pi-pencil'},
-        {label: 'Documentation', icon: 'pi pi-fw pi-file'},
-        {label: 'Settings', icon: 'pi pi-fw pi-cog'}
+        {label: 'нефтегазовая отрасль', icon: 'pi pi-fw pi-home'},
+        {label: 'электроэнергетика', icon: 'pi pi-fw pi-calendar'},
+        {label: 'урановая промышленность', icon: 'pi pi-fw pi-pencil'},
     ];
 
     return (
