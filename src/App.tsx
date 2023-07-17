@@ -8,6 +8,7 @@ import NavBar from './components/NavBar/NavBar.tsx';
 import Regions from './components/Regions/Regions.tsx';
 import CategoriesMenu from './components/CategoriesMenu/CategoriesMenu.tsx';
 import Title from './components/Title/Title.tsx';
+import ScrollingText from './components/ScrollingText/ScrollingText.tsx';
 
 function App() {
   return (
@@ -27,7 +28,12 @@ function App() {
       {/* <Regions></Regions> */}
     </div>
     <div className="CategoriesMenu" style={{background: "green"}}></div>
-    <div className="ScrollingText" style={{background: "magenta"}}></div>
+    {/* <div className="ScrollingText" style={{background: "magenta"}}>
+      <ScrollingText />
+    </div> */}
+    <div className="ScrollingText">
+      <ScrollingText />
+    </div>
     <div className="Regions" style={{background: "blue"}}></div>
     <div className="Map" style={{background: "#e5e5e5"}}>
       <Map />

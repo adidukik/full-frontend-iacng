@@ -12,6 +12,7 @@
   "dependencies": {
     "chart.js": "^4.3.0",
     "firebase": "^10.0.0",
+    "nice-react-ticker": "^2.1.0",
     "primeicons": "^6.0.1",
     "primereact": "^9.6.0",
     "react": "^18.2.0",
