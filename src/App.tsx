@@ -10,25 +10,15 @@ import Regions from './components/Regions/Regions.tsx';
 function App() {
   return (
     <div className="App">
-      <div className="NavBar">
-      <NavBar />
-      </div>
-      <div className="BigNumbers">
-        <BigNumbers />
-      </div>
-      <div className="Map">
-        <Map />
-      </div>
-      <div className="Graph">
-        <Graph />
-      </div>
-      <div className="Regions">
-        <Regions />
-      </div>
-      <div className="ChatBot">
-        <ChatBot />
-      </div>
-  </div>
+    <div className="Title" style={{background: "red"}}></div>
+    <div className="TabMenu" style={{background: "green"}}></div>
+    <div className="BigNumbers" style={{background: "yellow"}}></div>
+    <div className="ScrollingText" style={{background: "magenta"}}></div>
+    <div className="Regions" style={{background: "blue"}}></div>
+    <div className="Map" style={{background: "#e5e5e5"}}></div>
+    <div className="ChatBot" style={{background: "black"}}></div>
+    <div className="Graph"></div>
+</div>
   );
 }
 

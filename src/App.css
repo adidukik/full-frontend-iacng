@@ -1,23 +1,26 @@
 .App {
-    display: grid;
-    height: 100vh;
-    grid-gap: 10px;
-    justify-content: start;
-    display: grid; 
-    grid-auto-columns: 1fr; 
-    grid-template-columns: 0.6fr 1.5fr 0.9fr; 
-    grid-template-rows: 0.2fr 1.6fr 1.2fr; 
-    grid-template-areas: 
-        "NavBar NavBar NavBar"
-        "BigNumbers Map Regions"
-        "BigNumbers Graph ChatBot"; 
-  }
-
-.NavBar { grid-area: NavBar; }
+  width: 100vw;
+  height: 100vh;
+  display: grid; 
+  grid-auto-columns: 1fr; 
+  grid-auto-rows: 1fr; 
+  grid-template-columns: 1fr 2.24fr 1.11fr 1.35fr; 
+  grid-template-rows: 1.73fr 1fr 2.25fr 11.8fr 3.96fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "Title Title Title Title"
+    "TabMenu TabMenu TabMenu TabMenu"
+    "BigNumbers ScrollingText ScrollingText ScrollingText"
+    "BigNumbers Map Map Regions"
+    "BigNumbers Graph ChatBot ChatBot"; 
+}
+.Title { grid-area: Title; }
+.TabMenu { grid-area: TabMenu; }
 .BigNumbers { grid-area: BigNumbers; }
-.Map { grid-area: Map; }
-.Graph { grid-area: Graph; }
+.ScrollingText { grid-area: ScrollingText; }
 .Regions { grid-area: Regions; }
+.Map { grid-area: Map; }
 .ChatBot { grid-area: ChatBot; }
+.Graph { grid-area: Graph; }
 
 ul { list-style-type: none; padding: 0; }

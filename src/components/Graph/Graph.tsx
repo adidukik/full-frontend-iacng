@@ -24,7 +24,7 @@ const Graph = () => {
             ]
         };
         const options = {
-            maintainAspectRatio: false,
+            maintainAspectRatio: true,
             aspectRatio: 0.6,
             plugins: {
                 legend: {
