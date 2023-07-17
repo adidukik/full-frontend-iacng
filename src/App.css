@@ -31,3 +31,20 @@ ul { list-style-type: none; padding: 0; }
   grid-area: Title; 
   height: 100%;
 }
+
+.custom-ticker {
+  font-family: Arial, sans-serif;
+  color: blue;
+}
+
+.card {
+  background: var(--surface-card);
+  border: 0.1px solid var(--surface-border);
+  margin-bottom: 0rem;
+  box-shadow: var(--card-shadow);
+  border-radius: $borderRadius;
+  text-align: center;
+  &:last-child {
+      margin-bottom: 0;
+  }
+}

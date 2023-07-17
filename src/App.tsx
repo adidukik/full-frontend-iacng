@@ -14,11 +14,11 @@ function App() {
   return (
     <div className="App">
     <div className="Title" style={{background:"yellow"}}>
-      {/* <Title /> */}
-      <p>СИТУАЦИОННО-АНАЛИТИЧЕСКИЙ ЦЕНТР ТОПЛИВНО-ЭНЕРГЕТИЧЕСКОГО КОМПЛЕКСА РЕСПУБЛИКИ КАЗАХСТАН</p>
+      <Title />
+      {/* <p>СИТУАЦИОННО-АНАЛИТИЧЕСКИЙ ЦЕНТР ТОПЛИВНО-ЭНЕРГЕТИЧЕСКОГО КОМПЛЕКСА РЕСПУБЛИКИ КАЗАХСТАН</p> */}
     </div>
     <div className="CategoriesMenu">
-      {/* <CategoriesMenu /> */}
+      <CategoriesMenu />
     </div>
     <div className="BigNumbers">
       <BigNumbers />
