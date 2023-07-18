@@ -1,0 +1,12 @@
+.card span.title {
+    font-weight: 1000; /* Adjust for how bold you want the text to be */
+    line-height: 2rem; Adjust to fit the line-height you desire
+    display: block; To ensure the span behaves like a block level element
+    text-align: center; /* Center align the text */
+    font-family: 'Montserrat';
+    color: #ffffff;
+}
+
+.card {
+    background: #545454;
+}

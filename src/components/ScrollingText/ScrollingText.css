@@ -1,0 +1,11 @@
+span.title {
+    font-weight: 1000; 
+    line-height: 2rem;
+    font-family: 'Montserrat';
+    color: #ff3131;
+}
+
+.scrollingText {
+    color: #FFFFFF;
+    font-family: 'Montserrat';
+}

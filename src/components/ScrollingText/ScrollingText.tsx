@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Ticker, { FinancialTicker, NewsTicker } from 'nice-react-ticker';
+import './ScrollingText.css'
+
 const ScrollingText = () => {
     return (
-        <Ticker>
-            <NewsTicker id="6" title="Авария на АНПЗ и МАЭК. Добыча нефти была приостановлена на четырех предприятиях в двух областях Казахстана" url="https://kaztag.kz/ru/news/dobycha-nefti-upala-na-21-posle-avariy-na-anpz-i-maek-na-zapade-kazakhstana" meta="11:10:20" />
-        </Ticker>
+        <div>
+        <span className="title">ЧС и ЧП по отрасли</span>
+        <div className="card" >
+        <marquee>
+            <span className="scrollingText">НКОК: 25.04.2023 снижение суточной добычи в связи с проведением внеплановых работ на морском комплексе</span>
+        </marquee>
+        </div>
+        </div>
     );
 };
 

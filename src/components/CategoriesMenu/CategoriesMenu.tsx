@@ -1,21 +1,51 @@
-import React, { useState } from 'react';
-import { TabMenu } from 'primereact/tabmenu';
-import { MenuItem } from 'primereact/menuitem';
+// import React, { useState } from 'react';
+// import { TabMenu } from 'primereact/tabmenu';
+// import { MenuItem } from 'primereact/menuitem';
+// import './CategoriesMenu.css';
+
+// const CategoriesMenu = () => {
+//     const items: MenuItem[] = [
+//         {label: 'нефтегазовая отрасль'},
+//         {label: 'электроэнергетика'},
+//         {label: 'урановая промышленность'},
+//     ];
+
+//     return (
+//         <div className="card">
+//             <div className = "center">
+//                 <TabMenu model={items} />
+//             </div>
+//         </div>
+//     )
+// }
+
+// export default CategoriesMenu
+
+
+import React from 'react';
+import { Nav } from 'react-bootstrap';
+import './CategoriesMenu.css';
 
 const CategoriesMenu = () => {
-    const items: MenuItem[] = [
-        {label: 'нефтегазовая отрасль'},
-        {label: 'электроэнергетика'},
-        {label: 'урановая промышленность'},
+    const items = [
+        'нефтегазовая отрасль',
+        'электроэнергетика',
+        'урановая промышленность',
     ];
 
     return (
-        <div className="card">
+        <div className="card-categories categories-menu">
             <div className = "center">
-            <TabMenu model={items} />
+                <Nav variant="tabs" defaultActiveKey="#нефтегазовая отрасль">
+                {items.map((item, idx) => (
+                    <Nav.Item key={idx}>
+                    <Nav.Link href={`#${item}`}>{item}</Nav.Link>
+                    </Nav.Item>
+                ))}
+                </Nav>
             </div>
         </div>
     )
 }
 
-export default CategoriesMenu
+export default CategoriesMenu;

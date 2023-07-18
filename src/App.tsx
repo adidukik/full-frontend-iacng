@@ -1,4 +1,5 @@
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import BigNumbers from './components/BigNumbers/BigNumbers.tsx';
 import Map from './components/Map/Map.tsx';
 import Graph from './components/Graph/graph.tsx';
@@ -16,7 +17,7 @@ function App() {
     {/* <div className="Title" style={{background: 'green'}}>
       <Title />
     </div> */}
-    <div className="Title">
+        <div className="Title">
       <Title />
     </div>
     {/* <div className = "center"> */}
@@ -29,7 +30,7 @@ function App() {
       <BigNumbers />
     </div>
     <div className="ScrollingText"></div>
-    <div className="Regions" style={{background:"green"}}>
+    <div className="Regions">
       {/* <Regions></Regions> */}
     </div>
     {/* <div className="CategoriesMenu" style={{background: "green"}}></div> */}

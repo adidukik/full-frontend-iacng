@@ -1,9 +1,10 @@
 import { Card } from 'primereact/card';
+import './Title.css';
 
 const Title = () => {
     return (
-        <div className="card">
-            <p>СИТУАЦИОННО-АНАЛИТИЧЕСКИЙ ЦЕНТР ТОПЛИВНО-ЭНЕРГЕТИЧЕСКОГО КОМПЛЕКСА РЕСПУБЛИКИ КАЗАХСТАН</p>
+        <div className="card" >
+            <span className="title">СИТУАЦИОННО-АНАЛИТИЧЕСКИЙ ЦЕНТР ТОПЛИВНО-ЭНЕРГЕТИЧЕСКОГО КОМПЛЕКСА РЕСПУБЛИКИ КАЗАХСТАН</span>
         </div>
     );
 };

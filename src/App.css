@@ -1,3 +1,5 @@
+
+
 .App {
   width: 100vw;
   height: 100vh;
@@ -5,8 +7,8 @@
   grid-auto-columns: 1fr; 
   grid-auto-rows: 1fr; 
   grid-template-columns: 1fr 2.24fr 1.11fr 1.35fr; 
-  grid-template-rows: 1.73fr 1fr 2.25fr 11.8fr 3.96fr; 
-  gap: 10px; 
+  grid-template-rows: 1fr 1fr 2.25fr 11.8fr 3.96fr; 
+  gap: 2px 5px; 
   grid-template-areas:  
     "Title Title Title Title"
     "CategoriesMenu CategoriesMenu CategoriesMenu CategoriesMenu"
@@ -23,9 +25,6 @@
 .Map { grid-area: Map; }
 .ChatBot { grid-area: ChatBot; }
 .Graph { grid-area: Graph; }
-
-ul { list-style-type: none; padding: 0; }
-
 
 .Title { 
   grid-area: Title; 
@@ -51,5 +50,4 @@ ul { list-style-type: none; padding: 0; }
 
 .center {
   align-items: center;
-
 }
