@@ -47,7 +47,7 @@ const ChatBot = () => {
     useEffect(scrollToBottom, [chatLog]);
 
     return ( 
-        <Card className='chat-bot'> 
+        <div className="card">
         <div className="chat-container">
             <div className="chat-content">
                 
@@ -69,7 +69,7 @@ const ChatBot = () => {
                 }} className="chat-button"/>
             </div>
         </div>
-        </Card>
+        </div>
     );
 };
 

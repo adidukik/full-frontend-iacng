@@ -57,12 +57,11 @@ const Graph = () => {
         setChartOptions(options);
     }, []);
     return (
-        <Card title="График" >
-             <div style={{width: '14.5%', height: '20%'}}>
+        <div className="card">
+             <div style={{width: '40%', height: '20%'}}>
                 <Chart type="line" data={chartData} options={chartOptions} />
             </div>
-
-        </Card>
+        </div>
     );
 };
 

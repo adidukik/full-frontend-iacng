@@ -13,13 +13,18 @@ import ScrollingText from './components/ScrollingText/ScrollingText.tsx';
 function App() {
   return (
     <div className="App">
-    <div className="Title" style={{background:"yellow"}}>
+    {/* <div className="Title" style={{background: 'green'}}>
       <Title />
-      {/* <p>СИТУАЦИОННО-АНАЛИТИЧЕСКИЙ ЦЕНТР ТОПЛИВНО-ЭНЕРГЕТИЧЕСКОГО КОМПЛЕКСА РЕСПУБЛИКИ КАЗАХСТАН</p> */}
+    </div> */}
+    <div className="Title">
+      <Title />
     </div>
+    {/* <div className = "center"> */}
     <div className="CategoriesMenu">
       <CategoriesMenu />
     </div>
+    {/* </div> */}
+
     <div className="BigNumbers">
       <BigNumbers />
     </div>
@@ -27,10 +32,7 @@ function App() {
     <div className="Regions" style={{background:"green"}}>
       {/* <Regions></Regions> */}
     </div>
-    <div className="CategoriesMenu" style={{background: "green"}}></div>
-    {/* <div className="ScrollingText" style={{background: "magenta"}}>
-      <ScrollingText />
-    </div> */}
+    {/* <div className="CategoriesMenu" style={{background: "green"}}></div> */}
     <div className="ScrollingText">
       <ScrollingText />
     </div>
@@ -41,7 +43,7 @@ function App() {
     <div className="ChatBot" style={{background:"magenta"}}>
         <ChatBot />
     </div>
-    <div className="Graph" style={{background:"red"}}>
+    <div className="Graph">
       <Graph />
     </div>
 </div>

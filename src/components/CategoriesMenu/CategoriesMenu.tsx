@@ -4,14 +4,16 @@ import { MenuItem } from 'primereact/menuitem';
 
 const CategoriesMenu = () => {
     const items: MenuItem[] = [
-        {label: 'нефтегазовая отрасль', icon: 'pi pi-fw pi-home'},
-        {label: 'электроэнергетика', icon: 'pi pi-fw pi-calendar'},
-        {label: 'урановая промышленность', icon: 'pi pi-fw pi-pencil'},
+        {label: 'нефтегазовая отрасль'},
+        {label: 'электроэнергетика'},
+        {label: 'урановая промышленность'},
     ];
 
     return (
         <div className="card">
+            <div className = "center">
             <TabMenu model={items} />
+            </div>
         </div>
     )
 }

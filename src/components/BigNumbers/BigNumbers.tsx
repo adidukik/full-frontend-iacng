@@ -9,6 +9,7 @@ import { LayoutContext } from '../layout/context/layoutcontext';
 import Link from 'next/link';
 import { Demo } from '../types/types';
 import { ChartData, ChartOptions } from 'chart.js';
+import { TabMenu } from 'primereact/tabmenu';
 
 import { Card } from 'primereact/card';
 import './BigNumbers.css';
@@ -16,16 +17,26 @@ import './BigNumbers.css';
 interface BigNumbersProps {
 }
 
+const items: MenuItem[] = [
+  {label: 'сутки'},
+  {label: 'месяц'},
+  {label: 'год'},
+];
+
 const BigNumbers: React.FC<BigNumbersProps> = (props) => {
   const labels = [
-    "Добыча нефти",
+    "Добыча нефти (тонн) план - 146125 факт 145000",
     "Добыча газа",
-    "Переработка нефти",
-    "Биржевая цена"
+    "Производство нефтепродуктов",
+    "Остаток НП (дни)",
+    "Экспорт нефти %, нефтепродуктов %",
+    "Цены на нефть, внутренний рынок - 40, на экспорт - 40 Бензин 92 РК - 203"
   ];
 
   return (
-    <Card title="Сводка" className='big-numbers'>
+    <div className="card">
+      <TabMenu model={items} />
+
       <ul>
         {labels.map
               (label => 
@@ -33,7 +44,7 @@ const BigNumbers: React.FC<BigNumbersProps> = (props) => {
                 <Button label={label} className="p-button-raised p-button-text"/>
               </li>)}
       </ul>
-    </Card>
+    </div>
     
   );
 };
