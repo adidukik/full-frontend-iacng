@@ -1,6 +1,6 @@
 import './App.css';
 import BigNumbers from './components/BigNumbers/BigNumbers.tsx';
-import Map from './components/Map/Map.tsx';
+import AppMap from './components/Map/AppMap.tsx';
 import Graph from './components/Graph/graph.tsx';
 import ChatBot from './components/ChatBot/ChatBot.jsx';
 import 'primereact/resources/themes/lara-light-blue/theme.css';
@@ -15,18 +15,18 @@ function App() {
     <div className="Title" style={{background:"yellow"}}>
       {/* <Title /> */}
     </div>
-    <div className="TabMenu">
-      <CategoriesMenu></CategoriesMenu>
+    <div className="TabMenu" style={{background:"pink"}}>
+      {/* <CategoriesMenu></CategoriesMenu> */}
     </div>
-    <div className="BigNumbers">
+    <div className="BigNumbers" style={{background:"yellow"}}>
       <BigNumbers></BigNumbers>
     </div>
     <div className="ScrollingText"></div>
     <div className="Regions" style={{background:"green"}}>
       {/* <Regions></Regions> */}
     </div>
-    <div className="Map" style={{background:"blue"}}>
-      {/* <Map /> */}
+    <div className="Map">
+      <AppMap />
     </div>
     <div className="ChatBot" style={{background:"magenta"}}>
       {/* <ChatBot /> */}
