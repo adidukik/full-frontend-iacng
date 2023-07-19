@@ -68,7 +68,7 @@ const BigNumbers: React.FC<BigNumbersProps> = (props) => {
 
   return (
 
-    <Card className="big-numbers">
+    <Card className="big-numbers app-card">
       <Card.Header>
         <Nav variant="tabs" defaultActiveKey="#сутки">
           {items.map((item, idx) => (
@@ -82,7 +82,7 @@ const BigNumbers: React.FC<BigNumbersProps> = (props) => {
         <ul>
           {labels.map(label => 
             <li key={label}>
-              <Button variant="outline-primary">{label}</Button>
+              <Button variant="outline-primary" className='big-numbers__btn'>{label}</Button>
             </li>)}
         </ul>
       </Card.Body>

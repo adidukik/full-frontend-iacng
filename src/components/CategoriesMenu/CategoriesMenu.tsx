@@ -38,8 +38,8 @@ const CategoriesMenu = () => {
             <div className = "center">
                 <Nav variant="tabs" defaultActiveKey="#нефтегазовая отрасль">
                 {items.map((item, idx) => (
-                    <Nav.Item key={idx}>
-                    <Nav.Link href={`#${item}`}>{item}</Nav.Link>
+                    <Nav.Item key={idx} >
+                    <Nav.Link href={`#${item}`} className="categories-menu__category">{item}</Nav.Link>
                     </Nav.Item>
                 ))}
                 </Nav>

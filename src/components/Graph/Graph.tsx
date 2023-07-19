@@ -2,6 +2,8 @@ import { Card } from 'primereact/card';
 import { Chart } from 'primereact/chart';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 
+import './Graph.css'
+
 const Graph = () => {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});

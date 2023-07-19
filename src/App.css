@@ -1,5 +1,4 @@
 
-
 .App {
   width: 100vw;
   height: 100vh;
@@ -8,13 +7,16 @@
   grid-auto-rows: 1fr; 
   grid-template-columns: 1fr 2.24fr 1.11fr 1.35fr; 
   grid-template-rows: 1fr 1fr 2.25fr 11.8fr 3.96fr; 
-  gap: 2px 5px; 
   grid-template-areas:  
     "Title Title Title Title"
     "CategoriesMenu CategoriesMenu CategoriesMenu CategoriesMenu"
     "BigNumbers ScrollingText ScrollingText ScrollingText"
     "BigNumbers Map Map Regions"
     "BigNumbers Graph ChatBot ChatBot"; 
+
+  font-family: "Montserrat", sans-serif;
+  padding: 10px 24px;
+
 }
 
 .Title { grid-area: Title; }
@@ -36,18 +38,17 @@
   color: blue;
 }
 
-.card {
-  background: var(--surface-card);
-  border: 0px solid var(--surface-border);
-  margin-bottom: 0rem;
-  box-shadow: var(--card-shadow);
-  border-radius: $borderRadius;
-  text-align: center;
-  &:last-child {
-      margin-bottom: 0;
-  }
-}
-
 .center {
   align-items: center;
+}
+div.card{
+  background-color: #545454;
+  height: 100%;
+  border-radius: 0;
+}
+*{
+  box-sizing: border-box;
+}
+button.btn{
+  border-radius: 0;
 }

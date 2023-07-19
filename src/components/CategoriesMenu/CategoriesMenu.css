@@ -50,6 +50,9 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
+.CategoriesMenu{
+    margin-bottom: 10px;
+}
 .categories-menu .nav-tabs {
     max-height: 50px; 
     display: flex;
@@ -66,6 +69,7 @@
     background-color: #A6A6A6;
     font-weight: 400;
     color: #ffffff; 
+   border: 0;
 }
 
 .categories-menu .nav-tabs .nav-item.show .nav-link, .categories-menu .nav-tabs .nav-link.active {
@@ -85,4 +89,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.categories-menu .categories-menu__category{
+    border-radius: 0 0 20px 20px;
+}
+.categories-menu a{
+    margin: 0;
 }

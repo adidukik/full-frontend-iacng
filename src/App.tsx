@@ -2,7 +2,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BigNumbers from './components/BigNumbers/BigNumbers.tsx';
 import Map from './components/Map/Map.tsx';
-import Graph from './components/Graph/graph.tsx';
+import Graph from './components/Graph/Graph.tsx';
 import ChatBot from './components/ChatBot/ChatBot.jsx';
 import 'primereact/resources/themes/lara-light-blue/theme.css';
 import NavBar from './components/NavBar/NavBar.tsx';
@@ -17,7 +17,7 @@ function App() {
     {/* <div className="Title" style={{background: 'green'}}>
       <Title />
     </div> */}
-        <div className="Title">
+        <div className="Title align-items-center d-flex w-100">
       <Title />
     </div>
     {/* <div className = "center"> */}

@@ -3,8 +3,8 @@ import './Title.css';
 
 const Title = () => {
     return (
-        <div className="card" >
-            <span className="title">СИТУАЦИОННО-АНАЛИТИЧЕСКИЙ ЦЕНТР ТОПЛИВНО-ЭНЕРГЕТИЧЕСКОГО КОМПЛЕКСА РЕСПУБЛИКИ КАЗАХСТАН</span>
+        <div className="card w-100" >
+            <span className="title d-flex align-items-center justify-content-center">СИТУАЦИОННО-АНАЛИТИЧЕСКИЙ ЦЕНТР ТОПЛИВНО-ЭНЕРГЕТИЧЕСКОГО КОМПЛЕКСА РЕСПУБЛИКИ КАЗАХСТАН</span>
         </div>
     );
 };
