@@ -4,7 +4,7 @@ import TileLayer from 'ol/layer/Tile';
 import OSM from "ol/source/OSM";
 import Extent from 'ol/interaction/Extent.js'
 import './AppMap.css';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { fromLonLat, useGeographic } from 'ol/proj';
 import { Card } from 'primereact/card';
 import VectorSource from 'ol/source/Vector';
@@ -22,18 +22,27 @@ import fieldsData from '../../assets/geo/fields.json';
 import { Feature } from 'ol';
 import { getCenter } from 'ol/extent';
 import Geometry from 'ol/geom/Geometry';
+import { regionNames } from '../Regions/Regions';
 
-const AppMap = () => {
+interface AppMapProps{
+  currentRegion:string;
+}
+
+const AppMap = ({currentRegion}: AppMapProps) => {
   // useGeographic();
   const [zoom, setZoom] = useState(4);
   const [mapCenter, setMapCenter] = useState([7347086.392356056, 6106854.834885074]);
 
-  console.log(regionsData.features);
+ 
   const format = new GeoJSON();
   const features = format.readFeatures(regionsData);
+  console.log(features[0].values_.name_ru);
 
-  const view = new View({ center: mapCenter, zoom: zoom });
-  const flyTo = (location, done) => {
+ 
+
+  const view = useMemo(() => new View({ center: mapCenter, zoom: zoom }), [mapCenter, zoom]);
+
+  const flyTo = useCallback((location, done) => {
     const duration = 2000;
     let parts = 2;
     let called = false;
@@ -66,7 +75,7 @@ const AppMap = () => {
       },
       callback
     );
-  }
+  }, [view,zoom]);
 
   const style = new Style({
     fill: new Fill({
@@ -74,18 +83,18 @@ const AppMap = () => {
     }),
   });
 
-  const vectorLayer = new VectorLayer({
-    source: new VectorSource({
-      features: new GeoJSON().readFeatures(regionsData),
+ const vectorLayer = useMemo(() => new VectorLayer({
+  source: new VectorSource({
+    features: new GeoJSON().readFeatures(regionsData),
+  }),
+  style: function (feature) {
+    const color = feature.get('COLOR') || '#eeeeee';
+    style.getFill().setColor(color);
+    return style;
+  },
+}), [regionsData, style]);
 
-    }),
-    style: function (feature) {
-      const color = feature.get('COLOR') || '#eeeeee';
-      style.getFill().setColor(color);
-      return style;
-    },
-  });
-
+  vectorLayer.setOpacity(0.5);
 
   const ref = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Map>(null);
@@ -107,13 +116,17 @@ const AppMap = () => {
   //  // mapRef.current?.getView().setCenter([0,0.6]);
   // }, [mapRef, zoom]);
 
-  setTimeout(() => {
-    const feature = features[0];
+   if(currentRegion){
+    console.log(currentRegion);
+    const feature =  features.filter(feature => feature.values_.name_ru === currentRegion)[0]
+    //.filter(feature => feature.values_.name_ru === currentRegion)
     console.log(feature);
     const extent = feature.getGeometry().getExtent();
     const center = getCenter(extent);
     flyTo(center, (e) => { console.log(e) });
-  }, 2000);
+  }
+
+
 
   return (
     <>

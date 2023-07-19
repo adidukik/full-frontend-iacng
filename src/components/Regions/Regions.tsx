@@ -4,29 +4,23 @@ import { Column } from 'primereact/column';
 import './Regions.css';
 import { Button } from 'primereact/button';
 
-const Regions = () => {
-    const products = [
-//         01	Астана
-// 02	Алматы
-// 03	Акмолинская область
-// 04	Актюбинская область
-// 05	Алматинская область
-// 06	Атырауская область
-// 07	Западно-Казахстанская область
-// 08	Жамбылская область
-// 09	Карагандинская область
-// 10	Костанайская область
-// 11	Кызылординская область
-// 12	Мангистауская область
-// 13	Южно-Казахстанская область
-// 14	Павлодарская область
-// 15	Северо-Казахстанская область
-// 16	Восточно-Казахстанская область
-        { code: <Button className="p-button-outlined p-button-text">Астана</Button>, name: 'Product 1', category: 'Category 1', quantity: 10 },
-        { code: <Button className="p-button-outlined p-button-text">Алматы</Button>, name: 'Product 2', category: 'Category 2', quantity: 20 },
-        { code: <Button className="p-button-outlined p-button-text">Северо-Казахстанская область</Button>, name: 'Product 1', category: 'Category 1', quantity: 10 },
-        { code: <Button className="p-button-outlined p-button-text">Павлодарская область</Button>, name: 'Product 2', category: 'Category 2', quantity: 20 },
-    ];
+export const regionNames = ['Абайская область', 'Акмолинская область', 'Актюбинская область', 'Алматинская область', 'Алматы', 'Астана', 'Атырауская область', 'Восточно-Казахстанская область', 'Жамбылская область', 'Жетысуская область', 'Западно-Казахстанская область', 'Карагандинская область', 'Костанайская область', 'Кызылординская область', 'Мангистауская область', 'Павлодарская область', 'Северо-Казахстанская область', 'Туркестанская область', 'Улытауская область', 'Шымкент'];
+
+interface RegionsProps{
+    onRegionClick: (el)=>void;
+}
+const Regions = ({onRegionClick}: RegionsProps) => {
+    
+    const products = regionNames.map(el => 
+        {return { 
+            code: <Button className="p-button-outlined p-button-text" onClick={()=>onRegionClick(el)}>{el}</Button>, 
+            name: 'Product 1', 
+            category: 'Category 1', 
+            quantity: 10,
+        }}
+        )
+       
+ 
 
     return (
             <DataTable value={products} className='Regions__table'>

@@ -10,8 +10,11 @@ import Regions from './components/Regions/Regions.tsx';
 import CategoriesMenu from './components/CategoriesMenu/CategoriesMenu.tsx';
 import Title from './components/Title/Title.tsx';
 import ScrollingText from './components/ScrollingText/ScrollingText.tsx';
+import { useState } from 'react';
 
 function App() {
+  const [currentRegion, setCurrentRegion] = useState(null);
+
   return (
     <div className="App">
     {/* <div className="Title" style={{background: 'green'}}>
@@ -31,14 +34,14 @@ function App() {
     </div>
     <div className="ScrollingText"></div>
     <div className="Regions">
-      <Regions></Regions>
+      <Regions  onRegionClick = {setCurrentRegion}></Regions>
     </div>
     {/* <div className="CategoriesMenu" style={{background: "green"}}></div> */}
     <div className="ScrollingText">
       <ScrollingText />
     </div>
     <div className="Map" style={{background: "#e5e5e5"}}>
-      <AppMap />
+      <AppMap currentRegion={currentRegion}/>
     </div>
     <div className="ChatBot" style={{background:"magenta"}}>
         <ChatBot />
