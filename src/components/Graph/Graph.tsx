@@ -2,6 +2,8 @@ import { Card } from 'primereact/card';
 import { Chart } from 'primereact/chart';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 
+import './Graph.css'
+
 const Graph = () => {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
@@ -25,7 +27,7 @@ const Graph = () => {
         };
         const options = {
             maintainAspectRatio: true,
-            aspectRatio: 0.6,
+            aspectRatio: 1.0,
             plugins: {
                 legend: {
                     labels: {
@@ -57,10 +59,11 @@ const Graph = () => {
         setChartOptions(options);
     }, []);
     return (
-        <Card title="График" >
-            <Chart type="line" data={chartData} options={chartOptions} />
-
-        </Card>
+        <div className="card">
+             <div style={{width: '40%', height: '20%'}}>
+                <Chart type="line" data={chartData} options={chartOptions} />
+            </div>
+        </div>
     );
 };
 

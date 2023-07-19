@@ -1,14 +1,11 @@
 import { Card } from 'primereact/card';
-import { Skeleton } from 'primereact/skeleton';
+import './Title.css';
 
 const Title = () => {
-
     return (
-        <Card>
-
-                {/* СИТУАЦИОННО-АНАЛИТИЧЕСКИЙ ЦЕНТР ТОПЛИВНО-ЭНЕРГЕТИЧЕСКОГО КОМПЛЕКСА РЕСПУБЛИКИ КАЗАХСТАН */}
-
-        </Card>
+        <div className="card w-100" >
+            <span className="title d-flex align-items-center justify-content-center">СИТУАЦИОННО-АНАЛИТИЧЕСКИЙ ЦЕНТР ТОПЛИВНО-ЭНЕРГЕТИЧЕСКОГО КОМПЛЕКСА РЕСПУБЛИКИ КАЗАХСТАН</span>
+        </div>
     );
 };
 

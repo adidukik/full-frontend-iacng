@@ -1,34 +1,51 @@
-import React, { useState } from 'react';
-import { TabMenu } from 'primereact/tabmenu';
-import { MenuItem } from 'primereact/menuitem';
+// import React, { useState } from 'react';
+// import { TabMenu } from 'primereact/tabmenu';
+// import { MenuItem } from 'primereact/menuitem';
+// import './CategoriesMenu.css';
+
+// const CategoriesMenu = () => {
+//     const items: MenuItem[] = [
+//         {label: 'нефтегазовая отрасль'},
+//         {label: 'электроэнергетика'},
+//         {label: 'урановая промышленность'},
+//     ];
+
+//     return (
+//         <div className="card">
+//             <div className = "center">
+//                 <TabMenu model={items} />
+//             </div>
+//         </div>
+//     )
+// }
+
+// export default CategoriesMenu
+
+
+import React from 'react';
+import { Nav } from 'react-bootstrap';
+import './CategoriesMenu.css';
 
 const CategoriesMenu = () => {
-    // const [activeIndex, setActiveIndex] = useState(3);
-    // const items = [
-    //     {label: 'нефтегазовая отрасль', icon: 'pi pi-fw pi-home'},
-    //     {label: 'Электроэнергетика', icon: 'pi pi-fw pi-calendar'},
-    //     {label: 'урановая промышленность', icon: 'pi pi-fw pi-pencil'},
-    // ];
-
-    // return (
-    //     <div className="card">
-    //         <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => {
-    //             setActiveIndex(e.index);
-    //             console.log(e.index);
-    //             }} />
-    //     </div>
-    // )
-    const items: MenuItem[] = [
-        {label: 'нефтегазовая отрасль', icon: 'pi pi-fw pi-home'},
-        {label: 'электроэнергетика', icon: 'pi pi-fw pi-calendar'},
-        {label: 'урановая промышленность', icon: 'pi pi-fw pi-pencil'},
+    const items = [
+        'нефтегазовая отрасль',
+        'электроэнергетика',
+        'урановая промышленность',
     ];
 
     return (
-        <div className="card">
-            <TabMenu model={items} />
+        <div className="card-categories categories-menu">
+            <div className = "center">
+                <Nav variant="tabs" defaultActiveKey="#нефтегазовая отрасль">
+                {items.map((item, idx) => (
+                    <Nav.Item key={idx} >
+                    <Nav.Link href={`#${item}`} className="categories-menu__category">{item}</Nav.Link>
+                    </Nav.Item>
+                ))}
+                </Nav>
+            </div>
         </div>
     )
 }
 
-export default CategoriesMenu
+export default CategoriesMenu;

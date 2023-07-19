@@ -1,7 +1,7 @@
 
 .chat-content {
     overflow-y: auto;
-    height: 180px;
+    height: 117px;
     padding: 1em;
     display: flex;
     flex-direction: column;
@@ -13,7 +13,7 @@
     background-color: #007ad9;
     border-radius: 18px;
     padding: 10px 20px;
-    margin: 5px 0;
+    margin: 0px 0;
     max-width: 70%;
     color: white;
     align-self: flex-end;
@@ -24,7 +24,7 @@
 
 .chat-message p {
     margin: 0;
-    line-height: 20px;
+    line-height: 10px;
     word-break: break-all;
 }
 
@@ -36,7 +36,7 @@
 
 .chat-input-area {
     display: flex;
-    padding: 0.5em;
+    padding: 0em;
     border-top: 1px solid #ddd;
     align-items: center;
     background-color: #fafafa;
@@ -73,7 +73,7 @@
 }
 
 .p-inputtextarea {
-    border: 1px solid #ddd;
+    border: 0px solid #ddd;
     background-color: white;
     color: #333;
 }

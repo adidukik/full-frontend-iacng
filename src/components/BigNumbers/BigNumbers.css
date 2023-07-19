@@ -1,8 +1,9 @@
-.big-numbers{
-    width: 100%;
-    height: 100%;
+.BigNumbers{
+    margin-right: 14px;
 }
-.big-numbers li{
-    margin-bottom: 20px;
-
+.big-numbers__btn{
+    background-color: #a6a6a6;
+    color: #000;
+    width: 100%;
+    margin-bottom: 7px;
 }
