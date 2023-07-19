@@ -7,3 +7,51 @@
     width: 100%;
     margin-bottom: 7px;
 }
+.BigNumbers .nav-tabs {
+    max-height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.BigNumbers .nav-item {
+    flex: 1;
+    text-align: center;
+    
+}
+
+.BigNumbers a.nav-link {
+    border-radius: 0;
+    font-weight: 800 !important;
+    font-family: 'Montserrat', sans-serif;
+    background-color: #A6A6A6;
+    font-weight: 400;
+    color: #000;
+    border: 0;
+    padding: 0;
+}
+
+.BigNumbers .nav-tabs .nav-item.show .nav-link,
+.BigNumbers .nav-tabs .nav-link.active {
+    background-color: #004AAD;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.BigNumbers .nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.BigNumbers .nav-link {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.BigNumbers div.card{
+    background: none;
+}
+.BigNumbers .card-body{
+    background-color: #545454;
+}

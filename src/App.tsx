@@ -31,14 +31,13 @@ function App() {
     </div>
     <div className="ScrollingText"></div>
     <div className="Regions">
-      {/* <Regions></Regions> */}
+      <Regions></Regions>
     </div>
     {/* <div className="CategoriesMenu" style={{background: "green"}}></div> */}
     <div className="ScrollingText">
       <ScrollingText />
     </div>
-    <div className="Regions" style={{background: "blue"}}></div>
-    <div className="AppMap" style={{background: "#e5e5e5"}}>
+    <div className="Map" style={{background: "#e5e5e5"}}>
       <AppMap />
     </div>
     <div className="ChatBot" style={{background:"magenta"}}>
