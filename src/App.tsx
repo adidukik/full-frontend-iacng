@@ -1,7 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import BigNumbers from './components/BigNumbers/BigNumbers.tsx';
-import Map from './components/Map/Map.tsx';
+import AppMap from './components/Map/AppMap.tsx';
 import Graph from './components/Graph/Graph.tsx';
 import ChatBot from './components/ChatBot/ChatBot.jsx';
 import 'primereact/resources/themes/lara-light-blue/theme.css';
@@ -38,8 +38,8 @@ function App() {
       <ScrollingText />
     </div>
     <div className="Regions" style={{background: "blue"}}></div>
-    <div className="Map" style={{background: "#e5e5e5"}}>
-      <Map />
+    <div className="AppMap" style={{background: "#e5e5e5"}}>
+      <AppMap />
     </div>
     <div className="ChatBot" style={{background:"magenta"}}>
         <ChatBot />
