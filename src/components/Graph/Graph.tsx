@@ -26,30 +26,30 @@ const Graph = () => {
             ]
         };
         const options = {
-            maintainAspectRatio: true,
-            aspectRatio: 1.0,
+            maintainAspectRatio: false,
+            responsive: true,
             plugins: {
                 legend: {
                     labels: {
-                        color: textColor
+                        color: '#ffffff'
                     }
                 }
             },
             scales: {
                 x: {
                     ticks: {
-                        color: textColorSecondary
+                        color: '#ffffff'
                     },
                     grid: {
-                        color: surfaceBorder
+                        color: '#ffffff'
                     }
                 },
                 y: {
                     ticks: {
-                        color: textColorSecondary
+                        color: '#ffffff'
                     },
                     grid: {
-                        color: surfaceBorder
+                        color: '#ffffff'
                     }
                 }
             }
@@ -59,8 +59,8 @@ const Graph = () => {
         setChartOptions(options);
     }, []);
     return (
-        <div style={{width: '40%', height: '20%'}}>
-            <Chart type="line" data={chartData} options={chartOptions} />
+        <div style={{width: '100%', height: '100%', backgroundColor: '#A6A6A6'}}>
+            <Chart type="line" data={chartData} options={chartOptions} className="chart-oil"/>
         </div>
     );
 };
