@@ -27,6 +27,7 @@ import React from 'react';
 import { Nav } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { setCategory } from './categoriesSlice';
+import './CategoriesMenu.css';
 
 const CategoriesMenu = () => {
   const dispatch = useDispatch();
@@ -56,3 +57,4 @@ const CategoriesMenu = () => {
 }
 
 export default CategoriesMenu;
+
