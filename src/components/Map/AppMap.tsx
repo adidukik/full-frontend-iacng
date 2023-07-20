@@ -2,43 +2,39 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import OSM from "ol/source/OSM";
-import Extent from 'ol/interaction/Extent.js'
 import './AppMap.css';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { fromLonLat, useGeographic } from 'ol/proj';
-import { Card } from 'primereact/card';
 import VectorSource from 'ol/source/Vector';
 
 import GeoJSON from 'ol/format/GeoJSON.js';
 
-import XYZ from 'ol/source/XYZ.js';
 import { Vector as VectorLayer } from 'ol/layer.js';
-import { bbox as bboxStrategy } from 'ol/loadingstrategy.js';
 import Fill from 'ol/style/Fill';
 import Style from 'ol/style/Style';
 
 import regionsData from '../../assets/geo/kz_regions.json';
 import fieldsData from '../../assets/geo/fields.json';
-import { Feature } from 'ol';
 import { getCenter } from 'ol/extent';
-import Geometry from 'ol/geom/Geometry';
 import { regionNames } from '../Regions/Regions';
 
+console.log("fields", fieldsData);
+console.log("region", regionsData);
 interface AppMapProps{
   currentRegion:string;
 }
 
 const AppMap = ({currentRegion}: AppMapProps) => {
+  const regionNameToColor = {};
+   const colors = ['#e9cfdb', '#faf0dd', '#d2e9ce', '#d0ebdb'];
+  for(let i=0;i < regionNames.length;i++){
+    regionNameToColor[regionNames[i]] = colors[i%colors.length];
+  }
   // useGeographic();
   const [zoom, setZoom] = useState(4);
   const [mapCenter, setMapCenter] = useState([7347086.392356056, 6106854.834885074]);
-
- 
   const format = new GeoJSON();
-  const features = format.readFeatures(regionsData);
-  console.log(features[0].values_.name_ru);
-
- 
+  const regionsFeatures = format.readFeatures(regionsData);
+  const fieldsFeatures = format.readFeatures(fieldsData);
 
   const view = useMemo(() => new View({ center: mapCenter, zoom: zoom }), [mapCenter, zoom]);
 
@@ -83,33 +79,41 @@ const AppMap = ({currentRegion}: AppMapProps) => {
     }),
   });
 
- const vectorLayer = useMemo(() => new VectorLayer({
+ const regionsLayer = useMemo(() => new VectorLayer({
   source: new VectorSource({
-    features: new GeoJSON().readFeatures(regionsData),
+    features: regionsFeatures,
   }),
   style: function (feature) {
-    const color = feature.get('COLOR') || '#eeeeee';
-    style.getFill().setColor(color);
-    return style;
+      const color =regionNameToColor[feature.values_.name_ru];
+      style.getFill().setColor(color);
+      return style;
   },
 }), [regionsData, style]);
 
-  vectorLayer.setOpacity(0.5);
+const fieldsLayer = useMemo(() => new VectorLayer({
+  source: new VectorSource({
+    features: fieldsFeatures,
+  }),
+  style: function (feature) {
+      style.getFill().setColor("#ffffff");
+      return style;
+  },
+}), []);
+
+  regionsLayer.setOpacity(0.8);
 
   const ref = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Map>(null);
   useEffect(() => {
-    console.log("I'm mounting!");
-
     //new TileLayer({ source: new OSM() }), 
     if (ref.current && !mapRef.current) {
       mapRef.current = new Map({
-        layers: [new TileLayer({ source: new OSM() }), vectorLayer],
+        layers: [new TileLayer({ source: new OSM() }), regionsLayer, fieldsLayer],
         view: view,
         target: ref.current
       });
     }
-  }, [ref, mapRef, mapCenter, zoom, vectorLayer]);
+  }, [ref, mapRef, mapCenter, zoom, regionsLayer]);
 
   // useEffect(() => {
   // //   mapRef.current?.getView().setZoom(zoom);
@@ -118,7 +122,7 @@ const AppMap = ({currentRegion}: AppMapProps) => {
 
    if(currentRegion){
     console.log(currentRegion);
-    const feature =  features.filter(feature => feature.values_.name_ru === currentRegion)[0]
+    const feature =  regionsFeatures.filter(feature => feature.values_.name_ru === currentRegion)[0]
     //.filter(feature => feature.values_.name_ru === currentRegion)
     console.log(feature);
     const extent = feature.getGeometry().getExtent();
