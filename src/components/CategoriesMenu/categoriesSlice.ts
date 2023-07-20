@@ -1,5 +1,3 @@
-// features/categories/categoriesSlice.ts
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type Category = 'нефтегазовая отрасль' | 'электроэнергетика' | 'урановая промышленность';

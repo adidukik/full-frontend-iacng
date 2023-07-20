@@ -34,7 +34,7 @@ const ChatBot = () => {
         sendMessage(); // This should probably be done differently if sendMessage is asynchronous
         setTimeout(
             ()=>{
-                handleSendMessage("bot", "I am SkyNet");
+                handleSendMessage("bot", "Здравствуйте! Этот чат-бот сейчас работает в мануальном режиме. Ожидайте ответа от оператора.");
                 setIsBotResponding(false);
             }, 1500
         );
