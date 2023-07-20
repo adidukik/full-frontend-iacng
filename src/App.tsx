@@ -17,39 +17,31 @@ function App() {
 
   return (
     <div className="App">
-    {/* <div className="Title" style={{background: 'green'}}>
-      <Title />
-    </div> */}
-        <div className="Title align-items-center d-flex w-100">
-      <Title />
-    </div>
-    {/* <div className = "center"> */}
-    <div className="CategoriesMenu">
-      <CategoriesMenu />
-    </div>
-    {/* </div> */}
-
-    <div className="BigNumbers">
-      <BigNumbers />
-    </div>
-    <div className="ScrollingText"></div>
-    <div className="Regions">
-      <Regions  onRegionClick = {setCurrentRegion}></Regions>
-    </div>
-    {/* <div className="CategoriesMenu" style={{background: "green"}}></div> */}
-    <div className="ScrollingText">
-      <ScrollingText />
-    </div>
-    <div className="Map" style={{background: "#e5e5e5"}}>
-      <AppMap currentRegion={currentRegion}/>
-    </div>
-    <div className="ChatBot" style={{background:"magenta"}}>
-        <ChatBot />
-    </div>
-    <div className="Graph">
-      <Graph />
-    </div>
-</div>
+      <div className="Title align-items-center d-flex w-100">
+        <Title />
+      </div>
+      <div className="CategoriesMenu">
+        <CategoriesMenu />
+      </div>
+      <div className="BigNumbers">
+        <BigNumbers />
+      </div>
+      <div className="Regions">
+        <Regions  onRegionClick = {setCurrentRegion}></Regions>
+      </div>
+      <div className="ScrollingText">
+        <ScrollingText />
+      </div>
+      <div className="Map" style={{background: "#e5e5e5"}}>
+        <AppMap currentRegion={currentRegion}/>
+      </div>
+      <div className="ChatBot" style={{background:"magenta"}}>
+          <ChatBot />
+      </div>
+      <div className="Graph">
+        <Graph />
+      </div>
+  </div>
   );
 }
 
