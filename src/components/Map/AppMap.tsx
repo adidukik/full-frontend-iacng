@@ -202,19 +202,24 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
     }
   }, [ref, mapRef, mapCenter, zoom, regionsLayer, bigNumberValue]);
 
-  if (currentRegion) {
-    console.log(currentRegion);
-    const feature = regionsFeatures.filter(
-      (feature) => feature.values_.name_ru === currentRegion
-    )[0];
-    //.filter(feature => feature.values_.name_ru === currentRegion)
-    console.log(feature);
-    const extent = feature.getGeometry().getExtent();
-    const center = getCenter(extent);
-    flyTo(center, (e) => {
-      console.log(e);
-    });
-  }
+  useEffect(() => {
+    if (currentRegion) {
+      console.log(currentRegion);
+      const feature = regionsFeatures.filter(
+        (feature) => feature.values_.name_ru === currentRegion
+      )[0];
+      //.filter(feature => feature.values_.name_ru === currentRegion)
+      console.log(feature);
+      const extent = feature.getGeometry().getExtent();
+      const center = getCenter(extent);
+
+      // Call the flyTo function when currentRegion changes
+      flyTo(center, (e) => {
+        console.log(e);
+      });
+    }
+  }, [currentRegion]);
+
   return (
     <>
       <div ref={ref} id="map" />
