@@ -21,31 +21,38 @@
 
 // export default CategoriesMenu
 
+// features/categories/CategoriesMenu.tsx
 
 import React from 'react';
 import { Nav } from 'react-bootstrap';
-import './CategoriesMenu.css';
+import { useDispatch } from 'react-redux';
+import { setCategory } from './categoriesSlice';
 
 const CategoriesMenu = () => {
-    const items = [
-        'нефтегазовая отрасль',
-        'электроэнергетика',
-        'урановая промышленность',
-    ];
+  const dispatch = useDispatch();
+  const items = [
+    'нефтегазовая отрасль',
+    'электроэнергетика',
+    'урановая промышленность',
+  ];
 
-    return (
-        <div className="card-categories categories-menu">
-            <div className = "center">
-                <Nav variant="tabs" defaultActiveKey="#нефтегазовая отрасль">
-                {items.map((item, idx) => (
-                    <Nav.Item key={idx} >
-                    <Nav.Link href={`#${item}`} className="categories-menu__category">{item}</Nav.Link>
-                    </Nav.Item>
-                ))}
-                </Nav>
-            </div>
+  const handleSelect = (selectedKey: string) => {
+    dispatch(setCategory(selectedKey as any));
+  };
+
+  return (
+    <div className="card-categories categories-menu">
+        <div className = "center">
+            <Nav variant="tabs" defaultActiveKey="нефтегазовая отрасль" onSelect={handleSelect}>
+            {items.map((item, idx) => (
+                <Nav.Item key={idx}>
+                <Nav.Link eventKey={item} className="categories-menu__category">{item}</Nav.Link>
+                </Nav.Item>
+            ))}
+            </Nav>
         </div>
-    )
+    </div>
+  )
 }
 
 export default CategoriesMenu;
