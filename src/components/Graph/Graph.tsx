@@ -8,6 +8,26 @@ const Graph = () => {
   const [chartData, setChartData] = useState({});
   const [chartOptions, setChartOptions] = useState({});
 
+  const [months, setMonths] = useState({}); // State to store the fetched number
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        
+        const response = await fetch('http://192.168.0.57:8000/calculate_last_x_months_oil_yield/12/'); // Replace with your API endpoint
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const months1 = await response.json();
+        setMonths(months1.yields_per_month);
+        // console.log(months1.yields_per_month); // Assuming the API response is an object with a "number" property
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   useEffect(() => {
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue("--text-color");
@@ -15,12 +35,13 @@ const Graph = () => {
       "--text-color-secondary"
     );
     const surfaceBorder = documentStyle.getPropertyValue("--surface-border");
+    console.log(months);
     const data = {
       labels: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль"],
       datasets: [
         {
-          label: "Цена на нефть",
-          data: [65, 59, 80, 81, 56, 55, 40],
+          label: "Добыча нефти",
+          data: [months[0], months[1], months[2], months[3], months[4], months[5], months[6]],
           fill: false,
           borderColor: documentStyle.getPropertyValue("--blue-500"),
           tension: 0.4,
@@ -59,10 +80,10 @@ const Graph = () => {
 
     setChartData(data);
     setChartOptions(options);
-  }, []);
+  }, [months]);
   return (
     <div style={{ width: "100%", height: "100%", backgroundColor: "#A6A6A6" }}>
-      {/* <Chart type="line" data={chartData} options={chartOptions} className="chart-oil"/> */}
+      <Chart type="line" data={chartData} options={chartOptions} className="chart-oil"/>
     </div>
   );
 };
