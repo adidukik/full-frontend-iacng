@@ -43,7 +43,7 @@ const numberToLayerType = {
   1: "газ",
 };
 const getFieldsLayer = (bigNumberValue) => {
-  console.log("hi hi", bigNumberValue);
+  console.log("big", bigNumberValue);
   const currentType = numberToLayerType["0"];
   if (currentType) {
     const featuresToDisplay = fieldsFeatures.filter((field) =>
@@ -81,6 +81,24 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
     () => new View({ center: mapCenter, zoom: zoom }),
     [mapCenter, zoom]
   );
+  const [logValue, setLogValue] = useState(bigNumberValue);
+
+  useEffect(() => {
+    // This effect will run whenever bigNumberValue changes
+    console.log("bigNumberValue changed:", bigNumberValue);
+    // Update the logValue state with the latest bigNumberValue
+    setLogValue(bigNumberValue);
+  }, [bigNumberValue]); // Specify bigNumberValue as a dependency
+
+  useEffect(() => {
+    // This effect will run on mount and set up the interval to log the value every second
+    const intervalId = setInterval(() => {
+      console.log("Logging bigNumberValue:", logValue);
+    }, 1000);
+
+    // Cleanup the interval when the component unmounts
+    return () => clearInterval(intervalId);
+  }, [logValue]); // Specify logValue as a dependency
 
   const flyTo = useCallback(
     (location, done) => {
@@ -136,12 +154,11 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
   );
 
   regionsLayer.setOpacity(0.8);
-  console.log(bigNumberValue);
   const ref = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Map>(null);
   let lastIdRef = useRef<number>(-1);
 
-  const [popupText, setPopupText] = useState("");
+  const [popupText, setPopupText] = useState(null);
   const [popupVisibility, setpopupVisibility] = useState(false);
 
   useEffect(() => {
@@ -177,7 +194,6 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
         if (selected !== null) {
           selected.setStyle(undefined);
           selected = null;
-          console.log(e);
         }
         setpopupVisibility(false);
         mapRef.current.forEachFeatureAtPixel(e.pixel, function (f) {
@@ -186,10 +202,13 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
             f.values_.type !== "district" &&
             lastIdRef.current !== f.values_.id
           ) {
-            console.log(f.values_.operator_name);
-            console.log(e.coordinate);
+            console.log(f);
             popup.setPosition(e.coordinate);
-            setPopupText(f.values_.operator_name);
+            setPopupText({
+              Имя: f.values_.name,
+              Оператор: f.values_.operator_name,
+              Добыча: f.values_.field_resources,
+            });
             lastIdRef.current = f.values_.id;
           }
           selected = f;
@@ -204,21 +223,28 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
 
   useEffect(() => {
     if (currentRegion) {
-      console.log(currentRegion);
       const feature = regionsFeatures.filter(
         (feature) => feature.values_.name_ru === currentRegion
       )[0];
       //.filter(feature => feature.values_.name_ru === currentRegion)
-      console.log(feature);
       const extent = feature.getGeometry().getExtent();
       const center = getCenter(extent);
 
       // Call the flyTo function when currentRegion changes
-      flyTo(center, (e) => {
-        console.log(e);
-      });
+      flyTo(center, () => {});
     }
   }, [currentRegion]);
+
+  const getPopupText = (popupText) => {
+    const arr = [];
+    for (const popupTextItem in popupText) {
+      const formattedElement = `${popupTextItem}: ${popupText[popupTextItem]}`;
+
+      // Step 4: Store each formatted string in an array
+      arr.push(formattedElement);
+    }
+    return arr;
+  };
 
   return (
     <>
@@ -228,7 +254,9 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
         ref={popupRef}
         className={popupVisibility ? "" : "hidden"}
       >
-        {popupText}
+        {getPopupText(popupText).map((str) => (
+          <p key={str}>{str}</p>
+        ))}
       </div>
     </>
   );

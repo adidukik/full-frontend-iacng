@@ -1,11 +1,11 @@
 
 .chat-container {
-    background-color: #A6A6A6;
+    background-color: #545454;
 }
 
 .chat-content {
     overflow-y: auto;
-    background-color: #A6A6A6;
+    background-color: #545454;
     height: 117px;
     padding: 1em;
     display: flex;
