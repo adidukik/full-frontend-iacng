@@ -4,7 +4,6 @@
 ```
 git clone https://github.com/adidukik/full-frontend-iacng.git
 cd full-frontend-iacng
-git checkout bootstrap
 npm i
 npm run dev
 ```
