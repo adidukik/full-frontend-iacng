@@ -252,7 +252,7 @@ const BigNumbers: React.FC<BigNumbersProps> = (props) => {
     switch (activeCategory) {
       case "нефтегазовая отрасль":
         setLabels([
-          `Добыча нефти (тонн) план - ${Math.floor(oilPlan)} факт ${oilFact}`,
+          `Добыча нефти (тонн) <br> план - ${Math.floor(oilPlan)} <br> факт ${oilFact}`,
           `Добыча газа (тонн) план - ${Math.floor(gasPlan)} факт ${gasFact}`,
           `Производство нефтепродуктов: бензин - ${benzin}, керосин - ${kerosin}, дизельное топливо - ${dt}, мазут - ${mt}`,
           "Остаток НП (дни)",
@@ -270,9 +270,9 @@ const BigNumbers: React.FC<BigNumbersProps> = (props) => {
         break;
       default:
         setLabels([
-          `Добыча нефти (тонн) план - ${Math.floor(oilPlan)} факт 0`,
-          "Добыча газа",
-          "Производство нефтепродуктов",
+          `Добыча нефти (тонн) план - ${Math.floor(oilPlan)} факт ${oilFact}`,
+          `Добыча газа (тонн) план - ${Math.floor(gasPlan)} факт ${gasFact}`,
+          `Производство нефтепродуктов: бензин - ${benzin}, керосин - ${kerosin}, дизельное топливо - ${dt}, мазут - ${mt}`,
           "Остаток НП (дни)",
           "Экспорт нефти %, нефтепродуктов %",
           "Цены на нефть, внутренний рынок - 40, на экспорт - 40 Бензин 92 РК - 203",
@@ -318,7 +318,8 @@ const BigNumbers: React.FC<BigNumbersProps> = (props) => {
                   dispatch(setBigNumberValue(index));
                 }}
               >
-                {label}
+                {/* {label} */}
+                <p dangerouslySetInnerHTML={{ __html: label }} />
               </Button>
             </li>
           ))}
