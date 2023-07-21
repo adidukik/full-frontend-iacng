@@ -54,3 +54,6 @@ div.card{
 button.btn{
   border-radius: 0;
 }
+.hidden{
+  visibility: hidden;
+}

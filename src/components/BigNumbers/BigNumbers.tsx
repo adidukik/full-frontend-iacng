@@ -46,12 +46,12 @@
 
 // export default BigNumbers;
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import { Button, Card, Nav } from "react-bootstrap";
 import "./BigNumbers.css";
 import React, { useEffect, useState } from "react";
-import { setBigNumbers } from "./bigNumbersSlice";
+import { setBigNumberValue } from "./bigNumbersSlice";
 
 interface BigNumbersProps {}
 
@@ -59,6 +59,9 @@ const BigNumbers: React.FC<BigNumbersProps> = (props) => {
   const timeRanges = ["сутки", "месяц", "год"];
   const [currentTimeRange, setCurrentTimeRange] = useState(timeRanges[0]); // State to store active tab
   const activeCategory = useSelector((state: RootState) => state.categories);
+
+  // Access dispatch to dispatch actions
+  const dispatch = useDispatch();
 
   // let labels = getLabelsForCategory(activeCategory, 0);  // Implement this function to return labels based on category
 
@@ -312,7 +315,7 @@ const BigNumbers: React.FC<BigNumbersProps> = (props) => {
                 variant="outline-primary"
                 className="big-numbers__btn"
                 onClick={(e) => {
-                  setBigNumbers(index);
+                  dispatch(setBigNumberValue(index));
                 }}
               >
                 {/* {label} */}

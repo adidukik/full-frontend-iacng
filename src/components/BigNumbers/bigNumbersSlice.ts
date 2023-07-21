@@ -1,19 +1,25 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { User } from "firebase/auth";
 
-type BigNumber = 0 | 1 | 2;
+export interface BigNumberState {
+  value: number;
+}
 
-const initialState: BigNumber = 0;
+const initialState: BigNumberState = {
+  value: 0
+};
 
-const bigNumbersSlice = createSlice({
-  name: 'categories',
+const bigNumberSlice = createSlice({
+  name: "bigNumber",
   initialState,
   reducers: {
-    setBigNumbers: (state, action: PayloadAction<BigNumber>) => {
-      return action.payload;
-    }
-  }
+    setBigNumberValue: (state, action: PayloadAction<number>) => {
+      state.value = action.payload;
+      console.log(action.payload);
+    },
+  },
 });
 
-export const { setBigNumbers } = bigNumbersSlice.actions;
+export const { setBigNumberValue } = bigNumberSlice.actions;
 
-export default bigNumbersSlice.reducer;
+export default bigNumberSlice.reducer;
