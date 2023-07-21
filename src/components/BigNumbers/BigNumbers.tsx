@@ -252,12 +252,16 @@ const BigNumbers: React.FC<BigNumbersProps> = (props) => {
     switch (activeCategory) {
       case "нефтегазовая отрасль":
         setLabels([
-          `Добыча нефти (тонн) <br> план - ${Math.floor(oilPlan)} <br> факт ${oilFact}`,
-          `Добыча газа (тонн) план - ${Math.floor(gasPlan)} факт ${gasFact}`,
-          `Производство нефтепродуктов: бензин - ${benzin}, керосин - ${kerosin}, дизельное топливо - ${dt}, мазут - ${mt}`,
-          "Остаток НП (дни)",
-          "Экспорт нефти %, нефтепродуктов %",
-          "Цены на нефть, внутренний рынок - 40, на экспорт - 40 Бензин 92 РК - 203",
+          `<strong>Добыча нефти (тонн)</strong> <br> план - ${Math.floor(
+            oilPlan
+          )} <br> факт ${oilFact}`,
+          `<strong>Добыча газа (тонн)</strong>  <br> план - ${Math.floor(
+            gasPlan
+          )}  <br> факт ${gasFact}`,
+          `<strong>Производство нефтепродуктов</strong><br> бензин - ${benzin}<br>керосин - ${kerosin}<br>дизельное топливо - ${dt}<br>мазут - ${mt}`,
+          "<strong>Остаток НП (дни)</strong>",
+          "<strong>Экспорт</strong><br> нефти %, нефтепродуктов %",
+          "<strong>Цены на нефть</strong><br> внутренний рынок - 40, на экспорт - 40 Бензин 92 РК - 203",
         ]);
         break;
       case "электроэнергетика":

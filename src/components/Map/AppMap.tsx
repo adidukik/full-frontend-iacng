@@ -67,13 +67,14 @@ interface AppMapProps {
 
 const AppMap = ({ currentRegion }: AppMapProps) => {
   const bigNumberValue = useSelector((state: BigNumberState) => state.value);
+  console.log("bigNumberValue:", bigNumberValue);
   const regionNameToColor = {};
   const colors = ["#e9cfdb", "#faf0dd", "#d2e9ce", "#d0ebdb"];
   for (let i = 0; i < regionNames.length; i++) {
     regionNameToColor[regionNames[i]] = colors[i % colors.length];
   }
   const popupRef = useRef(null);
-  const [zoom, setZoom] = useState(4);
+  const [zoom, setZoom] = useState(5);
   const [mapCenter, setMapCenter] = useState([
     7347086.392356056, 6106854.834885074,
   ]);
@@ -153,7 +154,7 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
     [regionsData, regionsStyle]
   );
 
-  regionsLayer.setOpacity(0.8);
+  regionsLayer.setOpacity(0.6);
   const ref = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Map>(null);
   let lastIdRef = useRef<number>(-1);

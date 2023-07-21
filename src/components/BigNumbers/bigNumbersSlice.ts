@@ -15,7 +15,7 @@ const bigNumberSlice = createSlice({
   reducers: {
     setBigNumberValue: (state, action: PayloadAction<number>) => {
       state.value = action.payload;
-      console.log("state value",state.value);
+      return {...state, value:action.payload};
     },
   },
 });
