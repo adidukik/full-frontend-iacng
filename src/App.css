@@ -1,4 +1,52 @@
-ul{
-    list-style-type: none;
-    padding: 0;
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: grid; 
+  grid-auto-columns: 1fr; 
+  grid-auto-rows: 1fr; 
+  grid-template-columns: 1fr 2.24fr 1.11fr 1.35fr; 
+  grid-template-rows: 1fr 1fr 2.25fr 11.8fr 3.96fr; 
+  grid-template-areas:  
+    "Title Title Title Title"
+    "CategoriesMenu CategoriesMenu CategoriesMenu CategoriesMenu"
+    "BigNumbers ScrollingText ScrollingText ScrollingText"
+    "BigNumbers Map Map Regions"
+    "BigNumbers Graph ChatBot ChatBot"; 
+
+  font-family: "Montserrat", sans-serif !important;
+  padding: 5px 24px;
+
+}
+
+.Title { grid-area: Title; }
+.CategoriesMenu { grid-area: CategoriesMenu ; }
+.BigNumbers { grid-area: BigNumbers; }
+.ScrollingText { grid-area: ScrollingText; }
+.Regions { grid-area: Regions; }
+.Map { grid-area: Map; }
+.ChatBot { grid-area: ChatBot; }
+.Graph { grid-area: Graph; }
+
+.Title { 
+  grid-area: Title; 
+  height: 100%;
+}
+.center {
+  align-items: center;
+}
+div.card{
+  background-color: #545454;
+  height: 100%;
+  border-radius: 0;
+  border: none;
+}
+*{
+  box-sizing: border-box;
+}
+button.btn{
+  border-radius: 0;
+}
+.hidden{
+  visibility: hidden;
 }

@@ -1,0 +1,33 @@
+.Regions{
+    overflow: auto;
+   
+}
+.Regions button{
+color: #000 !important;
+}
+.Regions td{
+padding: 0 !important;
+}
+.Regions td, th{
+    width: 50px;
+    vertical-align: middle !important;
+    text-align: center !important;
+}
+
+.Regions table div{
+    display: flex;
+    justify-content: center;
+}
+.Regions table{
+text-align: center !important;
+    vertical-align: middle;
+}
+
+.Regions__table .p-datatable-tbody > tr {
+    background-color: #A6A6A6 !important;
+}
+
+.Regions__table .p-datatable-thead > tr {
+    background-color: #A6A6A6 !important;
+}
+

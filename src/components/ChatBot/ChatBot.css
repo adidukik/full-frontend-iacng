@@ -1,17 +1,15 @@
+
 .chat-container {
-    width: 550px;
-    height: 350px;
-    display: flex;
-    flex-direction: column;
+    background-color: #545454;
 }
 
 .chat-content {
     overflow-y: auto;
-    flex-grow: 1;
+    background-color: #545454;
+    height: 117px;
     padding: 1em;
     display: flex;
     flex-direction: column;
-    background-color: white;
     border-bottom: 1px solid #ddd;
 }
 
@@ -19,7 +17,7 @@
     background-color: #007ad9;
     border-radius: 18px;
     padding: 10px 20px;
-    margin: 5px 0;
+    margin: 0px 0;
     max-width: 70%;
     color: white;
     align-self: flex-end;
@@ -30,7 +28,7 @@
 
 .chat-message p {
     margin: 0;
-    line-height: 20px;
+    line-height: 1.5;
     word-break: break-all;
 }
 
@@ -42,10 +40,10 @@
 
 .chat-input-area {
     display: flex;
-    padding: 0.5em;
+    padding: 0em;
     border-top: 1px solid #ddd;
     align-items: center;
-    background-color: #fafafa;
+    background-color: #A6A6A6;
 }
 
 .chat-input {
@@ -58,7 +56,7 @@
 
 .chat-button {
     background: #007ad9;
-    color: white;
+    color: #A6A6A6;
     font-size: 0.9em;
     padding: 10px;
     border: none;
@@ -70,16 +68,16 @@
 
 /* Overriding PrimeReact styles */
 .p-button {
-    background-color: #007ad9;
+    background-color: #004AAD;
     color: white;
 }
 
 .p-button:enabled:hover {
-    background-color: #005999;
+    background-color: #004AAD;
 }
 
 .p-inputtextarea {
-    border: 1px solid #ddd;
-    background-color: white;
+    border: 0px solid #ddd;
+    background-color: #A6A6A6;
     color: #333;
 }

@@ -1,0 +1,21 @@
+span.title {
+    font-weight: 1000; 
+    line-height: 2rem;
+    font-family: 'Montserrat';
+    color: #ff3131;
+}
+.ScrollingText{
+    font-size: 19px;
+}
+.scrollingText {
+    display: block;
+    height: 100%;
+    color: #FFFFFF;
+    
+}
+.ScrollingText div.card{
+    height: 70px;
+}
+.ScrollingText marquee{
+    height: 100%;
+}

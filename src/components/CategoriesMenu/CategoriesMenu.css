@@ -1,0 +1,98 @@
+/* /* @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+.p-tabmenu {
+    max-height: 50px;
+}
+
+.p-tabmenu .p-tabmenu-nav {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.p-tabmenu .p-tabmenu-nav .p-tabmenuitem {
+    flex: 1;
+    text-align: center;
+}
+
+.p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #A6A6A6;
+    font-weight: 400;
+    color: #ffffff; 
+}
+
+.p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link {
+    background-color: #004AAD !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+
+.p-tabmenu .p-tabmenu-nav {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.p-tabmenu .p-tabmenu-nav .p-tabmenuitem {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.p-tabmenu .p-menuitem-link {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+.CategoriesMenu{
+    margin-bottom: 10px;
+}
+.categories-menu .nav-tabs {
+    max-height: 50px; 
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.categories-menu .nav-item {
+    flex: 1;
+    text-align: center;
+}
+
+.categories-menu .nav-link {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #A6A6A6;
+    font-weight: 400;
+    color: #ffffff; 
+   border: 0;
+}
+
+.categories-menu .nav-tabs .nav-item.show .nav-link, .categories-menu .nav-tabs .nav-link.active {
+    background-color: #004AAD;
+    color: #ffffff; 
+    font-weight: 700;
+}
+
+.categories-menu .nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.categories-menu .nav-link {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.categories-menu .categories-menu__category{
+    border-radius: 0 0 20px 20px;
+}
+.categories-menu a{
+    margin: 0;
+}
