@@ -19,36 +19,34 @@ const BigNumbers = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const [bigNumbers, setBigNumbers] = useState<BigNumber[]>([]);
-  switch (activeCategory) {
-    case "нефтегазовая отрасль":
-      const timeRangeToEnglish = {
-        сутки: "date",
-        месяц: "month",
-        год: "year",
-      };
-      const currentTimeRangeInEnglish = timeRangeToEnglish[currentTimeRange];
 
-      const oilPlan = useFetchData(
-        `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_plan/`,
-      );
-      const oilFact = useFetchData(
-        `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield/`,
-      );
-      const gasPlan = useFetchData(
-        `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield_plan/`,
-      );
-      const gasFact = useFetchData(
-        `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield/`,
-      );
+  const timeRangeToEnglish = {
+    сутки: "date",
+    месяц: "month",
+    год: "year",
+  };
+  const currentTimeRangeInEnglish = timeRangeToEnglish[currentTimeRange];
 
-      const benzin = useFetchData(`http://192.168.0.57:8000/calculate_benzin/`);
-      const kerosin = useFetchData(
-        `http://192.168.0.57:8000/calculate_kerosin/`,
-      );
-      const dt = useFetchData(`http://192.168.0.57:8000/calculate_dt/`);
-      const mt = useFetchData(`http://192.168.0.57:8000/calculate_mt/`);
+  const oilPlan = useFetchData(
+    `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_plan/`,
+  );
+  const oilFact = useFetchData(
+    `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield/`,
+  );
+  const gasPlan = useFetchData(
+    `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield_plan/`,
+  );
+  const gasFact = useFetchData(
+    `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield/`,
+  );
 
-      useEffect(() => {
+  const benzin = useFetchData(`http://192.168.0.57:8000/calculate_benzin/`);
+  const kerosin = useFetchData(`http://192.168.0.57:8000/calculate_kerosin/`);
+  const dt = useFetchData(`http://192.168.0.57:8000/calculate_dt/`);
+  const mt = useFetchData(`http://192.168.0.57:8000/calculate_mt/`);
+  useEffect(() => {
+    switch (activeCategory) {
+      case "нефтегазовая отрасль":
         setBigNumbers([
           {
             title: "Добыча нефти (тонн)",
@@ -136,20 +134,135 @@ const BigNumbers = (): JSX.Element => {
             ],
           },
         ]);
-      }, [benzin, dt, gasFact, gasPlan, kerosin, mt, oilFact, oilPlan]);
 
-      break;
-    case "электроэнергетика":
-      // setLabels(["Производство электроэнергии план - 146125 факт 145000"]);
-      break;
-    case "урановая промышленность":
-      // setLabels([
-      //   /*лейблы для урановой промышленности*/
-      // ]);
-      break;
-    default:
-      console.log();
-  }
+        break;
+      case "электроэнергетика":
+        setBigNumbers([
+          {
+            title: "Генерация (МВт)",
+            data: [
+              {
+                label: "план",
+                value: 11506,
+              },
+              {
+                label: "факт",
+                value: 12319,
+              },
+            ],
+          },
+          {
+            title: "Потребление (МВт)",
+            data: [
+              {
+                label: "план",
+                value: 11561,
+              },
+              {
+                label: "факт",
+                value: 12656,
+              },
+            ],
+          },
+          {
+            title: "Сальдо-переток (МВт)",
+            data: [
+              {
+                label: "план",
+                value: 55,
+              },
+              {
+                label: "факт",
+                value: 337,
+              },
+            ],
+          },
+          {
+            title: "Потребление крупных предприятий Казахстана",
+            data: [],
+          },
+          {
+            title: "Нагрузка эл. станций национального значения",
+            data: [],
+          },
+          {
+            title: "Переток Сев. зоны РК-РФ (млн.кВтч)",
+            data: [
+              {
+                label: "план",
+                value: 3.61,
+              },
+              {
+                label: "факт",
+                value: -3.68,
+              },
+            ],
+          },
+          {
+            title: "Переток Зап. зоны РК-РФ (млн.кВтч)",
+            data: [
+              {
+                label: "план",
+                value: 1.18,
+              },
+              {
+                label: "факт",
+                value: 1.13,
+              },
+            ],
+          },
+          {
+            title: "Переток РК-ЦА (млн.кВтч)",
+            data: [
+              {
+                label: "план",
+                value: 0.0,
+              },
+              {
+                label: "факт",
+                value: 11.42,
+              },
+            ],
+          },
+          {
+            title: "Перетоки энергосистем ЦА за 13 дней июня факт (млн.кВт.ч)",
+            data: [
+              {
+                label: "С-до Кыргызстана (нараст)",
+                value: -13.1,
+              },
+              {
+                label: "С-до Узбекистана (нараст)",
+                value: 0.4,
+              },
+              {
+                label: "С-до РК-ЦА (нараст)",
+                value: 12.7,
+              },
+            ],
+          },
+        ]);
+
+        break;
+      case "урановая промышленность":
+        // setLabels([
+        //   /*лейблы для урановой промышленности*/
+        // ]);
+        break;
+      default:
+        console.log();
+    }
+  }, [
+    activeCategory,
+    benzin,
+    dt,
+    gasFact,
+    gasPlan,
+    kerosin,
+    mt,
+    oilFact,
+    oilPlan,
+  ]);
 
   // console.log(labels);
   return (
@@ -179,11 +292,11 @@ const BigNumbers = (): JSX.Element => {
                   dispatch(setBigNumberValue(index));
                 }}
               >
-                <h4>{bigNumber.title}</h4>
+                <h5 className="big-numbers__title">{bigNumber.title}</h5>
                 <ul>
                   {bigNumber.data.map((bigNumberData) => (
-                    <li key={bigNumberData.label}>
-                      {bigNumberData.label} - {bigNumberData.value}
+                    <li key={bigNumberData.label} className="big-numbers__data">
+                      {bigNumberData.label}: {bigNumberData.value}
                     </li>
                   ))}
                 </ul>
