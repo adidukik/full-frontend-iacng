@@ -48,7 +48,7 @@ const getFieldsLayer = (bigNumberValue) => {
   const currentType = numberToLayerType["" + bigNumberValue];
   if (currentType) {
     const featuresToDisplay = fieldsFeatures.filter((field) =>
-      String(field.values_?.field_resources).includes(currentType)
+      String(field.values_?.field_resources).includes(currentType),
     );
     return new VectorLayer({
       source: new VectorSource({
@@ -68,7 +68,7 @@ interface AppMapProps {
 
 const AppMap = ({ currentRegion }: AppMapProps) => {
   const bigNumberValue = useSelector(
-    (state: RootState) => state.bigNumbers.value
+    (state: RootState) => state.bigNumbers.value,
   );
   const regionNameToColor = {};
   const colors = ["#e9cfdb", "#faf0dd", "#d2e9ce", "#d0ebdb"];
@@ -82,12 +82,12 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
   ]);
   const view = useMemo(
     () => new View({ center: mapCenter, zoom: zoom }),
-    [mapCenter, zoom]
+    [mapCenter, zoom],
   );
 
   const flyTo = useCallback(
     (location, done) => {
-      const duration = 2000;
+      const duration = 500;
       let parts = 2;
       let called = false;
       function callback(complete) {
@@ -106,7 +106,7 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
           duration: duration,
           zoom: 6,
         },
-        callback
+        callback,
       );
       view.animate(
         {
@@ -117,10 +117,10 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
           zoom: zoom,
           duration: duration / 2,
         },
-        callback
+        callback,
       );
     },
-    [view, zoom]
+    [view, zoom],
   );
 
   const regionsLayer = useMemo(
@@ -135,18 +135,16 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
           return regionsStyle;
         },
       }),
-    [regionsData, regionsStyle]
+    [regionsData, regionsStyle],
   );
 
   regionsLayer.setOpacity(0.6);
   const ref = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Map>(null);
-  let lastIdRef = useRef<number>(-1);
+  const lastIdRef = useRef<number>(-1);
 
   const [popupText, setPopupText] = useState(null);
   const [popupVisibility, setpopupVisibility] = useState(false);
-
-  useEffect(() => {}, []);
 
   const fieldsLayerRef = useRef(null);
   useEffect(() => {
@@ -184,7 +182,9 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
         }
         setpopupVisibility(false);
         mapRef.current.forEachFeatureAtPixel(e.pixel, function (f) {
-          if (f.values_.type !== "district") setpopupVisibility(true);
+          if (f.values_.type !== "district") {
+            setpopupVisibility(true);
+          }
           if (
             f.values_.type !== "district" &&
             lastIdRef.current !== f.values_.id
@@ -220,7 +220,7 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
   useEffect(() => {
     if (currentRegion) {
       const feature = regionsFeatures.filter(
-        (feature) => feature.values_.name_ru === currentRegion
+        (feature) => feature.values_.name_ru === currentRegion,
       )[0];
       //.filter(feature => feature.values_.name_ru === currentRegion)
       const extent = feature.getGeometry().getExtent();

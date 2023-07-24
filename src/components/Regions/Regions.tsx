@@ -57,28 +57,24 @@ const Regions = ({ onRegionClick }: RegionsProps) => {
         field="region"
         header="Регион"
         sortable
-        bodyStyle={{ backgroundColor: "#A6A6A6" }}
         headerStyle={{ backgroundColor: "gray" }}
       ></Column>
       <Column
         field="indicator"
         header="Показатель"
         sortable
-        bodyStyle={{ backgroundColor: "#A6A6A6" }}
         headerStyle={{ backgroundColor: "gray" }}
       ></Column>
       <Column
         field="category"
         header="Category"
         sortable
-        bodyStyle={{ backgroundColor: "#A6A6A6" }}
         headerStyle={{ backgroundColor: "gray" }}
       ></Column>
       <Column
         field="quantity"
         header="Quantity"
         sortable
-        bodyStyle={{ backgroundColor: "#A6A6A6" }}
         headerStyle={{ backgroundColor: "gray" }}
       ></Column>
     </DataTable>

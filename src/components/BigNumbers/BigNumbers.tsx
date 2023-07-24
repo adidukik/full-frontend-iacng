@@ -46,7 +46,7 @@ const BigNumbers = (): JSX.Element => {
   const mt = useFetchData(`http://192.168.0.57:8000/calculate_mt/`);
   useEffect(() => {
     switch (activeCategory) {
-      case "нефтегазовая отрасль":
+      case 0:
         setBigNumbers([
           {
             title: "Добыча нефти (тонн)",
@@ -136,7 +136,7 @@ const BigNumbers = (): JSX.Element => {
         ]);
 
         break;
-      case "электроэнергетика":
+      case 1:
         setBigNumbers([
           {
             title: "Генерация (МВт)",
@@ -244,7 +244,7 @@ const BigNumbers = (): JSX.Element => {
         ]);
 
         break;
-      case "урановая промышленность":
+      case 2:
         // setLabels([
         //   /*лейблы для урановой промышленности*/
         // ]);

@@ -1,11 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export type Category =
-  | "нефтегазовая отрасль"
-  | "электроэнергетика"
-  | "урановая промышленность";
+export type Category = 0 | 1 | 2;
 
-const initialState: Category = "нефтегазовая отрасль";
+const initialState: Category = 0;
 
 const categoriesSlice = createSlice({
   name: "categories",
