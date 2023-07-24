@@ -1,68 +1,19 @@
-// import { Button } from 'primereact/button';
-// import { Chart } from 'primereact/chart';
-// import { Column } from 'primereact/column';
-// import { DataTable } from 'primereact/datatable';
-// import { Menu } from 'primereact/menu';
-// import React, { useContext, useEffect, useRef, useState } from 'react';
-// import { TabMenu } from 'primereact/tabmenu';
-
-// import { Card } from 'primereact/card';
-// import './BigNumbers.css';
-
-// interface BigNumbersProps {
-// }
-
-// const items: MenuItem[] = [
-//   {label: 'сутки'},
-//   {label: 'месяц'},
-//   {label: 'год'},
-// ];
-
-// const BigNumbers: React.FC<BigNumbersProps> = (props) => {
-//   const labels = [
-//     "Добыча нефти (тонн) план - 146125 факт 145000",
-//     "Добыча газа",
-//     "Производство нефтепродуктов",
-//     "Остаток НП (дни)",
-//     "Экспорт нефти %, нефтепродуктов %",
-//     "Цены на нефть, внутренний рынок - 40, на экспорт - 40 Бензин 92 РК - 203"
-//   ];
-
-//   return (
-//     <div className="card">
-//       <TabMenu model={items} className="time-tabmenuitem"/>
-
-//       <ul>
-//         {labels.map
-//               (label =>
-//               <li key = {label}>
-//                 <Button label={label} className="p-button-raised p-button-text"/>
-//               </li>)}
-//       </ul>
-//     </div>
-
-//   );
-// };
-
-// export default BigNumbers;
-
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import { Button, Card, Nav } from "react-bootstrap";
 import "./BigNumbers.css";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { setBigNumberValue } from "./bigNumbersSlice";
 import useFetchData from "../../hooks/useFetchData";
 import { BigNumber } from "../../interfaces/BigNumber";
-import { limit } from "firebase/firestore";
-import useBigNumbers from "../../hooks/useBigNumbers";
+import { Category } from "../CategoriesMenu/categoriesSlice";
+import { Card, Nav, Button } from "react-bootstrap";
 
-interface BigNumbersProps {}
-
-const BigNumbers: React.FC<BigNumbersProps> = (props) => {
+const BigNumbers = (): JSX.Element => {
   const timeRanges = ["сутки", "месяц", "год"];
   const [currentTimeRange, setCurrentTimeRange] = useState(timeRanges[0]); // State to store active tab
-  const activeCategory = useSelector((state: RootState) => state.categories);
+  const activeCategory: Category = useSelector(
+    (state: RootState) => state.categories,
+  );
 
   // Access dispatch to dispatch actions
   const dispatch = useDispatch();
@@ -78,21 +29,21 @@ const BigNumbers: React.FC<BigNumbersProps> = (props) => {
       const currentTimeRangeInEnglish = timeRangeToEnglish[currentTimeRange];
 
       const oilPlan = useFetchData(
-        `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_plan/`
+        `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_plan/`,
       );
       const oilFact = useFetchData(
-        `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield/`
+        `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield/`,
       );
       const gasPlan = useFetchData(
-        `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield_plan/`
+        `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield_plan/`,
       );
       const gasFact = useFetchData(
-        `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield/`
+        `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield/`,
       );
 
       const benzin = useFetchData(`http://192.168.0.57:8000/calculate_benzin/`);
       const kerosin = useFetchData(
-        `http://192.168.0.57:8000/calculate_kerosin/`
+        `http://192.168.0.57:8000/calculate_kerosin/`,
       );
       const dt = useFetchData(`http://192.168.0.57:8000/calculate_dt/`);
       const mt = useFetchData(`http://192.168.0.57:8000/calculate_mt/`);
@@ -185,7 +136,7 @@ const BigNumbers: React.FC<BigNumbersProps> = (props) => {
             ],
           },
         ]);
-      }, []);
+      }, [benzin, dt, gasFact, gasPlan, kerosin, mt, oilFact, oilPlan]);
 
       break;
     case "электроэнергетика":
@@ -197,6 +148,7 @@ const BigNumbers: React.FC<BigNumbersProps> = (props) => {
       // ]);
       break;
     default:
+      console.log();
   }
 
   // console.log(labels);
