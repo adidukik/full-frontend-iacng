@@ -22,6 +22,7 @@ import { BigNumberState } from "../BigNumbers/bigNumbersSlice";
 import { toStringHDMS } from "ol/coordinate";
 import Overlay from "ol/Overlay";
 import { Popover } from "react-bootstrap";
+import { RootState } from "../../../store";
 
 const regionsStyle = new Style({
   fill: new Fill({
@@ -44,7 +45,7 @@ const numberToLayerType = {
 };
 const getFieldsLayer = (bigNumberValue) => {
   console.log("big", bigNumberValue);
-  const currentType = numberToLayerType["0"];
+  const currentType = numberToLayerType["" + bigNumberValue];
   if (currentType) {
     const featuresToDisplay = fieldsFeatures.filter((field) =>
       String(field.values_?.field_resources).includes(currentType)
@@ -66,8 +67,9 @@ interface AppMapProps {
 }
 
 const AppMap = ({ currentRegion }: AppMapProps) => {
-  const bigNumberValue = useSelector((state: BigNumberState) => state.value);
-  console.log("bigNumberValue:", bigNumberValue);
+  const bigNumberValue = useSelector(
+    (state: RootState) => state.bigNumbers.value
+  );
   const regionNameToColor = {};
   const colors = ["#e9cfdb", "#faf0dd", "#d2e9ce", "#d0ebdb"];
   for (let i = 0; i < regionNames.length; i++) {
@@ -82,24 +84,6 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
     () => new View({ center: mapCenter, zoom: zoom }),
     [mapCenter, zoom]
   );
-  const [logValue, setLogValue] = useState(bigNumberValue);
-
-  useEffect(() => {
-    // This effect will run whenever bigNumberValue changes
-    console.log("bigNumberValue changed:", bigNumberValue);
-    // Update the logValue state with the latest bigNumberValue
-    setLogValue(bigNumberValue);
-  }, [bigNumberValue]); // Specify bigNumberValue as a dependency
-
-  useEffect(() => {
-    // This effect will run on mount and set up the interval to log the value every second
-    const intervalId = setInterval(() => {
-      console.log("Logging bigNumberValue:", logValue);
-    }, 1000);
-
-    // Cleanup the interval when the component unmounts
-    return () => clearInterval(intervalId);
-  }, [logValue]); // Specify logValue as a dependency
 
   const flyTo = useCallback(
     (location, done) => {
@@ -162,17 +146,19 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
   const [popupText, setPopupText] = useState(null);
   const [popupVisibility, setpopupVisibility] = useState(false);
 
+  useEffect(() => {}, []);
+
+  const fieldsLayerRef = useRef(null);
   useEffect(() => {
-    const fieldsLayer = getFieldsLayer(bigNumberValue);
     const mapLayers = [new TileLayer({ source: new OSM() }), regionsLayer];
-    if (fieldsLayer) mapLayers.push(fieldsLayer);
-    //new TileLayer({ source: new OSM() }),
     if (ref.current && !mapRef.current) {
+      console.log("map rerender");
       mapRef.current = new Map({
         layers: mapLayers,
         view: view,
         target: ref.current,
       });
+
       const popup = new Overlay({
         element: document.getElementById("popup"),
       });
@@ -219,6 +205,15 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
           return true;
         });
       });
+    }
+    const newFieldsLayer = getFieldsLayer(bigNumberValue);
+    if (newFieldsLayer) {
+      if (fieldsLayerRef.current) {
+        // If the fieldsLayer already exists, remove it from the map first
+        mapRef.current.removeLayer(fieldsLayerRef.current);
+      }
+      fieldsLayerRef.current = newFieldsLayer;
+      mapRef.current.addLayer(newFieldsLayer);
     }
   }, [ref, mapRef, mapCenter, zoom, regionsLayer, bigNumberValue]);
 

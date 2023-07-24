@@ -1,12 +1,10 @@
 module.exports = {
+  globals: { angular: false, module: false, inject: false, document: false },
+  env: { browser: true, amd: true, node: true },
   root: true,
-  extends: [
-    "eslint:recommended",
-    "react-app",
-    "prettier",
-    "plugin:prettier/recommended",
-  ],
+  extends: ["eslint:recommended", "prettier", "plugin:prettier/recommended"],
   ignorePatterns: ["styleguide.config.js"],
+  plugins: ["react", "react-hooks"],
   overrides: [
     {
       files: ["src/**/*.ts?(x)"],
@@ -57,6 +55,7 @@ module.exports = {
         ],
         "guard-for-in": "warn",
         "react-hooks/rules-of-hooks": "warn",
+        "react-hooks/exhaustive-deps": "warn",
         "no-sequences": "warn",
         "prefer-const": "warn",
         "no-console": "warn",
