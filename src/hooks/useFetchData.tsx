@@ -21,7 +21,7 @@ function useFetchData(url: string) {
     fetchData();
   }, [url]);
 
-  return data;
+  return Math.floor(data);
 }
 
 export default useFetchData;

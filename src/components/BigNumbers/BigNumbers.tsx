@@ -53,6 +53,9 @@ import "./BigNumbers.css";
 import React, { useEffect, useState } from "react";
 import { setBigNumberValue } from "./bigNumbersSlice";
 import useFetchData from "../../hooks/useFetchData";
+import { BigNumber } from "../../interfaces/BigNumber";
+import { limit } from "firebase/firestore";
+import useBigNumbers from "../../hooks/useBigNumbers";
 
 interface BigNumbersProps {}
 
@@ -64,101 +67,7 @@ const BigNumbers: React.FC<BigNumbersProps> = (props) => {
   // Access dispatch to dispatch actions
   const dispatch = useDispatch();
 
-  // let labels = getLabelsForCategory(activeCategory, 0);  // Implement this function to return labels based on category
-
-  // const [oilPlan, setNumberData] = useState<number | null>(null); // State to store the fetched number
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const currentTimeRangeToUrl = {
-  //         сутки: "http://192.168.0.57:8000/calculate_last_date_oil_yield_plan/",
-  //         месяц:
-  //           "http://192.168.0.57:8000/calculate_last_month_oil_yield_plan/",
-  //         год: "http://192.168.0.57:8000/calculate_last_year_oil_yield_plan/",
-  //       };
-  //       const response = await fetch(currentTimeRangeToUrl[currentTimeRange]); // Replace with your API endpoint
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-  //       const data = await response.json();
-  //       setNumberData(Object.values(data)[0]);
-  //       console.log(Object.values(data)[0]); // Assuming the API response is an object with a "number" property
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-  const timeRangeToEnglish = {
-    сутки: "date",
-    месяц: "month",
-    год: "year",
-  };
-  const currentTimeRangeInEnglish = timeRangeToEnglish[currentTimeRange];
-
-  const oilPlan = useFetchData(
-    `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_plan/`
-  );
-  const oilFact = useFetchData(
-    `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield/`
-  );
-  const gasPlan = useFetchData(
-    `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield_plan/`
-  );
-  const gasFact = useFetchData(
-    `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield/`
-  );
-
-  const benzin = useFetchData(`http://192.168.0.57:8000/calculate_benzin/`);
-  const kerosin = useFetchData(`http://192.168.0.57:8000/calculate_kerosin/`);
-  const dt = useFetchData(`http://192.168.0.57:8000/calculate_dt/`);
-  const mt = useFetchData(`http://192.168.0.57:8000/calculate_mt/`);
-
-  const [labels, setLabels] = useState<string[]>([]);
-  useEffect(() => {
-    switch (activeCategory) {
-      case "нефтегазовая отрасль":
-        setLabels([
-          `<strong>Добыча нефти (тонн)</strong> <br> план - ${Math.floor(
-            oilPlan
-          )} <br> факт ${oilFact}`,
-          `<strong>Добыча газа (тонн)</strong>  <br> план - ${Math.floor(
-            gasPlan
-          )}  <br> факт ${gasFact}`,
-          `<strong>Производство нефтепродуктов</strong><br> бензин - ${benzin}<br>керосин - ${kerosin}<br>дизельное топливо - ${dt}<br>мазут - ${mt}`,
-          "<strong>Остаток НП (дни)</strong>",
-          "<strong>Экспорт</strong><br> нефти %, нефтепродуктов %",
-          "<strong>Цены на нефть</strong><br> внутренний рынок - 40, на экспорт - 40 Бензин 92 РК - 203",
-        ]);
-        break;
-      case "электроэнергетика":
-        setLabels(["Производство электроэнергии план - 146125 факт 145000"]);
-        break;
-      case "урановая промышленность":
-        setLabels([
-          /*лейблы для урановой промышленности*/
-        ]);
-        break;
-      default:
-        setLabels([
-          `Добыча нефти (тонн) план - ${Math.floor(oilPlan)} факт ${oilFact}`,
-          `Добыча газа (тонн) план - ${Math.floor(gasPlan)} факт ${gasFact}`,
-          `Производство нефтепродуктов: бензин - ${benzin}, керосин - ${kerosin}, дизельное топливо - ${dt}, мазут - ${mt}`,
-          "Остаток НП (дни)",
-          "Экспорт нефти %, нефтепродуктов %",
-          "Цены на нефть, внутренний рынок - 40, на экспорт - 40 Бензин 92 РК - 203",
-        ]);
-    }
-  }, [
-    activeCategory,
-    oilPlan,
-    oilFact,
-    gasPlan,
-    gasFact,
-    benzin,
-    kerosin,
-    dt,
-    mt,
-  ]);
+  const bigNumbers = useBigNumbers(currentTimeRange);
 
   // console.log(labels);
   return (
@@ -179,8 +88,8 @@ const BigNumbers: React.FC<BigNumbersProps> = (props) => {
       </Card.Header>
       <Card.Body>
         <ul>
-          {labels.map((label, index) => (
-            <li key={label}>
+          {bigNumbers.map((bigNumber, index) => (
+            <li key={bigNumber.title}>
               <Button
                 variant="outline-primary"
                 className="big-numbers__btn"
@@ -188,8 +97,14 @@ const BigNumbers: React.FC<BigNumbersProps> = (props) => {
                   dispatch(setBigNumberValue(index));
                 }}
               >
-                {/* {label} */}
-                <p dangerouslySetInnerHTML={{ __html: label }} />
+                <h4>{bigNumber.title}</h4>
+                <ul>
+                  {bigNumber.data.map((bigNumberData) => (
+                    <li key={bigNumberData.label}>
+                      {bigNumberData.label} - {bigNumberData.value}
+                    </li>
+                  ))}
+                </ul>
               </Button>
             </li>
           ))}
@@ -198,8 +113,5 @@ const BigNumbers: React.FC<BigNumbersProps> = (props) => {
     </Card>
   );
 };
-
-// Implement this function to return different labels based on category
-function getLabelsForCategory(category: string, numberData: number | null) {}
 
 export default BigNumbers;
