@@ -23,10 +23,11 @@ import { toStringHDMS } from "ol/coordinate";
 import Overlay from "ol/Overlay";
 import { Popover } from "react-bootstrap";
 import { RootState } from "../../../store";
+import { normalize } from "ol/color";
 
 const regionsStyle = new Style({
   fill: new Fill({
-    color: "#eeeeee",
+    color: "#000000",
   }),
 });
 const fieldsStyle = new Style({
@@ -44,7 +45,6 @@ const numberToLayerType = {
   1: "газ",
 };
 const getFieldsLayer = (bigNumberValue) => {
-  console.log("big", bigNumberValue);
   const currentType = numberToLayerType["" + bigNumberValue];
   if (currentType) {
     const featuresToDisplay = fieldsFeatures.filter((field) =>
@@ -148,9 +148,22 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
 
   const fieldsLayerRef = useRef(null);
   useEffect(() => {
-    const mapLayers = [new TileLayer({ source: new OSM() }), regionsLayer];
+    const red = normalize(["band", 1]);
+    const green = normalize(["band", 2]);
+    const blue = normalize(["band", 3]);
+    const trueColor = {
+      color: ["array", red, green, blue, 1],
+      gamma: 1.1,
+    };
+
+    const bgLayer = new TileLayer({
+      style: trueColor,
+      source: new OSM(),
+    });
+
+    const mapLayers = [bgLayer, regionsLayer];
+
     if (ref.current && !mapRef.current) {
-      console.log("map rerender");
       mapRef.current = new Map({
         layers: mapLayers,
         view: view,
@@ -189,7 +202,6 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
             f.values_.type !== "district" &&
             lastIdRef.current !== f.values_.id
           ) {
-            console.log(f);
             popup.setPosition(e.coordinate);
             setPopupText({
               Имя: f.values_.name,

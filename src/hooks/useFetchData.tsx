@@ -12,7 +12,6 @@ function useFetchData(url: string) {
         }
         const data = await response.json();
         setData(Object.values(data)[0]);
-        console.log(Object.values(data)[0]);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
