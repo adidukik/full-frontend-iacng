@@ -4,15 +4,15 @@
   display: grid;
   grid-auto-columns: 1fr;
   grid-auto-rows: 1fr;
-  grid-template-columns: 1fr 2.24fr 1.11fr 1.35fr;
-  grid-template-rows: 1fr 1fr 2.25fr 11.8fr 3.96fr;
+  grid-template-columns: 1fr 3.22fr 1.27fr 1.19fr;
+  grid-template-rows: 2.29fr 1fr 1.6fr 15.37fr 9.86fr;
   grid-template-areas:
     "Title Title Title Title"
     "CategoriesMenu CategoriesMenu CategoriesMenu CategoriesMenu"
     "BigNumbers ScrollingText ScrollingText ScrollingText"
     "BigNumbers Map Map ChatBot"
     "BigNumbers Regions Regions Graph";
-
+  gap: 16px;
   font-family: "Montserrat", sans-serif !important;
   padding: 5px 24px;
   background: url("./src/assets/images/bg1.png") center center no-repeat;

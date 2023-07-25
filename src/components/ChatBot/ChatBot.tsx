@@ -79,8 +79,8 @@ const ChatBot = () => {
       style={{
         width: "100%",
         border: "none",
-        maxHeight: "210px",
       }}
+      className="ChatBot__iframe"
     ></iframe>
   );
 };

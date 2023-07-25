@@ -1,83 +1,86 @@
-
 .chat-container {
-    background-color: #545454;
+  background-color: #545454;
 }
 
 .chat-content {
-    overflow-y: auto;
-    background-color: #545454;
-    height: 117px;
-    padding: 1em;
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid #ddd;
+  overflow-y: auto;
+  background-color: #545454;
+  height: 117px;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #ddd;
 }
 
 .chat-message {
-    background-color: #007ad9;
-    border-radius: 18px;
-    padding: 10px 20px;
-    margin: 0px 0;
-    max-width: 70%;
-    color: white;
-    align-self: flex-end;
-    word-wrap: break-word;
-    position: relative;
-    font-size: 0.9em;
+  background-color: #007ad9;
+  border-radius: 18px;
+  padding: 10px 20px;
+  margin: 0px 0;
+  max-width: 70%;
+  color: white;
+  align-self: flex-end;
+  word-wrap: break-word;
+  position: relative;
+  font-size: 0.9em;
 }
 
 .chat-message p {
-    margin: 0;
-    line-height: 1.5;
-    word-break: break-all;
+  margin: 0;
+  line-height: 1.5;
+  word-break: break-all;
 }
 
 .chat-message.left {
-    background-color: #f4f4f4;
-    color: #333;
-    align-self: flex-start;
+  background-color: #f4f4f4;
+  color: #333;
+  align-self: flex-start;
 }
 
 .chat-input-area {
-    display: flex;
-    padding: 0em;
-    border-top: 1px solid #ddd;
-    align-items: center;
-    background-color: #A6A6A6;
+  display: flex;
+  padding: 0em;
+  border-top: 1px solid #ddd;
+  align-items: center;
+  background-color: #a6a6a6;
 }
 
 .chat-input {
-    flex: 1;
-    border: none;
-    padding: 10px;
-    font-size: 0.9em;
-    border-radius: 3px;
+  flex: 1;
+  border: none;
+  padding: 10px;
+  font-size: 0.9em;
+  border-radius: 3px;
 }
 
 .chat-button {
-    background: #007ad9;
-    color: #A6A6A6;
-    font-size: 0.9em;
-    padding: 10px;
-    border: none;
-    border-radius: 3px;
-    margin-left: 5px;
-    margin-right: 5px;
-    cursor: pointer;
+  background: #007ad9;
+  color: #a6a6a6;
+  font-size: 0.9em;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  margin-left: 5px;
+  margin-right: 5px;
+  cursor: pointer;
 }
 
 /* Overriding PrimeReact styles */
 .p-button {
-    background-color: #004AAD;
-    color: white;
+  background-color: #004aad;
+  color: white;
 }
 
 .p-button:enabled:hover {
-    background-color: #004AAD;
+  background-color: #004aad;
 }
 
 .p-inputtextarea {
-    border: 0px solid #ddd;
-    background-color: #A6A6A6;
-    color: #333;
+  border: 0px solid #ddd;
+  background-color: #a6a6a6;
+  color: #333;
+}
+.ChatBot__iframe {
+  height: 100%;
+  padding-bottom: 10px;
 }
