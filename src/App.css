@@ -15,7 +15,8 @@
 
   font-family: "Montserrat", sans-serif !important;
   padding: 5px 24px;
-  background-image: url("./src/assets/images/bg1.png");
+  background: url("./src/assets/images/bg1.png") center center no-repeat;
+  background-size: cover;
 }
 
 .Title {
