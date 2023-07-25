@@ -18,7 +18,10 @@
   background: url("./src/assets/images/bg1.png") center center no-repeat;
   background-size: cover;
 }
-
+.App > div {
+  border-radius: 10px !important;
+  overflow: hidden;
+}
 .Title {
   grid-area: Title;
 }
