@@ -1,9 +1,23 @@
 .BigNumbers {
   margin-right: 14px;
+  color: #fff;
   overflow-y: auto;
 }
-.big-numbers__data {
-  font-size: 12px;
+.big-numbers__heading,
+.big-numbers__date {
+  color: #fff;
+  text-align: center;
+}
+.big-numbers__data,
+.big-numbers__data-table {
+  text-align: left;
+  font-size: 14px;
+}
+li.big-numbers__data:first-child {
+  margin-right: 10px;
+}
+.big-numbers__data-table td {
+  text-align: left;
 }
 .big-numbers__title {
   font-size: 14px;
@@ -11,11 +25,16 @@
 .big-numbers__btn {
   border: 1px solid white !important;
   color: #fff;
-
   width: 100%;
   margin-bottom: 7px;
   border: none;
   border-radius: 10px !important;
+}
+
+.big-numbers__btn-active {
+  color: var(--bs-btn-hover-color);
+  background-color: var(--bs-btn-hover-bg);
+  border-color: var(--bs-btn-hover-border-color);
 }
 .BigNumbers .nav-tabs {
   max-height: 50px;
@@ -31,12 +50,11 @@
 .BigNumbers a.nav-link {
   border-radius: 0;
   font-weight: 800 !important;
-  font-family: "Montserrat", sans-serif;
-  background-color: #a6a6a6;
   font-weight: 400;
-  color: #000;
+  color: #fff;
   border: 0;
-  padding: 0;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .BigNumbers .nav-tabs .nav-item.show .nav-link,

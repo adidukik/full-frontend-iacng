@@ -1,7 +1,5 @@
 .Graph {
   margin-right: 14px;
-}
-
-.chart-oil {
-  height: 100%;
+  background: #041541ff;
+  margin: 0;
 }

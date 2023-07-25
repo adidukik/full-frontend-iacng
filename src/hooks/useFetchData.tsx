@@ -20,7 +20,7 @@ function useFetchData(url: string) {
     fetchData();
   }, [url]);
 
-  return Math.floor(data);
+  return data;
 }
 
 export default useFetchData;

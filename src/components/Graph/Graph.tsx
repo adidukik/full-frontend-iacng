@@ -1,15 +1,45 @@
-import { Card } from "primereact/card";
-import { Chart } from "primereact/chart";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
 import "./Graph.css";
 
 const Graph = () => {
-  const [chartData, setChartData] = useState({});
-  const [chartOptions, setChartOptions] = useState({});
-
-  const [months, setMonths] = useState({}); // State to store the fetched number
-
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+  );
+  const [chartData, setChartData] = useState({
+    labels: [],
+    datasets: [],
+  });
+  const [months, setMonths] = useState({});
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top" as const,
+      },
+      title: {
+        display: true,
+        text: "Добыча",
+      },
+    },
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,8 +49,8 @@ const Graph = () => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        const months1 = await response.json();
-        setMonths(months1.yields_per_month);
+        const data = await response.json();
+        setMonths(data.yields_per_month);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -29,12 +59,6 @@ const Graph = () => {
   }, []);
 
   useEffect(() => {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue("--text-color");
-    const textColorSecondary = documentStyle.getPropertyValue(
-      "--text-color-secondary",
-    );
-    const surfaceBorder = documentStyle.getPropertyValue("--surface-border");
     const data = {
       labels: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль"],
       datasets: [
@@ -49,52 +73,21 @@ const Graph = () => {
             months[5],
             months[6],
           ],
-          fill: false,
-          borderColor: documentStyle.getPropertyValue("--blue-500"),
-          tension: 0.4,
+          borderColor: "white",
+          borderWidth: 2,
         },
       ],
     };
-    const options = {
-      maintainAspectRatio: false,
-      responsive: true,
-      plugins: {
-        legend: {
-          labels: {
-            color: "#ffffff",
-          },
-        },
-      },
-      scales: {
-        x: {
-          ticks: {
-            color: "#ffffff",
-          },
-          grid: {
-            color: "#ffffff",
-          },
-        },
-        y: {
-          ticks: {
-            color: "#ffffff",
-          },
-          grid: {
-            color: "#ffffff",
-          },
-        },
-      },
-    };
 
     setChartData(data);
-    setChartOptions(options);
   }, [months]);
+
   return (
-    <Chart
-      type="line"
-      data={chartData}
-      options={chartOptions}
-      className="chart-oil"
-    />
+    <div className="chart-oil">
+      {chartData.labels.length > 0 && (
+        <Line data={chartData} options={options} />
+      )}
+    </div>
   );
 };
 

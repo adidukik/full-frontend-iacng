@@ -7,12 +7,59 @@ import useFetchData from "../../hooks/useFetchData";
 import { BigNumber } from "../../interfaces/BigNumber";
 import { Category } from "../CategoriesMenu/categoriesSlice";
 import { Card, Nav, Button } from "react-bootstrap";
+import { getFormattedDate } from "../../utils/getFormattedDate";
+
+const BigNumberButton = ({ bigNumber }) => {
+  const getListItem = (bigNumberData) => {
+    return (
+      <li key={bigNumberData.label} className="big-numbers__data">
+        <div>
+          <>{bigNumberData.label}</>
+          <br></br>
+          <>{bigNumberData.value}</>
+        </div>
+      </li>
+    );
+  };
+  const getTableItem = (bigNumberData) => {
+    return (
+      <tr className="big-numbers__data-table" key={bigNumberData.label}>
+        <td> {bigNumberData.label}</td>
+        <td> {bigNumberData.value}</td>
+      </tr>
+    );
+  };
+  if (bigNumber.data.length < 2) {
+    return (
+      <>
+        {bigNumber.data[0].label} {bigNumber.data[0].value}
+      </>
+    );
+  } else if (bigNumber.data.length < 3) {
+    return (
+      <ul className="d-flex flex-row justify-content-around">
+        {bigNumber.data.map((bigNumberData) => getListItem(bigNumberData))}
+      </ul>
+    );
+  } else {
+    return (
+      <table>
+        <tbody>
+          {bigNumber.data.map((bigNumberData) => getTableItem(bigNumberData))}
+        </tbody>
+      </table>
+    );
+  }
+};
 
 const BigNumbers = (): JSX.Element => {
   const timeRanges = ["сутки", "месяц", "год"];
   const [currentTimeRange, setCurrentTimeRange] = useState(timeRanges[0]); // State to store active tab
   const activeCategory: Category = useSelector(
     (state: RootState) => state.categories,
+  );
+  const bigNumberValue = useSelector(
+    (state: RootState) => state.bigNumbers.value,
   );
 
   // Access dispatch to dispatch actions
@@ -26,24 +73,39 @@ const BigNumbers = (): JSX.Element => {
     год: "year",
   };
   const currentTimeRangeInEnglish = timeRangeToEnglish[currentTimeRange];
+  const latestDate = getFormattedDate(
+    useFetchData("http://192.168.0.57:8000/last_day/"),
+  );
+  console.log(latestDate);
+  const oilPlan = Math.floor(
+    useFetchData(
+      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_plan/`,
+    ),
+  );
+  const oilFact = Math.floor(
+    useFetchData(
+      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield/`,
+    ),
+  );
+  const gasPlan = Math.floor(
+    useFetchData(
+      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield_plan/`,
+    ),
+  );
+  const gasFact = Math.floor(
+    useFetchData(
+      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield/`,
+    ),
+  );
 
-  const oilPlan = useFetchData(
-    `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_plan/`,
+  const benzin = Math.floor(
+    useFetchData(`http://192.168.0.57:8000/calculate_benzin/`),
   );
-  const oilFact = useFetchData(
-    `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield/`,
+  const kerosin = Math.floor(
+    useFetchData(`http://192.168.0.57:8000/calculate_kerosin/`),
   );
-  const gasPlan = useFetchData(
-    `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield_plan/`,
-  );
-  const gasFact = useFetchData(
-    `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield/`,
-  );
-
-  const benzin = useFetchData(`http://192.168.0.57:8000/calculate_benzin/`);
-  const kerosin = useFetchData(`http://192.168.0.57:8000/calculate_kerosin/`);
-  const dt = useFetchData(`http://192.168.0.57:8000/calculate_dt/`);
-  const mt = useFetchData(`http://192.168.0.57:8000/calculate_mt/`);
+  const dt = Math.floor(useFetchData(`http://192.168.0.57:8000/calculate_dt/`));
+  const mt = Math.floor(useFetchData(`http://192.168.0.57:8000/calculate_mt/`));
   useEffect(() => {
     switch (activeCategory) {
       case 0:
@@ -97,7 +159,12 @@ const BigNumbers = (): JSX.Element => {
           },
           {
             title: "Остаток НП (дни)",
-            data: [],
+            data: [
+              {
+                label: "",
+                value: 3,
+              },
+            ],
           },
           {
             title: "Экспорт",
@@ -264,9 +331,10 @@ const BigNumbers = (): JSX.Element => {
     oilPlan,
   ]);
 
-  // console.log(labels);
   return (
     <Card className="big-numbers app-card">
+      <h1 className="big-numbers__heading">Данные</h1>
+      <h3 className="big-numbers__date">за {latestDate}</h3>
       <Card.Header>
         <Nav variant="tabs" defaultActiveKey="#сутки">
           {timeRanges.map((item, idx) => (
@@ -287,19 +355,15 @@ const BigNumbers = (): JSX.Element => {
             <li key={bigNumber.title}>
               <Button
                 variant="outline-primary"
-                className="big-numbers__btn"
+                className={`big-numbers__btn ${
+                  bigNumberValue === index && "big-numbers__btn-active"
+                }`}
                 onClick={(e) => {
                   dispatch(setBigNumberValue(index));
                 }}
               >
                 <h5 className="big-numbers__title">{bigNumber.title}</h5>
-                <ul>
-                  {bigNumber.data.map((bigNumberData) => (
-                    <li key={bigNumberData.label} className="big-numbers__data">
-                      {bigNumberData.label}: {bigNumberData.value}
-                    </li>
-                  ))}
-                </ul>
+                <BigNumberButton bigNumber={bigNumber}></BigNumberButton>
               </Button>
             </li>
           ))}
