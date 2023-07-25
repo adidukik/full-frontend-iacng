@@ -11,6 +11,7 @@ import CategoriesMenu from "./components/CategoriesMenu/CategoriesMenu.tsx";
 import Title from "./components/Title/Title.tsx";
 import ScrollingText from "./components/ScrollingText/ScrollingText.tsx";
 import { useState } from "react";
+import { Box } from "./components/Regions/Regions_card.tsx";
 
 function App() {
   const [currentRegion, setCurrentRegion] = useState(null);
@@ -27,7 +28,9 @@ function App() {
         <BigNumbers />
       </div>
       <div className="Regions">
+        {/* <Box></Box> */}
         <Regions onRegionClick={setCurrentRegion}></Regions>
+        {/* <Regions /> When redux is implemented*/}
       </div>
       <div className="ScrollingText">
         <ScrollingText />

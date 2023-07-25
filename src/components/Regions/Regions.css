@@ -1,4 +1,4 @@
-.Regions {
+/* .Regions {
   overflow: auto;
 }
 .Regions button {
@@ -40,4 +40,53 @@ th {
 }
 .Regions__table th {
   padding: 5px !important;
+} */
+.container {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100vh;
+  background-color: #041541;
+  color: white;
+  padding: 0;
+}
+
+.table {
+  width: 100%;
+}
+
+.table .MuiTableCell-root {
+  width: 50px;
+  vertical-align: middle !important;
+  text-align: center !important;
+  padding: 0 !important;
+  color: white;
+}
+
+.table .MuiButton-root {
+  color: white !important;
+  font-size: 12px;
+  padding: 5px;
+  background-color: transparent;
+}
+
+.table .MuiTableCell-head {
+  padding: 5px !important;
+  background-color: #041541;
+  font-size: 14px;
+  color: white;
+}
+
+.table .MuiTableCell-body {
+  background-color: #041541;
+  font-size: 12px;
+  color: white;
+  border-spacing: 0;
+  border: none;
+}
+
+.table .MuiTable-root {
+  display: flex;
+  justify-content: center;
+  text-align: center !important;
+  vertical-align: middle;
 }
