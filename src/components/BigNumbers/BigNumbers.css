@@ -9,11 +9,13 @@
   font-size: 14px;
 }
 .big-numbers__btn {
-  background-color: #a6a6a6;
-  color: #000;
+  border: 1px solid white !important;
+  color: #fff;
+
   width: 100%;
   margin-bottom: 7px;
   border: none;
+  border-radius: 10px !important;
 }
 .BigNumbers .nav-tabs {
   max-height: 50px;
@@ -60,5 +62,5 @@
   background: none;
 }
 .BigNumbers .card-body {
-  background-color: #545454;
+  background-color: #041541ff;
 }

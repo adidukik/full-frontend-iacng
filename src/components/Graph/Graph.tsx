@@ -89,14 +89,12 @@ const Graph = () => {
     setChartOptions(options);
   }, [months]);
   return (
-    <div style={{ width: "100%", height: "100%", backgroundColor: "#A6A6A6" }}>
-      <Chart
-        type="line"
-        data={chartData}
-        options={chartOptions}
-        className="chart-oil"
-      />
-    </div>
+    <Chart
+      type="line"
+      data={chartData}
+      options={chartOptions}
+      className="chart-oil"
+    />
   );
 };
 
