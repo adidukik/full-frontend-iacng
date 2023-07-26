@@ -1,17 +1,15 @@
 import Map from "ol/Map";
 import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
-import OSM from "ol/source/OSM";
 import "./AppMap.css";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import VectorSource from "ol/source/Vector";
-
+import { MultiPolygon } from "ol/geom";
 import GeoJSON from "ol/format/GeoJSON.js";
-
+import { FullScreen, defaults as defaultControls } from "ol/control.js";
 import { Vector as VectorLayer } from "ol/layer.js";
 import Fill from "ol/style/Fill";
 import Style from "ol/style/Style";
-
+import { OSM, Stamen, Vector as VectorSource } from "ol/source.js";
 import regionsData from "../../assets/geo/kz_regions.json";
 import fieldsData from "../../assets/geo/fields.json";
 import { getCenter } from "ol/extent";
@@ -24,6 +22,7 @@ import Overlay from "ol/Overlay";
 import { Popover } from "react-bootstrap";
 import { RootState } from "../../../store";
 import { normalize } from "ol/color";
+import { getVectorContext } from "ol/render";
 
 const regionsStyle = new Style({
   fill: new Fill({
@@ -76,7 +75,7 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
     regionNameToColor[regionNames[i]] = colors[i % colors.length];
   }
   const popupRef = useRef(null);
-  const [zoom, setZoom] = useState(6);
+  const [zoom, setZoom] = useState(5);
   const [mapCenter, setMapCenter] = useState([
     7347086.392356056, 6106854.834885074,
   ]);
@@ -134,8 +133,9 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
           regionsStyle.getFill().setColor(color);
           return regionsStyle;
         },
+        zIndex: 2,
       }),
-    [regionsData, regionsStyle],
+    [],
   );
 
   regionsLayer.setOpacity(0.6);
@@ -148,87 +148,127 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
 
   const fieldsLayerRef = useRef(null);
   useEffect(() => {
-    const red = normalize(["band", 1]);
-    const green = normalize(["band", 2]);
-    const blue = normalize(["band", 3]);
-    const trueColor = {
-      color: ["array", red, green, blue, 1],
-      gamma: 1.1,
-      background: "#000",
-    };
+    const background = new TileLayer({
+      className: "stamen",
+      source: new Stamen({
+        layer: "toner",
+      }),
+    });
 
-    const bgLayer = new TileLayer({
-      style: trueColor,
+    const base = new TileLayer({
       source: new OSM(),
     });
 
-    const mapLayers = [bgLayer, regionsLayer];
+    const clipLayer = regionsLayer;
+
+    //Giving the clipped layer an extent is necessary to avoid rendering when the feature is outside the viewport
+    clipLayer.getSource().on("addfeature", function () {
+      base.setExtent(clipLayer.getSource().getExtent());
+    });
+
+    const style = new Style({
+      fill: new Fill({
+        color: "black",
+      }),
+    });
+
+    base.on("postrender", function (e) {
+      const polygons = [];
+      clipLayer.getSource().forEachFeature(function (feature) {
+        const name = feature.get("name");
+
+        const geometry = feature.getGeometry();
+
+        const type = geometry.getType();
+        if (type === "Polygon") {
+          polygons.push(geometry);
+        } else if (type === "MultiPolygon") {
+          Array.prototype.push.apply(polygons, geometry.getPolygons());
+        }
+      });
+      const multiPolygon = new MultiPolygon([]);
+      polygons.forEach(function (polygon) {
+        multiPolygon.appendPolygon(polygon);
+      });
+
+      e.context.globalCompositeOperation = "destination-in";
+      const vectorContext = getVectorContext(e);
+      vectorContext.setStyle(style);
+      vectorContext.drawGeometry(multiPolygon);
+      base.setZIndex(1);
+      e.context.globalCompositeOperation = "source-over";
+    });
+
+    const mapLayers = [clipLayer, base];
 
     if (ref.current && !mapRef.current) {
       mapRef.current = new Map({
+        controls: defaultControls({ attribution: false }).extend([
+          new FullScreen(),
+        ]),
         layers: mapLayers,
         view: view,
         target: ref.current,
       });
 
-      const popup = new Overlay({
-        element: document.getElementById("popup"),
-      });
-      mapRef.current.addOverlay(popup);
+      // const popup = new Overlay({
+      //   element: document.getElementById("popup"),
+      // });
+      // mapRef.current.addOverlay(popup);
 
-      // Showing place features when the user hovers
+      // // Showing place features when the user hovers
 
-      const selectStyle = new Style({
-        fill: new Fill({
-          color: "#eeeeee",
-        }),
-        stroke: new Stroke({
-          color: "rgba(255, 255, 255, 0.7)",
-          width: 2,
-        }),
-      });
+      // const selectStyle = new Style({
+      //   fill: new Fill({
+      //     color: "#eeeeee",
+      //   }),
+      //   stroke: new Stroke({
+      //     color: "rgba(255, 255, 255, 0.7)",
+      //     width: 2,
+      //   }),
+      // });
 
-      let selected = null;
-      mapRef.current.on("pointermove", function (e) {
-        if (selected !== null) {
-          selected.setStyle(undefined);
-          selected = null;
-        }
-        setpopupVisibility(false);
-        mapRef.current.forEachFeatureAtPixel(e.pixel, function (f) {
-          if (f.values_.type !== "district") {
-            setpopupVisibility(true);
-          }
-          if (
-            f.values_.type !== "district" &&
-            lastIdRef.current !== f.values_.id
-          ) {
-            popup.setPosition(e.coordinate);
-            setPopupText({
-              Имя: f.values_.name,
-              Оператор: f.values_.operator_name,
-              Добыча: f.values_.field_resources,
-            });
-            lastIdRef.current = f.values_.id;
-          }
-          selected = f;
-          selectStyle.getFill().setColor(f.get("COLOR") || "#eeeeee");
-          f.setStyle(selectStyle);
+      // let selected = null;
+      // mapRef.current.on("pointermove", function (e) {
+      //   if (selected !== null) {
+      //     selected.setStyle(undefined);
+      //     selected = null;
+      //   }
+      //   setpopupVisibility(false);
+      //   mapRef.current.forEachFeatureAtPixel(e.pixel, function (f) {
+      //     if (f.values_.type !== "district") {
+      //       setpopupVisibility(true);
+      //     }
+      //     if (
+      //       f.values_.type !== "district" &&
+      //       lastIdRef.current !== f.values_.id
+      //     ) {
+      //       popup.setPosition(e.coordinate);
+      //       setPopupText({
+      //         Имя: f.values_.name,
+      //         Оператор: f.values_.operator_name,
+      //         Добыча: f.values_.field_resources,
+      //       });
+      //       lastIdRef.current = f.values_.id;
+      //     }
+      //     selected = f;
+      //     selectStyle.getFill().setColor(f.get("COLOR") || "#eeeeee");
+      //     f.setStyle(selectStyle);
 
-          return true;
-        });
-      });
+      //     return true;
+      //   });
+      // });
     }
-    const newFieldsLayer = getFieldsLayer(bigNumberValue);
-    if (newFieldsLayer) {
-      if (fieldsLayerRef.current) {
-        // If the fieldsLayer already exists, remove it from the map first
-        mapRef.current.removeLayer(fieldsLayerRef.current);
-      }
-      fieldsLayerRef.current = newFieldsLayer;
-      mapRef.current.addLayer(newFieldsLayer);
-    }
-  }, [ref, mapRef, mapCenter, zoom, regionsLayer, bigNumberValue]);
+    // const newFieldsLayer = getFieldsLayer(bigNumberValue);
+    // if (newFieldsLayer) {
+    //   if (fieldsLayerRef.current) {
+    //     // If the fieldsLayer already exists, remove it from the map first
+    //     mapRef.current.removeLayer(fieldsLayerRef.current);
+    //   }
+    //   fieldsLayerRef.current = newFieldsLayer;
+    //   mapRef.current.addLayer(newFieldsLayer);
+    // }
+  }, [ref, mapRef, mapCenter, zoom, regionsLayer, bigNumberValue, view]);
 
   useEffect(() => {
     if (currentRegion) {

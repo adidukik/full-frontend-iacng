@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function useFetchData(url: string) {
+function useFetchData(url: string, isArray: boolean = false) {
   const [data, setData] = useState<number | null>(null);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ function useFetchData(url: string) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        setData(Object.values(data)[0]);
+        isArray ? setData(data) : setData(Object.values(data)[0]);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
