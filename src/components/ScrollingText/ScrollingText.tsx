@@ -27,9 +27,9 @@ const ScrollingText = () => {
   }
   return (
     <div>
-      <span className="title">ЧС и ЧП по отрасли</span>
+      {/* <span className="title">ЧС и ЧП по отрасли</span> */}
       <div className="card d-flex align-items-center">
-        <marquee className="d-flex align-items-center">
+        <marquee>
           <span className="scrollingText">{text}</span>
         </marquee>
       </div>
