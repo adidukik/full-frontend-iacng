@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import "./BigNumbers.css";
 import { useEffect, useState } from "react";
-import { setBigNumberValue } from "./bigNumbersSlice";
+import { setBigNumberValue, setCurrentTimeRange } from "./bigNumbersSlice";
 import useFetchData from "../../hooks/useFetchData";
 import { BigNumber } from "../../interfaces/BigNumber";
 import { Category } from "../CategoriesMenu/categoriesSlice";
@@ -54,12 +54,14 @@ const BigNumberButton = ({ bigNumber }) => {
 
 const BigNumbers = (): JSX.Element => {
   const timeRanges = ["сутки", "месяц", "год"];
-  const [currentTimeRange, setCurrentTimeRange] = useState(timeRanges[0]); // State to store active tab
   const activeCategory: Category = useSelector(
     (state: RootState) => state.categories,
   );
   const bigNumberValue = useSelector(
     (state: RootState) => state.bigNumbers.value,
+  );
+  const currentTimeRange = useSelector(
+    (state: RootState) => state.bigNumbers.currentTimeRange,
   );
 
   // Access dispatch to dispatch actions
@@ -353,7 +355,7 @@ const BigNumbers = (): JSX.Element => {
             <Nav.Item key={idx}>
               <Nav.Link
                 href={`#${item}`}
-                onClick={() => setCurrentTimeRange(item)}
+                onClick={() => dispatch(setCurrentTimeRange(item))}
               >
                 {item}
               </Nav.Link>
