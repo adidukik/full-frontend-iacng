@@ -120,7 +120,9 @@ const BigNumbers = (): JSX.Element => {
       `http://192.168.0.57:8000/calculate_mt_last_${currentTimeRangeInEnglish}`,
     ),
   );
+  
   useEffect(() => {
+    
     switch (activeCategory) {
       case 0:
         setBigNumbers([
@@ -344,7 +346,6 @@ const BigNumbers = (): JSX.Element => {
     oilFact,
     oilPlan,
   ]);
-
   return (
     <Card className="big-numbers app-card">
       <h1 className="big-numbers__heading">Данные</h1>
