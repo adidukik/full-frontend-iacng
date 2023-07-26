@@ -2,4 +2,8 @@
   margin-right: 14px;
   background: #041541ff;
   margin: 0;
+  height: 100%;
+}
+.chart-oil {
+  height: 100%;
 }

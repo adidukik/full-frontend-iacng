@@ -99,13 +99,25 @@ const BigNumbers = (): JSX.Element => {
   );
 
   const benzin = Math.floor(
-    useFetchData(`http://192.168.0.57:8000/calculate_benzin/`),
+    useFetchData(
+      `http://192.168.0.57:8000/calculate_benzin_last_${currentTimeRangeInEnglish}`,
+    ),
   );
   const kerosin = Math.floor(
-    useFetchData(`http://192.168.0.57:8000/calculate_kerosin/`),
+    useFetchData(
+      `http://192.168.0.57:8000/calculate_kerosin_last_${currentTimeRangeInEnglish}`,
+    ),
   );
-  const dt = Math.floor(useFetchData(`http://192.168.0.57:8000/calculate_dt/`));
-  const mt = Math.floor(useFetchData(`http://192.168.0.57:8000/calculate_mt/`));
+  const dt = Math.floor(
+    useFetchData(
+      `http://192.168.0.57:8000/calculate_dt_last_${currentTimeRangeInEnglish}`,
+    ),
+  );
+  const mt = Math.floor(
+    useFetchData(
+      `http://192.168.0.57:8000/calculate_mt_last_${currentTimeRangeInEnglish}`,
+    ),
+  );
   useEffect(() => {
     switch (activeCategory) {
       case 0:
@@ -148,7 +160,7 @@ const BigNumbers = (): JSX.Element => {
                 value: kerosin,
               },
               {
-                label: "дизельное топливо",
+                label: "дизель",
                 value: dt,
               },
               {

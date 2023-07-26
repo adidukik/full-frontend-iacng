@@ -76,7 +76,7 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
     regionNameToColor[regionNames[i]] = colors[i % colors.length];
   }
   const popupRef = useRef(null);
-  const [zoom, setZoom] = useState(5);
+  const [zoom, setZoom] = useState(6);
   const [mapCenter, setMapCenter] = useState([
     7347086.392356056, 6106854.834885074,
   ]);
@@ -154,6 +154,7 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
     const trueColor = {
       color: ["array", red, green, blue, 1],
       gamma: 1.1,
+      background: "#000",
     };
 
     const bgLayer = new TileLayer({

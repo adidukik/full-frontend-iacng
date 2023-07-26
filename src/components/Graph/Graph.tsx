@@ -23,20 +23,39 @@ const Graph = () => {
     Tooltip,
     Legend,
   );
+
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [],
   });
   const [months, setMonths] = useState({});
   const options = {
+    maintainAspectRatio: false,
     responsive: true,
+
     plugins: {
       legend: {
         position: "top" as const,
+        labels: {
+          color: "#fff",
+        },
       },
       title: {
         display: true,
         text: "Добыча",
+        color: "#fff",
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: "#fff", // Change this color to your desired font color
+        },
+      },
+      y: {
+        ticks: {
+          color: "#fff", // Change this color to your desired font color
+        },
       },
     },
   };
@@ -74,6 +93,7 @@ const Graph = () => {
             months[6],
           ],
           borderColor: "white",
+          defaultFontColor: "white",
           borderWidth: 2,
         },
       ],
