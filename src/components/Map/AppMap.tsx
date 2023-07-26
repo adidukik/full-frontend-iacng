@@ -81,8 +81,8 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
     "#BADA55", // Hi-Tech Green
     "#FF3131",
   ];
-  for (let i = 0; i < regionNames.length; i++) {
-    regionNameToColor[regionNames[i]] = colors[i % colors.length];
+  for (let i = 0; i < Object.keys(regionNames).length; i++) {
+    regionNameToColor[regionNames[Object.keys(regionNames)[i]]] = colors[i % colors.length];
   }
   const popupRef = useRef(null);
   const [zoom, setZoom] = useState(5);
