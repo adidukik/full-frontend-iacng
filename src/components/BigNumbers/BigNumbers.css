@@ -3,11 +3,22 @@
   color: #fff;
   overflow-y: auto;
 }
+.big-numbers table {
+  float: left;
+  width: 100%;
+}
+.big-numbers table td {
+  padding-right: 15px;
+}
 .big-numbers__heading,
 .big-numbers__date {
   color: #fff;
   text-align: center;
 }
+.big-numbers__title {
+  text-align: left;
+}
+
 .big-numbers__data,
 .big-numbers__data-table {
   text-align: left;

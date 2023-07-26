@@ -32,12 +32,12 @@ const BigNumberButton = ({ bigNumber }) => {
   if (bigNumber.data.length < 2) {
     return (
       <>
-        {bigNumber.data[0].label} {bigNumber.data[0].value}
+        {bigNumber.data.label} {bigNumber.data.value}
       </>
     );
   } else if (bigNumber.data.length < 3) {
     return (
-      <ul className="d-flex flex-row justify-content-around">
+      <ul className="d-flex flex-row justify-content-between">
         {bigNumber.data.map((bigNumberData) => getListItem(bigNumberData))}
       </ul>
     );

@@ -72,13 +72,14 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
     (state: RootState) => state.bigNumbers.value,
   );
   const regionNameToColor = {};
+  // "#FF00FF", // Neon Magenta
+  //"#00A6ED", // Electric Blue
   const colors = [
-    "#00A6ED", // Electric Blue
-    "#FF00FF", // Neon Magenta
     "#FFC300", // Cyber Yellow
     "#3B82F6", // Neon Blue
     "#FF6D00", // Hyper Orange
     "#BADA55", // Hi-Tech Green
+    "#FF3131",
   ];
   for (let i = 0; i < regionNames.length; i++) {
     regionNameToColor[regionNames[i]] = colors[i % colors.length];

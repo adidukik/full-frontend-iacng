@@ -26,13 +26,10 @@ const ScrollingText = () => {
       text = "";
   }
   return (
-    <div>
-      {/* <span className="title">ЧС и ЧП по отрасли</span> */}
-      <div className="card d-flex align-items-center">
-        <marquee>
-          <span className="scrollingText">{text}</span>
-        </marquee>
-      </div>
+    <div className="card d-flex align-items-center">
+      <marquee>
+        <span className="scrollingText">{text}</span>
+      </marquee>
     </div>
   );
 };
