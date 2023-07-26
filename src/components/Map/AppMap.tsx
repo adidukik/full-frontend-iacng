@@ -12,16 +12,14 @@ import Style from "ol/style/Style";
 import { OSM, Stamen, Vector as VectorSource } from "ol/source.js";
 import regionsData from "../../assets/geo/kz_regions.json";
 import fieldsData from "../../assets/geo/fields.json";
+import factoriesData from "../../assets/geo/factories.json";
+import plantsData from "../../assets/geo/power_plants.json";
 import { getCenter } from "ol/extent";
 import { regionNames } from "../Regions/Regions";
 import Stroke from "ol/style/Stroke";
 import { useSelector } from "react-redux";
-import { BigNumberState } from "../BigNumbers/bigNumbersSlice";
-import { toStringHDMS } from "ol/coordinate";
 import Overlay from "ol/Overlay";
-import { Popover } from "react-bootstrap";
 import { RootState } from "../../../store";
-import { normalize } from "ol/color";
 import { getVectorContext } from "ol/render";
 
 const regionsStyle = new Style({
@@ -61,6 +59,22 @@ const getFieldsLayer = (bigNumberValue) => {
       },
     });
   }
+};
+
+const getFactoriesLayer = () => {
+  const features = format.readFeatures(factoriesData);
+  console.log(features);
+  return new VectorLayer({
+    source: new VectorSource({
+      features: features,
+    }),
+    zIndex: 1,
+
+    style: function (feature) {
+      fieldsStyle.getFill().setColor("#000");
+      return fieldsStyle;
+    },
+  });
 };
 
 interface AppMapProps {
@@ -269,14 +283,20 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
         });
       });
     }
-    const newFieldsLayer = getFieldsLayer(bigNumberValue);
-    if (newFieldsLayer) {
+    let newLayer;
+    if (bigNumberValue < 2) {
+      newLayer = getFieldsLayer(bigNumberValue);
+    } else if (bigNumberValue === 2) {
+      console.log("Hi");
+      newLayer = getFactoriesLayer();
+    }
+    if (newLayer) {
       if (fieldsLayerRef.current) {
         // If the fieldsLayer already exists, remove it from the map first
         mapRef.current.removeLayer(fieldsLayerRef.current);
       }
-      fieldsLayerRef.current = newFieldsLayer;
-      mapRef.current.addLayer(newFieldsLayer);
+      fieldsLayerRef.current = newLayer;
+      mapRef.current.addLayer(newLayer);
     }
   }, [ref, mapRef, mapCenter, zoom, regionsLayer, bigNumberValue, view]);
 
