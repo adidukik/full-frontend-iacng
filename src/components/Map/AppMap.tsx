@@ -53,6 +53,8 @@ const getFieldsLayer = (bigNumberValue) => {
       source: new VectorSource({
         features: featuresToDisplay,
       }),
+      zIndex: 1,
+
       style: function (feature) {
         fieldsStyle.getFill().setColor("#000");
         return fieldsStyle;
@@ -70,7 +72,14 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
     (state: RootState) => state.bigNumbers.value,
   );
   const regionNameToColor = {};
-  const colors = ["#e9cfdb", "#faf0dd", "#d2e9ce", "#d0ebdb"];
+  const colors = [
+    "#00A6ED", // Electric Blue
+    "#FF00FF", // Neon Magenta
+    "#FFC300", // Cyber Yellow
+    "#3B82F6", // Neon Blue
+    "#FF6D00", // Hyper Orange
+    "#BADA55", // Hi-Tech Green
+  ];
   for (let i = 0; i < regionNames.length; i++) {
     regionNameToColor[regionNames[i]] = colors[i % colors.length];
   }
@@ -128,17 +137,17 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
         source: new VectorSource({
           features: regionsFeatures,
         }),
+        opacity: 0.6,
+        zIndex: 1,
         style: function (feature) {
           const color = regionNameToColor[feature.values_.name_ru];
           regionsStyle.getFill().setColor(color);
           return regionsStyle;
         },
-        zIndex: 2,
       }),
     [],
   );
 
-  regionsLayer.setOpacity(0.6);
   const ref = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Map>(null);
   const lastIdRef = useRef<number>(-1);
@@ -195,7 +204,7 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
       const vectorContext = getVectorContext(e);
       vectorContext.setStyle(style);
       vectorContext.drawGeometry(multiPolygon);
-      base.setZIndex(1);
+
       e.context.globalCompositeOperation = "source-over";
     });
 
@@ -211,63 +220,63 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
         target: ref.current,
       });
 
-      // const popup = new Overlay({
-      //   element: document.getElementById("popup"),
-      // });
-      // mapRef.current.addOverlay(popup);
+      const popup = new Overlay({
+        element: document.getElementById("popup"),
+      });
+      mapRef.current.addOverlay(popup);
 
-      // // Showing place features when the user hovers
+      // Showing place features when the user hovers
 
-      // const selectStyle = new Style({
-      //   fill: new Fill({
-      //     color: "#eeeeee",
-      //   }),
-      //   stroke: new Stroke({
-      //     color: "rgba(255, 255, 255, 0.7)",
-      //     width: 2,
-      //   }),
-      // });
+      const selectStyle = new Style({
+        fill: new Fill({
+          color: "#eeeeee",
+        }),
+        stroke: new Stroke({
+          color: "rgba(255, 255, 255, 0.7)",
+          width: 2,
+        }),
+      });
 
-      // let selected = null;
-      // mapRef.current.on("pointermove", function (e) {
-      //   if (selected !== null) {
-      //     selected.setStyle(undefined);
-      //     selected = null;
-      //   }
-      //   setpopupVisibility(false);
-      //   mapRef.current.forEachFeatureAtPixel(e.pixel, function (f) {
-      //     if (f.values_.type !== "district") {
-      //       setpopupVisibility(true);
-      //     }
-      //     if (
-      //       f.values_.type !== "district" &&
-      //       lastIdRef.current !== f.values_.id
-      //     ) {
-      //       popup.setPosition(e.coordinate);
-      //       setPopupText({
-      //         Имя: f.values_.name,
-      //         Оператор: f.values_.operator_name,
-      //         Добыча: f.values_.field_resources,
-      //       });
-      //       lastIdRef.current = f.values_.id;
-      //     }
-      //     selected = f;
-      //     selectStyle.getFill().setColor(f.get("COLOR") || "#eeeeee");
-      //     f.setStyle(selectStyle);
+      let selected = null;
+      mapRef.current.on("pointermove", function (e) {
+        if (selected !== null) {
+          selected.setStyle(undefined);
+          selected = null;
+        }
+        setpopupVisibility(false);
+        mapRef.current.forEachFeatureAtPixel(e.pixel, function (f) {
+          if (f.values_.type !== "district") {
+            setpopupVisibility(true);
+          }
+          if (
+            f.values_.type !== "district" &&
+            lastIdRef.current !== f.values_.id
+          ) {
+            popup.setPosition(e.coordinate);
+            setPopupText({
+              Имя: f.values_.name,
+              Оператор: f.values_.operator_name,
+              Добыча: f.values_.field_resources,
+            });
+            lastIdRef.current = f.values_.id;
+          }
+          selected = f;
+          selectStyle.getFill().setColor(f.get("COLOR") || "#eeeeee");
+          f.setStyle(selectStyle);
 
-      //     return true;
-      //   });
-      // });
+          return true;
+        });
+      });
     }
-    // const newFieldsLayer = getFieldsLayer(bigNumberValue);
-    // if (newFieldsLayer) {
-    //   if (fieldsLayerRef.current) {
-    //     // If the fieldsLayer already exists, remove it from the map first
-    //     mapRef.current.removeLayer(fieldsLayerRef.current);
-    //   }
-    //   fieldsLayerRef.current = newFieldsLayer;
-    //   mapRef.current.addLayer(newFieldsLayer);
-    // }
+    const newFieldsLayer = getFieldsLayer(bigNumberValue);
+    if (newFieldsLayer) {
+      if (fieldsLayerRef.current) {
+        // If the fieldsLayer already exists, remove it from the map first
+        mapRef.current.removeLayer(fieldsLayerRef.current);
+      }
+      fieldsLayerRef.current = newFieldsLayer;
+      mapRef.current.addLayer(newFieldsLayer);
+    }
   }, [ref, mapRef, mapCenter, zoom, regionsLayer, bigNumberValue, view]);
 
   useEffect(() => {
