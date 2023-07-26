@@ -1,84 +1,120 @@
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
+  import { DataTable } from "primereact/datatable";
+  import { Column } from "primereact/column";
+  import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Paper } from "@mui/material";
+  import { useDispatch, useSelector } from 'react-redux'; // import hooks
 
-import "./Regions.css";
-import { Button } from "primereact/button";
+  import "./Regions.css";
+  // import { Button } from "primereact/button";
+  import { RootState } from "../../../store";
+  import { selectRegion } from './regionsSlice'
 
-export const regionNames = [
-  "Абайская область",
-  "Акмолинская область",
-  "Актюбинская область",
-  "Алматинская область",
-  "Алматы",
-  "Астана",
-  "Атырауская область",
-  "Восточно-Казахстанская область",
-  "Жамбылская область",
-  "Жетысуская область",
-  "Западно-Казахстанская область",
-  "Карагандинская область",
-  "Костанайская область",
-  "Кызылординская область",
-  "Мангистауская область",
-  "Павлодарская область",
-  "Северо-Казахстанская область",
-  "Туркестанская область",
-  "Улытауская область",
-  "Шымкент",
-];
 
-interface RegionsProps {
-  onRegionClick: (el: string) => void;
-}
+  export const regionNames = [
+    "Абайская область",
+    "Акмолинская область",
+    "Актюбинская область",
+    "Алматинская область",
+    "Алматы",
+    "Астана",
+    "Атырауская область",
+    "Восточно-Казахстанская область",
+    "Жамбылская область",
+    "Жетысуская область",
+    "Западно-Казахстанская область",
+    "Карагандинская область",
+    "Костанайская область",
+    "Кызылординская область",
+    "Мангистауская область",
+    "Павлодарская область",
+    "Северо-Казахстанская область",
+    "Туркестанская область",
+    "Улытауская область",
+    "Шымкент",
+  ];
 
-const Regions = ({ onRegionClick }: RegionsProps) => {
-  const products = regionNames.map((el) => {
-    return {
-      region: (
-        <Button
-          className="p-button-outlined p-button-text d-flex justify-content-center align-items-center"
-          style={{
-            margin: "auto",
-          }}
-          onClick={() => onRegionClick(el)}
-        >
-          {el}
-        </Button>
-      ),
-      indicator: "105%",
-      category: "Category 1",
-      quantity: 10,
-    };
-  });
+  interface RegionsProps {
+    onRegionClick: (el: string) => void;
+  }
 
-  return (
-    <DataTable value={products} className="Regions__table">
-      <Column
-        field="region"
-        header="Регион"
-        sortable
-        headerStyle={{ backgroundColor: "gray" }}
-      ></Column>
-      <Column
-        field="indicator"
-        header="Показатель"
-        sortable
-        headerStyle={{ backgroundColor: "gray" }}
-      ></Column>
-      <Column
-        field="category"
-        header="Category"
-        sortable
-        headerStyle={{ backgroundColor: "gray" }}
-      ></Column>
-      <Column
-        field="quantity"
-        header="Quantity"
-        sortable
-        headerStyle={{ backgroundColor: "gray" }}
-      ></Column>
-    </DataTable>
-  );
-};
 
-export default Regions;
+  // const Regions = () => {
+  //   const dispatch = useDispatch()
+  //   const selectedRegion = useSelector((state: RootState) => state.regions.selectedRegion)
+
+  //   const handleButtonClick = (region: string) => {
+  //     dispatch(selectRegion(region))
+  //   }
+
+  //   return (
+  //     <TableContainer component={Paper} className="container" sx={{backgroundColor: "#041541", padding: "0"}}>
+  //       <Table className="table">
+  //         <TableHead>
+  //           <TableRow>
+  //             <TableCell>Регион</TableCell>
+  //             <TableCell align="right">Производство</TableCell>
+  //             <TableCell align="right">Статус</TableCell>
+  //             <TableCell align="right">План</TableCell>
+  //           </TableRow>
+  //         </TableHead>
+  //         <TableBody>
+  //           {regionNames.map((region, index) => (
+  //             <TableRow key={index}>
+  //               <TableCell component="th" scope="row">
+  //                 <Button
+  //                   variant={region === selectedRegion ? "outlined" : "contained"}
+  //                   className="button"
+  //                   onClick={() => handleButtonClick(region)}
+  //                 >
+  //                   {region}
+  //                 </Button>
+  //               </TableCell>
+  //               <TableCell align="right">10,000</TableCell>
+  //               <TableCell align="right">Работает</TableCell>
+  //               <TableCell align="right">100%</TableCell>
+  //             </TableRow>
+  //           ))}
+  //         </TableBody>
+  //       </Table>
+  //     </TableContainer>
+  //   );
+  // };
+
+  // export default Regions;
+
+
+  const Regions = ({ onRegionClick }: RegionsProps) => {
+    return (
+      <TableContainer component={Paper} className="container" sx={{backgroundColor: "#041541", padding: "0"}}>
+        <Table className="table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Регион</TableCell>
+              <TableCell align="right">Производство</TableCell>
+              <TableCell align="right">Статус</TableCell>
+              <TableCell align="right">План</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {regionNames.map((region, index) => (
+              <TableRow key={index}>
+                <TableCell component="th" scope="row">
+                  <Button
+                    variant="contained"
+                    className="button"
+                    onClick={() => onRegionClick(region)}
+                  >
+                    {region}
+                  </Button>
+                </TableCell>
+                <TableCell align="right">10,000</TableCell>
+                <TableCell align="right">Работает</TableCell>
+                <TableCell align="right">100%</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
+  };
+
+  export default Regions;
