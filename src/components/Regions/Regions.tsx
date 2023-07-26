@@ -112,7 +112,7 @@ import useFetchData from "../../hooks/useFetchData";
         const regionDataPlan = useFetchData(planUrl, true);
         // Convert the regionData to an array of objects for table rendering
         useEffect(() => {
-        if (regionDataFact ){
+        if (regionDataFact && regionDataPlan){
           const tableData = Object.keys(regionDataFact).map((region) => (
             {
             region,
