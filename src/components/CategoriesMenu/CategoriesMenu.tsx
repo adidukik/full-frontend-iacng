@@ -43,7 +43,6 @@ const CategoriesMenu = () => {
 
   return (
     <div className="card-categories categories-menu">
-      <div className="center">
         <Nav
           variant="tabs"
           defaultActiveKey="нефтегазовая отрасль"
@@ -57,7 +56,6 @@ const CategoriesMenu = () => {
             </Nav.Item>
           ))}
         </Nav>
-      </div>
     </div>
   );
 };

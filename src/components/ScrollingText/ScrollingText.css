@@ -14,8 +14,12 @@ span.title {
     
 }
 .ScrollingText div.card{
-    height: 70px;
+    height: auto;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
 }
+
 .ScrollingText marquee{
     height: 100%;
 }
