@@ -10,28 +10,29 @@
 import useFetchData from "../../hooks/useFetchData";
 
 
-  export const regionNames = [
-    "Абайская область",
-    "Акмолинская область",
-    "Актюбинская область",
-    "Алматинская область",
-    "Алматы",
-    "Астана",
-    "Атырауская область",
-    "Восточно-Казахстанская область",
-    "Жамбылская область",
-    "Жетысуская область",
-    "Западно-Казахстанская область",
-    "Карагандинская область",
-    "Костанайская область",
-    "Кызылординская область",
-    "Мангистауская область",
-    "Павлодарская область",
-    "Северо-Казахстанская область",
-    "Туркестанская область",
-    "Улытауская область",
-    "Шымкент",
-  ];
+  export const regionNames = {
+    "Абайская обл.": "Абайская область",
+  "Акмолинская обл.": "Акмолинская область",
+  "Актюбинская обл.": "Актюбинская область",
+  "Алматинская обл.": "Алматинская область",
+  "Алматинская обл..": "Алматы",
+  "Акмолинская обл..": "Астана",
+  "Атырауская обл.": "Атырауская область",
+  "ВКО": "Восточно-Казахстанская область",
+  "Жамбылская обл.": "Жамбылская область",
+  "Жетысуская обл.": "Жетысуская область",
+  "ЗКО": "Западно-Казахстанская область",
+  "Карагандинская обл.": "Карагандинская область",
+  "Костанайская обл.": "Костанайская область",
+  "Кызылординская обл.": "Кызылординская область",
+  "Мангистауская обл.": "Мангистауская область",
+  "Кавлодарская обл.": "Павлодарская область",
+  "СКО": "Северо-Казахстанская область",
+  "Туркестанская обл.": "Туркестанская область",
+  "Улытауская обл.": "Улытауская область",
+  "Шымкент обл.": "Шымкент",
+"ЌАЗАЌСТАН": "Казахстан",
+  };
 
   interface RegionsProps {
     onRegionClick: (el: string) => void;
@@ -89,7 +90,7 @@ import useFetchData from "../../hooks/useFetchData";
     const parseRegionName = (fullName) => {
       const lastIndex = fullName.lastIndexOf('/');
       const regionName = fullName.substring(lastIndex + 1).trim();
-      return regionName.charAt(0).toUpperCase() + regionName.slice(1).toLowerCase();
+      return regionName.charAt(0) + regionName.slice(1);
     };
     
     const currentTimeRange = useSelector(
@@ -147,7 +148,7 @@ import useFetchData from "../../hooks/useFetchData";
                 <Button
                   variant="contained"
                   className="button"
-                  onClick={() => onRegionClick(row.region)}
+                  onClick={() => regionNames[parseRegionName(row.region)]!="Казахстан" ? onRegionClick(regionNames[parseRegionName(row.region)]): null}
                 >
                   {parseRegionName(row.region)}
                 </Button>
