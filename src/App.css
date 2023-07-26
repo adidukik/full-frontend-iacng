@@ -5,7 +5,7 @@
   grid-auto-columns: 1fr;
   grid-auto-rows: 1fr;
   grid-template-columns: 1.4fr 3.3fr 1.3fr 2fr;
-  grid-template-rows: 1.4fr 1.1fr 1.6fr 11.37fr 9.84fr;
+  grid-template-rows: 1.4fr 1fr 1.6fr 11.37fr 9.84fr;
   grid-template-areas:
     "Title Title Title Title"
     "CategoriesMenu CategoriesMenu CategoriesMenu CategoriesMenu"
