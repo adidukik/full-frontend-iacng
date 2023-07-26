@@ -48,50 +48,54 @@
 }
  */
 
- /*
+/*
  NEW CODE
  */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 
 .categories-menu .nav-tabs {
-    max-height: 50px; 
-    display: flex;
-    justify-content: space-evenly;
+  max-height: 50px;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .categories-menu .nav-item {
-    flex: 1;
-    text-align: center;
+  flex: 1;
+  text-align: center;
 }
 
 .categories-menu .nav-link {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    color: #ffffff; 
-   border: 0;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  color: #ffffff;
+  border: 0;
 }
 
-.categories-menu .nav-tabs .nav-item.show .nav-link, .categories-menu .nav-tabs .nav-link.active {
-    background-color: #004AAD;
-    color: #ffffff; 
-    font-weight: 700;
+.categories-menu .nav-tabs .nav-item.show .nav-link,
+.categories-menu .nav-tabs .nav-link.active {
+  background-color: #004aad;
+  color: #ffffff;
+  font-weight: 700;
 }
 
 .categories-menu .nav-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .categories-menu .nav-link {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.categories-menu .categories-menu__category{
-    border-radius: 0 0 20px 20px;
+.categories-menu .categories-menu__category {
+  border-radius: 0 0 20px 20px;
 }
-.categories-menu a{
-    margin: 0;
+.categories-menu a {
+  margin: 0;
+}
+.categories-menu .nav-tabs {
+  border: none;
 }
