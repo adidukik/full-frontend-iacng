@@ -54,7 +54,7 @@ function drawCircles(coordinatesArray) {
   const source = new VectorSource();
 
   coordinatesArray.forEach((coords) => {
-    const circle = new Circle(coords.values_.geometry.flatCoordinates, 1500); // Create a circle geometry around the point
+    const circle = new Circle(coords.values_.geometry.flatCoordinates, 4500); // Create a circle geometry around the point
     const feature = new Feature(circle);
     // Copy all the properties from the original feature to the new feature
     for (const prop in coords.values_) {
@@ -114,24 +114,8 @@ const getFactoriesLayer = () => {
 };
 
 const getPlantsLayer = () => {
-  const features = plantsData.map((point) => {
-    const feature = new Feature({
-      geometry: new ol.geom.Point(ol.proj.fromLonLat([point.lon, point.lat])),
-      id: point.id,
-    });
-    return feature;
-  });
-  return new VectorLayer({
-    source: new VectorSource({
-      features: features,
-    }),
-    zIndex: 1,
-
-    style: function (feature) {
-      factoriesStyle.getFill().setColor("#000");
-      return factoriesStyle;
-    },
-  });
+  const features = format.readFeatures(plantsData);
+  return drawCircles(features);
 };
 
 interface AppMapProps {
@@ -227,42 +211,48 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Map>(null);
   const lastIdRef = useRef<number>(-1);
+  const activeCategoryRef = useRef(activeCategory);
+  const bigNumberValueRef = useRef(bigNumberValue);
+  useEffect(() => {
+    // ... your existing useEffect code ...
 
+    activeCategoryRef.current = activeCategory;
+    bigNumberValueRef.current = bigNumberValue;
+  }, [activeCategory, bigNumberValue]);
   const [popupText, setPopupText] = useState(null);
   const [popupVisibility, setPopupVisibility] = useState(false);
 
   const fieldsLayerRef = useRef(null);
-  const getNextPopupText = useCallback(
-    (f) => {
-      let nextPopupText;
-      if (activeCategory === 0) {
-        if (bigNumberValue < 2) {
-          nextPopupText = {
-            Имя: f.values_.name,
-            Оператор: f.values_.operator_name,
-            Добыча: f.values_.field_resources,
-          };
-        } else if (bigNumberValue === 2) {
-          nextPopupText = {
-            Компания: f.values_.company,
-            Продукты: f.values_.products,
-            Статус: f.values_.status,
-            Тип: f.values_.type,
-          };
-        }
-      } else if (activeCategory === 1) {
+  const getNextPopupText = (f) => {
+    const activeCategory = activeCategoryRef.current;
+    const bigNumberValue = bigNumberValueRef.current;
+    let nextPopupText;
+    if (activeCategory === 0) {
+      if (bigNumberValue < 2) {
         nextPopupText = {
-          Компания: f.values_.name,
-          Продукты: f.values_.operator_name,
-          Статус: f.values_.field_resources,
+          Имя: f.values_.name,
+          Оператор: f.values_.operator_name,
+          Добыча: f.values_.field_resources,
+        };
+      } else if (bigNumberValue === 2) {
+        nextPopupText = {
+          Компания: f.values_.company,
+          Продукты: f.values_.products,
+          Статус: f.values_.status,
+          Тип: f.values_.type,
         };
       }
-      return nextPopupText;
-    },
-    [activeCategory, bigNumberValue],
-  );
+    } else if (activeCategory === 1) {
+      nextPopupText = {
+        Компания: f.values_.company,
+        Имя: f.values_.name,
+        Тип: f.values_.type,
+      };
+    }
+    return nextPopupText;
+  };
   const popupOverlayRef = useRef(null);
-
+  let selected = null;
   const selectStyle = new Style({
     fill: new Fill({
       color: "#eeeeee",
@@ -272,37 +262,8 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
       width: 2,
     }),
   });
-  let selected = null;
-
-  const onMovePerFeature = useCallback(
-    (f, coordinate) => {
-      if (f.values_.type !== "district") {
-        setPopupVisibility(true);
-      }
-      if (f.values_.type !== "district" && lastIdRef.current !== f.values_.id) {
-        const nextPopupText = getNextPopupText(f);
-
-        popupOverlayRef.current.setPosition(coordinate);
-        setPopupText(nextPopupText);
-        lastIdRef.current = f.values_.id;
-      }
-      selected = f;
-      selectStyle.getFill().setColor(f.get("COLOR") || "#eeeeee");
-      f.setStyle(selectStyle);
-
-      return true;
-    },
-    [getNextPopupText],
-  );
 
   useEffect(() => {
-    const background = new TileLayer({
-      className: "stamen",
-      source: new Stamen({
-        layer: "toner",
-      }),
-    });
-
     const base = new TileLayer({
       source: new OSM(),
     });
@@ -320,8 +281,6 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
     const onPostRender = (e) => {
       const polygons = [];
       regionsLayer.getSource().forEachFeature(function (feature) {
-        const name = feature.get("name");
-
         const geometry = feature.getGeometry();
 
         const type = geometry.getType();
@@ -361,19 +320,36 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
         element: document.getElementById("popup"),
       });
       mapRef.current.addOverlay(popupOverlayRef.current);
-    }
+      const onPointerMove = (e) => {
+        if (selected !== null) {
+          selected.setStyle(undefined);
+          selected = null;
+        }
+        setPopupVisibility(false);
 
-    const onPointerMove = (e) => {
-      if (selected !== null) {
-        selected.setStyle(undefined);
-        selected = null;
-      }
-      setPopupVisibility(false);
-      mapRef.current.forEachFeatureAtPixel(e.pixel, (feature) => {
-        onMovePerFeature(feature, e.coordinate);
-      });
-    };
-    mapRef.current.on("pointermove", onPointerMove);
+        mapRef.current.forEachFeatureAtPixel(e.pixel, (f) => {
+          if (f.values_.type !== "district") {
+            setPopupVisibility(true);
+          }
+          if (
+            f.values_.type !== "district" &&
+            lastIdRef.current !== f.values_.id
+          ) {
+            const nextPopupText = getNextPopupText(f);
+
+            popupOverlayRef.current.setPosition(e.coordinate);
+            setPopupText(nextPopupText);
+            lastIdRef.current = f.values_.id;
+          }
+          selected = f;
+          selectStyle.getFill().setColor(f.get("COLOR") || "#eeeeee");
+          f.setStyle(selectStyle);
+
+          return true;
+        });
+      };
+      mapRef.current.on("pointermove", onPointerMove);
+    }
   }, [activeCategory, bigNumberValue, getNextPopupText, regionsLayer, view]);
 
   useEffect(() => {
