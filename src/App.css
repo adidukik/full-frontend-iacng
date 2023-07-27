@@ -18,6 +18,11 @@
   background: url("./src/assets/images/bg1.png") center center no-repeat;
   background-size: cover;
 }
+th,
+td,
+button {
+  font-family: "Montserrat", sans-serif !important;
+}
 .App > div {
   border-radius: 10px !important;
   overflow: hidden;
@@ -68,4 +73,22 @@ button.btn {
 }
 .hidden {
   visibility: hidden;
+}
+/*       ScrollBar 2        */
+
+::-webkit-scrollbar {
+  width: 10px;
+  margin-right: 13px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: #363636;
+  border: 1px solid #cacaca;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: #e7e7e7;
 }

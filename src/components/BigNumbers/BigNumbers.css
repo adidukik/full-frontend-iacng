@@ -2,6 +2,8 @@
   margin-right: 14px;
   color: #fff;
   overflow-y: auto;
+
+  padding-right: 5px;
 }
 .big-numbers table {
   float: left;
@@ -18,7 +20,9 @@
 .big-numbers__title {
   text-align: left;
 }
-
+.card-body {
+  overflow-y: auto;
+}
 .big-numbers__data,
 .big-numbers__data-table {
   text-align: left;
