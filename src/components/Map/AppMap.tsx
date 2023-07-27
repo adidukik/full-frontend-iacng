@@ -3,7 +3,7 @@ import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import "./AppMap.css";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { MultiPolygon } from "ol/geom";
+import { Circle, MultiPolygon } from "ol/geom";
 import GeoJSON from "ol/format/GeoJSON.js";
 import { FullScreen, defaults as defaultControls } from "ol/control.js";
 import { Vector as VectorLayer } from "ol/layer.js";
@@ -21,6 +21,8 @@ import { useSelector } from "react-redux";
 import Overlay from "ol/Overlay";
 import { RootState } from "../../../store";
 import { getVectorContext } from "ol/render";
+import { Feature } from "ol";
+import { Circle as CircleStyle } from "ol/style.js";
 
 const regionsStyle = new Style({
   fill: new Fill({
@@ -28,6 +30,11 @@ const regionsStyle = new Style({
   }),
 });
 const fieldsStyle = new Style({
+  fill: new Fill({
+    color: "#eeeeee",
+  }),
+});
+const factoriesStyle = new Style({
   fill: new Fill({
     color: "#eeeeee",
   }),
@@ -41,13 +48,52 @@ const numberToLayerType = {
   0: "нефть",
   1: "газ",
 };
+function drawCircles(coordinatesArray) {
+  // Create a new VectorSource
+
+  const source = new VectorSource();
+
+  coordinatesArray.forEach((coords) => {
+    const circle = new Circle(coords.values_.geometry.flatCoordinates, 1500); // Create a circle geometry around the point
+    const feature = new Feature(circle);
+    // Copy all the properties from the original feature to the new feature
+    for (const prop in coords.values_) {
+      if (prop !== "geometry") {
+        feature.values_[prop] = coords.values_[prop];
+      }
+    }
+    source.addFeature(feature); // Add the feature to the VectorSource
+  });
+
+  const style = new Style({
+    fill: new Fill({
+      color: "rgba(18, 255, 255, 1)",
+    }),
+    stroke: new Stroke({
+      color: "#ff3131",
+      width: 2,
+    }),
+    image: new CircleStyle({
+      radius: 20000,
+      fill: new Fill({
+        color: "#ffcc33",
+      }),
+    }),
+  });
+  const vector = new VectorLayer({
+    source: source,
+    style: style,
+    zIndex: 2,
+  });
+  return vector;
+}
 const getFieldsLayer = (bigNumberValue) => {
   const currentType = numberToLayerType["" + bigNumberValue];
   if (currentType) {
     const featuresToDisplay = fieldsFeatures.filter((field) =>
       String(field.values_?.field_resources).includes(currentType),
     );
-    return new VectorLayer({
+    const vl = new VectorLayer({
       source: new VectorSource({
         features: featuresToDisplay,
       }),
@@ -58,12 +104,23 @@ const getFieldsLayer = (bigNumberValue) => {
         return fieldsStyle;
       },
     });
+    return vl;
   }
 };
 
 const getFactoriesLayer = () => {
   const features = format.readFeatures(factoriesData);
-  console.log(features);
+  return drawCircles(features);
+};
+
+const getPlantsLayer = () => {
+  const features = plantsData.map((point) => {
+    const feature = new Feature({
+      geometry: new ol.geom.Point(ol.proj.fromLonLat([point.lon, point.lat])),
+      id: point.id,
+    });
+    return feature;
+  });
   return new VectorLayer({
     source: new VectorSource({
       features: features,
@@ -71,8 +128,8 @@ const getFactoriesLayer = () => {
     zIndex: 1,
 
     style: function (feature) {
-      fieldsStyle.getFill().setColor("#000");
-      return fieldsStyle;
+      factoriesStyle.getFill().setColor("#000");
+      return factoriesStyle;
     },
   });
 };
@@ -85,6 +142,9 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
   const bigNumberValue = useSelector(
     (state: RootState) => state.bigNumbers.value,
   );
+  const activeCategory: Category = useSelector(
+    (state: RootState) => state.categories,
+  );
   const regionNameToColor = {};
   // "#FF00FF", // Neon Magenta
   //"#00A6ED", // Electric Blue
@@ -96,7 +156,8 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
     "#FF3131",
   ];
   for (let i = 0; i < Object.keys(regionNames).length; i++) {
-    regionNameToColor[regionNames[Object.keys(regionNames)[i]]] = colors[i % colors.length];
+    regionNameToColor[regionNames[Object.keys(regionNames)[i]]] =
+      colors[i % colors.length];
   }
   const popupRef = useRef(null);
   const [zoom, setZoom] = useState(5);
@@ -168,9 +229,72 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
   const lastIdRef = useRef<number>(-1);
 
   const [popupText, setPopupText] = useState(null);
-  const [popupVisibility, setpopupVisibility] = useState(false);
+  const [popupVisibility, setPopupVisibility] = useState(false);
 
   const fieldsLayerRef = useRef(null);
+  const getNextPopupText = useCallback(
+    (f) => {
+      let nextPopupText;
+      if (activeCategory === 0) {
+        if (bigNumberValue < 2) {
+          nextPopupText = {
+            Имя: f.values_.name,
+            Оператор: f.values_.operator_name,
+            Добыча: f.values_.field_resources,
+          };
+        } else if (bigNumberValue === 2) {
+          nextPopupText = {
+            Компания: f.values_.company,
+            Продукты: f.values_.products,
+            Статус: f.values_.status,
+            Тип: f.values_.type,
+          };
+        }
+      } else if (activeCategory === 1) {
+        nextPopupText = {
+          Компания: f.values_.name,
+          Продукты: f.values_.operator_name,
+          Статус: f.values_.field_resources,
+        };
+      }
+      return nextPopupText;
+    },
+    [activeCategory, bigNumberValue],
+  );
+  const popupOverlayRef = useRef(null);
+
+  const selectStyle = new Style({
+    fill: new Fill({
+      color: "#eeeeee",
+    }),
+    stroke: new Stroke({
+      color: "rgba(255, 255, 255, 0.7)",
+      width: 2,
+    }),
+  });
+  let selected = null;
+
+  const onMovePerFeature = useCallback(
+    (f, coordinate) => {
+      if (f.values_.type !== "district") {
+        setPopupVisibility(true);
+      }
+      if (f.values_.type !== "district" && lastIdRef.current !== f.values_.id) {
+        const nextPopupText = getNextPopupText(f);
+
+        popupOverlayRef.current.setPosition(coordinate);
+        setPopupText(nextPopupText);
+        lastIdRef.current = f.values_.id;
+      }
+      selected = f;
+      selectStyle.getFill().setColor(f.get("COLOR") || "#eeeeee");
+      f.setStyle(selectStyle);
+
+      return true;
+    },
+    [getNextPopupText],
+  );
+
   useEffect(() => {
     const background = new TileLayer({
       className: "stamen",
@@ -183,11 +307,9 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
       source: new OSM(),
     });
 
-    const clipLayer = regionsLayer;
-
     //Giving the clipped layer an extent is necessary to avoid rendering when the feature is outside the viewport
-    clipLayer.getSource().on("addfeature", function () {
-      base.setExtent(clipLayer.getSource().getExtent());
+    regionsLayer.getSource().on("addfeature", function () {
+      base.setExtent(regionsLayer.getSource().getExtent());
     });
 
     const style = new Style({
@@ -195,10 +317,9 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
         color: "black",
       }),
     });
-
-    base.on("postrender", function (e) {
+    const onPostRender = (e) => {
       const polygons = [];
-      clipLayer.getSource().forEachFeature(function (feature) {
+      regionsLayer.getSource().forEachFeature(function (feature) {
         const name = feature.get("name");
 
         const geometry = feature.getGeometry();
@@ -221,9 +342,10 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
       vectorContext.drawGeometry(multiPolygon);
 
       e.context.globalCompositeOperation = "source-over";
-    });
+    };
+    base.on("postrender", onPostRender);
 
-    const mapLayers = [clipLayer, base];
+    const mapLayers = [regionsLayer, base];
 
     if (ref.current && !mapRef.current) {
       mapRef.current = new Map({
@@ -235,61 +357,37 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
         target: ref.current,
       });
 
-      const popup = new Overlay({
+      popupOverlayRef.current = new Overlay({
         element: document.getElementById("popup"),
       });
-      mapRef.current.addOverlay(popup);
-
-      // Showing place features when the user hovers
-
-      const selectStyle = new Style({
-        fill: new Fill({
-          color: "#eeeeee",
-        }),
-        stroke: new Stroke({
-          color: "rgba(255, 255, 255, 0.7)",
-          width: 2,
-        }),
-      });
-
-      let selected = null;
-      mapRef.current.on("pointermove", function (e) {
-        if (selected !== null) {
-          selected.setStyle(undefined);
-          selected = null;
-        }
-        setpopupVisibility(false);
-        mapRef.current.forEachFeatureAtPixel(e.pixel, function (f) {
-          if (f.values_.type !== "district") {
-            setpopupVisibility(true);
-          }
-          if (
-            f.values_.type !== "district" &&
-            lastIdRef.current !== f.values_.id
-          ) {
-            popup.setPosition(e.coordinate);
-            setPopupText({
-              Имя: f.values_.name,
-              Оператор: f.values_.operator_name,
-              Добыча: f.values_.field_resources,
-            });
-            lastIdRef.current = f.values_.id;
-          }
-          selected = f;
-          selectStyle.getFill().setColor(f.get("COLOR") || "#eeeeee");
-          f.setStyle(selectStyle);
-
-          return true;
-        });
-      });
+      mapRef.current.addOverlay(popupOverlayRef.current);
     }
+
+    const onPointerMove = (e) => {
+      if (selected !== null) {
+        selected.setStyle(undefined);
+        selected = null;
+      }
+      setPopupVisibility(false);
+      mapRef.current.forEachFeatureAtPixel(e.pixel, (feature) => {
+        onMovePerFeature(feature, e.coordinate);
+      });
+    };
+    mapRef.current.on("pointermove", onPointerMove);
+  }, [activeCategory, bigNumberValue, getNextPopupText, regionsLayer, view]);
+
+  useEffect(() => {
     let newLayer;
-    if (bigNumberValue < 2) {
-      newLayer = getFieldsLayer(bigNumberValue);
-    } else if (bigNumberValue === 2) {
-      console.log("Hi");
-      newLayer = getFactoriesLayer();
+    if (activeCategory === 0) {
+      if (bigNumberValue < 2) {
+        newLayer = getFieldsLayer(bigNumberValue);
+      } else if (bigNumberValue === 2) {
+        newLayer = getFactoriesLayer();
+      }
+    } else {
+      newLayer = getPlantsLayer();
     }
+
     if (newLayer) {
       if (fieldsLayerRef.current) {
         // If the fieldsLayer already exists, remove it from the map first
@@ -298,7 +396,7 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
       fieldsLayerRef.current = newLayer;
       mapRef.current.addLayer(newLayer);
     }
-  }, [ref, mapRef, mapCenter, zoom, regionsLayer, bigNumberValue, view]);
+  }, [activeCategory, bigNumberValue]);
 
   useEffect(() => {
     if (currentRegion) {
@@ -310,7 +408,7 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
       const center = getCenter(extent);
 
       // Call the flyTo function when currentRegion changes
-      flyTo(center, () => {});
+      flyTo(center);
     }
   }, [currentRegion]);
 
