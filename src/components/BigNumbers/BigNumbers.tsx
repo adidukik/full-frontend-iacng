@@ -32,7 +32,7 @@ const BigNumberButton = ({ bigNumber }) => {
   if (bigNumber.data.length < 2) {
     return (
       <>
-        {bigNumber.data.label} {bigNumber.data.value}
+        {bigNumber.data[0].label} {bigNumber.data[0].value}
       </>
     );
   } else if (bigNumber.data.length < 3) {
@@ -225,11 +225,11 @@ const BigNumbers = (): JSX.Element => {
             data: [
               {
                 label: "план",
-                value: 11506,
+                value: 11192,
               },
               {
                 label: "факт",
-                value: 12319,
+                value: 11465,
               },
             ],
           },
@@ -238,11 +238,11 @@ const BigNumbers = (): JSX.Element => {
             data: [
               {
                 label: "план",
-                value: 11561,
+                value: 13360,
               },
               {
                 label: "факт",
-                value: 12656,
+                value: 13867,
               },
             ],
           },
@@ -251,11 +251,15 @@ const BigNumbers = (): JSX.Element => {
             data: [
               {
                 label: "план",
-                value: 55,
+                value: 2168,
               },
               {
                 label: "факт",
-                value: 337,
+                value: 2402,
+              },
+              {
+                label: "±",
+                value: 234,
               },
             ],
           },
@@ -272,11 +276,11 @@ const BigNumbers = (): JSX.Element => {
             data: [
               {
                 label: "план",
-                value: 3.61,
+                value: 36.32,
               },
               {
                 label: "факт",
-                value: -3.68,
+                value: 39.8,
               },
             ],
           },
@@ -285,11 +289,11 @@ const BigNumbers = (): JSX.Element => {
             data: [
               {
                 label: "план",
-                value: 1.18,
+                value: 0.57,
               },
               {
                 label: "факт",
-                value: 1.13,
+                value: 0.19,
               },
             ],
           },
@@ -298,28 +302,28 @@ const BigNumbers = (): JSX.Element => {
             data: [
               {
                 label: "план",
-                value: 0.0,
+                value: 1.9,
               },
               {
                 label: "факт",
-                value: 11.42,
+                value: 1.21,
               },
             ],
           },
           {
-            title: "Перетоки энергосистем ЦА за 13 дней июня факт (млн.кВт.ч)",
+            title: "Перетоки энергосистем ЦА за 26 дней июля факт (млн.кВт.ч)",
             data: [
               {
                 label: "С-до Кыргызстана (нараст)",
-                value: -13.1,
+                value: -58.7,
               },
               {
                 label: "С-до Узбекистана (нараст)",
-                value: 0.4,
+                value: 41.0,
               },
               {
                 label: "С-до РК-ЦА (нараст)",
-                value: 12.7,
+                value: 17.7,
               },
             ],
           },
@@ -365,22 +369,26 @@ const BigNumbers = (): JSX.Element => {
       </Card.Header>
       <Card.Body>
         <ul>
-          {bigNumbers.map((bigNumber, index) => (
-            <li key={bigNumber.title}>
-              <Button
-                variant="outline-primary"
-                className={`big-numbers__btn ${
-                  bigNumberValue === index && "big-numbers__btn-active"
-                }`}
-                onClick={(e) => {
-                  dispatch(setBigNumberValue(index));
-                }}
-              >
-                <h5 className="big-numbers__title">{bigNumber.title}</h5>
-                <BigNumberButton bigNumber={bigNumber}></BigNumberButton>
-              </Button>
-            </li>
-          ))}
+          {bigNumbers.map((bigNumber, index) =>
+            bigNumber.data.length === 0 ? (
+              <></>
+            ) : (
+              <li key={bigNumber.title}>
+                <Button
+                  variant="outline-primary"
+                  className={`big-numbers__btn ${
+                    bigNumberValue === index && "big-numbers__btn-active"
+                  }`}
+                  onClick={(e) => {
+                    dispatch(setBigNumberValue(index));
+                  }}
+                >
+                  <h5 className="big-numbers__title">{bigNumber.title}</h5>
+                  <BigNumberButton bigNumber={bigNumber}></BigNumberButton>
+                </Button>
+              </li>
+            ),
+          )}
         </ul>
       </Card.Body>
     </Card>
