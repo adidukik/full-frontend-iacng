@@ -79,18 +79,18 @@ const Graph = () => {
 
   useEffect(() => {
     const data = {
-      labels: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль"],
+      labels: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь"],
       datasets: [
         {
           label: "Добыча нефти",
           data: [
-            months[0],
-            months[1],
-            months[2],
-            months[3],
-            months[4],
-            months[5],
-            months[6],
+         
+            months[7],
+            months[8],
+            months[9],
+            months[10],
+            months[11],
+            months[12],
           ],
           borderColor: "white",
           defaultFontColor: "white",
