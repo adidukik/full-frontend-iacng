@@ -29,6 +29,7 @@ const Graph = () => {
     datasets: [],
   });
   const [months, setMonths] = useState({});
+  ChartJS.defaults.font.family = "MontSerrat";
   const options = {
     maintainAspectRatio: false,
     responsive: true,
@@ -38,6 +39,10 @@ const Graph = () => {
         position: "top" as const,
         labels: {
           color: "#fff",
+          // This more specific font property overrides the global property
+          font: {
+            size: 16,
+          },
         },
       },
       title: {
@@ -84,7 +89,6 @@ const Graph = () => {
         {
           label: "Добыча нефти",
           data: [
-         
             months[7],
             months[8],
             months[9],

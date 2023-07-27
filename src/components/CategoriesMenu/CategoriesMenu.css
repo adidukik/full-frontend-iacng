@@ -52,7 +52,9 @@
  NEW CODE
  */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
-
+.CategoriesMenu div {
+  height: 100%;
+}
 .categories-menu .nav-tabs {
   max-height: 50px;
   display: flex;
