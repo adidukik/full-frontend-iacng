@@ -237,10 +237,13 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
       } else if (bigNumberValue === 2) {
         nextPopupText = {
           Компания: f.values_.company,
-          Продукты: f.values_.products,
+
           Статус: f.values_.status,
           Тип: f.values_.type,
         };
+        if (f.values_.products) {
+          nextPopupText["Продукты"] = f.values_.products;
+        }
       }
     } else if (activeCategory === 1) {
       nextPopupText = {
@@ -328,11 +331,15 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
         setPopupVisibility(false);
 
         mapRef.current.forEachFeatureAtPixel(e.pixel, (f) => {
-          if (f.values_.type !== "district") {
+          if (
+            f.values_.type !== "district" &&
+            f.values_.type !== "republic city"
+          ) {
             setPopupVisibility(true);
           }
           if (
             f.values_.type !== "district" &&
+            f.values_.type !== "republic city" &&
             lastIdRef.current !== f.values_.id
           ) {
             const nextPopupText = getNextPopupText(f);
@@ -408,7 +415,9 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
         className={popupVisibility ? "" : "hidden"}
       >
         {getPopupText(popupText).map((str) => (
-          <p key={str}>{str}</p>
+          <>
+            {str.replace(/<br\/>/g, "")} <br></br>
+          </>
         ))}
       </div>
     </>
