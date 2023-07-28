@@ -1,46 +1,3 @@
-/* .Regions {
-  overflow: auto;
-}
-.Regions button {
-  color: #000 !important;
-}
-.Regions td {
-  padding: 0 !important;
-}
-.Regions td,
-th {
-  width: 50px;
-  vertical-align: middle !important;
-  text-align: center !important;
-}
-
-.Regions table div {
-  display: flex;
-  justify-content: center;
-}
-.Regions table {
-  text-align: center !important;
-  vertical-align: middle;
-}
-
-.Regions__table .p-datatable-tbody > tr {
-  background-color: #a6a6a6 !important;
-  font-size: 12px;
-  border-spacing: 0;
-  border: none;
-}
-
-.Regions__table .p-datatable-thead > tr {
-  background-color: #a6a6a6 !important;
-  font-size: 14px;
-}
-.Regions__table button {
-  font-size: 12px;
-  padding: 5px;
-}
-.Regions__table th {
-  padding: 5px !important;
-} */
 .container {
   overflow-x: hidden;
   overflow-y: auto;
@@ -89,4 +46,7 @@ th {
   justify-content: center;
   text-align: center !important;
   vertical-align: middle;
+}
+.Regions button {
+  width: 100% !important;
 }

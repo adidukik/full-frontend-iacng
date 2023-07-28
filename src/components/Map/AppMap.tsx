@@ -54,7 +54,7 @@ function drawCircles(coordinatesArray) {
   const source = new VectorSource();
 
   coordinatesArray.forEach((coords) => {
-    const circle = new Circle(coords.values_.geometry.flatCoordinates, 4500); // Create a circle geometry around the point
+    const circle = new Circle(coords.values_.geometry.flatCoordinates, 9000); // Create a circle geometry around the point
     const feature = new Feature(circle);
     // Copy all the properties from the original feature to the new feature
     for (const prop in coords.values_) {
@@ -69,10 +69,7 @@ function drawCircles(coordinatesArray) {
     fill: new Fill({
       color: "rgba(18, 255, 255, 1)",
     }),
-    stroke: new Stroke({
-      color: "#ff3131",
-      width: 2,
-    }),
+    stroke: new Stroke({ color: "#041541" }),
     image: new CircleStyle({
       radius: 20000,
       fill: new Fill({
@@ -98,10 +95,20 @@ const getFieldsLayer = (bigNumberValue) => {
         features: featuresToDisplay,
       }),
       zIndex: 1,
-
+      // 4edbd9
       style: function (feature) {
-        fieldsStyle.getFill().setColor("#000");
-        return fieldsStyle;
+        const fill = new Fill({
+          color: "#4edbd9",
+        });
+        const stroke = new Stroke({
+          color: "#0d6efd", // Set the color for the border
+          width: 1, // Set the width of the border
+        });
+
+        return new Style({
+          fill: fill,
+          stroke: stroke,
+        });
       },
     });
     return vl;
@@ -154,7 +161,7 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
   );
 
   const flyTo = useCallback(
-    (location, done) => {
+    (location) => {
       const duration = 500;
       let parts = 2;
       let called = false;
@@ -165,7 +172,6 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
         }
         if (parts === 0 || !complete) {
           called = true;
-          done(complete);
         }
       }
       view.animate(
@@ -201,8 +207,18 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
         zIndex: 1,
         style: function (feature) {
           const color = regionNameToColor[feature.values_.name_ru];
-          regionsStyle.getFill().setColor(color);
-          return regionsStyle;
+          const fill = new Fill({
+            color: color,
+          });
+          const stroke = new Stroke({
+            color: "black", // Set the color for the border
+            width: 1, // Set the width of the border
+          });
+
+          return new Style({
+            fill: fill,
+            stroke: stroke,
+          });
         },
       }),
     [],
@@ -415,9 +431,9 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
         className={popupVisibility ? "" : "hidden"}
       >
         {getPopupText(popupText).map((str) => (
-          <>
+          <div key={str}>
             {str.replace(/<br\/>/g, "")} <br></br>
-          </>
+          </div>
         ))}
       </div>
     </>
