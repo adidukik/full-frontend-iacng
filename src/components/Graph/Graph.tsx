@@ -12,6 +12,8 @@ import {
 } from "chart.js";
 
 import "./Graph.css";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store";
 
 const Graph = () => {
   ChartJS.register(
@@ -23,7 +25,9 @@ const Graph = () => {
     Tooltip,
     Legend,
   );
-
+  const bigNumberValue = useSelector(
+    (state: RootState) => state.bigNumbers.value,
+  );
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [],
@@ -105,14 +109,17 @@ const Graph = () => {
 
     setChartData(data);
   }, [months]);
-
-  return (
-    <div className="chart-oil">
-      {chartData.labels.length > 0 && (
-        <Line data={chartData} options={options} />
-      )}
-    </div>
-  );
+  if (bigNumberValue === 0) {
+    return (
+      <div className="chart-oil">
+        {chartData.labels.length > 0 && (
+          <Line data={chartData} options={options} />
+        )}
+      </div>
+    );
+  } else {
+    return <></>;
+  }
 };
 
 export default Graph;

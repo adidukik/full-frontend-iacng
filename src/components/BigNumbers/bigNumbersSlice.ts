@@ -5,11 +5,13 @@ type BigNumberTimeRange = "сутки" | "месяц" | "год";
 export interface BigNumberState {
   value: number;
   currentTimeRange: BigNumberTimeRange;
+  latestDate: Date;
 }
 
 const initialState: BigNumberState = {
   value: 0,
   currentTimeRange: "сутки",
+  latestDate: new Date(),
 };
 
 const bigNumberSlice = createSlice({
@@ -22,10 +24,13 @@ const bigNumberSlice = createSlice({
     setCurrentTimeRange: (state, action: PayloadAction<BigNumberTimeRange>) => {
       state.currentTimeRange = action.payload;
     },
+    setLatestDate: (state, action: PayloadAction<Date>) => {
+      state.latestDate = action.payload;
+    },
   },
 });
 
-export const { setBigNumberValue, setCurrentTimeRange } =
+export const { setBigNumberValue, setCurrentTimeRange, setLatestDate } =
   bigNumberSlice.actions;
 
 export default bigNumberSlice.reducer;

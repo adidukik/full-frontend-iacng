@@ -2,37 +2,47 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
 import "./BigNumbers.css";
 import { useEffect, useState } from "react";
-import { setBigNumberValue, setCurrentTimeRange } from "./bigNumbersSlice";
+import {
+  setBigNumberValue,
+  setCurrentTimeRange,
+  setLatestDate,
+} from "./bigNumbersSlice";
 import useFetchData from "../../hooks/useFetchData";
 import { BigNumber } from "../../interfaces/BigNumber";
 import { Category } from "../CategoriesMenu/categoriesSlice";
 import { Card, Nav, Button } from "react-bootstrap";
 import { getFormattedDate } from "../../utils/getFormattedDate";
+import { formatNumberWithSpaces } from "../../utils/formatNumberWithSpaces";
+
+export const LATEST_DATE_URL = "http://192.168.0.57:8000/last_day/";
 
 const BigNumberButton = ({ bigNumber }) => {
   const getListItem = (bigNumberData) => {
+    const formattedValue = formatNumberWithSpaces(bigNumberData.value);
     return (
       <li key={bigNumberData.label} className="big-numbers__data">
         <div>
           <>{bigNumberData.label}</>
           <br></br>
-          <>{bigNumberData.value}</>
+          <>{formattedValue}</>
         </div>
       </li>
     );
   };
   const getTableItem = (bigNumberData) => {
+    const formattedValue = formatNumberWithSpaces(bigNumberData.value);
     return (
       <tr className="big-numbers__data-table" key={bigNumberData.label}>
         <td> {bigNumberData.label}</td>
-        <td> {bigNumberData.value}</td>
+        <td> {formattedValue}</td>
       </tr>
     );
   };
   if (bigNumber.data.length < 2) {
     return (
       <>
-        {bigNumber.data[0].label} {bigNumber.data[0].value}
+        {bigNumber.data[0].label}{" "}
+        {formatNumberWithSpaces(bigNumber.data[0].value)}
       </>
     );
   } else if (bigNumber.data.length < 3) {
@@ -63,6 +73,9 @@ const BigNumbers = (): JSX.Element => {
   const currentTimeRange = useSelector(
     (state: RootState) => state.bigNumbers.currentTimeRange,
   );
+  const latestDate = useSelector(
+    (state: RootState) => state.bigNumbers.latestDate,
+  );
 
   // Access dispatch to dispatch actions
   const dispatch = useDispatch();
@@ -75,10 +88,12 @@ const BigNumbers = (): JSX.Element => {
     год: "year",
   };
   const currentTimeRangeInEnglish = timeRangeToEnglish[currentTimeRange];
-  const latestDate = getFormattedDate(
-    useFetchData("http://192.168.0.57:8000/last_day/"),
-  );
-  console.log(latestDate);
+
+  const fetchedDate: Date = useFetchData(LATEST_DATE_URL);
+  if (fetchedDate != latestDate) {
+    dispatch(setLatestDate(fetchedDate));
+  }
+  const formattedDate = getFormattedDate(latestDate);
   const oilPlan = Math.floor(
     useFetchData(
       `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_plan/`,
@@ -352,7 +367,7 @@ const BigNumbers = (): JSX.Element => {
   return (
     <Card className="big-numbers app-card">
       <h1 className="big-numbers__heading">Данные</h1>
-      <h3 className="big-numbers__date">за {latestDate}</h3>
+      <h3 className="big-numbers__date">за {formattedDate}</h3>
       <Card.Header>
         <Nav variant="tabs" defaultActiveKey="#сутки">
           {timeRanges.map((item, idx) => (

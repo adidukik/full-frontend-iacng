@@ -125,6 +125,14 @@ const getPlantsLayer = () => {
   return drawCircles(features);
 };
 
+const colors = [
+  "#FFC300", // Cyber Yellow
+  "#3B82F6", // Neon Blue
+  "#FF6D00", // Hyper Orange
+  "#BADA55", // Hi-Tech Green
+  "#FF3131",
+];
+
 interface AppMapProps {
   currentRegion: string;
 }
@@ -139,13 +147,7 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
   const regionNameToColor = {};
   // "#FF00FF", // Neon Magenta
   //"#00A6ED", // Electric Blue
-  const colors = [
-    "#FFC300", // Cyber Yellow
-    "#3B82F6", // Neon Blue
-    "#FF6D00", // Hyper Orange
-    "#BADA55", // Hi-Tech Green
-    "#FF3131",
-  ];
+
   for (let i = 0; i < Object.keys(regionNames).length; i++) {
     regionNameToColor[regionNames[Object.keys(regionNames)[i]]] =
       colors[i % colors.length];
@@ -347,6 +349,7 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
         setPopupVisibility(false);
 
         mapRef.current.forEachFeatureAtPixel(e.pixel, (f) => {
+          console.log(f);
           if (
             f.values_.type !== "district" &&
             f.values_.type !== "republic city"

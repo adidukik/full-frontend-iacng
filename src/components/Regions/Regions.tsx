@@ -1,5 +1,3 @@
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
 import {
   Table,
   TableBody,
@@ -7,17 +5,16 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Button,
   Paper,
 } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux"; // import hooks
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux"; // import hooks
+import { useEffect, useMemo, useState } from "react";
 import "./Regions.css";
-// import { Button } from "primereact/button";
 import { RootState } from "../../../store";
-import { selectRegion } from "./regionsSlice";
 import useFetchData from "../../hooks/useFetchData";
 import RegionsTableCell from "./RegionsTableCell";
+import { parseRegionName } from "../../utils/parseRegionName";
+import { Category } from "../CategoriesMenu/categoriesSlice";
 
 export const regionNames = {
   "Абайская обл.": "Абайская область",
@@ -47,11 +44,6 @@ interface RegionsProps {
   onRegionClick: (el: string) => void;
 }
 const Regions = ({ onRegionClick }: RegionsProps) => {
-  const parseRegionName = (fullName) => {
-    const lastIndex = fullName.lastIndexOf("/");
-    const regionName = fullName.substring(lastIndex + 1).trim();
-    return regionName.charAt(0) + regionName.slice(1);
-  };
   const activeCategory: Category = useSelector(
     (state: RootState) => state.categories,
   );
@@ -171,9 +163,9 @@ const Regions = ({ onRegionClick }: RegionsProps) => {
     <TableContainer
       component={Paper}
       className="container"
-      sx={{ backgroundColor: "#041541", padding: "0" }}
+      sx={{ backgroundColor: "#041541", padding: "0", height: "100%" }}
     >
-      <Table className="table">
+      <Table className="table" sx={{ height: "100%" }}>
         <TableHead>
           <TableRow>
             <TableCell>Регион</TableCell>
@@ -186,28 +178,6 @@ const Regions = ({ onRegionClick }: RegionsProps) => {
         <TableBody>
           {tableData.map((row, index) => (
             <TableRow key={index}>
-              {/* <TableCell component="th" scope="row">
-                <Button
-                  variant="contained"
-                  className="button"
-                  onClick={() =>
-                    regionNames[parseRegionName(row.region)] != "Казахстан"
-                      ? onRegionClick(regionNames[parseRegionName(row.region)])
-                      : null
-                  }
-                >
-                  {parseRegionName(row.region)}
-                </Button>
-              </TableCell>
-              <TableCell align="right">{row.Факт}</TableCell>
-              <TableCell align="right">{row.План}</TableCell>
-              <TableCell
-                align="right"
-                style={{ color: row.Отклонение < 0 ? "red" : "green" }}
-              >
-                {row.Отклонение}
-              </TableCell>
-              <TableCell align="right">{row.Статус}</TableCell> */}
               {Object.entries(row).map(
                 ([rowKey, rowData]: [string, number], index) =>
                   index ? (

@@ -1,5 +1,6 @@
 import { TableCell } from "@mui/material";
 import { Button } from "@mui/material";
+import { formatNumberWithSpaces } from "../../utils/formatNumberWithSpaces";
 
 interface RegionsTableCellProps {
   rowData: number;
@@ -18,7 +19,7 @@ const RegionsTableCell = ({
     return (
       <TableCell align="right">
         <Button variant="contained" className="button" onClick={onClick}>
-          {rowData}
+          {formatNumberWithSpaces(rowData)}
         </Button>
       </TableCell>
     );
@@ -28,7 +29,7 @@ const RegionsTableCell = ({
         align="right"
         style={showDiff ? { color: rowData < 0 ? "red" : "green" } : null}
       >
-        {rowData}
+        {formatNumberWithSpaces(rowData)}
       </TableCell>
     );
   }
