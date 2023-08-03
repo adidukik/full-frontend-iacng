@@ -15,6 +15,12 @@ import "./Graph.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 
+import { InputNumber } from "primereact/inputnumber";
+import { Button } from "@mui/material";
+
+const bigNumberValueToLabel = [["oil", "gas"], []];
+const bigNumberValueToDatasetLabel = [["Добыча нефти", "Добыча газа"], []];
+
 const Graph = () => {
   ChartJS.register(
     CategoryScale,
@@ -28,11 +34,14 @@ const Graph = () => {
   const bigNumberValue = useSelector(
     (state: RootState) => state.bigNumbers.value,
   );
+  const activeCategory: Category = useSelector(
+    (state: RootState) => state.categories,
+  );
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [],
   });
-  const [months, setMonths] = useState({});
+  const [months, setMonths] = useState([]);
   ChartJS.defaults.font.family = "MontSerrat";
   const options = {
     maintainAspectRatio: false,
@@ -49,11 +58,6 @@ const Graph = () => {
           },
         },
       },
-      title: {
-        display: true,
-        text: "Добыча",
-        color: "#fff",
-      },
     },
     scales: {
       x: {
@@ -68,38 +72,34 @@ const Graph = () => {
       },
     },
   };
+  const [graphMonths, setGraphMonths] = useState(6);
+  const [displayedGraphMonths, setDisplayedGraphMonths] = useState(6);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://192.168.0.57:8000/calculate_last_x_months_oil_yield/12/",
+          `http://192.168.0.57:8000/calculate_last_x_months_${bigNumberValueToLabel[activeCategory][bigNumberValue]}_yield/${displayedGraphMonths}/`,
         ); // Replace with your API endpoint
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
+        console.log("adidas", data.yields_per_month);
         setMonths(data.yields_per_month);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
     fetchData();
-  }, []);
+  }, [activeCategory, bigNumberValue, displayedGraphMonths]);
 
   useEffect(() => {
     const data = {
-      labels: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь"],
+      labels: months.map((el, index) => index),
       datasets: [
         {
-          label: "Добыча нефти",
-          data: [
-            months[7],
-            months[8],
-            months[9],
-            months[10],
-            months[11],
-            months[12],
-          ],
+          label: bigNumberValueToDatasetLabel[activeCategory][bigNumberValue],
+          data: months,
           borderColor: "white",
           defaultFontColor: "white",
           borderWidth: 2,
@@ -108,13 +108,52 @@ const Graph = () => {
     };
 
     setChartData(data);
-  }, [months]);
-  if (bigNumberValue === 0) {
+  }, [activeCategory, bigNumberValue, months]);
+
+  const [selectedValue, setSelectedValue] = useState("");
+
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
+  const muiStyles = {
+    // Define the styles to set the text color to white
+    whiteText: {
+      color: "white",
+    },
+    blueText: {
+      color: "blue",
+    },
+  };
+
+  if (activeCategory === 0) {
     return (
       <div className="chart-oil">
-        {chartData.labels.length > 0 && (
-          <Line data={chartData} options={options} />
-        )}
+        <div className="chart-oil__select">
+          <label htmlFor="minmax-buttons" className="font-bold block mb-2">
+            Число месяцев
+          </label>
+          <InputNumber
+            inputId="minmax-buttons"
+            value={graphMonths}
+            onValueChange={(e) => setGraphMonths(e.value)}
+            mode="decimal"
+            showButtons
+            min={0}
+            max={100}
+            className="chart-oil__input"
+          />
+          <Button
+            style={{ fontSize: "10px", color: "white" }}
+            onClick={() => setDisplayedGraphMonths(graphMonths)}
+          >
+            Отрисовать
+          </Button>
+        </div>
+        <div className="chart-oil__graph-wrapper">
+          {chartData.labels.length > 0 && (
+            <Line data={chartData} options={options} />
+          )}
+        </div>
       </div>
     );
   } else {

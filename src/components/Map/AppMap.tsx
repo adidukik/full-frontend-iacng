@@ -386,16 +386,17 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
       } else if (bigNumberValue === 2) {
         newLayer = getFactoriesLayer();
       }
-    } else {
+    } else if (activeCategory === 1) {
       newLayer = getPlantsLayer();
+    } else {
+      newLayer = null;
     }
-
+    if (fieldsLayerRef.current) {
+      // If the fieldsLayer already exists, remove it from the map first
+      mapRef.current.removeLayer(fieldsLayerRef.current);
+    }
+    fieldsLayerRef.current = newLayer;
     if (newLayer) {
-      if (fieldsLayerRef.current) {
-        // If the fieldsLayer already exists, remove it from the map first
-        mapRef.current.removeLayer(fieldsLayerRef.current);
-      }
-      fieldsLayerRef.current = newLayer;
       mapRef.current.addLayer(newLayer);
     }
   }, [activeCategory, bigNumberValue]);

@@ -6,4 +6,32 @@
 }
 .chart-oil {
   height: 100%;
+  padding: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.chart-oil__select {
+  max-width: 80px;
+}
+.chart-oil__graph-wrapper {
+  width: 100%;
+}
+.chart-oil__select label {
+  margin: 0 !important;
+  font-size: 10px;
+  text-align: center;
+}
+.chart-oil__input input {
+  width: 40px;
+  background: none;
+  color: white;
+  border: none;
+  border-radius: 10px !important;
+  padding: 5px 0px;
+  text-align: center;
+}
+.chart-oil__input button {
+  background: none;
+  width: 20px !important;
+  border: none;
 }

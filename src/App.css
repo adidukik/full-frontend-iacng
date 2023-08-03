@@ -23,6 +23,9 @@ td,
 button {
   font-family: "Montserrat", sans-serif !important;
 }
+label {
+  color: white;
+}
 .App > div {
   border-radius: 10px !important;
   overflow: hidden;

@@ -77,7 +77,6 @@ const BigNumbers = (): JSX.Element => {
     (state: RootState) => state.bigNumbers.latestDate,
   );
 
-  // Access dispatch to dispatch actions
   const dispatch = useDispatch();
 
   const [bigNumbers, setBigNumbers] = useState<BigNumber[]>([]);
@@ -88,11 +87,13 @@ const BigNumbers = (): JSX.Element => {
     год: "year",
   };
   const currentTimeRangeInEnglish = timeRangeToEnglish[currentTimeRange];
-
   const fetchedDate: Date = useFetchData(LATEST_DATE_URL);
-  if (fetchedDate != latestDate) {
-    dispatch(setLatestDate(fetchedDate));
-  }
+  useEffect(() => {
+    if (fetchedDate != latestDate) {
+      dispatch(setLatestDate(fetchedDate));
+    }
+  }, [dispatch, fetchedDate, latestDate]);
+
   const formattedDate = getFormattedDate(latestDate);
   const oilPlan = Math.floor(
     useFetchData(
@@ -346,9 +347,9 @@ const BigNumbers = (): JSX.Element => {
 
         break;
       case 2:
-        // setLabels([
-        //   /*лейблы для урановой промышленности*/
-        // ]);
+        setBigNumbers([
+          /*лейблы для урановой промышленности*/
+        ]);
         break;
       default:
         console.log();

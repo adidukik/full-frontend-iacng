@@ -51,14 +51,19 @@ const Regions = ({ onRegionClick }: RegionsProps) => {
   const currentTimeRange = useSelector(
     (state: RootState) => state.bigNumbers.currentTimeRange,
   );
+  const bigNumberValue = useSelector(
+    (state: RootState) => state.bigNumbers.value,
+  );
   const timeRangeToEnglish = {
     сутки: "day",
     месяц: "month",
     год: "year",
   };
+  const bigNumberToType = ["oil", "gas"];
+  const yieldType = bigNumberToType[bigNumberValue];
   const currentTimeRangeInEnglish = timeRangeToEnglish[currentTimeRange];
-  const factUrl = `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_by_regions/`;
-  const planUrl = `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_by_regions_plan/`;
+  const factUrl = `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_${yieldType}_yield_by_regions/`;
+  const planUrl = `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_${yieldType}_yield_by_regions_plan/`;
   // State to store table data
   const [tableData, setTableData] = useState([]);
   const showDiffElems = ["Отклонение"];
@@ -66,7 +71,7 @@ const Regions = ({ onRegionClick }: RegionsProps) => {
   const regionDataPlan = useFetchData(planUrl, true);
   // Convert the regionData to an array of objects for table rendering
   useEffect(() => {
-    if (activeCategory == 0) {
+    if (activeCategory === 0) {
       if (regionDataFact && regionDataPlan) {
         const tableData = Object.keys(regionDataFact).map((region) => ({
           region: parseRegionName(region),
@@ -75,14 +80,15 @@ const Regions = ({ onRegionClick }: RegionsProps) => {
             regionDataPlan[region] === null ? 0 : regionDataPlan[region],
           ), // Use 0 as default value if План data is not available
           Отклонение:
+            regionDataFact[region] -
             Math.floor(
               regionDataPlan[region] === null ? 0 : regionDataPlan[region],
-            ) - regionDataFact[region], // Calculate the difference between План and Факт
+            ), // Calculate the difference between План and Факт
           Статус: "Работает",
         }));
         setTableData(tableData);
       }
-    } else {
+    } else if (activeCategory === 1) {
       const tableData = [
         {
           Станция: "ТОО Экиб. ГРЭС-1",
@@ -142,6 +148,8 @@ const Regions = ({ onRegionClick }: RegionsProps) => {
         },
       ];
       setTableData(tableData);
+    } else {
+      setTableData([]);
     }
   }, [activeCategory, regionDataFact, regionDataPlan]);
 
@@ -158,7 +166,7 @@ const Regions = ({ onRegionClick }: RegionsProps) => {
       };
     }
   };
-
+  console.log(tableData);
   return (
     <TableContainer
       component={Paper}
