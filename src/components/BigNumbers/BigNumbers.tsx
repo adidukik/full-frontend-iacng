@@ -155,7 +155,7 @@ const BigNumbers = (): JSX.Element => {
             ],
           },
           {
-            title: "Добыча газа (тонн)",
+            title: "Добыча газа (тыс. куб. м)",
             data: [
               {
                 label: "план",
