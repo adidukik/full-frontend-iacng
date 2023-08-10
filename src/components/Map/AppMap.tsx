@@ -3,7 +3,7 @@ import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import "./AppMap.css";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Circle, MultiPolygon } from "ol/geom";
+import { Circle, Geometry, MultiPolygon } from "ol/geom";
 import GeoJSON from "ol/format/GeoJSON.js";
 import { FullScreen, defaults as defaultControls } from "ol/control.js";
 import { Vector as VectorLayer } from "ol/layer.js";
@@ -14,6 +14,9 @@ import regionsData from "../../assets/geo/kz_regions.json";
 import fieldsData from "../../assets/geo/fields.json";
 import factoriesData from "../../assets/geo/factories.json";
 import plantsData from "../../assets/geo/power_plants.json";
+import oilPipelinesData from "../../assets/geo/oil_pipelines.json";
+import transmissionLinesData from "../../assets/geo/transmission_lines.json";
+// import gasPipelinesData from "../../assets/geo/gas_pipelines.json";
 import { getCenter } from "ol/extent";
 import { regionNames } from "../Regions/Regions";
 import Stroke from "ol/style/Stroke";
@@ -23,22 +26,8 @@ import { RootState } from "../../../store";
 import { getVectorContext } from "ol/render";
 import { Feature } from "ol";
 import { Circle as CircleStyle } from "ol/style.js";
+import { Category } from "../CategoriesMenu/categoriesSlice";
 
-const regionsStyle = new Style({
-  fill: new Fill({
-    color: "#000000",
-  }),
-});
-const fieldsStyle = new Style({
-  fill: new Fill({
-    color: "#eeeeee",
-  }),
-});
-const factoriesStyle = new Style({
-  fill: new Fill({
-    color: "#eeeeee",
-  }),
-});
 const format = new GeoJSON();
 const regionsFeatures = format.readFeatures(regionsData);
 const fieldsFeatures = format.readFeatures(fieldsData).filter((feature) => {
@@ -48,7 +37,7 @@ const numberToLayerType = {
   0: "нефть",
   1: "газ",
 };
-function drawCircles(coordinatesArray) {
+function drawCircles(coordinatesArray): VectorLayer<VectorSource<Geometry>> {
   // Create a new VectorSource
 
   const source = new VectorSource();
@@ -84,7 +73,31 @@ function drawCircles(coordinatesArray) {
   });
   return vector;
 }
-const getFieldsLayer = (bigNumberValue) => {
+function drawLines(
+  features,
+  lineStyle = new Style({
+    stroke: new Stroke({
+      color: "blue", // Change this to your desired color
+      width: 2, // Change this to your desired line width
+    }),
+  }),
+) {
+  const vectorSource = new VectorSource({
+    features: features, // Initialize the vector source with the provided features
+  });
+
+  const vectorLayer = new VectorLayer({
+    source: vectorSource,
+    style: lineStyle, // Apply the custom style to the layer
+    zIndex: 1,
+  });
+
+  return vectorLayer;
+}
+
+const getFieldsLayer = (
+  bigNumberValue,
+): VectorLayer<VectorSource<Geometry>> => {
   const currentType = numberToLayerType["" + bigNumberValue];
   if (currentType) {
     const featuresToDisplay = fieldsFeatures.filter((field) =>
@@ -115,6 +128,23 @@ const getFieldsLayer = (bigNumberValue) => {
   }
 };
 
+const getOilGasPipelines = (bigNumberValue) => {
+  const data = oilPipelinesData;
+  const features = format.readFeatures(data);
+  return drawLines(features);
+};
+const getTransmissionLines = () => {
+  const features = format.readFeatures(transmissionLinesData);
+  console.log(features);
+  const lineStyle = new Style({
+    stroke: new Stroke({
+      color: "red", // Change this to your desired color
+      width: 1, // Change this to your desired line width
+    }),
+  });
+  return drawLines(features, lineStyle);
+};
+
 const getFactoriesLayer = () => {
   const features = format.readFeatures(factoriesData);
   return drawCircles(features);
@@ -132,7 +162,6 @@ const colors = [
   "#BADA55", // Hi-Tech Green
   "#FF3131",
 ];
-
 
 const AppMap = () => {
   const bigNumberValue = useSelector(
@@ -233,15 +262,13 @@ const AppMap = () => {
   const activeCategoryRef = useRef(activeCategory);
   const bigNumberValueRef = useRef(bigNumberValue);
   useEffect(() => {
-    // ... your existing useEffect code ...
-
     activeCategoryRef.current = activeCategory;
     bigNumberValueRef.current = bigNumberValue;
   }, [activeCategory, bigNumberValue]);
   const [popupText, setPopupText] = useState(null);
   const [popupVisibility, setPopupVisibility] = useState(false);
 
-  const fieldsLayerRef = useRef(null);
+  const fieldsLayerRef = useRef([]);
   const getNextPopupText = (f) => {
     const activeCategory = activeCategoryRef.current;
     const bigNumberValue = bigNumberValueRef.current;
@@ -350,7 +377,6 @@ const AppMap = () => {
         setPopupVisibility(false);
 
         mapRef.current.forEachFeatureAtPixel(e.pixel, (f) => {
-          console.log(f);
           if (
             f.values_.type !== "district" &&
             f.values_.type !== "republic city"
@@ -380,24 +406,24 @@ const AppMap = () => {
   }, [activeCategory, bigNumberValue, getNextPopupText, regionsLayer, view]);
 
   useEffect(() => {
-    let newLayer;
+    let newLayers = [];
     if (activeCategory === 0) {
       if (bigNumberValue < 2) {
-        newLayer = getFieldsLayer(bigNumberValue);
+        newLayers = [
+          getFieldsLayer(bigNumberValue),
+          getOilGasPipelines(bigNumberValue),
+        ];
       } else if (bigNumberValue === 2) {
-        newLayer = getFactoriesLayer();
+        newLayers = [getFactoriesLayer()];
       }
     } else if (activeCategory === 1) {
-      newLayer = getPlantsLayer();
-    } else {
-      newLayer = null;
+      newLayers = [getPlantsLayer(), getTransmissionLines()];
     }
-    if (fieldsLayerRef.current) {
-      // If the fieldsLayer already exists, remove it from the map first
-      mapRef.current.removeLayer(fieldsLayerRef.current);
+    for (const fieldsLayer of fieldsLayerRef.current) {
+      mapRef.current.removeLayer(fieldsLayer);
     }
-    fieldsLayerRef.current = newLayer;
-    if (newLayer) {
+    fieldsLayerRef.current = newLayers;
+    for (const newLayer of newLayers) {
       mapRef.current.addLayer(newLayer);
     }
   }, [activeCategory, bigNumberValue]);
