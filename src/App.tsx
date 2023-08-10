@@ -12,39 +12,14 @@ import Title from "./components/Title/Title.tsx";
 import ScrollingText from "./components/ScrollingText/ScrollingText.tsx";
 import { useState } from "react";
 import { Box } from "./components/Regions/Regions_card.tsx";
+import { BrowserRouter } from "react-router-dom";
+import { PagesRouter } from "./routes/PagesRouter.tsx";
 
 function App() {
-  const [currentRegion, setCurrentRegion] = useState(null);
-
   return (
-    <div className="App">
-      <div className="Title align-items-center d-flex w-100">
-        <Title />
-      </div>
-      <div className="CategoriesMenu">
-        <CategoriesMenu />
-      </div>
-      <div className="BigNumbers">
-        <BigNumbers />
-      </div>
-      <div className="Regions">
-        {/* <Box></Box> */}
-        <Regions onRegionClick={setCurrentRegion}></Regions>
-        {/* <Regions /> When redux is implemented*/}
-      </div>
-      <div className="ScrollingText">
-        <ScrollingText />
-      </div>
-      <div className="Map" style={{ background: "#e5e5e5" }}>
-        <AppMap currentRegion={currentRegion} />
-      </div>
-      <div className="ChatBot">
-        <ChatBot />
-      </div>
-      <div className="Graph">
-        <Graph />
-      </div>
-    </div>
+    <BrowserRouter>
+      <PagesRouter />
+    </BrowserRouter>
   );
 }
 

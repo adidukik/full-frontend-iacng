@@ -7,7 +7,7 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
-import { useSelector } from "react-redux"; // import hooks
+import { useDispatch, useSelector } from "react-redux"; // import hooks
 import { useEffect, useMemo, useState } from "react";
 import "./Regions.css";
 import { RootState } from "../../../store";
@@ -15,6 +15,7 @@ import useFetchData from "../../hooks/useFetchData";
 import RegionsTableCell from "./RegionsTableCell";
 import { parseRegionName } from "../../utils/parseRegionName";
 import { Category } from "../CategoriesMenu/categoriesSlice";
+import { selectRegion } from "./regionsSlice";
 
 export const regionNames = {
   "Абайская обл.": "Абайская область",
@@ -40,14 +41,14 @@ export const regionNames = {
   ЌАЗАЌСТАН: "Казахстан",
 };
 
-interface RegionsProps {
-  onRegionClick: (el: string) => void;
-}
-const Regions = ({ onRegionClick }: RegionsProps) => {
+const Regions = () => {
   const activeCategory: Category = useSelector(
     (state: RootState) => state.categories,
   );
-
+  const dispatch = useDispatch();
+  const onRegionClick = (region) => {
+    dispatch(selectRegion(region));
+  };
   const currentTimeRange = useSelector(
     (state: RootState) => state.bigNumbers.currentTimeRange,
   );

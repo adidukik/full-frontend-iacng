@@ -133,11 +133,8 @@ const colors = [
   "#FF3131",
 ];
 
-interface AppMapProps {
-  currentRegion: string;
-}
 
-const AppMap = ({ currentRegion }: AppMapProps) => {
+const AppMap = () => {
   const bigNumberValue = useSelector(
     (state: RootState) => state.bigNumbers.value,
   );
@@ -152,6 +149,10 @@ const AppMap = ({ currentRegion }: AppMapProps) => {
     regionNameToColor[regionNames[Object.keys(regionNames)[i]]] =
       colors[i % colors.length];
   }
+  const currentRegion = useSelector(
+    (state: RootState) => state.regions.selectedRegion,
+  );
+
   const popupRef = useRef(null);
   const [zoom, setZoom] = useState(5);
   const [mapCenter, setMapCenter] = useState([
