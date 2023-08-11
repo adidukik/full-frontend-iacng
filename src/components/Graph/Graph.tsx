@@ -17,9 +17,10 @@ import { RootState } from "../../../store";
 
 import { InputNumber } from "primereact/inputnumber";
 import { Button } from "@mui/material";
+import { Category } from "../CategoriesMenu/categoriesSlice";
 
-const bigNumberValueToLabel = [["oil", "gas"], []];
-const bigNumberValueToDatasetLabel = [["Добыча нефти", "Добыча газа"], []];
+const bigNumberValueToLabel = [["oil", "gas"], [], []];
+const bigNumberValueToDatasetLabel = [["Добыча нефти", "Добыча газа"], [], []];
 
 const Graph = () => {
   ChartJS.register(
