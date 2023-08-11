@@ -16,7 +16,7 @@ import factoriesData from "../../assets/geo/factories.json";
 import plantsData from "../../assets/geo/power_plants.json";
 import oilPipelinesData from "../../assets/geo/oil_pipelines.json";
 import transmissionLinesData from "../../assets/geo/transmission_lines.json";
-// import gasPipelinesData from "../../assets/geo/gas_pipelines.json";
+import gasPipelinesData from "../../assets/geo/gas_pipelines.json";
 import { getCenter } from "ol/extent";
 import { regionNames } from "../Regions/Regions";
 import Stroke from "ol/style/Stroke";
@@ -129,7 +129,7 @@ const getFieldsLayer = (
 };
 
 const getOilGasPipelines = (bigNumberValue) => {
-  const data = oilPipelinesData;
+  const data = bigNumberValue === 0 ? oilPipelinesData : gasPipelinesData;
   const features = format.readFeatures(data);
   return drawLines(features);
 };
