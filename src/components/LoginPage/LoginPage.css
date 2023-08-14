@@ -1,0 +1,25 @@
+/* An attempt to make borders illuminate in gradient */
+
+.card {
+    background-color: #041541;
+    color: white;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .card::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    right: -20px;
+    bottom: -20px;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.2), transparent);
+    transform: rotate(-45deg);
+    z-index: -1;
+  }
+  
