@@ -27,6 +27,7 @@ import { getVectorContext } from "ol/render";
 import { Feature } from "ol";
 import { Circle as CircleStyle } from "ol/style.js";
 import { Category } from "../CategoriesMenu/categoriesSlice";
+import useWeather from "../../hooks/useWeather";
 
 const format = new GeoJSON();
 const regionsFeatures = format.readFeatures(regionsData);
@@ -453,6 +454,8 @@ const AppMap = () => {
     return arr;
   };
 
+  const weatherData = useWeather();
+  console.log(weatherData);
   return (
     <>
       <div ref={ref} id="map" />
