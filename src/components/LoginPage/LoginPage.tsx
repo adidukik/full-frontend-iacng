@@ -64,7 +64,7 @@ const LoginPage: React.FC = () => {
         <Card className="card">
           <CardContent>
             <Typography component="h1" variant="h5" sx={{ color: 'white', marginBottom: 2 }}>
-              Вход в портал ИАЦНГ
+              Вход в портал САЦ ТЭК РК
             </Typography>
             <Collapse in={alertVisible}>
               <Alert severity="error" sx={{ marginBottom: 2 }} onClose={handleCloseAlert}>
