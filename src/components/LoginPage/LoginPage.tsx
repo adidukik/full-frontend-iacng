@@ -1,14 +1,40 @@
 import React, { useState } from 'react';
-import { TextField, Button, Container, Typography, CssBaseline, Card, CardContent, Box } from '@mui/material';
-import './LoginPage.css';
+import {
+  TextField,
+  Button,
+  Container,
+  Typography,
+  CssBaseline,
+  Card,
+  CardContent,
+  Box,
+  Alert,
+  Collapse,
+} from '@mui/material';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebase';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage: React.FC = () => {
-  const [username, setUsername] = useState('');
+  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [alertVisible, setAlertVisible] = useState(false); // Initialize to false
 
-  const handleLogin = () => {
-    console.log('Username:', username);
-    console.log('Password:', password);
+  const handleLogin = async () => {
+    try {
+      setError(''); // Clear any previous error messages
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate('/');
+    } catch (error) {
+      setError('Неверный адрес электронной почты или пароль'); // Set the error message
+      setAlertVisible(true); // Make sure the alert is visible
+    }
+  };
+
+  const handleCloseAlert = () => {
+    setAlertVisible(false);
   };
 
   return (
@@ -30,14 +56,19 @@ const LoginPage: React.FC = () => {
             <Typography component="h1" variant="h5" sx={{ color: 'white', marginBottom: 2 }}>
               Вход в портал ИАЦНГ
             </Typography>
+            <Collapse in={alertVisible}>
+              <Alert severity="error" sx={{ marginBottom: 2 }} onClose={handleCloseAlert}>
+                {error}
+              </Alert>
+            </Collapse>
             <form onSubmit={(e) => e.preventDefault()}>
               <TextField
                 variant="outlined"
                 margin="normal"
                 fullWidth
-                label="Логин"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                label="Почта"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 InputLabelProps={{ style: { color: 'white' } }}
                 InputProps={{ style: { color: 'white', borderColor: 'white' } }}
                 focused
