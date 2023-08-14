@@ -454,8 +454,6 @@ const AppMap = () => {
     return arr;
   };
 
-  const weatherData = useWeather();
-  console.log(weatherData);
   return (
     <>
       <div ref={ref} id="map" />
