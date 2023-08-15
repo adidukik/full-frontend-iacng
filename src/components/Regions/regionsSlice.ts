@@ -1,23 +1,28 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface RegionsState {
-  selectedRegion: string
+  selectedRegion: string;
+  displayedRegions: string[];
 }
 
 const initialState: RegionsState = {
-  selectedRegion: ''
-}
+  selectedRegion: "",
+  displayedRegions: [],
+};
 
 const regionsSlice = createSlice({
-  name: 'regions',
+  name: "regions",
   initialState,
   reducers: {
     selectRegion(state, action: PayloadAction<string>) {
-      state.selectedRegion = action.payload
+      state.selectedRegion = action.payload;
+    },
+    setDisplayedRegions(state, action: PayloadAction<string[]>) {
+      state.displayedRegions = action.payload;
     },
   },
-})
+});
 
-export const { selectRegion } = regionsSlice.actions
+export const { selectRegion, setDisplayedRegions } = regionsSlice.actions;
 
-export default regionsSlice.reducer
+export default regionsSlice.reducer;

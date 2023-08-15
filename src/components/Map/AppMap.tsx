@@ -20,7 +20,7 @@ import gasPipelinesData from "../../assets/geo/gas_pipelines.json";
 import { getCenter } from "ol/extent";
 import { regionNames } from "../Regions/Regions";
 import Stroke from "ol/style/Stroke";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Overlay from "ol/Overlay";
 import { RootState } from "../../../store";
 import { getVectorContext } from "ol/render";
@@ -70,7 +70,6 @@ function drawCircles(coordinatesArray): VectorLayer<VectorSource<Geometry>> {
   const vector = new VectorLayer({
     source: source,
     style: style,
-    zIndex: 2,
   });
   return vector;
 }
@@ -98,6 +97,7 @@ function drawLines(
 
 const getFieldsLayer = (
   bigNumberValue,
+  displayedRegions,
 ): VectorLayer<VectorSource<Geometry>> => {
   const currentType = numberToLayerType["" + bigNumberValue];
   if (currentType) {
@@ -106,11 +106,19 @@ const getFieldsLayer = (
         String(field.values_?.field_resources).includes(currentType),
       )
       .filter((field) =>
-        String(field.values_?.operator_name)
-          .toLowerCase()
-          .includes("саутс"),
+        // Check if the feature intersects with any displayed region
+        displayedRegions.some((regionFeature) =>
+          field
+            .getGeometry()
+            .intersectsExtent(regionFeature.getGeometry().getExtent()),
+        ),
       );
-    console.log(featuresToDisplay);
+
+    // .filter((field) =>
+    //   String(field.values_?.operator_name)
+    //     .toLowerCase()
+    //     .includes("саутс"),
+    // );
     const vl = new VectorLayer({
       source: new VectorSource({
         features: featuresToDisplay,
@@ -136,14 +144,20 @@ const getFieldsLayer = (
   }
 };
 
-const getOilGasPipelines = (bigNumberValue) => {
+const getOilGasPipelines = (bigNumberValue, displayedRegions) => {
   const data = bigNumberValue === 0 ? oilPipelinesData : gasPipelinesData;
-  const features = format.readFeatures(data);
+  const features = format.readFeatures(data).filter((field) =>
+    // Check if the feature intersects with any displayed region
+    displayedRegions.some((regionFeature) =>
+      field
+        .getGeometry()
+        .intersectsExtent(regionFeature.getGeometry().getExtent()),
+    ),
+  );
   return drawLines(features);
 };
 const getTransmissionLines = () => {
   const features = format.readFeatures(transmissionLinesData);
-  console.log(features);
   const lineStyle = new Style({
     stroke: new Stroke({
       color: "red", // Change this to your desired color
@@ -189,7 +203,13 @@ const AppMap = () => {
   const currentRegion = useSelector(
     (state: RootState) => state.regions.selectedRegion,
   );
-
+  const currentCompanyId = useSelector(
+    (state: RootState) => state.auth.currentCompanyId,
+  );
+  // const displayedRegions = useSelector(
+  //   (state: RootState) => state.regions.displayedRegions,
+  // );
+  const dispatch = useDispatch();
   const popupRef = useRef(null);
   const [zoom, setZoom] = useState(5);
   const [mapCenter, setMapCenter] = useState([
@@ -236,17 +256,33 @@ const AppMap = () => {
     },
     [view, zoom],
   );
+  const displayedRegionsSet = new Set();
 
+  for (const feature of fieldsFeatures) {
+    if (feature.values_.operator_name.toLowerCase().includes("саутс")) {
+      displayedRegionsSet.add(feature);
+    }
+  }
+  const displayedRegionsArr = Array.from(displayedRegionsSet);
+  const displayedRegionsNamesArr = displayedRegionsArr.map(
+    (feature) => feature.values_.au_name,
+  );
+  console.log(displayedRegionsNamesArr);
   const regionsLayer = useMemo(
     () =>
       new VectorLayer({
         source: new VectorSource({
           features: regionsFeatures,
         }),
-        opacity: 0.6,
         zIndex: 1,
         style: function (feature) {
-          const color = regionNameToColor[feature.values_.name_ru];
+          const isDisplayed = displayedRegionsNamesArr.includes(
+            feature.values_.name_ru,
+          );
+
+          const color = isDisplayed
+            ? regionNameToColor[feature.values_.name_ru]
+            : "#e5e5e5";
           const fill = new Fill({
             color: color,
           });
@@ -254,11 +290,12 @@ const AppMap = () => {
             color: "black", // Set the color for the border
             width: 1, // Set the width of the border
           });
-
-          return new Style({
+          const myStyle = new Style({
             fill: fill,
             stroke: stroke,
           });
+
+          return myStyle;
         },
       }),
     [],
@@ -418,8 +455,8 @@ const AppMap = () => {
     if (activeCategory === 0) {
       if (bigNumberValue < 2) {
         newLayers = [
-          getFieldsLayer(bigNumberValue),
-          getOilGasPipelines(bigNumberValue),
+          getFieldsLayer(bigNumberValue, displayedRegionsArr),
+          getOilGasPipelines(bigNumberValue, displayedRegionsArr),
         ];
       } else if (bigNumberValue === 2) {
         newLayers = [getFactoriesLayer()];
@@ -434,7 +471,7 @@ const AppMap = () => {
     for (const newLayer of newLayers) {
       mapRef.current.addLayer(newLayer);
     }
-  }, [activeCategory, bigNumberValue]);
+  }, [activeCategory, bigNumberValue, dispatch]);
 
   useEffect(() => {
     if (currentRegion) {
@@ -448,7 +485,7 @@ const AppMap = () => {
       // Call the flyTo function when currentRegion changes
       flyTo(center);
     }
-  }, [currentRegion]);
+  }, [currentRegion, flyTo]);
 
   const getPopupText = (popupText) => {
     const arr = [];
