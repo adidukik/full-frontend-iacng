@@ -18,6 +18,7 @@ import { RootState } from "../../../store";
 import { InputNumber } from "primereact/inputnumber";
 import { Button } from "@mui/material";
 import { Category } from "../CategoriesMenu/categoriesSlice";
+import { getGraphLabels } from "../../utils/getGraphLabels";
 
 const bigNumberValueToLabel = [["oil", "gas"], [], []];
 const bigNumberValueToDatasetLabel = [["Добыча нефти", "Добыча газа"], [], []];
@@ -37,6 +38,9 @@ const Graph = () => {
   );
   const activeCategory: Category = useSelector(
     (state: RootState) => state.categories,
+  );
+  const latestDate = useSelector(
+    (state: RootState) => state.bigNumbers.latestDate,
   );
   const [chartData, setChartData] = useState({
     labels: [],
@@ -95,7 +99,7 @@ const Graph = () => {
 
   useEffect(() => {
     const data = {
-      labels: months.map((el, index) => index),
+      labels: getGraphLabels(latestDate, months.length),
       datasets: [
         {
           label: bigNumberValueToDatasetLabel[activeCategory][bigNumberValue],
@@ -108,7 +112,7 @@ const Graph = () => {
     };
 
     setChartData(data);
-  }, [activeCategory, bigNumberValue, months]);
+  }, [activeCategory, bigNumberValue, latestDate, months]);
 
   const [selectedValue, setSelectedValue] = useState("");
 

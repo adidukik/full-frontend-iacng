@@ -28,6 +28,7 @@ import { Feature } from "ol";
 import { Circle as CircleStyle } from "ol/style.js";
 import { Category } from "../CategoriesMenu/categoriesSlice";
 import useWeather from "../../hooks/useWeather";
+import { setCurrentCompanyId } from "../LoginPage/authSlice";
 
 const format = new GeoJSON();
 const regionsFeatures = format.readFeatures(regionsData);
@@ -98,14 +99,15 @@ function drawLines(
 const getFieldsLayer = (
   bigNumberValue,
   displayedRegions,
+  currentCompanyId,
 ): VectorLayer<VectorSource<Geometry>> => {
   const currentType = numberToLayerType["" + bigNumberValue];
   if (currentType) {
-    const featuresToDisplay = fieldsFeatures
-      .filter((field) =>
-        String(field.values_?.field_resources).includes(currentType),
-      )
-      .filter((field) =>
+    let featuresToDisplay = fieldsFeatures.filter((field) =>
+      String(field.values_?.field_resources).includes(currentType),
+    );
+    if (currentCompanyId !== 0) {
+      featuresToDisplay = featuresToDisplay.filter((field) =>
         // Check if the feature intersects with any displayed region
         displayedRegions.some((regionFeature) =>
           field
@@ -113,6 +115,7 @@ const getFieldsLayer = (
             .intersectsExtent(regionFeature.getGeometry().getExtent()),
         ),
       );
+    }
 
     // .filter((field) =>
     //   String(field.values_?.operator_name)
@@ -144,16 +147,24 @@ const getFieldsLayer = (
   }
 };
 
-const getOilGasPipelines = (bigNumberValue, displayedRegions) => {
+const getOilGasPipelines = (
+  bigNumberValue,
+  displayedRegions,
+  currentCompanyId,
+) => {
   const data = bigNumberValue === 0 ? oilPipelinesData : gasPipelinesData;
-  const features = format.readFeatures(data).filter((field) =>
-    // Check if the feature intersects with any displayed region
-    displayedRegions.some((regionFeature) =>
-      field
-        .getGeometry()
-        .intersectsExtent(regionFeature.getGeometry().getExtent()),
-    ),
-  );
+  let features = format.readFeatures(data);
+  if (currentCompanyId !== 0) {
+    features = features.filter((field) =>
+      // Check if the feature intersects with any displayed region
+      displayedRegions.some((regionFeature) =>
+        field
+          .getGeometry()
+          .intersectsExtent(regionFeature.getGeometry().getExtent()),
+      ),
+    );
+  }
+
   return drawLines(features);
 };
 const getTransmissionLines = () => {
@@ -275,14 +286,16 @@ const AppMap = () => {
           features: regionsFeatures,
         }),
         zIndex: 1,
+        opacity: 0.6,
         style: function (feature) {
           const isDisplayed = displayedRegionsNamesArr.includes(
             feature.values_.name_ru,
           );
 
-          const color = isDisplayed
-            ? regionNameToColor[feature.values_.name_ru]
-            : "#e5e5e5";
+          const color =
+            isDisplayed || currentCompanyId === 0
+              ? regionNameToColor[feature.values_.name_ru]
+              : "#e5e5e5";
           const fill = new Fill({
             color: color,
           });
@@ -455,8 +468,12 @@ const AppMap = () => {
     if (activeCategory === 0) {
       if (bigNumberValue < 2) {
         newLayers = [
-          getFieldsLayer(bigNumberValue, displayedRegionsArr),
-          getOilGasPipelines(bigNumberValue, displayedRegionsArr),
+          getFieldsLayer(bigNumberValue, displayedRegionsArr, currentCompanyId),
+          getOilGasPipelines(
+            bigNumberValue,
+            displayedRegionsArr,
+            currentCompanyId,
+          ),
         ];
       } else if (bigNumberValue === 2) {
         newLayers = [getFactoriesLayer()];

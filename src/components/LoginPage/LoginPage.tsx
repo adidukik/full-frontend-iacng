@@ -19,7 +19,7 @@ import { setCurrentCompanyId } from "./authSlice";
 import { useDispatch } from "react-redux";
 
 const usernameToId = {
-  "adidukik@gmail.com": 57,
+  "adidukik@gmail.com": 0,
 };
 
 const LoginPage: React.FC = () => {
