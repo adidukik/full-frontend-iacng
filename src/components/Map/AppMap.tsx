@@ -101,9 +101,16 @@ const getFieldsLayer = (
 ): VectorLayer<VectorSource<Geometry>> => {
   const currentType = numberToLayerType["" + bigNumberValue];
   if (currentType) {
-    const featuresToDisplay = fieldsFeatures.filter((field) =>
-      String(field.values_?.field_resources).includes(currentType),
-    );
+    const featuresToDisplay = fieldsFeatures
+      .filter((field) =>
+        String(field.values_?.field_resources).includes(currentType),
+      )
+      .filter((field) =>
+        String(field.values_?.operator_name)
+          .toLowerCase()
+          .includes("саутс"),
+      );
+    console.log(featuresToDisplay);
     const vl = new VectorLayer({
       source: new VectorSource({
         features: featuresToDisplay,

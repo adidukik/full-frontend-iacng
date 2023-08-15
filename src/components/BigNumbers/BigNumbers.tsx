@@ -76,7 +76,11 @@ const BigNumbers = (): JSX.Element => {
   const latestDate = useSelector(
     (state: RootState) => state.bigNumbers.latestDate,
   );
-
+  const currentCompanyId = useSelector(
+    (state: RootState) => state.auth.currentCompanyId,
+  );
+  const currentCompanyIdStr =
+    currentCompanyId === 0 ? "" : currentCompanyId + "";
   const dispatch = useDispatch();
 
   const [bigNumbers, setBigNumbers] = useState<BigNumber[]>([]);
@@ -95,24 +99,25 @@ const BigNumbers = (): JSX.Element => {
   }, [dispatch, fetchedDate, latestDate]);
 
   const formattedDate = getFormattedDate(latestDate);
+
   const oilPlan = Math.floor(
     useFetchData(
-      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_plan/`,
+      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_plan/${currentCompanyIdStr}`,
     ),
   );
   const oilFact = Math.floor(
     useFetchData(
-      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield/`,
+      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield/${currentCompanyIdStr}`,
     ),
   );
   const gasPlan = Math.floor(
     useFetchData(
-      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield_plan/`,
+      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield_plan/${currentCompanyIdStr}`,
     ),
   );
   const gasFact = Math.floor(
     useFetchData(
-      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield/`,
+      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield/${currentCompanyIdStr}`,
     ),
   );
 
@@ -136,11 +141,26 @@ const BigNumbers = (): JSX.Element => {
       `http://192.168.0.57:8000/calculate_mt_last_${currentTimeRangeInEnglish}`,
     ),
   );
+  const xr = Math.floor(
+    useFetchData(
+      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_xr/${currentCompanyId}`,
+    ),
+  );
+  const skv = Math.floor(
+    useFetchData(
+      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_skv/${currentCompanyIdStr}`,
+    ),
+  );
+  const poteri = Math.floor(
+    useFetchData(
+      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_poteri/${currentCompanyIdStr}`,
+    ),
+  );
 
   useEffect(() => {
     switch (activeCategory) {
       case 0:
-        setBigNumbers([
+        const manufacturing = [
           {
             title: "Добыча нефти (тонн)",
             data: [
@@ -167,71 +187,107 @@ const BigNumbers = (): JSX.Element => {
               },
             ],
           },
-          {
-            title: "Производство нефтепродуктов",
-            data: [
-              {
-                label: "бензин",
-                value: benzin,
-              },
-              {
-                label: "керосин",
-                value: kerosin,
-              },
-              {
-                label: "дизель",
-                value: dt,
-              },
-              {
-                label: "мазут",
-                value: mt,
-              },
-            ],
-          },
-          {
-            title: "Остаток НП (дни)",
-            data: [
-              {
-                label: "",
-                value: 3,
-              },
-            ],
-          },
-          {
-            title: "Экспорт",
-            data: [
-              {
-                label: "нефти",
-                value: 0,
-              },
-              {
-                label: "нефтепродуктов",
-                value: 0,
-              },
-            ],
-          },
-          {
-            title: "Цены на нефть",
-            data: [
-              {
-                label: "внутренний рынок",
-                value: 40,
-              },
-              {
-                label: "на экспорт",
-                value: 40,
-              },
-              {
-                label: "Бензин",
-                value: 92,
-              },
-              {
-                label: "РК",
-                value: 203,
-              },
-            ],
-          },
-        ]);
+        ];
+        if (currentCompanyId === 0) {
+          setBigNumbers([
+            ...manufacturing,
+            {
+              title: "Производство нефтепродуктов",
+              data: [
+                {
+                  label: "бензин",
+                  value: benzin,
+                },
+                {
+                  label: "керосин",
+                  value: kerosin,
+                },
+                {
+                  label: "дизель",
+                  value: dt,
+                },
+                {
+                  label: "мазут",
+                  value: mt,
+                },
+              ],
+            },
+            {
+              title: "Остаток НП (дни)",
+              data: [
+                {
+                  label: "",
+                  value: 3,
+                },
+              ],
+            },
+            {
+              title: "Экспорт",
+              data: [
+                {
+                  label: "нефти",
+                  value: 0,
+                },
+                {
+                  label: "нефтепродуктов",
+                  value: 0,
+                },
+              ],
+            },
+            {
+              title: "Цены на нефть",
+              data: [
+                {
+                  label: "внутренний рынок",
+                  value: 40,
+                },
+                {
+                  label: "на экспорт",
+                  value: 40,
+                },
+                {
+                  label: "Бензин",
+                  value: 92,
+                },
+                {
+                  label: "РК",
+                  value: 203,
+                },
+              ],
+            },
+          ]);
+        } else {
+          setBigNumbers([
+            ...manufacturing,
+            {
+              title: "Нефть на хранении",
+              data: [
+                {
+                  label: "факт",
+                  value: xr,
+                },
+              ],
+            },
+            {
+              title: "Простой скважин",
+              data: [
+                {
+                  label: "факт",
+                  value: skv,
+                },
+              ],
+            },
+            {
+              title: "Потери в тоннах",
+              data: [
+                {
+                  label: "факт",
+                  value: poteri,
+                },
+              ],
+            },
+          ]);
+        }
 
         break;
       case 1:

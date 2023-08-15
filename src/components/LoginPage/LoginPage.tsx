@@ -18,6 +18,10 @@ import ReCAPTCHA from "react-google-recaptcha"; // Import the reCAPTCHA componen
 import { setCurrentCompanyId } from "./authSlice";
 import { useDispatch } from "react-redux";
 
+const usernameToId = {
+  "adidukik@gmail.com": 57,
+};
+
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -38,7 +42,7 @@ const LoginPage: React.FC = () => {
         // reCAPTCHA verified, proceed with authentication
         await signInWithEmailAndPassword(auth, email, password);
         navigate("/");
-        dispatch(setCurrentCompanyId(57));
+        dispatch(setCurrentCompanyId(usernameToId[email]));
       }
     } catch (error) {
       setError("Неверный адрес электронной почты или пароль"); // Set the error message

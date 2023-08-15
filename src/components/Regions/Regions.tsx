@@ -167,7 +167,6 @@ const Regions = () => {
       };
     }
   };
-  console.log(tableData);
   return (
     <TableContainer
       component={Paper}

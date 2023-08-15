@@ -85,7 +85,6 @@ const Graph = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log("adidas", data.yields_per_month);
         setMonths(data.yields_per_month);
       } catch (error) {
         console.error("Error fetching data:", error);
