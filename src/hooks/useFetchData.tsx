@@ -10,36 +10,22 @@ function useFetchData<T>(url: string, isArray: boolean = false): T | null {
     (state: RootState) => state.bigNumbers.latestDate,
   );
   useEffect(() => {
-    // setCachedData({});
-  }, [latestDate]);
-  useEffect(() => {
     const fetchData = async () => {
       if (cachedData[url] === undefined) {
-        // console.log(url + "\n");
-        try {
-          const response = await fetch(url);
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          const data = await response.json();
-          if (isArray) {
+        fetch(url)
+          .then((response) => response.json())
+          .then((fetchedData) => {
+            const value = isArray ? fetchedData : Object.values(fetchedData)[0];
+
             setCachedData((prevCachedData) => ({
               ...prevCachedData,
-              [url]: data,
+              [url]: value,
             }));
-          } else {
-            setCachedData((prevCachedData) => ({
-              ...prevCachedData,
-              [url]: Object.values(data)[0],
-            }));
-          }
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        }
+          });
       }
     };
     fetchData();
-  }, [url]);
+  }, [isArray, url]);
 
   useEffect(() => {
     setData(cachedData[url]);

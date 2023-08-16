@@ -2,14 +2,14 @@ import Map from "ol/Map";
 import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import "./AppMap.css";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Circle, Geometry, MultiPolygon, Point } from "ol/geom";
 import GeoJSON from "ol/format/GeoJSON.js";
 import { FullScreen, defaults as defaultControls } from "ol/control.js";
 import { Vector as VectorLayer } from "ol/layer.js";
 import Fill from "ol/style/Fill";
 import Style from "ol/style/Style";
-import { OSM, Stamen, Vector as VectorSource } from "ol/source.js";
+import { OSM, Vector as VectorSource } from "ol/source.js";
 import regionsData from "../../assets/geo/kz_regions.json";
 import fieldsData from "../../assets/geo/fields.json";
 import factoriesData from "../../assets/geo/factories.json";
@@ -27,13 +27,11 @@ import { getVectorContext } from "ol/render";
 import { Feature } from "ol";
 import { Circle as CircleStyle } from "ol/style.js";
 import { Category } from "../CategoriesMenu/categoriesSlice";
-import useWeather from "../../hooks/useWeather";
-import { setCurrentCompanyId } from "../LoginPage/authSlice";
 
 const format = new GeoJSON();
 const regionsFeatures = format.readFeatures(regionsData);
 const fieldsFeatures = format.readFeatures(fieldsData).filter((feature) => {
-  return feature.values_?.type === "добыча";
+  return feature.get("type") === "добыча";
 });
 const numberToLayerType = {
   0: "нефть",
@@ -47,13 +45,15 @@ function drawCircles(
 
   const source = new VectorSource();
 
-  coordinatesArray.forEach((coords) => {
-    displayedRegions.forEach((regionFeature) => {
+  coordinatesArray.forEach((coords: Point) => {
+    console.log(coords)
+    displayedRegions.forEach((regionFeature: Polygon) => {
       const regionGeometry = regionFeature.getGeometry();
-      const pointGeometry = new Point(coords.values_.geometry.flatCoordinates);
+      const pointGeometry = coords.getGeometry();
       if (
-        currentCompanyId === 0 ||
-        regionGeometry.containsCoordinate(pointGeometry.getCoordinates())
+        currentCompanyId === 0 
+        ||
+        regionGeometry.intersectsCoordinate(coords.getGeometry().flatCoordinates)
       ) {
         const circle = new Circle(
           coords.values_.geometry.flatCoordinates,
@@ -63,7 +63,7 @@ function drawCircles(
         // Copy all the properties from the original feature to the new feature
         for (const prop in coords.values_) {
           if (prop !== "geometry") {
-            feature.values_[prop] = coords.values_[prop];
+            feature.set(prop, coords.values_[prop]);
           }
         }
         source.addFeature(feature); // Add the feature to the VectorSource
@@ -86,6 +86,7 @@ function drawCircles(
   const vector = new VectorLayer({
     source: source,
     style: style,
+    zIndex: 1
   });
   return vector;
 }
@@ -97,7 +98,7 @@ function drawLines(
       width: 2, // Change this to your desired line width
     }),
   }),
-) {
+): VectorLayer<VectorSource> {
   const vectorSource = new VectorSource({
     features: features, // Initialize the vector source with the provided features
   });
@@ -111,15 +112,12 @@ function drawLines(
   return vectorLayer;
 }
 
-const getFieldsLayer = (
-  bigNumberValue,
-  displayedRegions,
-  currentCompanyId,
-): VectorLayer<VectorSource<Geometry>> => {
+const getFieldsLayer = (params): VectorLayer<VectorSource<Geometry>> => {
+  const { bigNumberValue, displayedRegions, currentCompanyId } = params;
   const currentType = numberToLayerType["" + bigNumberValue];
   if (currentType) {
     let featuresToDisplay = fieldsFeatures.filter((field) =>
-      String(field.values_?.field_resources).includes(currentType),
+      String(field.get("field_resources")).includes(currentType),
     );
     if (currentCompanyId !== 0) {
       featuresToDisplay = featuresToDisplay.filter((field) =>
@@ -143,7 +141,7 @@ const getFieldsLayer = (
       }),
       zIndex: 1,
       // 4edbd9
-      style: function (feature) {
+      style: function () {
         const fill = new Fill({
           color: "#4edbd9",
         });
@@ -162,13 +160,11 @@ const getFieldsLayer = (
   }
 };
 
-const getOilGasPipelines = (
-  bigNumberValue,
-  displayedRegions,
-  currentCompanyId,
-) => {
+const getOilGasPipelines = (params): VectorLayer<VectorSource> => {
+  const { bigNumberValue, displayedRegions, currentCompanyId } = params;
   const data = bigNumberValue === 0 ? oilPipelinesData : gasPipelinesData;
   let features = format.readFeatures(data);
+  console.log(displayedRegions);
   if (currentCompanyId !== 0) {
     features = features.filter((field) =>
       // Check if the feature intersects with any displayed region
@@ -182,8 +178,9 @@ const getOilGasPipelines = (
 
   return drawLines(features);
 };
-const getTransmissionLines = (displayedRegions, currentCompanyId) => {
-  const features = format.readFeatures(transmissionLinesData);
+const getTransmissionLines= (params): VectorLayer<VectorSource>  => {
+  const { displayedRegions, currentCompanyId } = params;
+  let features = format.readFeatures(transmissionLinesData);
 
   const lineStyle = new Style({
     stroke: new Stroke({
@@ -192,23 +189,23 @@ const getTransmissionLines = (displayedRegions, currentCompanyId) => {
     }),
   });
 
-  // if (currentCompanyId !== 0) {
-  //   features = features.filter((field) =>
-  //     // Check if the feature intersects with any displayed region
-  //     displayedRegions.some((regionFeature) =>
-  //       field
-  //         .getGeometry()
-  //         .intersectsExtent(regionFeature.getGeometry().getExtent()),
-  //     ),
-  //   );
-  // }
+  if (currentCompanyId !== 0) {
+    features = features.filter((field) =>
+      // Check if the feature intersects with any displayed region
+      displayedRegions.some((regionFeature) =>
+        field
+          .getGeometry()
+          .intersectsExtent(regionFeature.getGeometry().getExtent()),
+      ),
+    );
+  }
 
   return drawLines(features, lineStyle);
 };
 
-const getFactoriesLayer = () => {
+const getFactoriesLayer = (params) => {
   const features = format.readFeatures(factoriesData);
-  return drawCircles(features);
+  return drawCircles(features, params);
 };
 
 const getPlantsLayer = (params) => {
@@ -223,6 +220,49 @@ const colors = [
   "#BADA55", // Hi-Tech Green
   "#FF3131",
 ];
+const DEFAULT_ZOOM = 5;
+const DEFAULT_MAP_CENTER = [7347086.392356056, 6106854.834885074];
+const view = new View({ center: DEFAULT_MAP_CENTER, zoom: DEFAULT_ZOOM });
+// populating regionNameToColor
+const regionNameToColor = {};
+for (let i = 0; i < Object.keys(regionNames).length; i++) {
+  regionNameToColor[regionNames[Object.keys(regionNames)[i]]] =
+    colors[i % colors.length];
+}
+// ------
+const flyTo = (location): void => {
+  const duration = 500;
+  let parts = 2;
+  let called = false;
+  function callback(complete): void {
+    --parts;
+    if (called) {
+      return;
+    }
+    if (parts === 0 || !complete) {
+      called = true;
+    }
+  }
+  view.animate(
+    {
+      center: location,
+      duration: duration,
+      zoom: 6,
+    },
+    callback,
+  );
+  view.animate(
+    {
+      zoom: DEFAULT_ZOOM - 1,
+      duration: duration / 2,
+    },
+    {
+      zoom: DEFAULT_ZOOM,
+      duration: duration / 2,
+    },
+    callback,
+  );
+};
 
 const AppMap = () => {
   const bigNumberValue = useSelector(
@@ -231,14 +271,7 @@ const AppMap = () => {
   const activeCategory: Category = useSelector(
     (state: RootState) => state.categories,
   );
-  const regionNameToColor = {};
-  // "#FF00FF", // Neon Magenta
-  //"#00A6ED", // Electric Blue
 
-  for (let i = 0; i < Object.keys(regionNames).length; i++) {
-    regionNameToColor[regionNames[Object.keys(regionNames)[i]]] =
-      colors[i % colors.length];
-  }
   const currentRegion = useSelector(
     (state: RootState) => state.regions.selectedRegion,
   );
@@ -250,61 +283,21 @@ const AppMap = () => {
   // );
   const dispatch = useDispatch();
   const popupRef = useRef(null);
-  const [zoom, setZoom] = useState(5);
-  const [mapCenter, setMapCenter] = useState([
-    7347086.392356056, 6106854.834885074,
-  ]);
-  const view = useMemo(
-    () => new View({ center: mapCenter, zoom: zoom }),
-    [mapCenter, zoom],
-  );
 
-  const flyTo = useCallback(
-    (location) => {
-      const duration = 500;
-      let parts = 2;
-      let called = false;
-      function callback(complete) {
-        --parts;
-        if (called) {
-          return;
-        }
-        if (parts === 0 || !complete) {
-          called = true;
-        }
-      }
-      view.animate(
-        {
-          center: location,
-          duration: duration,
-          zoom: 6,
-        },
-        callback,
-      );
-      view.animate(
-        {
-          zoom: zoom - 1,
-          duration: duration / 2,
-        },
-        {
-          zoom: zoom,
-          duration: duration / 2,
-        },
-        callback,
-      );
-    },
-    [view, zoom],
-  );
   const displayedRegionsMap = {};
+  const regionNameToFeature = {};
+
+  regionsFeatures.forEach((feature) => {
+    regionNameToFeature[feature.get("name_ru")] = feature;
+  });
   for (const feature of fieldsFeatures) {
-    if (feature.values_.operator_name.toLowerCase().includes("саутс")) {
-      displayedRegionsMap[feature.values_.au_name] = feature;
+    if (feature.get("operator_name").toLowerCase().includes("саутс")) {
+      displayedRegionsMap[feature.get("au_name")] =
+        regionNameToFeature[feature.get("au_name")];
     }
   }
   const displayedRegionsArr = Array.from(Object.values(displayedRegionsMap));
-  console.log("set", displayedRegionsMap);
   const displayedRegionsNamesArr = Object.keys(displayedRegionsMap);
-  console.log(displayedRegionsNamesArr);
   const regionsLayer = useMemo(
     () =>
       new VectorLayer({
@@ -315,12 +308,12 @@ const AppMap = () => {
         opacity: 0.6,
         style: function (feature) {
           const isDisplayed = displayedRegionsNamesArr.includes(
-            feature.values_.name_ru,
+            feature.get("name_ru"),
           );
 
           const color =
             isDisplayed || currentCompanyId === 0
-              ? regionNameToColor[feature.values_.name_ru]
+              ? regionNameToColor[feature.get("name_ru")]
               : "#e5e5e5";
           const fill = new Fill({
             color: color,
@@ -460,23 +453,23 @@ const AppMap = () => {
         }
         setPopupVisibility(false);
 
-        mapRef.current.forEachFeatureAtPixel(e.pixel, (f) => {
+        mapRef.current.forEachFeatureAtPixel(e.pixel, (f: Feature) => {
           if (
-            f.values_.type !== "district" &&
-            f.values_.type !== "republic city"
+            f.get("type") !== "district" &&
+            f.get("type") !== "republic city"
           ) {
             setPopupVisibility(true);
           }
           if (
-            f.values_.type !== "district" &&
-            f.values_.type !== "republic city" &&
-            lastIdRef.current !== f.values_.id
+            f.get("type") !== "district" &&
+            f.get("type") !== "republic city" &&
+            lastIdRef.current !== f.get("id")
           ) {
             const nextPopupText = getNextPopupText(f);
 
             popupOverlayRef.current.setPosition(e.coordinate);
             setPopupText(nextPopupText);
-            lastIdRef.current = f.values_.id;
+            lastIdRef.current = f.get("id");
           }
           selected = f;
           selectStyle.getFill().setColor(f.get("COLOR") || "#eeeeee");
@@ -491,24 +484,19 @@ const AppMap = () => {
 
   useEffect(() => {
     let newLayers = [];
+    const params = {
+      bigNumberValue,
+      displayedRegions: displayedRegionsArr,
+      currentCompanyId,
+    };
     if (activeCategory === 0) {
       if (bigNumberValue < 2) {
-        newLayers = [
-          getFieldsLayer(bigNumberValue, displayedRegionsArr, currentCompanyId),
-          getOilGasPipelines(
-            bigNumberValue,
-            displayedRegionsArr,
-            currentCompanyId,
-          ),
-        ];
+        newLayers = [getFieldsLayer(params), getOilGasPipelines(params)];
       } else if (bigNumberValue === 2) {
-        newLayers = [getFactoriesLayer()];
+        newLayers = [getFactoriesLayer(params)];
       }
     } else if (activeCategory === 1) {
-      newLayers = [
-        getPlantsLayer({ displayedRegionsArr, currentCompanyId }),
-        getTransmissionLines(displayedRegionsArr, currentCompanyId),
-      ];
+      newLayers = [getPlantsLayer(params), getTransmissionLines(params)];
     }
     for (const fieldsLayer of fieldsLayerRef.current) {
       mapRef.current.removeLayer(fieldsLayer);
@@ -522,7 +510,7 @@ const AppMap = () => {
   useEffect(() => {
     if (currentRegion) {
       const feature = regionsFeatures.filter(
-        (feature) => feature.values_.name_ru === currentRegion,
+        (feature) => feature.get("name_ru") === currentRegion,
       )[0];
       //.filter(feature => feature.values_.name_ru === currentRegion)
       const extent = feature.getGeometry().getExtent();

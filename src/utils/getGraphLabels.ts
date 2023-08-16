@@ -1,5 +1,4 @@
 export function getGraphLabels(date: Date, numOfMonths: number): string[] {
-  console.log("date", date);
   date = new Date(date);
   const labels: string[] = [];
   const monthNames = [
