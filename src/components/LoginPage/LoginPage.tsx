@@ -19,7 +19,9 @@ import { setCurrentCompanyId } from "./authSlice";
 import { useDispatch } from "react-redux";
 
 const usernameToId = {
+  "sactec@gmail.com": 0,
   "adidukik@gmail.com": 0,
+  "south_oil@gmail.com": 57,
 };
 
 const LoginPage: React.FC = () => {
@@ -35,15 +37,15 @@ const LoginPage: React.FC = () => {
     try {
       setError(""); // Clear any previous error messages
 
-      // Verify the reCAPTCHA response
-      const recaptchaToken = await recaptchaRef.current?.executeAsync();
+      // Убрали капчу потому что на ремоуте гонит
+      // const recaptchaToken = await recaptchaRef.current?.executeAsync();
 
-      if (recaptchaToken) {
-        // reCAPTCHA verified, proceed with authentication
-        await signInWithEmailAndPassword(auth, email, password);
-        navigate("/");
-        dispatch(setCurrentCompanyId(usernameToId[email]));
-      }
+      // if (recaptchaToken) {
+      //   // reCAPTCHA verified, proceed with authentication
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/");
+      dispatch(setCurrentCompanyId(usernameToId[email]));
+      // }
     } catch (error) {
       setError("Неверный адрес электронной почты или пароль"); // Set the error message
       setAlertVisible(true); // Make sure the alert is visible
@@ -93,8 +95,8 @@ const LoginPage: React.FC = () => {
                 margin="normal"
                 fullWidth
                 label="Почта"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={email.split("@")[0]}
+                onChange={(e) => setEmail(e.target.value + "@gmail.com")}
                 InputLabelProps={{ style: { color: "white" } }}
                 InputProps={{ style: { color: "white", borderColor: "white" } }}
                 focused

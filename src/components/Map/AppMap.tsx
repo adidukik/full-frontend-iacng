@@ -3,7 +3,7 @@ import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import "./AppMap.css";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Circle, Geometry, MultiPolygon } from "ol/geom";
+import { Circle, Geometry, MultiPolygon, Point } from "ol/geom";
 import GeoJSON from "ol/format/GeoJSON.js";
 import { FullScreen, defaults as defaultControls } from "ol/control.js";
 import { Vector as VectorLayer } from "ol/layer.js";
@@ -39,21 +39,36 @@ const numberToLayerType = {
   0: "нефть",
   1: "газ",
 };
-function drawCircles(coordinatesArray): VectorLayer<VectorSource<Geometry>> {
-  // Create a new VectorSource
+function drawCircles(
+  coordinatesArray,
+  params,
+): VectorLayer<VectorSource<Geometry>> {
+  const { displayedRegions, currentCompanyId } = params;
 
   const source = new VectorSource();
 
   coordinatesArray.forEach((coords) => {
-    const circle = new Circle(coords.values_.geometry.flatCoordinates, 9000); // Create a circle geometry around the point
-    const feature = new Feature(circle);
-    // Copy all the properties from the original feature to the new feature
-    for (const prop in coords.values_) {
-      if (prop !== "geometry") {
-        feature.values_[prop] = coords.values_[prop];
+    displayedRegions.forEach((regionFeature) => {
+      const regionGeometry = regionFeature.getGeometry();
+      const pointGeometry = new Point(coords.values_.geometry.flatCoordinates);
+      if (
+        currentCompanyId === 0 ||
+        regionGeometry.containsCoordinate(pointGeometry.getCoordinates())
+      ) {
+        const circle = new Circle(
+          coords.values_.geometry.flatCoordinates,
+          9000,
+        ); // Create a circle geometry around the point
+        const feature = new Feature(circle);
+        // Copy all the properties from the original feature to the new feature
+        for (const prop in coords.values_) {
+          if (prop !== "geometry") {
+            feature.values_[prop] = coords.values_[prop];
+          }
+        }
+        source.addFeature(feature); // Add the feature to the VectorSource
       }
-    }
-    source.addFeature(feature); // Add the feature to the VectorSource
+    });
   });
 
   const style = new Style({
@@ -167,14 +182,27 @@ const getOilGasPipelines = (
 
   return drawLines(features);
 };
-const getTransmissionLines = () => {
+const getTransmissionLines = (displayedRegions, currentCompanyId) => {
   const features = format.readFeatures(transmissionLinesData);
+
   const lineStyle = new Style({
     stroke: new Stroke({
       color: "red", // Change this to your desired color
       width: 1, // Change this to your desired line width
     }),
   });
+
+  // if (currentCompanyId !== 0) {
+  //   features = features.filter((field) =>
+  //     // Check if the feature intersects with any displayed region
+  //     displayedRegions.some((regionFeature) =>
+  //       field
+  //         .getGeometry()
+  //         .intersectsExtent(regionFeature.getGeometry().getExtent()),
+  //     ),
+  //   );
+  // }
+
   return drawLines(features, lineStyle);
 };
 
@@ -183,9 +211,9 @@ const getFactoriesLayer = () => {
   return drawCircles(features);
 };
 
-const getPlantsLayer = () => {
+const getPlantsLayer = (params) => {
   const features = format.readFeatures(plantsData);
-  return drawCircles(features);
+  return drawCircles(features, params);
 };
 
 const colors = [
@@ -479,7 +507,10 @@ const AppMap = () => {
         newLayers = [getFactoriesLayer()];
       }
     } else if (activeCategory === 1) {
-      newLayers = [getPlantsLayer(), getTransmissionLines()];
+      newLayers = [
+        getPlantsLayer({ displayedRegionsArr, currentCompanyId }),
+        getTransmissionLines(displayedRegionsArr, currentCompanyId),
+      ];
     }
     for (const fieldsLayer of fieldsLayerRef.current) {
       mapRef.current.removeLayer(fieldsLayer);
