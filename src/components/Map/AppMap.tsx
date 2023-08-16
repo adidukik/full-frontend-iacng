@@ -295,17 +295,15 @@ const AppMap = () => {
     },
     [view, zoom],
   );
-  const displayedRegionsSet = new Set();
-
+  const displayedRegionsMap = {};
   for (const feature of fieldsFeatures) {
     if (feature.values_.operator_name.toLowerCase().includes("саутс")) {
-      displayedRegionsSet.add(feature);
+      displayedRegionsMap[feature.values_.au_name] = feature;
     }
   }
-  const displayedRegionsArr = Array.from(displayedRegionsSet);
-  const displayedRegionsNamesArr = displayedRegionsArr.map(
-    (feature) => feature.values_.au_name,
-  );
+  const displayedRegionsArr = Array.from(Object.values(displayedRegionsMap));
+  console.log("set", displayedRegionsMap);
+  const displayedRegionsNamesArr = Object.keys(displayedRegionsMap);
   console.log(displayedRegionsNamesArr);
   const regionsLayer = useMemo(
     () =>
