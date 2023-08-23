@@ -22,7 +22,7 @@ export function getGraphLabels(date: Date, numOfMonths: number): string[] {
     const previousMonth = (currentMonth + 12) % 12;
     const previousYear = currentMonth <= 0 ? currentYear - 1 : currentYear;
 
-    labels.push(`${monthNames[previousMonth % 12]} ${previousYear}`);
+    labels.unshift(`${monthNames[previousMonth % 12]} ${previousYear}`);
   }
 
   return labels;

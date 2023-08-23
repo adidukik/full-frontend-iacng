@@ -314,7 +314,7 @@ const AppMap = () => {
           const color =
             isDisplayed || currentCompanyId === 0
               ? regionNameToColor[feature.get("name_ru")]
-              : "#e5e5e5";
+              : "#000000";
           const fill = new Fill({
             color: color,
           });
