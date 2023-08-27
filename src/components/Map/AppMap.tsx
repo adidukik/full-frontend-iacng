@@ -27,6 +27,7 @@ import { getVectorContext } from "ol/render";
 import { Feature } from "ol";
 import { Circle as CircleStyle } from "ol/style.js";
 import { Category } from "../CategoriesMenu/categoriesSlice";
+import { formatNumberWithSpaces } from "../../utils/formatNumberWithSpaces";
 
 const format = new GeoJSON();
 const regionsFeatures = format.readFeatures(regionsData);
@@ -46,14 +47,15 @@ function drawCircles(
   const source = new VectorSource();
 
   coordinatesArray.forEach((coords: Point) => {
-    console.log(coords)
+    console.log(coords);
     displayedRegions.forEach((regionFeature: Polygon) => {
       const regionGeometry = regionFeature.getGeometry();
       const pointGeometry = coords.getGeometry();
       if (
-        currentCompanyId === 0 
-        ||
-        regionGeometry.intersectsCoordinate(coords.getGeometry().flatCoordinates)
+        currentCompanyId === 0 ||
+        regionGeometry.intersectsCoordinate(
+          coords.getGeometry().flatCoordinates,
+        )
       ) {
         const circle = new Circle(
           coords.values_.geometry.flatCoordinates,
@@ -86,7 +88,7 @@ function drawCircles(
   const vector = new VectorLayer({
     source: source,
     style: style,
-    zIndex: 1
+    zIndex: 1,
   });
   return vector;
 }
@@ -178,7 +180,7 @@ const getOilGasPipelines = (params): VectorLayer<VectorSource> => {
 
   return drawLines(features);
 };
-const getTransmissionLines= (params): VectorLayer<VectorSource>  => {
+const getTransmissionLines = (params): VectorLayer<VectorSource> => {
   const { displayedRegions, currentCompanyId } = params;
   let features = format.readFeatures(transmissionLinesData);
 
@@ -346,35 +348,23 @@ const AppMap = () => {
   const [popupVisibility, setPopupVisibility] = useState(false);
 
   const fieldsLayerRef = useRef([]);
-  const getNextPopupText = (f) => {
+  const getNextPopupText = (f: Feature) => {
     const activeCategory = activeCategoryRef.current;
     const bigNumberValue = bigNumberValueRef.current;
-    let nextPopupText;
-    if (activeCategory === 0) {
-      if (bigNumberValue < 2) {
-        nextPopupText = {
+    const  nextPopupText = {
           Имя: f.values_.name,
           Оператор: f.values_.operator_name,
           Добыча: f.values_.field_resources,
-        };
-      } else if (bigNumberValue === 2) {
-        nextPopupText = {
-          Компания: f.values_.company,
-
+          Компания: f.get("company"),
+          "Диаметр (мм)": f.get("diameters"),
+          "Длина (км)": f.get("length"),
+          Название: f.get("name_ru"),
+          Мощность: formatNumberWithSpaces(f.get("power")),
           Статус: f.values_.status,
           Тип: f.values_.type,
-        };
-        if (f.values_.products) {
-          nextPopupText["Продукты"] = f.values_.products;
+          Продукты: f.values_.products,
+          "Напряжение (Вольт)": formatNumberWithSpaces(f.get("voltage"))
         }
-      }
-    } else if (activeCategory === 1) {
-      nextPopupText = {
-        Компания: f.values_.company,
-        Имя: f.values_.name,
-        Тип: f.values_.type,
-      };
-    }
     return nextPopupText;
   };
   const popupOverlayRef = useRef(null);
@@ -466,7 +456,7 @@ const AppMap = () => {
             lastIdRef.current !== f.get("id")
           ) {
             const nextPopupText = getNextPopupText(f);
-
+            console.log(f);
             popupOverlayRef.current.setPosition(e.coordinate);
             setPopupText(nextPopupText);
             lastIdRef.current = f.get("id");
@@ -524,10 +514,12 @@ const AppMap = () => {
   const getPopupText = (popupText) => {
     const arr = [];
     for (const popupTextItem in popupText) {
-      const formattedElement = `${popupTextItem}: ${popupText[popupTextItem]}`;
+      if (popupText[popupTextItem]) {
+        const formattedElement = `${popupTextItem}: ${popupText[popupTextItem]}`;
 
-      // Step 4: Store each formatted string in an array
-      arr.push(formattedElement);
+        // Step 4: Store each formatted string in an array
+        arr.push(formattedElement);
+      }
     }
     return arr;
   };
