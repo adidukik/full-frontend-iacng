@@ -8,7 +8,20 @@
   height: 100%;
   background: white;
   font-size: 10px;
-  padding: 10px;
+}
+
+#popup tr:nth-child(2n){
+  background-color: #041541;
+  color: white;
+}
+#popup tr:nth-child(2n+1){
+  background-color: blue;
+  color: white;
+  
+}
+#popup td{
+  margin: 0;
+  padding: 2px;
 }
 #popup p {
   margin: 0;

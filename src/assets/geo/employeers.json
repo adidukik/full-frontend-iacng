@@ -1,0 +1,3795 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6625",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1022,
+                "number": "1525Д",
+                "company_id": 55,
+                "name_ru": "Акционерное общество \"Каспий нефть\"",
+                "num_employees": 270,
+                "num_kz_employees": 270
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6626",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 947,
+                "number": "4032Д",
+                "company_id": 119,
+                "name_ru": "Акционерное общество \"КазАзот\"",
+                "num_employees": 261,
+                "num_kz_employees": 261
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6627",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1168,
+                "number": "535",
+                "company_id": 191,
+                "name_ru": "Атырауский Филиал компании \"Алтиес Петролеум Интернэшнл Б.В.\"",
+                "num_employees": 259,
+                "num_kz_employees": 252
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6628",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 997,
+                "number": "161Д",
+                "company_id": 91,
+                "name_ru": "Акционерное общество \"Нефтяная Компания \"КОР\"",
+                "num_employees": 258,
+                "num_kz_employees": 258
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6629",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1245,
+                "number": "662",
+                "company_id": 100,
+                "name_ru": "Товарищество с ограниченной ответственностью \"САУТС-ОЙЛ\"",
+                "num_employees": 64,
+                "num_kz_employees": 64
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_662a",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1017,
+                "number": "4877Д",
+                "company_id": 94,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Галаз и Компания\"",
+                "num_employees": 63,
+                "num_kz_employees": 63
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_662b",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1002,
+                "number": "43Д",
+                "company_id": 30,
+                "name_ru": "Акционерное общество \"Эмбамунайгаз\"",
+                "num_employees": 61,
+                "num_kz_employees": 61
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_662c",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-09Z",
+                "contract_id": 933,
+                "number": "26СРП",
+                "company_id": 36,
+                "name_ru": "Филиал компании \"Сайгак Казахстан Б.В.\"",
+                "num_employees": 59,
+                "num_kz_employees": 58
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_662d",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 923,
+                "number": "2882Д",
+                "company_id": 51,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Урихтау Оперейтинг\"",
+                "num_employees": 58,
+                "num_kz_employees": 58
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_662e",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1011,
+                "number": "613Д",
+                "company_id": 126,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Тасбулат Ойл Корпорэйшн\"",
+                "num_employees": 53,
+                "num_kz_employees": 53
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_662f",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 960,
+                "number": "2888Д",
+                "company_id": 60,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Green production\"",
+                "num_employees": 53,
+                "num_kz_employees": 53
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6630",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1293,
+                "number": "3996",
+                "company_id": 97,
+                "name_ru": "Акционерное общество \"Кристалл Менеджмент\"",
+                "num_employees": 53,
+                "num_kz_employees": 52
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6631",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1130,
+                "number": "4882",
+                "company_id": 81,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Светланд - ойл\"",
+                "num_employees": 53,
+                "num_kz_employees": 53
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6632",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1285,
+                "number": "4444",
+                "company_id": 127,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Тепке\"",
+                "num_employees": 50,
+                "num_kz_employees": 49
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6633",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 986,
+                "number": "3532Д",
+                "company_id": 107,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Табынай\"",
+                "num_employees": 49,
+                "num_kz_employees": 49
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6634",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1252,
+                "number": "4934",
+                "company_id": 61,
+                "name_ru": "Товарищество с ограниченной ответственностью \"KhamAd partners\"",
+                "num_employees": 48,
+                "num_kz_employees": 48
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6635",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1379,
+                "number": "4996",
+                "company_id": 156,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Добывающее предприятие \"ОРТАЛЫК\"",
+                "num_employees": 44,
+                "num_kz_employees": 43
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6636",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1038,
+                "number": "4130Д",
+                "company_id": 89,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Урал Ойл энд Газ\"",
+                "num_employees": 42,
+                "num_kz_employees": 41
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6637",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1242,
+                "number": "968",
+                "company_id": 33,
+                "name_ru": "Акционерное общество \"СНПС - Актобемунайгаз\"",
+                "num_employees": 41,
+                "num_kz_employees": 41
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6638",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1378,
+                "number": "4867",
+                "company_id": 534,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Совместное предприятие \"Будёновское\"",
+                "num_employees": 41,
+                "num_kz_employees": 40
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6639",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 998,
+                "number": "327Д",
+                "company_id": 30,
+                "name_ru": "Акционерное общество \"Эмбамунайгаз\"",
+                "num_employees": 38,
+                "num_kz_employees": 38
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_663a",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1306,
+                "number": "1529",
+                "company_id": 95,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Кен-Ай-Ойл Кызылорда\"",
+                "num_employees": 35,
+                "num_kz_employees": 35
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_663b",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1059,
+                "number": "1082Д",
+                "company_id": 190,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Аби Петролеум Кэпитал\"",
+                "num_employees": 34,
+                "num_kz_employees": 34
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_663c",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 967,
+                "number": "3517Д",
+                "company_id": 96,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Кольжан\"",
+                "num_employees": 34,
+                "num_kz_employees": 33
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_663d",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1292,
+                "number": "4001",
+                "company_id": 286,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Фирма \"АЛМЭКС ПЛЮС\"",
+                "num_employees": 34,
+                "num_kz_employees": 34
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_663e",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1275,
+                "number": "4707",
+                "company_id": 480,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Женис Оперейтинг\"",
+                "num_employees": 30,
+                "num_kz_employees": 25
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_663f",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 942,
+                "number": "29Д",
+                "company_id": 58,
+                "name_ru": "Товарищество с ограниченной ответственностью \"ANACO\"",
+                "num_employees": 29,
+                "num_kz_employees": 29
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6640",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1009,
+                "number": "4509Д",
+                "company_id": 100,
+                "name_ru": "Товарищество с ограниченной ответственностью \"САУТС-ОЙЛ\"",
+                "num_employees": 27,
+                "num_kz_employees": 27
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6641",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-09Z",
+                "contract_id": 1298,
+                "number": "2433",
+                "company_id": 159,
+                "name_ru": "Товарищество с ограниченной ответственностью \"МАРСЕЛЬ ПЕТРОЛЕУМ\"",
+                "num_employees": 26,
+                "num_kz_employees": 26
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6642",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1290,
+                "number": "4155",
+                "company_id": 288,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Ocean Petroleum\"",
+                "num_employees": 26,
+                "num_kz_employees": 26
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6643",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1297,
+                "number": "2523",
+                "company_id": 285,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Алтын КДТ\"",
+                "num_employees": 4,
+                "num_kz_employees": 4
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6644",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1096,
+                "number": "40Д",
+                "company_id": 27,
+                "name_ru": "Акционерное общество \"Озенмунайгаз\"",
+                "num_employees": 9944,
+                "num_kz_employees": 9944
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6645",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 924,
+                "number": "76Д",
+                "company_id": 33,
+                "name_ru": "Акционерное общество \"СНПС - Актобемунайгаз\"",
+                "num_employees": 5731,
+                "num_kz_employees": 5629
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6646",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 989,
+                "number": "16СРП",
+                "company_id": 140,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Тенгизшевройл\"",
+                "num_employees": 4744,
+                "num_kz_employees": 4695
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6647",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1032,
+                "number": "60Д",
+                "company_id": 133,
+                "name_ru": "Акционерное общество \"Каражанбасмунай\"",
+                "num_employees": 4705,
+                "num_kz_employees": 4678
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6648",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 970,
+                "number": "170Д",
+                "company_id": 134,
+                "name_ru": "Акционерное общество \"Мангистаумунайгаз\"",
+                "num_employees": 3942,
+                "num_kz_employees": 3896
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6649",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 964,
+                "number": "381СРП",
+                "company_id": 137,
+                "name_ru": "Карачаганак Петролиум Оперейтинг Б.В. Казахстанский филиал",
+                "num_employees": 3738,
+                "num_kz_employees": 3457
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_664a",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 993,
+                "number": "211Д",
+                "company_id": 30,
+                "name_ru": "Акционерное общество \"Эмбамунайгаз\"",
+                "num_employees": 2713,
+                "num_kz_employees": 2713
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_664b",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1023,
+                "number": "0",
+                "company_id": 188,
+                "name_ru": "Филиал \"Норт Каспиан Оперейтинг Компани Н.В.\"",
+                "num_employees": 2504,
+                "num_kz_employees": 2390
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_664c",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1355,
+                "number": "414",
+                "company_id": 523,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Казахстанско-французское совместное предприятие \"КАТКО\"",
+                "num_employees": 1256,
+                "num_kz_employees": 1234
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_664d",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 992,
+                "number": "413Д",
+                "company_id": 30,
+                "name_ru": "Акционерное общество \"Эмбамунайгаз\"",
+                "num_employees": 1248,
+                "num_kz_employees": 1248
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_664e",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1132,
+                "number": "4974",
+                "company_id": 103,
+                "name_ru": "Филиал компании \"Buzachi Operating Ltd\" (Бузачи Оперейтинг Лтд)",
+                "num_employees": 940,
+                "num_kz_employees": 910
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_664f",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1356,
+                "number": "507",
+                "company_id": 524,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Совместное предприятие \"ИНКАЙ\"",
+                "num_employees": 744,
+                "num_kz_employees": 739
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6650",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 962,
+                "number": "39Д",
+                "company_id": 141,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Совместное предприятие \"Казгермунай\"",
+                "num_employees": 715,
+                "num_kz_employees": 703
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6651",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 984,
+                "number": "3460Д",
+                "company_id": 100,
+                "name_ru": "Товарищество с ограниченной ответственностью \"САУТС-ОЙЛ\"",
+                "num_employees": 627,
+                "num_kz_employees": 627
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6652",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1365,
+                "number": "1800",
+                "company_id": 525,
+                "name_ru": "Товарищество с ограниченной ответственностью \"СОВМЕСТНОЕ ПРЕДПРИЯТИЕ \"ЮЖНАЯ ГОРНО-ХИМИЧЕСКАЯ КОМПАНИЯ\"",
+                "num_employees": 567,
+                "num_kz_employees": 566
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6653",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 994,
+                "number": "37Д",
+                "company_id": 30,
+                "name_ru": "Акционерное общество \"Эмбамунайгаз\"",
+                "num_employees": 566,
+                "num_kz_employees": 566
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6654",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1351,
+                "number": "1796",
+                "company_id": 156,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Добывающее предприятие \"ОРТАЛЫК\"",
+                "num_employees": 566,
+                "num_kz_employees": 561
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6655",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 925,
+                "number": "359ИД",
+                "company_id": 138,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Казахойл Актобе\"",
+                "num_employees": 563,
+                "num_kz_employees": 559
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6656",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1049,
+                "number": "81СРП",
+                "company_id": 87,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Жаикмунай\"",
+                "num_employees": 556,
+                "num_kz_employees": 542
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6657",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1363,
+                "number": "1798",
+                "company_id": 529,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Каратау\"",
+                "num_employees": 514,
+                "num_kz_employees": 514
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6658",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1353,
+                "number": "76",
+                "company_id": 151,
+                "name_ru": "Товарищество с ограниченной ответственностью \"РУ-6\"",
+                "num_employees": 499,
+                "num_kz_employees": 499
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6659",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1367,
+                "number": "1964",
+                "company_id": 532,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Байкен-U\"",
+                "num_employees": 455,
+                "num_kz_employees": 455
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_665a",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1129,
+                "number": "4878",
+                "company_id": 136,
+                "name_ru": "Акционерное общество \"Тургай-Петролеум\"",
+                "num_employees": 451,
+                "num_kz_employees": 449
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_665b",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 969,
+                "number": "18Д",
+                "company_id": 101,
+                "name_ru": "Товарищество с ограниченной ответственностью Совместное предприятие \"Куатамлонмунай\"",
+                "num_employees": 437,
+                "num_kz_employees": 425
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_665c",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1056,
+                "number": "4082Д",
+                "company_id": 102,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Кумколь Транс Сервис\"",
+                "num_employees": 436,
+                "num_kz_employees": 436
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_665d",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1354,
+                "number": "75",
+                "company_id": 152,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Казатомпром - SaUran\"",
+                "num_employees": 411,
+                "num_kz_employees": 410
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_665e",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 922,
+                "number": "3810Д",
+                "company_id": 33,
+                "name_ru": "Акционерное общество \"СНПС - Актобемунайгаз\"",
+                "num_employees": 399,
+                "num_kz_employees": 399
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_665f",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1125,
+                "number": "5112Д",
+                "company_id": 112,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Nobilis Corp\"",
+                "num_employees": 394,
+                "num_kz_employees": 393
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6660",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 963,
+                "number": "31Д",
+                "company_id": 121,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Каракудукмунай\"",
+                "num_employees": 379,
+                "num_kz_employees": 361
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6661",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1361,
+                "number": "996",
+                "company_id": 148,
+                "name_ru": "Акционерное общество \"Казахстанско-Российско-Кыргызское совместное предприятие с иностранными инвестициями \"ЗАРЕЧНОЕ\"",
+                "num_employees": 369,
+                "num_kz_employees": 369
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6662",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1377,
+                "number": "4614",
+                "company_id": 522,
+                "name_ru": "Акционерное общество \"Национальная атомная компания \"Казатомпром\"",
+                "num_employees": 365,
+                "num_kz_employees": 365
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6663",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 985,
+                "number": "221Д",
+                "company_id": 92,
+                "name_ru": "Акционерное общество \"СНПС-Ай Дан Мунай\"",
+                "num_employees": 238,
+                "num_kz_employees": 230
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6664",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 953,
+                "number": "2231Д",
+                "company_id": 93,
+                "name_ru": "Товарищество с ограниченной ответственностью \"KAZPETROL GROUP (КАЗПЕТРОЛ ГРУП)\"",
+                "num_employees": 238,
+                "num_kz_employees": 238
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6665",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1368,
+                "number": "2060",
+                "company_id": 531,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Семизбай-U\"",
+                "num_employees": 361,
+                "num_kz_employees": 355
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6666",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1362,
+                "number": "1797",
+                "company_id": 135,
+                "name_ru": "Акционерное общество \"ПетроКазахстан Кумколь Ресорсиз\"",
+                "num_employees": 1442,
+                "num_kz_employees": 1419
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6667",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1366,
+                "number": "1801",
+                "company_id": 531,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Семизбай-U\"",
+                "num_employees": 237,
+                "num_kz_employees": 23
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6668",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 975,
+                "number": "4886Д",
+                "company_id": 157,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Аппак\"",
+                "num_employees": 354,
+                "num_kz_employees": 353
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6669",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1372,
+                "number": "3609",
+                "company_id": 152,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Казатомпром - SaUran\"",
+                "num_employees": 235,
+                "num_kz_employees": 235
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_666a",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 973,
+                "number": "41Д",
+                "company_id": 56,
+                "name_ru": "Акционерное общество \"Матен Петролеум\"",
+                "num_employees": 205,
+                "num_kz_employees": 197
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_666b",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1352,
+                "number": "74",
+                "company_id": 152,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Казатомпром - SaUran\"",
+                "num_employees": 347,
+                "num_kz_employees": 339
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_666c",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1062,
+                "number": "84Д",
+                "company_id": 86,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Тарбагатай Мунай\"",
+                "num_employees": 205,
+                "num_kz_employees": 197
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_666d",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-10Z",
+                "contract_id": 968,
+                "number": "1129Д",
+                "company_id": 123,
+                "name_ru": "Товарищество с ограниченной ответственностью \"КОМ-МУНАЙ\"",
+                "num_employees": 205,
+                "num_kz_employees": 204
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_666e",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1161,
+                "number": "4014",
+                "company_id": 122,
+                "name_ru": "Товарищество с ограниченной ответственностью \"КЕН-САРЫ\"",
+                "num_employees": 341,
+                "num_kz_employees": 333
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_666f",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 954,
+                "number": "3862Д",
+                "company_id": 111,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Meerbusch\"",
+                "num_employees": 203,
+                "num_kz_employees": 197
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6670",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1073,
+                "number": "5102 Р",
+                "company_id": 220,
+                "name_ru": "Товарищество с ограниченной ответственностью \"DMS Services\" (ДиЭмЭс Сёрвисиз)",
+                "num_employees": 189,
+                "num_kz_employees": 189
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6671",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1358,
+                "number": "647",
+                "company_id": 525,
+                "name_ru": "Товарищество с ограниченной ответственностью \"СОВМЕСТНОЕ ПРЕДПРИЯТИЕ \"ЮЖНАЯ ГОРНО-ХИМИЧЕСКАЯ КОМПАНИЯ\"",
+                "num_employees": 321,
+                "num_kz_employees": 321
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6672",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 971,
+                "number": "230Д",
+                "company_id": 56,
+                "name_ru": "Акционерное общество \"Матен Петролеум\"",
+                "num_employees": 268,
+                "num_kz_employees": 265
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6673",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 981,
+                "number": "1117Д",
+                "company_id": 57,
+                "name_ru": "Товарищество с ограниченной ответственностью \"5A OIL (5А ОИЛ)\"",
+                "num_employees": 165,
+                "num_kz_employees": 162
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6674",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1360,
+                "number": "679",
+                "company_id": 526,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Степногорский горно-химический комбинат\"",
+                "num_employees": 319,
+                "num_kz_employees": 299
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6675",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1324,
+                "number": "1897",
+                "company_id": 46,
+                "name_ru": "Товарищество с ограниченной ответственностью \"КУЛ-БАС\"",
+                "num_employees": 156,
+                "num_kz_employees": 154
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6676",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1369,
+                "number": "2487",
+                "company_id": 533,
+                "name_ru": "Акционерное общество \"Совместное предприятие \"Акбастау\"",
+                "num_employees": 151,
+                "num_kz_employees": 151
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6677",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1154,
+                "number": "4869",
+                "company_id": 191,
+                "name_ru": "Атырауский Филиал компании \"Алтиес Петролеум Интернэшнл Б.В.\"",
+                "num_employees": 148,
+                "num_kz_employees": 144
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6678",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1042,
+                "number": "30Д",
+                "company_id": 114,
+                "name_ru": "Товарищество с ограниченной ответственностью \"TENGE Oil & Gas\"",
+                "num_employees": 132,
+                "num_kz_employees": 132
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6679",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1087,
+                "number": "5044Д",
+                "company_id": 106,
+                "name_ru": "Дочернее Товарищество с ограниченной ответственностью \"ЖАЛГИЗТОБЕМУНАЙ\"",
+                "num_employees": 129,
+                "num_kz_employees": 129
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_667a",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 958,
+                "number": "793",
+                "company_id": 117,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Бузачи Нефть\"",
+                "num_employees": 128,
+                "num_kz_employees": 128
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_667b",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1007,
+                "number": "1103Д",
+                "company_id": 72,
+                "name_ru": "Акционерное общество \"КоЖаН\"",
+                "num_employees": 290,
+                "num_kz_employees": 287
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_667c",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-03-31Z",
+                "contract_id": 1019,
+                "number": "4868Д",
+                "company_id": 92,
+                "name_ru": "Акционерное общество \"СНПС-Ай Дан Мунай\"",
+                "num_employees": 308,
+                "num_kz_employees": 297
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_667d",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 928,
+                "number": "366Д",
+                "company_id": 49,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Сагиз Петролеум Компани\"",
+                "num_employees": 286,
+                "num_kz_employees": 276
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_667e",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1034,
+                "number": "651СРП",
+                "company_id": 78,
+                "name_ru": "Товарищество с ограниченной ответственностью \"ПОТЕНЦИАЛ ОЙЛ\"",
+                "num_employees": 119,
+                "num_kz_employees": 119
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_667f",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1034,
+                "number": "651СРП",
+                "company_id": 78,
+                "name_ru": "Товарищество с ограниченной ответственностью \"ПОТЕНЦИАЛ ОЙЛ\"",
+                "num_employees": 119,
+                "num_kz_employees": 119
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6680",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1036,
+                "number": "80Д",
+                "company_id": 80,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Сазанкурак\"",
+                "num_employees": 112,
+                "num_kz_employees": 112
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6681",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1033,
+                "number": "880Д",
+                "company_id": 82,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Тобеарал Ойл\"",
+                "num_employees": 110,
+                "num_kz_employees": 110
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6682",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1044,
+                "number": "4943Д",
+                "company_id": 435,
+                "name_ru": "Акционерное общество \"Атыраумунайгаз\"",
+                "num_employees": 110,
+                "num_kz_employees": 110
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6683",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1006,
+                "number": "192Д",
+                "company_id": 130,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Эврика Олеум\"",
+                "num_employees": 97,
+                "num_kz_employees": 96
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6684",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 955,
+                "number": "1919Д",
+                "company_id": 191,
+                "name_ru": "Атырауский Филиал компании \"Алтиес Петролеум Интернэшнл Б.В.\"",
+                "num_employees": 95,
+                "num_kz_employees": 93
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6685",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1039,
+                "number": "2158Д",
+                "company_id": 105,
+                "name_ru": "Акционерное общество \"Phystech II\"",
+                "num_employees": 92,
+                "num_kz_employees": 92
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6686",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 957,
+                "number": "207",
+                "company_id": 191,
+                "name_ru": "Атырауский Филиал компании \"Алтиес Петролеум Интернэшнл Б.В.\"",
+                "num_employees": 89,
+                "num_kz_employees": 86
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6687",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 983,
+                "number": "3887Д",
+                "company_id": 100,
+                "name_ru": "Товарищество с ограниченной ответственностью \"САУТС-ОЙЛ\"",
+                "num_employees": 89,
+                "num_kz_employees": 89
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6688",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 920,
+                "number": "4937Д",
+                "company_id": 38,
+                "name_ru": "Товарищество с ограниченной ответственностью \"IC Petroleum\"",
+                "num_employees": 88,
+                "num_kz_employees": 88
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6689",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1364,
+                "number": "1799",
+                "company_id": 530,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Совместное предприятие \"Хорасан-U (Хорасан-У)\"",
+                "num_employees": 83,
+                "num_kz_employees": 83
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_668a",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1051,
+                "number": "12Д",
+                "company_id": 144,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Совместное предприятие \"Арман\"",
+                "num_employees": 80,
+                "num_kz_employees": 77
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_668b",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 932,
+                "number": "2255Д",
+                "company_id": 31,
+                "name_ru": "Акционерное общество \"Каспий Нефть ТМЕ\"",
+                "num_employees": 80,
+                "num_kz_employees": 76
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_668c",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 982,
+                "number": "668Д",
+                "company_id": 100,
+                "name_ru": "Товарищество с ограниченной ответственностью \"САУТС-ОЙЛ\"",
+                "num_employees": 76,
+                "num_kz_employees": 76
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_668d",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 959,
+                "number": "792",
+                "company_id": 117,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Бузачи Нефть\"",
+                "num_employees": 75,
+                "num_kz_employees": 75
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_668e",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 930,
+                "number": "3907Д",
+                "company_id": 52,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Фирма Ада Ойл\"",
+                "num_employees": 75,
+                "num_kz_employees": 74
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_668f",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1013,
+                "number": "2808Д",
+                "company_id": 92,
+                "name_ru": "Акционерное общество \"СНПС-Ай Дан Мунай\"",
+                "num_employees": 71,
+                "num_kz_employees": 67
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6690",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1308,
+                "number": "1280",
+                "company_id": 25,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Аскер Мунай\"",
+                "num_employees": 66,
+                "num_kz_employees": 65
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6691",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1136,
+                "number": "317",
+                "company_id": 110,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Lucent Petroleum\"",
+                "num_employees": 40,
+                "num_kz_employees": 35
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6692",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1035,
+                "number": "553СРП",
+                "company_id": 79,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Прикаспиан Петролеум Компани\"",
+                "num_employees": 40,
+                "num_kz_employees": 40
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6693",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 934,
+                "number": "3582Д",
+                "company_id": 43,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Арал Петролеум Кэпитал\"",
+                "num_employees": 25,
+                "num_kz_employees": 24
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6694",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1246,
+                "number": "661",
+                "company_id": 62,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Madot Oil\" (Мадот Ойл)",
+                "num_employees": 24,
+                "num_kz_employees": 23
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6695",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1021,
+                "number": "4947Д",
+                "company_id": 57,
+                "name_ru": "Товарищество с ограниченной ответственностью \"5A OIL (5А ОИЛ)\"",
+                "num_employees": 22,
+                "num_kz_employees": 22
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6696",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1124,
+                "number": "5113Д",
+                "company_id": 115,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Varro Operating Group\"",
+                "num_employees": 20,
+                "num_kz_employees": 20
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6697",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1302,
+                "number": "2127",
+                "company_id": 71,
+                "name_ru": "Товарищество с ограниченной ответственностью \"ИПЦ - Мунай\"",
+                "num_employees": 19,
+                "num_kz_employees": 19
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6698",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1370,
+                "number": "2488",
+                "company_id": 533,
+                "name_ru": "Акционерное общество \"Совместное предприятие \"Акбастау\"",
+                "num_employees": 18,
+                "num_kz_employees": 18
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_6699",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-09Z",
+                "contract_id": 1288,
+                "number": "4283",
+                "company_id": 119,
+                "name_ru": "Акционерное общество \"КазАзот\"",
+                "num_employees": 18,
+                "num_kz_employees": 18
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_669a",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1008,
+                "number": "4510Д",
+                "company_id": 100,
+                "name_ru": "Товарищество с ограниченной ответственностью \"САУТС-ОЙЛ\"",
+                "num_employees": 18,
+                "num_kz_employees": 18
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_669b",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1255,
+                "number": "4919",
+                "company_id": 98,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Кумколь Ойл\"",
+                "num_employees": 18,
+                "num_kz_employees": 18
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_669c",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1043,
+                "number": "61Д",
+                "company_id": 30,
+                "name_ru": "Акционерное общество \"Эмбамунайгаз\"",
+                "num_employees": 17,
+                "num_kz_employees": 17
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_669d",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1031,
+                "number": "1403Д",
+                "company_id": 162,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Mangistau Neftedobicha\"",
+                "num_employees": 16,
+                "num_kz_employees": 16
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_669e",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1256,
+                "number": "4914",
+                "company_id": 304,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Аль-Фараби Оперейтинг\"",
+                "num_employees": 16,
+                "num_kz_employees": 13
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_669f",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1276,
+                "number": "4705",
+                "company_id": 99,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Недра Ком\"",
+                "num_employees": 15,
+                "num_kz_employees": 15
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66a0",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1271,
+                "number": "4727",
+                "company_id": 295,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Kaz Drill Solution\"",
+                "num_employees": 15,
+                "num_kz_employees": 14
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66a1",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-09Z",
+                "contract_id": 1294,
+                "number": "398",
+                "company_id": 42,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Tabys Operating\"",
+                "num_employees": 14,
+                "num_kz_employees": 14
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66a2",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1072,
+                "number": "5103 Р",
+                "company_id": 230,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Нефтеная инженерно-технологическая сервисная компания Чжунман\"",
+                "num_employees": 13,
+                "num_kz_employees": 10
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66a3",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 972,
+                "number": "223Д",
+                "company_id": 56,
+                "name_ru": "Акционерное общество \"Матен Петролеум\"",
+                "num_employees": 12,
+                "num_kz_employees": 12
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66a4",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1291,
+                "number": "4152",
+                "company_id": 154,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Becturly Energy Operating\"",
+                "num_employees": 12,
+                "num_kz_employees": 12
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66a5",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1280,
+                "number": "4660",
+                "company_id": 18,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Кызылординский малотоннажный нефтеперерабатывающий завод\"",
+                "num_employees": 12,
+                "num_kz_employees": 12
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66a6",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1134,
+                "number": "4998",
+                "company_id": 260,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Oil Tolling Capital\"",
+                "num_employees": 12,
+                "num_kz_employees": 12
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66a7",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1141,
+                "number": "5006",
+                "company_id": 312,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Orda BB\"",
+                "num_employees": 12,
+                "num_kz_employees": 12
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66a8",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1322,
+                "number": "1528",
+                "company_id": 307,
+                "name_ru": "Товарищества с ограниченной ответственностью \"Қобланды\"",
+                "num_employees": 11,
+                "num_kz_employees": 11
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66a9",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1253,
+                "number": "4925",
+                "company_id": 253,
+                "name_ru": "Товарищество с ограниченной ответственностью \"BSG OIL\"",
+                "num_employees": 11,
+                "num_kz_employees": 11
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66aa",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 995,
+                "number": "1104Д",
+                "company_id": 72,
+                "name_ru": "Акционерное общество \"КоЖаН\"",
+                "num_employees": 10,
+                "num_kz_employees": 10
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66ab",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1376,
+                "number": "4198",
+                "company_id": 534,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Совместное предприятие \"Будёновское\"",
+                "num_employees": 10,
+                "num_kz_employees": 10
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66ac",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1289,
+                "number": "4216",
+                "company_id": 289,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Компания \"ЖАН и КС\"",
+                "num_employees": 10,
+                "num_kz_employees": 7
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66ad",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1155,
+                "number": "4833",
+                "company_id": 93,
+                "name_ru": "Товарищество с ограниченной ответственностью \"KAZPETROL GROUP (КАЗПЕТРОЛ ГРУП)\"",
+                "num_employees": 10,
+                "num_kz_employees": 10
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66ae",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1131,
+                "number": "4955",
+                "company_id": 30,
+                "name_ru": "Акционерное общество \"Эмбамунайгаз\"",
+                "num_employees": 10,
+                "num_kz_employees": 10
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66af",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1071,
+                "number": "5104 Р",
+                "company_id": 222,
+                "name_ru": "Товарищество с ограниченной ответственностью \"АККУМ LTD KZ\"",
+                "num_employees": 10,
+                "num_kz_employees": 10
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66b0",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1065,
+                "number": "5106 Д",
+                "company_id": 234,
+                "name_ru": "Товарищество с ограниченной ответственностью \"ASTANA-TRANS-OIL\"",
+                "num_employees": 10,
+                "num_kz_employees": 10
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66b1",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1307,
+                "number": "1527",
+                "company_id": 102,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Кумколь Транс Сервис\"",
+                "num_employees": 9,
+                "num_kz_employees": 9
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66b2",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1304,
+                "number": "1616",
+                "company_id": 282,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Фирма АДА\"",
+                "num_employees": 9,
+                "num_kz_employees": 9
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66b3",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 939,
+                "number": "4367Д",
+                "company_id": 37,
+                "name_ru": "Товарищество с ограниченной ответственностью СП \"FIAL\" (СП \"ФИАЛ)",
+                "num_employees": 9,
+                "num_kz_employees": 9
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66b4",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1127,
+                "number": "406",
+                "company_id": 30,
+                "name_ru": "Акционерное общество \"Эмбамунайгаз\"",
+                "num_employees": 8,
+                "num_kz_employees": 8
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66b5",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1078,
+                "number": "5169 Д",
+                "company_id": 224,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Astana Expo Trade ltd\"",
+                "num_employees": 8,
+                "num_kz_employees": 8
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66b6",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1321,
+                "number": "240",
+                "company_id": 90,
+                "name_ru": "Филиал \"ПетроКазахстан Венчерс Инк.\"",
+                "num_employees": 7,
+                "num_kz_employees": 6
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66b7",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1311,
+                "number": "1077",
+                "company_id": 77,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Норс Каспиан Ойл Девелопмент\"",
+                "num_employees": 6,
+                "num_kz_employees": 6
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66b8",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1326,
+                "number": "4383",
+                "company_id": 310,
+                "name_ru": "Товарищество с ограниченной ответственностью \"RAMCO Oil Shubar\"",
+                "num_employees": 6,
+                "num_kz_employees": 6
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66b9",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1081,
+                "number": "5087 Р",
+                "company_id": 227,
+                "name_ru": "Товарищество с ограниченной ответственностью \"West Precaspian Company\"",
+                "num_employees": 6,
+                "num_kz_employees": 6
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66ba",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1309,
+                "number": "1118",
+                "company_id": 163,
+                "name_ru": "Товарищество с ограниченной ответственностью \"QUMMUNAIGAZ\"",
+                "num_employees": 5,
+                "num_kz_employees": 5
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66bb",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1164,
+                "number": "1787",
+                "company_id": 160,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Курмангазы Петролеум\"",
+                "num_employees": 5,
+                "num_kz_employees": 5
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66bc",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1281,
+                "number": "4626",
+                "company_id": 292,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Бейнеу-Мунайгаз\"",
+                "num_employees": 5,
+                "num_kz_employees": 5
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66bd",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1076,
+                "number": "5099 Р",
+                "company_id": 222,
+                "name_ru": "Товарищество с ограниченной ответственностью \"АККУМ LTD KZ\"",
+                "num_employees": 5,
+                "num_kz_employees": 5
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66be",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1067,
+                "number": "5173 Р",
+                "company_id": 232,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Kenzhaly Petroleum (Кенжалы Петролеум)\"",
+                "num_employees": 4,
+                "num_kz_employees": 4
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66bf",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1066,
+                "number": "5174 Р",
+                "company_id": 233,
+                "name_ru": "Товарищество с ограниченной ответственностью \"KG Oil&Gas\"",
+                "num_employees": 4,
+                "num_kz_employees": 4
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66c0",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1310,
+                "number": "1081",
+                "company_id": 43,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Арал Петролеум Кэпитал\"",
+                "num_employees": 3,
+                "num_kz_employees": 3
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66c1",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1260,
+                "number": "4895",
+                "company_id": 302,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Балкудук Мунай\"",
+                "num_employees": 3,
+                "num_kz_employees": 3
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66c2",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1259,
+                "number": "4896",
+                "company_id": 165,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Карабау Петролеум\"",
+                "num_employees": 3,
+                "num_kz_employees": 3
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66c3",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1249,
+                "number": "4941",
+                "company_id": 167,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Black Gold Operating Company\"",
+                "num_employees": 3,
+                "num_kz_employees": 3
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66c4",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1142,
+                "number": "5009",
+                "company_id": 262,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Ертис Ойл энд Газ\"",
+                "num_employees": 3,
+                "num_kz_employees": 3
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66c5",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1325,
+                "number": "2575",
+                "company_id": 309,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Сorporate Project Solutions\"",
+                "num_employees": 2,
+                "num_kz_employees": 2
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66c6",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1273,
+                "number": "4720",
+                "company_id": 293,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Taraz Investment\"",
+                "num_employees": 2,
+                "num_kz_employees": 2
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66c7",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1268,
+                "number": "4746",
+                "company_id": 164,
+                "name_ru": "Товарищество с ограниченной ответственностью \"DP ENERGY (ДиПи ЭНЕРДЖИ)\"",
+                "num_employees": 2,
+                "num_kz_employees": 2
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66c8",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1095,
+                "number": "5022Р",
+                "company_id": 240,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Kurasha Petroleum\"",
+                "num_employees": 2,
+                "num_kz_employees": 2
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66c9",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1327,
+                "number": "4697",
+                "company_id": 311,
+                "name_ru": "Товарищество с ограниченной ответственностью \"СТА Инновация\"",
+                "num_employees": 1,
+                "num_kz_employees": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66ca",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1274,
+                "number": "4711",
+                "company_id": 269,
+                "name_ru": "Товарищество с ограниченной ответственностью \"КазНедраПроект\"",
+                "num_employees": 1,
+                "num_kz_employees": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66cb",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1272,
+                "number": "4722",
+                "company_id": 294,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Стройинформ Б и К\"",
+                "num_employees": 1,
+                "num_kz_employees": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66cc",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1128,
+                "number": "4997",
+                "company_id": 257,
+                "name_ru": "Товарищество с ограниченной ответственностью \"ALTYN KOZ LTD KZ\"",
+                "num_employees": 1,
+                "num_kz_employees": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66cd",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1148,
+                "number": "5015",
+                "company_id": 266,
+                "name_ru": "Товарищество с ограниченной ответственностью \"SAPATEK MUNAY\"",
+                "num_employees": 1,
+                "num_kz_employees": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66ce",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1149,
+                "number": "5016",
+                "company_id": 268,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Enerplus\"",
+                "num_employees": 1,
+                "num_kz_employees": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66cf",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1151,
+                "number": "5017",
+                "company_id": 269,
+                "name_ru": "Товарищество с ограниченной ответственностью \"КазНедраПроект\"",
+                "num_employees": 1,
+                "num_kz_employees": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66d0",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1152,
+                "number": "5018",
+                "company_id": 270,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Сарайшык Petroleum\"",
+                "num_employees": 1,
+                "num_kz_employees": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66d1",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1088,
+                "number": "5037 Р",
+                "company_id": 166,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Керуен Логистик\"",
+                "num_employees": 1,
+                "num_kz_employees": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66d2",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1074,
+                "number": "5101 Р",
+                "company_id": 219,
+                "name_ru": "Товарищество с ограниченной ответственностью \"БИОПРОМ KZ\"",
+                "num_employees": 1,
+                "num_kz_employees": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66d3",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1074,
+                "number": "5101 Р",
+                "company_id": 91,
+                "name_ru": "Акционерное общество \"Нефтяная Компания \"КОР\"",
+                "num_employees": 1,
+                "num_kz_employees": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66d4",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1064,
+                "number": "5108 Р",
+                "company_id": 235,
+                "name_ru": "Товарищество с ограниченной ответственностью \"НО EXPERT\"",
+                "num_employees": 1,
+                "num_kz_employees": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66d5",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1126,
+                "number": "5109Р",
+                "company_id": 256,
+                "name_ru": "Товарищество с ограниченной ответственностью \"Карамай\"",
+                "num_employees": 1,
+                "num_kz_employees": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66d6",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1115,
+                "number": "5165",
+                "company_id": 490,
+                "name_ru": "Товарищество с ограниченной ответственностью \"КДЛ Компани\"",
+                "num_employees": 1,
+                "num_kz_employees": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66d7",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1111,
+                "number": "5198Р",
+                "company_id": 248,
+                "name_ru": "Частная компания Qassinoil Ltd.",
+                "num_employees": 1,
+                "num_kz_employees": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "employeers.fid--5f558b11_18a316cb1a8_66d8",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    0,
+                    0
+                ]
+            },
+            "geometry_name": "geom",
+            "properties": {
+                "date": "2023-08-08Z",
+                "contract_id": 1005,
+                "number": "65Д",
+                "company_id": 27,
+                "name_ru": "Акционерное общество \"Озенмунайгаз\"",
+                "num_employees": 0,
+                "num_kz_employees": 0
+            }
+        }
+    ],
+    "totalFeatures": 180,
+    "numberMatched": 180,
+    "numberReturned": 180,
+    "timeStamp": "2023-08-29T08:44:44.884Z",
+    "crs": {
+        "type": "name",
+        "properties": {
+            "name": "urn:ogc:def:crs:EPSG::4326"
+        }
+    }
+}

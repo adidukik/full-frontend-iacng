@@ -17,6 +17,7 @@ import plantsData from "../../assets/geo/power_plants.json";
 import oilPipelinesData from "../../assets/geo/oil_pipelines.json";
 import transmissionLinesData from "../../assets/geo/transmission_lines.json";
 import gasPipelinesData from "../../assets/geo/gas_pipelines.json";
+import employeesData from "../../assets/geo/employeers.json";
 import { getCenter } from "ol/extent";
 import { regionNames } from "../Regions/Regions";
 import Stroke from "ol/style/Stroke";
@@ -30,6 +31,11 @@ import { Category } from "../CategoriesMenu/categoriesSlice";
 import { formatNumberWithSpaces } from "../../utils/formatNumberWithSpaces";
 
 const format = new GeoJSON();
+const operatorIdToEmployees = {};
+for(const el of format.readFeatures(employeesData)){
+  operatorIdToEmployees[el.get("company_id")]=[el.get("num_employees"), el.get("num_kz_employees")];
+}
+console.log(operatorIdToEmployees)
 const regionsFeatures = format.readFeatures(regionsData);
 const fieldsFeatures = format.readFeatures(fieldsData).filter((feature) => {
   return feature.get("type") === "добыча";
@@ -351,6 +357,7 @@ const AppMap = () => {
   const getNextPopupText = (f: Feature) => {
     const activeCategory = activeCategoryRef.current;
     const bigNumberValue = bigNumberValueRef.current;
+    const operator_id = f.get("operator_id");
     const  nextPopupText = {
           Имя: f.values_.name,
           Оператор: f.values_.operator_name,
@@ -363,7 +370,9 @@ const AppMap = () => {
           Статус: f.values_.status,
           Тип: f.values_.type,
           Продукты: f.values_.products,
-          "Напряжение (Вольт)": formatNumberWithSpaces(f.get("voltage"))
+          "Напряжение (Вольт)": formatNumberWithSpaces(f.get("voltage")),
+          Работники: operator_id ? operatorIdToEmployees[operator_id][0] : null,
+          "Работники (граждане РК)": operator_id ? operatorIdToEmployees[operator_id][1] : null,
         }
     return nextPopupText;
   };
@@ -515,10 +524,10 @@ const AppMap = () => {
     const arr = [];
     for (const popupTextItem in popupText) {
       if (popupText[popupTextItem]) {
-        const formattedElement = `${popupTextItem}: ${popupText[popupTextItem]}`;
+        const keyval = [popupTextItem, popupText[popupTextItem]];
 
         // Step 4: Store each formatted string in an array
-        arr.push(formattedElement);
+        arr.push(keyval);
       }
     }
     return arr;
@@ -532,11 +541,22 @@ const AppMap = () => {
         ref={popupRef}
         className={popupVisibility ? "" : "hidden"}
       >
-        {getPopupText(popupText).map((str) => (
-          <div key={str}>
-            {str.replace(/<br\/>/g, "")} <br></br>
-          </div>
+      <table cellSpacing={0} cellPadding={0}>
+        <tbody>
+         
+      
+        {getPopupText(popupText).map((keyval) => (
+          <tr key={keyval[0]}>
+            <td>
+              {keyval[0]}
+            </td>
+             <td>
+              {keyval[1]}
+            </td>
+          </tr>
         ))}
+          </tbody>
+      </table>
       </div>
     </>
   );
