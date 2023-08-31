@@ -110,7 +110,7 @@ const BigNumbers = (): JSX.Element => {
       `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield/${currentCompanyIdStr}`,
     ),
   );
-  const opecFact = Math.floor(
+  const opec = Math.floor(
     useFetchData(
       `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_opec_yield/${currentCompanyIdStr}`,
     )
@@ -176,17 +176,13 @@ const BigNumbers = (): JSX.Element => {
                 label: "факт",
                 value: oilFact,
               },
-            ],
-          },
-          {
-            title: "ОПЕК (факт)",
-            data: [
               {
-                // label: "факт",
-                value: opecFact,
+                label: "ОПЕК",
+                value: opec,
               },
             ],
           },
+
           {
             title: "Добыча газа (тыс. куб. м)",
             data: [
@@ -433,7 +429,7 @@ const BigNumbers = (): JSX.Element => {
     mt,
     oilFact,
     oilPlan,
-    opecFact,
+    opec,
   ]);
   return (
     <Card className="big-numbers app-card">
