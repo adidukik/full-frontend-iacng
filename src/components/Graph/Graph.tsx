@@ -16,13 +16,60 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 
 import { InputNumber } from "primereact/inputnumber";
-import { Button } from "@mui/material";
+import { Button, getAccordionSummaryUtilityClass } from "@mui/material";
 import { Category } from "../CategoriesMenu/categoriesSlice";
 import { getGraphLabels } from "../../utils/getGraphLabels";
+import useFetchData from "../../hooks/useFetchData";
 
-const bigNumberValueToLabel = [["oil", "gas"], [], []];
-const bigNumberValueToDatasetLabel = [["Добыча нефти", "Добыча газа"], [], []];
+//  "#FFC300", // Cyber Yellow
+//   "#3B82F6", // Neon Blue
+//   "#FF6D00", // Hyper Orange
+//   "#BADA55", // Hi-Tech Green
+//   "#FF3131",
 
+const datasetOptions = [
+  {
+    label: "Добыча нефти",
+    color: "#FFC300",
+  },
+  {
+    label: "Добыча газа",
+    color: "#3B82F6",
+  },
+  {
+    label: "ОПЕК+",
+    color: "#FF6D00",
+  },
+];
+const graphOptions = {
+  maintainAspectRatio: false,
+  responsive: true,
+
+  plugins: {
+    legend: {
+      position: "top" as const,
+      labels: {
+        color: "#fff",
+        font: {
+          size: 16,
+        },
+      },
+    },
+  },
+  scales: {
+    x: {
+      ticks: {
+        color: "#fff", // Change this color to your desired font color
+      },
+    },
+    y: {
+      ticks: {
+        beginAtZero: true,
+        color: "#fff", // Change this color to your desired font color
+      },
+    },
+  },
+};
 const Graph = () => {
   ChartJS.register(
     CategoryScale,
@@ -46,90 +93,80 @@ const Graph = () => {
     labels: [],
     datasets: [],
   });
-  const [months, setMonths] = useState([]);
   ChartJS.defaults.font.family = "MontSerrat";
-  const options = {
-    maintainAspectRatio: false,
-    responsive: true,
 
-    plugins: {
-      legend: {
-        position: "top" as const,
-        labels: {
-          color: "#fff",
-          // This more specific font property overrides the global property
-          font: {
-            size: 16,
-          },
-        },
-      },
-    },
-    scales: {
-      x: {
-        ticks: {
-          color: "#fff", // Change this color to your desired font color
-        },
-      },
-      y: {
-        ticks: {
-          color: "#fff", // Change this color to your desired font color
-        },
-      },
-    },
-  };
   const [graphMonths, setGraphMonths] = useState(6);
   const [displayedGraphMonths, setDisplayedGraphMonths] = useState(6);
+
+  const yieldUrls = ["oil", "gas", "opec"].map(
+    (yieldType) =>
+      `http://192.168.0.57:8000/calculate_last_x_months_${yieldType}_yield/${displayedGraphMonths}`,
+  );
+  const oilData = useFetchData(yieldUrls[0], true);
+  const gasData = useFetchData(yieldUrls[1], true);
+  const opecData = useFetchData(yieldUrls[2], true);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `http://192.168.0.57:8000/calculate_last_x_months_${bigNumberValueToLabel[activeCategory][bigNumberValue]}_yield/${displayedGraphMonths}/`,
-        ); // Replace with your API endpoint
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
+    if (oilData && gasData && opecData) {
+      const [oilMonths, gasMonths, opecMonths] = [
+        oilData,
+        gasData,
+        opecData,
+      ].map((data, index) => {
+        let transformedData = data?.yields_per_month;
+
+        if (index === 2) {
+          transformedData =
+            transformedData?.map((el) => Math.floor(el * 1000)) || [];
         }
-        const data = await response.json();
-        setMonths(data.yields_per_month);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
-  }, [activeCategory, bigNumberValue, displayedGraphMonths]);
 
-  useEffect(() => {
-    const data = {
-      labels: getGraphLabels(latestDate, months.length),
-      datasets: [
-        {
-          label: bigNumberValueToDatasetLabel[activeCategory][bigNumberValue],
-          data: months,
-          borderColor: "white",
-          defaultFontColor: "white",
-          borderWidth: 2,
-        },
-      ],
-    };
+        return {
+          label: datasetOptions[index].label,
+          data: transformedData,
+        };
+      });
+      const monthsArray = [oilMonths, gasMonths, opecMonths];
+      monthsArray.forEach((months, index) => {
+        let pointColors = [];
+        if (index === 0 && activeCategory === 3) {
+          for (let i = 0; i < oilMonths.data.length; i++) {
+            pointColors.push(
+              opecMonths.data[i] < months.data[i]
+                ? "#FF0000"
+                : datasetOptions[index].color,
+            );
+          }
+        } else {
+          pointColors = Array(months.data.length).fill(
+            datasetOptions[index].color,
+          );
+        }
+        months.borderColor = datasetOptions[index].color;
+        months.backgroundColor = pointColors;
+      });
+     
+      const bigNumberValueToMonthsData = [
+        [[oilMonths], [gasMonths]],
+        [[]],
+        [[]],
+        [[oilMonths, opecMonths]],
+      ];
+      const data = {
+        labels: getGraphLabels(latestDate, displayedGraphMonths),
+        datasets: bigNumberValueToMonthsData[activeCategory][bigNumberValue],
+      };
+      setChartData(data);
+    }
+  }, [
+    activeCategory,
+    bigNumberValue,
+    displayedGraphMonths,
+    gasData,
+    latestDate,
+    oilData,
+    opecData,
+  ]);
 
-    setChartData(data);
-  }, [activeCategory, bigNumberValue, latestDate, months]);
-
-  const [selectedValue, setSelectedValue] = useState("");
-
-  const handleChange = (event) => {
-    setSelectedValue(event.target.value);
-  };
-  const muiStyles = {
-    // Define the styles to set the text color to white
-    whiteText: {
-      color: "white",
-    },
-    blueText: {
-      color: "blue",
-    },
-  };
-
-  if (activeCategory === 0) {
+  if (activeCategory === 0 || activeCategory === 3) {
     return (
       <div className="chart-oil">
         <div className="chart-oil__select">
@@ -154,9 +191,7 @@ const Graph = () => {
           </Button>
         </div>
         <div className="chart-oil__graph-wrapper">
-          {chartData.labels.length > 0 && (
-            <Line data={chartData} options={options} />
-          )}
+          {chartData && <Line data={chartData} options={graphOptions} />}
         </div>
       </div>
     );

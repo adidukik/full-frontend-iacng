@@ -110,7 +110,8 @@ const BigNumbers = (): JSX.Element => {
       `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield/${currentCompanyIdStr}`,
     ),
   );
-  const opec = Math.floor(
+  // correction for 1000
+  const opec = 1000 * Math.floor(
     useFetchData(
       `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_opec_yield/${currentCompanyIdStr}`,
     )
@@ -176,10 +177,7 @@ const BigNumbers = (): JSX.Element => {
                 label: "факт",
                 value: oilFact,
               },
-              {
-                label: "ОПЕК",
-                value: opec,
-              },
+              
             ],
           },
 
@@ -414,6 +412,19 @@ const BigNumbers = (): JSX.Element => {
       case 2:
         setBigNumbers([
           /*лейблы для урановой промышленности*/
+        ]);
+        break;
+      case 3:
+        setBigNumbers([
+           {
+            title: "ОПЕК+",
+            data: [
+              {
+                label: "показатель (тонны)",
+                value: opec,
+              },
+            ],
+          }
         ]);
         break;
       default:

@@ -28,6 +28,7 @@ import { Nav } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { setCategory } from "./categoriesSlice";
 import "./CategoriesMenu.css";
+import { setBigNumberValue } from "../BigNumbers/bigNumbersSlice";
 
 const CategoriesMenu = () => {
   const dispatch = useDispatch();
@@ -35,10 +36,12 @@ const CategoriesMenu = () => {
     "нефтегазовая отрасль",
     "электроэнергетика",
     "урановая промышленность",
+    "ОПЕК+"
   ];
 
   const handleSelect = (selectedKey: string) => {
     dispatch(setCategory(items.indexOf(selectedKey)));
+    dispatch(setBigNumberValue(0));
   };
 
   return (
