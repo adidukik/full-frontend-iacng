@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -20,6 +20,7 @@ import { Button, getAccordionSummaryUtilityClass } from "@mui/material";
 import { Category } from "../CategoriesMenu/categoriesSlice";
 import { getGraphLabels } from "../../utils/getGraphLabels";
 import useFetchData from "../../hooks/useFetchData";
+import useGraphData from "../../hooks/useGraphData";
 
 //  "#FFC300", // Cyber Yellow
 //   "#3B82F6", // Neon Blue
@@ -89,6 +90,9 @@ const Graph = () => {
   const latestDate = useSelector(
     (state: RootState) => state.bigNumbers.latestDate,
   );
+  const currentBigNumberId = useSelector(
+    (state: RootState) => state.bigNumbers.currentBigNumberId,
+  );
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [],
@@ -96,15 +100,35 @@ const Graph = () => {
   ChartJS.defaults.font.family = "MontSerrat";
 
   const [graphMonths, setGraphMonths] = useState(6);
-  const [displayedGraphMonths, setDisplayedGraphMonths] = useState(6);
+  const [displayedYDataPoints, setDisplayedGraphMonths] = useState(6);
 
-  const yieldUrls = ["oil", "gas", "opec"].map(
-    (yieldType) =>
-      `http://192.168.0.57:8000/calculate_last_x_months_${yieldType}_yield/${displayedGraphMonths}`,
-  );
-  const oilData = useFetchData(yieldUrls[0], true);
-  const gasData = useFetchData(yieldUrls[1], true);
-  const opecData = useFetchData(yieldUrls[2], true);
+  const {
+    oilData,
+    gasData,
+    opecData,
+    oilPricesData,
+    oilPricesLocalData,
+    prices92,
+    prices95,
+    prices98,
+    pricesDtl,
+    pricesDtz,
+  } = useGraphData(displayedYDataPoints);
+  const oilPricesMonths = useMemo(() => {
+    return {
+      label: "средняя цена нефти",
+      data: oilPricesData,
+      borderColor: "#BADA55",
+    };
+  }, [oilPricesData]);
+
+  const oilPricesLocalMonths = useMemo(() => {
+    return {
+      label: "средняя цена на внутренний рынок",
+      data: oilPricesLocalData,
+      borderColor: "#FF3131",
+    };
+  }, [oilPricesLocalData]);
   useEffect(() => {
     if (oilData && gasData && opecData) {
       const [oilMonths, gasMonths, opecMonths] = [
@@ -115,8 +139,7 @@ const Graph = () => {
         let transformedData = data?.yields_per_month;
 
         if (index === 2) {
-          transformedData =
-            transformedData?.map((el) => Math.floor(el * 1000)) || [];
+          transformedData = transformedData?.map((el) => Math.floor(el)) || [];
         }
 
         return {
@@ -143,27 +166,84 @@ const Graph = () => {
         months.borderColor = datasetOptions[index].color;
         months.backgroundColor = pointColors;
       });
-     
-      const bigNumberValueToMonthsData = [
-        [[oilMonths], [gasMonths]],
-        [[]],
-        [[]],
-        [[oilMonths, opecMonths]],
-      ];
+
+      const monthsData = {
+        oil_yield: [oilMonths],
+        gas_yield: [gasMonths],
+        oil_prices: [oilPricesMonths, oilPricesLocalMonths],
+        oil_products_yield: [],
+        oil_products_prices: [
+          {
+            label: "92",
+            data: prices92,
+            borderColor: "#FFC300", // Cyber Yellow
+          },
+          {
+            label: "95",
+            data: prices95,
+            borderColor: "#3B82F6", // Neon Blue
+          },
+          {
+            label: "98",
+            data: prices98,
+            borderColor: "#FF6D00", // Hyper Orange
+          },
+          {
+            label: "дтл",
+            data: pricesDtl,
+            borderColor: "#BADA55", // Hi-Tech Green
+          },
+          {
+            label: "дтз",
+            data: pricesDtz,
+            borderColor: "#FF3131", // Red
+          },
+        ],
+        leftover_oil_products: [],
+        export: [],
+        oil_stored: [],
+        well_downtime: [],
+        losses: [],
+        energy_generation: [],
+        renewable_energy: [],
+        energy_consumption: [],
+        balance_flow: [],
+        corporation_consumption: [],
+        station_load: [],
+        north_flow: [],
+        west_flow: [],
+        flow_middle_asia: [],
+        flow_middle_asia_month: [],
+        opec: [oilMonths, opecMonths],
+      };
       const data = {
-        labels: getGraphLabels(latestDate, displayedGraphMonths),
-        datasets: bigNumberValueToMonthsData[activeCategory][bigNumberValue],
+        labels: getGraphLabels(
+          latestDate,
+          displayedYDataPoints,
+          currentBigNumberId,
+        ),
+        datasets: monthsData[currentBigNumberId],
       };
       setChartData(data);
     }
   }, [
     activeCategory,
     bigNumberValue,
-    displayedGraphMonths,
+    currentBigNumberId,
+    displayedYDataPoints,
     gasData,
     latestDate,
     oilData,
+    oilPricesData,
+    oilPricesLocalData,
+    oilPricesLocalMonths,
+    oilPricesMonths,
     opecData,
+    prices92,
+    prices95,
+    prices98,
+    pricesDtl,
+    pricesDtz,
   ]);
 
   if (activeCategory === 0 || activeCategory === 3) {
@@ -171,7 +251,7 @@ const Graph = () => {
       <div className="chart-oil">
         <div className="chart-oil__select">
           <label htmlFor="minmax-buttons" className="font-bold block mb-2">
-            Число месяцев
+            Число {currentBigNumberId === "oil_products_prices" ? "дней": "месяцев"}
           </label>
           <InputNumber
             inputId="minmax-buttons"

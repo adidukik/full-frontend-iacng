@@ -28,7 +28,15 @@ import { Nav } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { setCategory } from "./categoriesSlice";
 import "./CategoriesMenu.css";
-import { setBigNumberValue } from "../BigNumbers/bigNumbersSlice";
+import { setBigNumberId, setBigNumberValue } from "../BigNumbers/bigNumbersSlice";
+import { setCurrentCompanyId } from "../LoginPage/authSlice";
+
+const firstBigNumbers: string[] = [
+  "oil_yield",
+  "energy_generation",
+  "",
+  "opec",
+];
 
 const CategoriesMenu = () => {
   const dispatch = useDispatch();
@@ -36,29 +44,31 @@ const CategoriesMenu = () => {
     "нефтегазовая отрасль",
     "электроэнергетика",
     "урановая промышленность",
-    "ОПЕК+"
+    "ОПЕК+",
   ];
 
   const handleSelect = (selectedKey: string) => {
-    dispatch(setCategory(items.indexOf(selectedKey)));
+    const categoryIndex = items.indexOf(selectedKey);
+    dispatch(setCategory(categoryIndex));
     dispatch(setBigNumberValue(0));
+    dispatch(setBigNumberId(firstBigNumbers[categoryIndex]));
   };
 
   return (
     <div className="card-categories categories-menu">
-        <Nav
-          variant="tabs"
-          defaultActiveKey="нефтегазовая отрасль"
-          onSelect={handleSelect}
-        >
-          {items.map((item, idx) => (
-            <Nav.Item key={idx}>
-              <Nav.Link eventKey={item} className="categories-menu__category">
-                {item}
-              </Nav.Link>
-            </Nav.Item>
-          ))}
-        </Nav>
+      <Nav
+        variant="tabs"
+        defaultActiveKey="нефтегазовая отрасль"
+        onSelect={handleSelect}
+      >
+        {items.map((item, idx) => (
+          <Nav.Item key={idx}>
+            <Nav.Link eventKey={item} className="categories-menu__category">
+              {item}
+            </Nav.Link>
+          </Nav.Item>
+        ))}
+      </Nav>
     </div>
   );
 };

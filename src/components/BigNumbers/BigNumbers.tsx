@@ -3,6 +3,8 @@ import { RootState } from "../../../store";
 import "./BigNumbers.css";
 import { useEffect, useState } from "react";
 import {
+  BigNumberTimeRange,
+  setBigNumberId,
   setBigNumberValue,
   setCurrentTimeRange,
   setLatestDate,
@@ -12,58 +14,13 @@ import { BigNumber } from "../../interfaces/BigNumber";
 import { Category } from "../CategoriesMenu/categoriesSlice";
 import { Card, Nav, Button } from "react-bootstrap";
 import { getFormattedDate } from "../../utils/getFormattedDate";
-import { formatNumberWithSpaces } from "../../utils/formatNumberWithSpaces";
+import { BigNumberButton } from "./BigNumberButton";
+import useBigNumbers from "../../hooks/useBigNumbers";
 
 export const LATEST_DATE_URL = "http://192.168.0.57:8000/last_day/";
 
-const BigNumberButton = ({ bigNumber }) => {
-  const getListItem = (bigNumberData) => {
-    const formattedValue = formatNumberWithSpaces(bigNumberData.value);
-    return (
-      <li key={bigNumberData.label} className="big-numbers__data">
-        <div>
-          <>{bigNumberData.label}</>
-          <br></br>
-          <>{formattedValue}</>
-        </div>
-      </li>
-    );
-  };
-  const getTableItem = (bigNumberData) => {
-    const formattedValue = formatNumberWithSpaces(bigNumberData.value);
-    return (
-      <tr className="big-numbers__data-table" key={bigNumberData.label}>
-        <td> {bigNumberData.label}</td>
-        <td> {formattedValue}</td>
-      </tr>
-    );
-  };
-  if (bigNumber.data.length < 2) {
-    return (
-      <>
-        {bigNumber.data[0].label}{" "}
-        {formatNumberWithSpaces(bigNumber.data[0].value)}
-      </>
-    );
-  } else if (bigNumber.data.length < 3) {
-    return (
-      <ul className="d-flex flex-row justify-content-between">
-        {bigNumber.data.map((bigNumberData) => getListItem(bigNumberData))}
-      </ul>
-    );
-  } else {
-    return (
-      <table>
-        <tbody>
-          {bigNumber.data.map((bigNumberData) => getTableItem(bigNumberData))}
-        </tbody>
-      </table>
-    );
-  }
-};
-
 const BigNumbers = (): JSX.Element => {
-  const timeRanges = ["сутки", "месяц", "год"];
+  const timeRanges: BigNumberTimeRange[] = ["сутки", "месяц", "год"];
   const activeCategory: Category = useSelector(
     (state: RootState) => state.categories,
   );
@@ -93,81 +50,42 @@ const BigNumbers = (): JSX.Element => {
   const currentTimeRangeInEnglish = timeRangeToEnglish[currentTimeRange];
   const fetchedDate: Date = useFetchData(LATEST_DATE_URL);
   useEffect(() => {
-    if (fetchedDate != latestDate) {
+    if (String(fetchedDate) != latestDate) {
       dispatch(setLatestDate(fetchedDate));
     }
   }, [dispatch, fetchedDate, latestDate]);
 
   const formattedDate = getFormattedDate(latestDate);
 
-  const oilPlan = Math.floor(
-    useFetchData(
-      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_plan/${currentCompanyIdStr}`,
-    ),
-  );
-  const oilFact = Math.floor(
-    useFetchData(
-      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield/${currentCompanyIdStr}`,
-    ),
-  );
-  // correction for 1000
-  const opec = 1000 * Math.floor(
-    useFetchData(
-      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_opec_yield/${currentCompanyIdStr}`,
-    )
-  );
-  const gasPlan = Math.floor(
-    useFetchData(
-      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield_plan/${currentCompanyIdStr}`,
-    ),
-  );
-  const gasFact = Math.floor(
-    useFetchData(
-      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_gas_yield/${currentCompanyIdStr}`,
-    ),
-  );
-  const benzin = Math.floor(
-    useFetchData(
-      `http://192.168.0.57:8000/calculate_benzin_last_${currentTimeRangeInEnglish}`,
-    ),
-  );
-  const kerosin = Math.floor(
-    useFetchData(
-      `http://192.168.0.57:8000/calculate_kerosin_last_${currentTimeRangeInEnglish}`,
-    ),
-  );
-  const dt = Math.floor(
-    useFetchData(
-      `http://192.168.0.57:8000/calculate_dt_last_${currentTimeRangeInEnglish}`,
-    ),
-  );
-  const mt = Math.floor(
-    useFetchData(
-      `http://192.168.0.57:8000/calculate_mt_last_${currentTimeRangeInEnglish}`,
-    ),
-  );
-  const xr = Math.floor(
-    useFetchData(
-      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_xr/${currentCompanyId}`,
-    ),
-  );
-  const skv = Math.floor(
-    useFetchData(
-      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_skv/${currentCompanyIdStr}`,
-    ),
-  );
-  const poteri = Math.floor(
-    useFetchData(
-      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_poteri/${currentCompanyIdStr}`,
-    ),
-  );
+  const {
+    oilPlan,
+    oilFact,
+    opec,
+    gasPlan,
+    gasFact,
+    benzin,
+    kerosin,
+    dt,
+    mt,
+    xr,
+    skv,
+    poteri,
+    avgOilPrice,
+    avgOilPriceLocal,
+    price92,
+    price95,
+    price98,
+    dtl,
+    dtz,
+  } = useBigNumbers(currentTimeRangeInEnglish, currentCompanyIdStr);
 
   useEffect(() => {
-    switch (activeCategory) {
+    switch (Number(activeCategory)) {
       case 0:
-        const manufacturing = [
+        const manufacturing: BigNumber[] = [
           {
             title: "Добыча нефти (тонн)",
+            id: "oil_yield",
             data: [
               {
                 label: "план",
@@ -177,12 +95,12 @@ const BigNumbers = (): JSX.Element => {
                 label: "факт",
                 value: oilFact,
               },
-              
             ],
           },
 
           {
             title: "Добыча газа (тыс. куб. м)",
+            id: "gas_yield",
             data: [
               {
                 label: "план",
@@ -198,8 +116,24 @@ const BigNumbers = (): JSX.Element => {
         if (currentCompanyId === 0) {
           setBigNumbers([
             ...manufacturing,
+
+            {
+              title: "Цены на нефть (тг/ т)",
+              id: "oil_prices",
+              data: [
+                {
+                  label: "средняя",
+                  value: avgOilPrice,
+                },
+                {
+                  label: "средняя на внутренний рынок",
+                  value: avgOilPriceLocal,
+                },
+              ],
+            },
             {
               title: "Производство нефтепродуктов",
+              id: "oil_products_yield",
               data: [
                 {
                   label: "бензин",
@@ -220,7 +154,34 @@ const BigNumbers = (): JSX.Element => {
               ],
             },
             {
+              title: "Цены на нефтепродукты",
+              id: "oil_products_prices",
+              data: [
+                {
+                  label: "92",
+                  value: price92,
+                },
+                {
+                  label: "95",
+                  value: price95,
+                },
+                {
+                  label: "98",
+                  value: price98,
+                },
+                {
+                  label: "дтл",
+                  value: dtl,
+                },
+                {
+                  label: "дтз",
+                  value: dtz,
+                },
+              ],
+            },
+            {
               title: "Остаток НП (дни)",
+              id: "leftover_oil_products",
               data: [
                 {
                   label: "",
@@ -230,6 +191,7 @@ const BigNumbers = (): JSX.Element => {
             },
             {
               title: "Экспорт",
+              id: "export",
               data: [
                 {
                   label: "нефти",
@@ -241,33 +203,13 @@ const BigNumbers = (): JSX.Element => {
                 },
               ],
             },
-            {
-              title: "Цены на нефть",
-              data: [
-                {
-                  label: "внутренний рынок",
-                  value: 40,
-                },
-                {
-                  label: "на экспорт",
-                  value: 40,
-                },
-                {
-                  label: "Бензин",
-                  value: 92,
-                },
-                {
-                  label: "РК",
-                  value: 203,
-                },
-              ],
-            },
           ]);
         } else {
           setBigNumbers([
             ...manufacturing,
             {
               title: "Нефть на хранении",
+              id: "oil_stored",
               data: [
                 {
                   label: "факт",
@@ -277,6 +219,7 @@ const BigNumbers = (): JSX.Element => {
             },
             {
               title: "Простой скважин",
+              id: "well_downtime",
               data: [
                 {
                   label: "факт",
@@ -286,6 +229,7 @@ const BigNumbers = (): JSX.Element => {
             },
             {
               title: "Потери в тоннах",
+              id: "losses",
               data: [
                 {
                   label: "факт",
@@ -301,6 +245,7 @@ const BigNumbers = (): JSX.Element => {
         setBigNumbers([
           {
             title: "Генерация (МВт)",
+            id: "energy_generation",
             data: [
               {
                 label: "план",
@@ -313,7 +258,18 @@ const BigNumbers = (): JSX.Element => {
             ],
           },
           {
+            title: "ВИЭ",
+            id: "renewable_energy",
+            data: [
+              {
+                label: "",
+                value: 0,
+              },
+            ],
+          },
+          {
             title: "Потребление (МВт)",
+            id: "energy_consumption",
             data: [
               {
                 label: "план",
@@ -327,6 +283,7 @@ const BigNumbers = (): JSX.Element => {
           },
           {
             title: "Сальдо-переток (МВт)",
+            id: "balance_flow",
             data: [
               {
                 label: "план",
@@ -344,14 +301,17 @@ const BigNumbers = (): JSX.Element => {
           },
           {
             title: "Потребление крупных предприятий Казахстана",
+            id: "corporation_consumption",
             data: [],
           },
           {
             title: "Нагрузка эл. станций национального значения",
+            id: "station_load",
             data: [],
           },
           {
             title: "Переток Сев. зоны РК-РФ (млн.кВтч)",
+            id: "north_flow",
             data: [
               {
                 label: "план",
@@ -365,6 +325,7 @@ const BigNumbers = (): JSX.Element => {
           },
           {
             title: "Переток Зап. зоны РК-РФ (млн.кВтч)",
+            id: "west_flow",
             data: [
               {
                 label: "план",
@@ -378,6 +339,7 @@ const BigNumbers = (): JSX.Element => {
           },
           {
             title: "Переток РК-ЦА (млн.кВтч)",
+            id: "flow_middle_asia",
             data: [
               {
                 label: "план",
@@ -391,6 +353,7 @@ const BigNumbers = (): JSX.Element => {
           },
           {
             title: "Перетоки энергосистем ЦА за 26 дней июля факт (млн.кВт.ч)",
+            id: "flow_middle_asia_month",
             data: [
               {
                 label: "С-до Кыргызстана (нараст)",
@@ -416,24 +379,30 @@ const BigNumbers = (): JSX.Element => {
         break;
       case 3:
         setBigNumbers([
-           {
+          {
             title: "ОПЕК+",
+            id: "opec",
             data: [
               {
                 label: "показатель (тонны)",
                 value: opec,
               },
             ],
-          }
+          },
         ]);
         break;
       default:
-        console.log();
+        setBigNumbers([]);
     }
   }, [
     activeCategory,
+    avgOilPrice,
+    avgOilPriceLocal,
     benzin,
+    currentCompanyId,
     dt,
+    dtl,
+    dtz,
     gasFact,
     gasPlan,
     kerosin,
@@ -441,10 +410,23 @@ const BigNumbers = (): JSX.Element => {
     oilFact,
     oilPlan,
     opec,
+    poteri,
+    price92,
+    price95,
+    price98,
+    skv,
+    xr,
   ]);
+  // useEffect(() => {
+  //   console.log(bigNumbers);
+  //   if (bigNumbers[0]) {
+  //     dispatch(setBigNumberId(bigNumbers[0].id));
+  //   }
+  // }, [activeCategory, bigNumbers]);
+
   return (
     <Card className="big-numbers app-card">
-      <h1 className="big-numbers__heading">Данные</h1>
+      <h3 className="big-numbers__heading">Данные</h3>
       <h3 className="big-numbers__date">за {formattedDate}</h3>
       <Card.Header>
         <Nav variant="tabs" defaultActiveKey="#сутки">
@@ -472,8 +454,9 @@ const BigNumbers = (): JSX.Element => {
                   className={`big-numbers__btn ${
                     bigNumberValue === index && "big-numbers__btn-active"
                   }`}
-                  onClick={(e) => {
+                  onClick={() => {
                     dispatch(setBigNumberValue(index));
+                    dispatch(setBigNumberId(bigNumbers[index].id));
                   }}
                 >
                   <h5 className="big-numbers__title">{bigNumber.title}</h5>

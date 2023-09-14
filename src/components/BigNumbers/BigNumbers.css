@@ -16,6 +16,7 @@
 .big-numbers__date {
   color: #fff;
   text-align: center;
+  font-size: 16px;
 }
 .big-numbers__title {
   text-align: left;

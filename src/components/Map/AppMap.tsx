@@ -32,10 +32,12 @@ import { formatNumberWithSpaces } from "../../utils/formatNumberWithSpaces";
 
 const format = new GeoJSON();
 const operatorIdToEmployees = {};
-for(const el of format.readFeatures(employeesData)){
-  operatorIdToEmployees[el.get("company_id")]=[el.get("num_employees"), el.get("num_kz_employees")];
+for (const el of format.readFeatures(employeesData)) {
+  operatorIdToEmployees[el.get("company_id")] = [
+    el.get("num_employees"),
+    el.get("num_kz_employees"),
+  ];
 }
-console.log(operatorIdToEmployees)
 const regionsFeatures = format.readFeatures(regionsData);
 const fieldsFeatures = format.readFeatures(fieldsData).filter((feature) => {
   return feature.get("type") === "добыча";
@@ -53,7 +55,6 @@ function drawCircles(
   const source = new VectorSource();
 
   coordinatesArray.forEach((coords: Point) => {
-    console.log(coords);
     displayedRegions.forEach((regionFeature: Polygon) => {
       const regionGeometry = regionFeature.getGeometry();
       const pointGeometry = coords.getGeometry();
@@ -138,11 +139,6 @@ const getFieldsLayer = (params): VectorLayer<VectorSource<Geometry>> => {
       );
     }
 
-    // .filter((field) =>
-    //   String(field.values_?.operator_name)
-    //     .toLowerCase()
-    //     .includes("саутс"),
-    // );
     const vl = new VectorLayer({
       source: new VectorSource({
         features: featuresToDisplay,
@@ -172,7 +168,6 @@ const getOilGasPipelines = (params): VectorLayer<VectorSource> => {
   const { bigNumberValue, displayedRegions, currentCompanyId } = params;
   const data = bigNumberValue === 0 ? oilPipelinesData : gasPipelinesData;
   let features = format.readFeatures(data);
-  console.log(displayedRegions);
   if (currentCompanyId !== 0) {
     features = features.filter((field) =>
       // Check if the feature intersects with any displayed region
@@ -187,7 +182,7 @@ const getOilGasPipelines = (params): VectorLayer<VectorSource> => {
   return drawLines(features);
 };
 const getTransmissionLines = (params): VectorLayer<VectorSource> => {
-  const { displayedRegions, currentCompanyId } = params;
+  const { bigNumberValue, displayedRegions, currentCompanyId } = params;
   let features = format.readFeatures(transmissionLinesData);
 
   const lineStyle = new Style({
@@ -215,9 +210,19 @@ const getFactoriesLayer = (params) => {
   const features = format.readFeatures(factoriesData);
   return drawCircles(features, params);
 };
-
+const renewableSources = [
+  "гидроэлектростанция","ветряная электростанция", "солнечная электростанция"
+]
 const getPlantsLayer = (params) => {
-  const features = format.readFeatures(plantsData);
+  let features = format.readFeatures(plantsData);
+  const {bigNumberValue} = params;
+  //  const set = new Set()
+  // for(const feat of features){
+  //   set.add(feat.get("type"))
+  // }
+  // console.log(set)
+  if(bigNumberValue === 1) features = features.filter(feature => renewableSources.includes(feature.get("type")))
+  console.log("features", renewableSources.includes("Гидроэлектростанция"))
   return drawCircles(features, params);
 };
 
@@ -358,22 +363,25 @@ const AppMap = () => {
     const activeCategory = activeCategoryRef.current;
     const bigNumberValue = bigNumberValueRef.current;
     const operator_id = f.get("operator_id");
-    const  nextPopupText = {
-          Имя: f.values_.name,
-          Оператор: f.values_.operator_name,
-          Добыча: f.values_.field_resources,
-          Компания: f.get("company"),
-          "Диаметр (мм)": f.get("diameters"),
-          "Длина (км)": f.get("length"),
-          Название: f.get("name_ru"),
-          Мощность: formatNumberWithSpaces(f.get("power")),
-          Статус: f.values_.status,
-          Тип: f.values_.type,
-          Продукты: f.values_.products,
-          "Напряжение (Вольт)": formatNumberWithSpaces(f.get("voltage")),
-          Работники: operator_id ? operatorIdToEmployees[operator_id][0] : null,
-          "Работники (граждане РК)": operator_id ? operatorIdToEmployees[operator_id][1] : null,
-        }
+    const nextPopupText = {
+      Имя: f.get("name"),
+      Оператор: f.get("operator_name"),
+      Добыча: f.get("field_resources"),
+      Компания: f.get("company"),
+      "Диаметр (мм)": f.get("diameters"),
+      "Длина (км)": f.get("length"),
+      Название: f.get("name_ru"),
+      Мощность: formatNumberWithSpaces(f.get("power")),
+      Статус: f.get("status"),
+      Тип: f.get("type"),
+      Продукты: f.get("products"),
+      "Напряжение (Вольт)": formatNumberWithSpaces(f.get("voltage")),
+      Работники: operator_id ? operatorIdToEmployees[operator_id][0] : null,
+      "Работники (граждане РК)": operator_id
+        ? operatorIdToEmployees[operator_id][1]
+        : null,
+    };
+
     return nextPopupText;
   };
   const popupOverlayRef = useRef(null);
@@ -465,7 +473,6 @@ const AppMap = () => {
             lastIdRef.current !== f.get("id")
           ) {
             const nextPopupText = getNextPopupText(f);
-            console.log(f);
             popupOverlayRef.current.setPosition(e.coordinate);
             setPopupText(nextPopupText);
             lastIdRef.current = f.get("id");
@@ -495,7 +502,10 @@ const AppMap = () => {
         newLayers = [getFactoriesLayer(params)];
       }
     } else if (activeCategory === 1) {
-      newLayers = [getPlantsLayer(params), getTransmissionLines(params)];
+      let filteredTransmissionLines = getTransmissionLines(params);
+    
+    
+      newLayers = [getPlantsLayer(params), filteredTransmissionLines];
     }
     for (const fieldsLayer of fieldsLayerRef.current) {
       mapRef.current.removeLayer(fieldsLayer);
@@ -541,22 +551,16 @@ const AppMap = () => {
         ref={popupRef}
         className={popupVisibility ? "" : "hidden"}
       >
-      <table cellSpacing={0} cellPadding={0}>
-        <tbody>
-         
-      
-        {getPopupText(popupText).map((keyval) => (
-          <tr key={keyval[0]}>
-            <td>
-              {keyval[0]}
-            </td>
-             <td>
-              {keyval[1]}
-            </td>
-          </tr>
-        ))}
+        <table cellSpacing={0} cellPadding={0}>
+          <tbody>
+            {getPopupText(popupText).map((keyval) => (
+              <tr key={keyval[0]}>
+                <td>{keyval[0]}</td>
+                <td>{keyval[1]}</td>
+              </tr>
+            ))}
           </tbody>
-      </table>
+        </table>
       </div>
     </>
   );
