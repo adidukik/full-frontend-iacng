@@ -291,9 +291,9 @@ const AppMap = () => {
   const currentCompanyId = useSelector(
     (state: RootState) => state.auth.currentCompanyId,
   );
-  // const displayedRegions = useSelector(
-  //   (state: RootState) => state.regions.displayedRegions,
-  // );
+  const currentBigNumberId = useSelector(
+    (state: RootState) => state.bigNumbers.currentBigNumberId,
+  );
   const dispatch = useDispatch();
   const popupRef = useRef(null);
 
@@ -496,9 +496,9 @@ const AppMap = () => {
       currentCompanyId,
     };
     if (activeCategory === 0) {
-      if (bigNumberValue < 2) {
+      if (currentBigNumberId === 'oil_yield' || currentBigNumberId === 'gas_yield') {
         newLayers = [getFieldsLayer(params), getOilGasPipelines(params)];
-      } else if (bigNumberValue === 2) {
+      } else if (currentBigNumberId === 'oil_products_yield') {
         newLayers = [getFactoriesLayer(params)];
       }
     } else if (activeCategory === 1) {
