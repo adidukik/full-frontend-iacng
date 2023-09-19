@@ -13,9 +13,8 @@ const RegionsTableCell = ({
   rowData,
   showDiff = false,
   onClick = null,
-  isButton = false,
 }: RegionsTableCellProps): JSX.Element => {
-  if (isButton) {
+  if (onClick) {
     return (
       <TableCell align="right">
         <Button variant="contained" className="button" onClick={onClick}>

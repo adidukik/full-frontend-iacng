@@ -22,19 +22,16 @@ export const LATEST_DATE_URL = "http://192.168.0.57:8000/last_day/";
 const BigNumbers = (): JSX.Element => {
   const timeRanges: BigNumberTimeRange[] = ["сутки", "месяц", "год"];
   const activeCategory: Category = useSelector(
-    (state: RootState) => state.categories,
-  );
-  const bigNumberValue = useSelector(
-    (state: RootState) => state.bigNumbers.value,
+    (state: RootState) => state.categories
   );
   const currentTimeRange = useSelector(
-    (state: RootState) => state.bigNumbers.currentTimeRange,
+    (state: RootState) => state.bigNumbers.currentTimeRange
   );
   const latestDate = useSelector(
-    (state: RootState) => state.bigNumbers.latestDate,
+    (state: RootState) => state.bigNumbers.latestDate
   );
   const currentCompanyId = useSelector(
-    (state: RootState) => state.auth.currentCompanyId,
+    (state: RootState) => state.auth.currentCompanyId
   );
   const currentCompanyIdStr =
     currentCompanyId === 0 ? "" : currentCompanyId + "";
@@ -96,7 +93,7 @@ const BigNumbers = (): JSX.Element => {
                 value: oilFact,
               },
             ],
-            tableHeaders: ["Тип", "Тонн",],
+            tableHeaders: ["Тип", "Тонн"],
           },
 
           {
@@ -113,7 +110,7 @@ const BigNumbers = (): JSX.Element => {
               },
             ],
 
-            tableHeaders: ["Тип", "Тыс. куб.м",],
+            tableHeaders: ["Тип", "Тыс. куб.м"],
           },
         ];
         if (currentCompanyId === 0) {
@@ -270,12 +267,16 @@ const BigNumbers = (): JSX.Element => {
             tableHeaders: [],
           },
           {
-            title: "ВИЭ",
+            title: "Выработка ВИЭ за 6 месяцев (млрд. кВт.ч)",
             id: "renewable_energy",
             data: [
               {
-                label: "",
-                value: 0,
+                label: "план",
+                value: 2.297,
+              },
+              {
+                label: "факт",
+                value: 3.35,
               },
             ],
             tableHeaders: [],
@@ -466,7 +467,7 @@ const BigNumbers = (): JSX.Element => {
                   }}
                 ></BigNumberButton>
               </li>
-            ),
+            )
           )}
         </ul>
       </Card.Body>
