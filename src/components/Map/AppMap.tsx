@@ -42,9 +42,9 @@ const regionsFeatures = format.readFeatures(regionsData);
 const fieldsFeatures = format.readFeatures(fieldsData).filter((feature) => {
   return feature.get("type") === "добыча";
 });
-const numberToLayerType = {
-  0: "нефть",
-  1: "газ",
+const idToLayerType = {
+  oil_yield: "нефть",
+  gas_yield: "газ",
 };
 function drawCircles(
   coordinatesArray,
@@ -122,8 +122,8 @@ function drawLines(
 }
 
 const getFieldsLayer = (params): VectorLayer<VectorSource<Geometry>> => {
-  const { bigNumberValue, displayedRegions, currentCompanyId } = params;
-  const currentType = numberToLayerType["" + bigNumberValue];
+  const { currentBigNumberId, displayedRegions, currentCompanyId } = params;
+  const currentType = idToLayerType[currentBigNumberId];
   if (currentType) {
     let featuresToDisplay = fieldsFeatures.filter((field) =>
       String(field.get("field_resources")).includes(currentType),
@@ -165,12 +165,11 @@ const getFieldsLayer = (params): VectorLayer<VectorSource<Geometry>> => {
 };
 
 const getOilGasPipelines = (params): VectorLayer<VectorSource> => {
-  const { bigNumberValue, displayedRegions, currentCompanyId } = params;
-  const data = bigNumberValue === 0 ? oilPipelinesData : gasPipelinesData;
+  const { displayedRegions, currentCompanyId, currentBigNumberId } = params;
+  const data = currentBigNumberId === "oil_yield" ? oilPipelinesData : gasPipelinesData;
   let features = format.readFeatures(data);
   if (currentCompanyId !== 0) {
     features = features.filter((field) =>
-      // Check if the feature intersects with any displayed region
       displayedRegions.some((regionFeature) =>
         field
           .getGeometry()
@@ -182,7 +181,7 @@ const getOilGasPipelines = (params): VectorLayer<VectorSource> => {
   return drawLines(features);
 };
 const getTransmissionLines = (params): VectorLayer<VectorSource> => {
-  const { bigNumberValue, displayedRegions, currentCompanyId } = params;
+  const { displayedRegions, currentCompanyId } = params;
   let features = format.readFeatures(transmissionLinesData);
 
   const lineStyle = new Style({
@@ -211,18 +210,18 @@ const getFactoriesLayer = (params) => {
   return drawCircles(features, params);
 };
 const renewableSources = [
-  "гидроэлектростанция","ветряная электростанция", "солнечная электростанция"
-]
+  "гидроэлектростанция",
+  "ветряная электростанция",
+  "солнечная электростанция",
+];
 const getPlantsLayer = (params) => {
   let features = format.readFeatures(plantsData);
-  const {bigNumberValue} = params;
-  //  const set = new Set()
-  // for(const feat of features){
-  //   set.add(feat.get("type"))
-  // }
-  // console.log(set)
-  if(bigNumberValue === 1) features = features.filter(feature => renewableSources.includes(feature.get("type")))
-  console.log("features", renewableSources.includes("Гидроэлектростанция"))
+  const { currentBigNumberId } = params;
+  if (currentBigNumberId === "renewable_energy") {
+    features = features.filter((feature) =>
+      renewableSources.includes(feature.get("type")),
+    );
+  }
   return drawCircles(features, params);
 };
 
@@ -349,19 +348,11 @@ const AppMap = () => {
   const ref = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Map>(null);
   const lastIdRef = useRef<number>(-1);
-  const activeCategoryRef = useRef(activeCategory);
-  const bigNumberValueRef = useRef(bigNumberValue);
-  useEffect(() => {
-    activeCategoryRef.current = activeCategory;
-    bigNumberValueRef.current = bigNumberValue;
-  }, [activeCategory, bigNumberValue]);
   const [popupText, setPopupText] = useState(null);
   const [popupVisibility, setPopupVisibility] = useState(false);
 
   const fieldsLayerRef = useRef([]);
   const getNextPopupText = (f: Feature) => {
-    const activeCategory = activeCategoryRef.current;
-    const bigNumberValue = bigNumberValueRef.current;
     const operator_id = f.get("operator_id");
     const nextPopupText = {
       Имя: f.get("name"),
@@ -491,22 +482,22 @@ const AppMap = () => {
   useEffect(() => {
     let newLayers = [];
     const params = {
-      bigNumberValue,
+      currentBigNumberId,
       displayedRegions: displayedRegionsArr,
       currentCompanyId,
     };
-    if (activeCategory === 0) {
-      if (currentBigNumberId === 'oil_yield' || currentBigNumberId === 'gas_yield') {
-        newLayers = [getFieldsLayer(params), getOilGasPipelines(params)];
-      } else if (currentBigNumberId === 'oil_products_yield') {
-        newLayers = [getFactoriesLayer(params)];
-      }
-    } else if (activeCategory === 1) {
-      let filteredTransmissionLines = getTransmissionLines(params);
-    
-    
+    if (
+      currentBigNumberId === "oil_yield" ||
+      currentBigNumberId === "gas_yield"
+    ) {
+      newLayers = [getFieldsLayer(params), getOilGasPipelines(params)];
+    } else if (currentBigNumberId === "oil_products_yield") {
+      newLayers = [getFactoriesLayer(params)];
+    } else if (currentBigNumberId === "energy_generation" || "renewable_energy") {
+      const filteredTransmissionLines = getTransmissionLines(params);
       newLayers = [getPlantsLayer(params), filteredTransmissionLines];
     }
+
     for (const fieldsLayer of fieldsLayerRef.current) {
       mapRef.current.removeLayer(fieldsLayer);
     }
@@ -514,7 +505,14 @@ const AppMap = () => {
     for (const newLayer of newLayers) {
       mapRef.current.addLayer(newLayer);
     }
-  }, [activeCategory, bigNumberValue, dispatch]);
+  }, [
+    activeCategory,
+    bigNumberValue,
+    currentBigNumberId,
+    currentCompanyId,
+    dispatch,
+    displayedRegionsArr,
+  ]);
 
   useEffect(() => {
     if (currentRegion) {
