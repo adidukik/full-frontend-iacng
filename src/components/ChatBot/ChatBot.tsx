@@ -71,7 +71,7 @@ const ChatBot = () => {
   //     </div>
   //     </div>
   // );
-  const link = "http://192.168.0.60:8501/";
+  const link = "http://192.168.0.107:8501/";
   return (
     <iframe
       src={link}

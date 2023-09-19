@@ -310,39 +310,27 @@ const BigNumbers = (): JSX.Element => {
             data: [],
           },
           {
-            title: "Переток Сев. зоны РК-РФ (млн.кВтч)",
-            id: "north_flow",
+            title: "Транзит ЭЭ (млн.кВтч)",
+            id: "transit_ee",
             data: [
               {
-                label: "план",
+                label: "Переток Сев. зоны РК-РФ план",
                 value: 36.32,
               },
               {
                 label: "факт",
                 value: 39.8,
               },
-            ],
-          },
-          {
-            title: "Переток Зап. зоны РК-РФ (млн.кВтч)",
-            id: "west_flow",
-            data: [
               {
-                label: "план",
+                label: " Переток Зап. зоны РК-РФ план",
                 value: 0.57,
               },
               {
                 label: "факт",
                 value: 0.19,
               },
-            ],
-          },
-          {
-            title: "Переток РК-ЦА (млн.кВтч)",
-            id: "flow_middle_asia",
-            data: [
               {
-                label: "план",
+                label: "Переток РК-ЦА план",
                 value: 1.9,
               },
               {
@@ -449,19 +437,13 @@ const BigNumbers = (): JSX.Element => {
               <></>
             ) : (
               <li key={bigNumber.title}>
-                <Button
-                  variant="outline-primary"
-                  className={`big-numbers__btn ${
-                    bigNumberValue === index && "big-numbers__btn-active"
-                  }`}
+                <BigNumberButton
+                  bigNumber={bigNumber}
                   onClick={() => {
                     dispatch(setBigNumberValue(index));
                     dispatch(setBigNumberId(bigNumbers[index].id));
                   }}
-                >
-                  <h5 className="big-numbers__title">{bigNumber.title}</h5>
-                  <BigNumberButton bigNumber={bigNumber}></BigNumberButton>
-                </Button>
+                ></BigNumberButton>
               </li>
             ),
           )}

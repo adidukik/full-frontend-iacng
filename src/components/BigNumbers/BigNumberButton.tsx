@@ -1,18 +1,14 @@
+import { useDispatch, useSelector } from "react-redux";
 import { formatNumberWithSpaces } from "../../utils/formatNumberWithSpaces";
+import { Button } from "react-bootstrap";
+import { RootState } from "../../../store";
 
-export const BigNumberButton = ({ bigNumber, isTable = false }) => {
-  const getListItem = (bigNumberData, units = "") => {
-    const formattedValue = formatNumberWithSpaces(bigNumberData.value);
-    return (
-      <li key={bigNumberData.label} className="big-numbers__data">
-        <div>
-          <>{bigNumberData.label}</>
-          <br></br>
-          <>{`${formattedValue} ${units}`}</>
-        </div>
-      </li>
-    );
-  };
+export const BigNumberButton = ({ bigNumber, onClick }) => {
+  const dispatch = useDispatch();
+  const currentBigNumberId = useSelector(
+    (state: RootState) => state.bigNumbers.currentBigNumberId,
+  );
+  const { title, id, data } = bigNumber;
   const getTableItem = (bigNumberData) => {
     const formattedValue = formatNumberWithSpaces(bigNumberData.value);
     return (
@@ -22,33 +18,21 @@ export const BigNumberButton = ({ bigNumber, isTable = false }) => {
       </tr>
     );
   };
-  if(isTable){
-     return (
-      <ul className="d-flex flex-column justify-content-between">
-        {bigNumber.data.map((bigNumberData) => getListItem(bigNumberData))}
-      </ul>
-    );
-  }
-  if (bigNumber.data.length < 2) {
-    return (
-      <>
-        {bigNumber.data[0].label}{" "}
-        {formatNumberWithSpaces(bigNumber.data[0].value)}
-      </>
-    );
-  } else if (bigNumber.data.length < 3) {
-    return (
-      <ul className="d-flex flex-row justify-content-between">
-        {bigNumber.data.map((bigNumberData) => getListItem(bigNumberData))}
-      </ul>
-    );
-  } else {
-    return (
+
+  return (
+    <Button
+      variant="outline-primary"
+      className={`big-numbers__btn ${
+        currentBigNumberId === id && "big-numbers__btn-active"
+      }`}
+      onClick={onClick}
+    >
+      <h5 className="big-numbers__title">{bigNumber.title}</h5>
       <table>
         <tbody>
-          {bigNumber.data.map((bigNumberData) => getTableItem(bigNumberData))}
+          {data.map((bigNumberData) => getTableItem(bigNumberData))}
         </tbody>
       </table>
-    );
-  }
+    </Button>
+  );
 };
