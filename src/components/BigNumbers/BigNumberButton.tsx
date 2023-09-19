@@ -32,7 +32,7 @@ export const BigNumberButton = ({ bigNumber, onClick }) => {
         <thead>
           <tr>
             {tableHeaders.map((el) => (
-              <td>{el}</td>
+              <td key={el}>{el}</td>
             ))}
           </tr>
         </thead>
