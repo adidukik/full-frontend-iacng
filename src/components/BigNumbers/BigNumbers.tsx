@@ -96,6 +96,7 @@ const BigNumbers = (): JSX.Element => {
                 value: oilFact,
               },
             ],
+            tableHeaders: ["Тип", "Тонн",],
           },
 
           {
@@ -111,6 +112,8 @@ const BigNumbers = (): JSX.Element => {
                 value: gasFact,
               },
             ],
+
+            tableHeaders: ["Тип", "Тыс. куб.м",],
           },
         ];
         if (currentCompanyId === 0) {
@@ -130,6 +133,7 @@ const BigNumbers = (): JSX.Element => {
                   value: avgOilPriceLocal,
                 },
               ],
+              tableHeaders: [],
             },
             {
               title: "Производство нефтепродуктов",
@@ -152,6 +156,7 @@ const BigNumbers = (): JSX.Element => {
                   value: mt,
                 },
               ],
+              tableHeaders: [],
             },
             {
               title: "Цены на нефтепродукты",
@@ -178,6 +183,7 @@ const BigNumbers = (): JSX.Element => {
                   value: dtz,
                 },
               ],
+              tableHeaders: [],
             },
             {
               title: "Остаток НП (дни)",
@@ -188,6 +194,7 @@ const BigNumbers = (): JSX.Element => {
                   value: 3,
                 },
               ],
+              tableHeaders: [],
             },
             {
               title: "Экспорт",
@@ -202,6 +209,7 @@ const BigNumbers = (): JSX.Element => {
                   value: 0,
                 },
               ],
+              tableHeaders: [],
             },
           ]);
         } else {
@@ -216,6 +224,7 @@ const BigNumbers = (): JSX.Element => {
                   value: xr,
                 },
               ],
+              tableHeaders: [],
             },
             {
               title: "Простой скважин",
@@ -226,6 +235,7 @@ const BigNumbers = (): JSX.Element => {
                   value: skv,
                 },
               ],
+              tableHeaders: [],
             },
             {
               title: "Потери в тоннах",
@@ -236,6 +246,7 @@ const BigNumbers = (): JSX.Element => {
                   value: poteri,
                 },
               ],
+              tableHeaders: [],
             },
           ]);
         }
@@ -256,6 +267,7 @@ const BigNumbers = (): JSX.Element => {
                 value: 11465,
               },
             ],
+            tableHeaders: [],
           },
           {
             title: "ВИЭ",
@@ -266,6 +278,7 @@ const BigNumbers = (): JSX.Element => {
                 value: 0,
               },
             ],
+            tableHeaders: [],
           },
           {
             title: "Потребление (МВт)",
@@ -280,6 +293,7 @@ const BigNumbers = (): JSX.Element => {
                 value: 13867,
               },
             ],
+            tableHeaders: [],
           },
           {
             title: "Сальдо-переток (МВт)",
@@ -298,16 +312,20 @@ const BigNumbers = (): JSX.Element => {
                 value: 234,
               },
             ],
+            tableHeaders: [],
           },
           {
             title: "Потребление крупных предприятий Казахстана",
             id: "corporation_consumption",
             data: [],
+
+            tableHeaders: [],
           },
           {
             title: "Нагрузка эл. станций национального значения",
             id: "station_load",
             data: [],
+            tableHeaders: [],
           },
           {
             title: "Транзит ЭЭ (млн.кВтч)",
@@ -338,6 +356,7 @@ const BigNumbers = (): JSX.Element => {
                 value: 1.21,
               },
             ],
+            tableHeaders: [],
           },
           {
             title: "Перетоки энергосистем ЦА за 26 дней июля факт (млн.кВт.ч)",
@@ -356,6 +375,7 @@ const BigNumbers = (): JSX.Element => {
                 value: 17.7,
               },
             ],
+            tableHeaders: [],
           },
         ]);
 
@@ -376,6 +396,7 @@ const BigNumbers = (): JSX.Element => {
                 value: opec,
               },
             ],
+            tableHeaders: [],
           },
         ]);
         break;

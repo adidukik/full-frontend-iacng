@@ -8,7 +8,7 @@ export const BigNumberButton = ({ bigNumber, onClick }) => {
   const currentBigNumberId = useSelector(
     (state: RootState) => state.bigNumbers.currentBigNumberId,
   );
-  const { title, id, data } = bigNumber;
+  const { title, id, data, tableHeaders } = bigNumber;
   const getTableItem = (bigNumberData) => {
     const formattedValue = formatNumberWithSpaces(bigNumberData.value);
     return (
@@ -29,6 +29,13 @@ export const BigNumberButton = ({ bigNumber, onClick }) => {
     >
       <h5 className="big-numbers__title">{bigNumber.title}</h5>
       <table>
+        <thead>
+          <tr>
+            {tableHeaders.map((el) => (
+              <td>{el}</td>
+            ))}
+          </tr>
+        </thead>
         <tbody>
           {data.map((bigNumberData) => getTableItem(bigNumberData))}
         </tbody>
