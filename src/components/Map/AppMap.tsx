@@ -40,7 +40,7 @@ for (const el of format.readFeatures(employeesData)) {
   ];
 }
 const regionsFeatures = format.readFeatures(regionsData);
-let plantsFeatures = format.readFeatures(plantsData);
+const plantsFeatures = format.readFeatures(plantsData);
 const fieldsFeatures = format.readFeatures(fieldsData).filter((feature) => {
   return feature.get("type") === "добыча";
 });
@@ -58,12 +58,11 @@ function drawCircles(
 
   coordinatesArray.forEach((coords: Point) => {
     displayedRegions.forEach((regionFeature: Polygon) => {
-      const regionGeometry = regionFeature.getGeometry();
-      const pointGeometry = coords.getGeometry();
+      const regionGeometry = regionFeature?.getGeometry();
       if (
         currentCompanyId === 0 ||
         regionGeometry.intersectsCoordinate(
-          coords.getGeometry().flatCoordinates
+          coords?.getGeometry()?.flatCoordinates
         )
       ) {
         const circle = new Circle(
@@ -141,7 +140,6 @@ const getFieldsLayer = (params): VectorLayer<VectorSource<Geometry>> => {
         )
       );
     }
- console.log(featuresToDisplay)
 
     const vl = new VectorLayer({
       source: new VectorSource({
@@ -164,7 +162,6 @@ const getFieldsLayer = (params): VectorLayer<VectorSource<Geometry>> => {
         });
       },
     });
-    console.log(vl)
     return vl;
   }
 };
@@ -222,13 +219,14 @@ const renewableSources = [
 ];
 const getPlantsLayer = (params) => {
   const { currentBigNumberId, renewablePlantsCallback } = params;
+  let filteredPlantsFeatures = plantsFeatures;
   if (currentBigNumberId === "renewable_energy") {
-    plantsFeatures = plantsFeatures.filter((feature) =>
+    filteredPlantsFeatures = plantsFeatures.filter((feature) =>
       renewableSources.includes(feature.get("type"))
     );
-    renewablePlantsCallback(plantsFeatures);
+    renewablePlantsCallback(filteredPlantsFeatures);
   }
-  return drawCircles(plantsFeatures, params);
+  return drawCircles(filteredPlantsFeatures, params);
 };
 
 const colors = [
@@ -544,18 +542,19 @@ const AppMap = () => {
         feature = regionsFeatures.filter(
           (regionsFeature) => regionsFeature.get("name_ru") === currentRegion
         )[0];
-      } else if (currentBigNumberId === "renewable_energy") {
+      } else if (currentBigNumberId === "energy_generation" || currentBigNumberId === "renewable_energy") {
         feature = plantsFeatures.filter(
           (regionsFeature) => regionsFeature.get("id") === currentRegion
         )[0];
       }
 
-      //.filter(feature => feature.values_.name_ru === currentRegion)
-      const extent = feature.getGeometry().getExtent();
+      if(feature){
+ const extent = feature.getGeometry().getExtent();
       const center = getCenter(extent);
 
-      // Call the flyTo function when currentRegion changes
       flyTo(center);
+      }
+     
     }
   }, [activeCategory, currentBigNumberId, currentRegion]);
 
