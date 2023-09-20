@@ -124,6 +124,7 @@ function drawLines(
 const getFieldsLayer = (params): VectorLayer<VectorSource<Geometry>> => {
   const { currentBigNumberId, displayedRegions, currentCompanyId } = params;
   const currentType = idToLayerType[currentBigNumberId];
+ 
   if (currentType) {
     let featuresToDisplay = fieldsFeatures.filter((field) =>
       String(field.get("field_resources")).includes(currentType),
@@ -138,6 +139,7 @@ const getFieldsLayer = (params): VectorLayer<VectorSource<Geometry>> => {
         ),
       );
     }
+ console.log(featuresToDisplay)
 
     const vl = new VectorLayer({
       source: new VectorSource({
@@ -160,6 +162,7 @@ const getFieldsLayer = (params): VectorLayer<VectorSource<Geometry>> => {
         });
       },
     });
+    console.log(vl)
     return vl;
   }
 };
