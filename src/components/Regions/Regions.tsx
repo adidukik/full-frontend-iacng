@@ -83,7 +83,7 @@ const Regions = () => {
     if (activeCategory === 0) {
       if (regionDataFact && regionDataPlan) {
         const tableData = Object.keys(regionDataFact).map((region) => ({
-          region: parseRegionName(region),
+          Регион: parseRegionName(region),
           Факт: regionDataFact[region] === null ? 0 : regionDataFact[region],
           План: Math.floor(
             regionDataPlan[region] === null ? 0 : regionDataPlan[region]
@@ -231,7 +231,7 @@ const Regions = () => {
                   const tableCellProps = {};
                   if (index) tableCellProps.align = "right";
                   if (rowKey === "id") return <></>;
-                  return <TableCell {...tableCellProps}>{rowKey}</TableCell>;
+                  return <TableCell {...tableCellProps} key={rowKey}>{rowKey}</TableCell>;
                 }
               )}
           </TableRow>

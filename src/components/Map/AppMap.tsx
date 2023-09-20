@@ -52,7 +52,7 @@ function drawCircles(
   coordinatesArray,
   params
 ): VectorLayer<VectorSource<Geometry>> {
-  const { displayedRegions, currentCompanyId } = params;
+  const { displayedRegions, currentCompanyId , currentZoom} = params;
 
   const source = new VectorSource();
 
@@ -65,9 +65,10 @@ function drawCircles(
           coords?.getGeometry()?.flatCoordinates
         )
       ) {
+        console.log(currentZoom)
         const circle = new Circle(
           coords.values_.geometry.flatCoordinates,
-          9000
+          111500000/Math.pow(currentZoom, 5)
         ); // Create a circle geometry around the point
         const feature = new Feature(circle);
         // Copy all the properties from the original feature to the new feature
@@ -390,7 +391,7 @@ const AppMap = () => {
       width: 2,
     }),
   });
-
+  const [currentZoom, setCurrentZoom]=useState(DEFAULT_ZOOM)
   useEffect(() => {
     const base = new TileLayer({
       source: new OSM(),
@@ -484,7 +485,7 @@ const AppMap = () => {
       mapRef.current.on("moveend", function (e) {
         let newZoom = mapRef.current.getView().getZoom();
         if (currZoom != newZoom) {
-          console.log("zoom end, new zoom: " + newZoom);
+setCurrentZoom(currZoom);
           currZoom = newZoom;
         }
       });
@@ -503,6 +504,7 @@ const AppMap = () => {
       displayedRegions: displayedRegionsArr,
       currentCompanyId,
       renewablePlantsCallback,
+      currentZoom
     };
     if (
       currentBigNumberId === "oil_yield" ||
@@ -526,14 +528,7 @@ const AppMap = () => {
     for (const newLayer of newLayers) {
       mapRef.current.addLayer(newLayer);
     }
-  }, [
-    activeCategory,
-    bigNumberValue,
-    currentBigNumberId,
-    currentCompanyId,
-    dispatch,
-    displayedRegionsArr,
-  ]);
+  }, [activeCategory, bigNumberValue, currentBigNumberId, currentCompanyId, currentZoom, dispatch, displayedRegionsArr]);
 
   useEffect(() => {
     if (currentRegion) {
