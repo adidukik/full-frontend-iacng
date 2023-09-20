@@ -29,6 +29,7 @@ import { Feature } from "ol";
 import { Circle as CircleStyle } from "ol/style.js";
 import { Category } from "../CategoriesMenu/categoriesSlice";
 import { formatNumberWithSpaces } from "../../utils/formatNumberWithSpaces";
+import { setRenewablePlants } from "./mapSlice";
 
 const format = new GeoJSON();
 const operatorIdToEmployees = {};
@@ -39,6 +40,7 @@ for (const el of format.readFeatures(employeesData)) {
   ];
 }
 const regionsFeatures = format.readFeatures(regionsData);
+let plantsFeatures = format.readFeatures(plantsData);
 const fieldsFeatures = format.readFeatures(fieldsData).filter((feature) => {
   return feature.get("type") === "добыча";
 });
@@ -48,7 +50,7 @@ const idToLayerType = {
 };
 function drawCircles(
   coordinatesArray,
-  params,
+  params
 ): VectorLayer<VectorSource<Geometry>> {
   const { displayedRegions, currentCompanyId } = params;
 
@@ -61,12 +63,12 @@ function drawCircles(
       if (
         currentCompanyId === 0 ||
         regionGeometry.intersectsCoordinate(
-          coords.getGeometry().flatCoordinates,
+          coords.getGeometry().flatCoordinates
         )
       ) {
         const circle = new Circle(
           coords.values_.geometry.flatCoordinates,
-          9000,
+          9000
         ); // Create a circle geometry around the point
         const feature = new Feature(circle);
         // Copy all the properties from the original feature to the new feature
@@ -106,7 +108,7 @@ function drawLines(
       color: "blue", // Change this to your desired color
       width: 2, // Change this to your desired line width
     }),
-  }),
+  })
 ): VectorLayer<VectorSource> {
   const vectorSource = new VectorSource({
     features: features, // Initialize the vector source with the provided features
@@ -127,7 +129,7 @@ const getFieldsLayer = (params): VectorLayer<VectorSource<Geometry>> => {
  
   if (currentType) {
     let featuresToDisplay = fieldsFeatures.filter((field) =>
-      String(field.get("field_resources")).includes(currentType),
+      String(field.get("field_resources")).includes(currentType)
     );
     if (currentCompanyId !== 0) {
       featuresToDisplay = featuresToDisplay.filter((field) =>
@@ -135,8 +137,8 @@ const getFieldsLayer = (params): VectorLayer<VectorSource<Geometry>> => {
         displayedRegions.some((regionFeature) =>
           field
             .getGeometry()
-            .intersectsExtent(regionFeature.getGeometry().getExtent()),
-        ),
+            .intersectsExtent(regionFeature.getGeometry().getExtent())
+        )
       );
     }
  console.log(featuresToDisplay)
@@ -169,15 +171,16 @@ const getFieldsLayer = (params): VectorLayer<VectorSource<Geometry>> => {
 
 const getOilGasPipelines = (params): VectorLayer<VectorSource> => {
   const { displayedRegions, currentCompanyId, currentBigNumberId } = params;
-  const data = currentBigNumberId === "oil_yield" ? oilPipelinesData : gasPipelinesData;
+  const data =
+    currentBigNumberId === "oil_yield" ? oilPipelinesData : gasPipelinesData;
   let features = format.readFeatures(data);
   if (currentCompanyId !== 0) {
     features = features.filter((field) =>
       displayedRegions.some((regionFeature) =>
         field
           .getGeometry()
-          .intersectsExtent(regionFeature.getGeometry().getExtent()),
-      ),
+          .intersectsExtent(regionFeature.getGeometry().getExtent())
+      )
     );
   }
 
@@ -200,8 +203,8 @@ const getTransmissionLines = (params): VectorLayer<VectorSource> => {
       displayedRegions.some((regionFeature) =>
         field
           .getGeometry()
-          .intersectsExtent(regionFeature.getGeometry().getExtent()),
-      ),
+          .intersectsExtent(regionFeature.getGeometry().getExtent())
+      )
     );
   }
 
@@ -218,14 +221,14 @@ const renewableSources = [
   "солнечная электростанция",
 ];
 const getPlantsLayer = (params) => {
-  let features = format.readFeatures(plantsData);
-  const { currentBigNumberId } = params;
+  const { currentBigNumberId, renewablePlantsCallback } = params;
   if (currentBigNumberId === "renewable_energy") {
-    features = features.filter((feature) =>
-      renewableSources.includes(feature.get("type")),
+    plantsFeatures = plantsFeatures.filter((feature) =>
+      renewableSources.includes(feature.get("type"))
     );
+    renewablePlantsCallback(plantsFeatures);
   }
-  return drawCircles(features, params);
+  return drawCircles(plantsFeatures, params);
 };
 
 const colors = [
@@ -264,7 +267,7 @@ const flyTo = (location): void => {
       duration: duration,
       zoom: 6,
     },
-    callback,
+    callback
   );
   view.animate(
     {
@@ -275,26 +278,26 @@ const flyTo = (location): void => {
       zoom: DEFAULT_ZOOM,
       duration: duration / 2,
     },
-    callback,
+    callback
   );
 };
 
 const AppMap = () => {
   const bigNumberValue = useSelector(
-    (state: RootState) => state.bigNumbers.value,
+    (state: RootState) => state.bigNumbers.value
   );
   const activeCategory: Category = useSelector(
-    (state: RootState) => state.categories,
+    (state: RootState) => state.categories
   );
 
   const currentRegion = useSelector(
-    (state: RootState) => state.regions.selectedRegion,
+    (state: RootState) => state.regions.selectedRegion
   );
   const currentCompanyId = useSelector(
-    (state: RootState) => state.auth.currentCompanyId,
+    (state: RootState) => state.auth.currentCompanyId
   );
   const currentBigNumberId = useSelector(
-    (state: RootState) => state.bigNumbers.currentBigNumberId,
+    (state: RootState) => state.bigNumbers.currentBigNumberId
   );
   const dispatch = useDispatch();
   const popupRef = useRef(null);
@@ -323,7 +326,7 @@ const AppMap = () => {
         opacity: 0.6,
         style: function (feature) {
           const isDisplayed = displayedRegionsNamesArr.includes(
-            feature.get("name_ru"),
+            feature.get("name_ru")
           );
 
           const color =
@@ -345,7 +348,7 @@ const AppMap = () => {
           return myStyle;
         },
       }),
-    [],
+    []
   );
 
   const ref = useRef<HTMLDivElement>(null);
@@ -479,15 +482,29 @@ const AppMap = () => {
         });
       };
       mapRef.current.on("pointermove", onPointerMove);
+      let currZoom = mapRef.current.getView().getZoom();
+      mapRef.current.on("moveend", function (e) {
+        let newZoom = mapRef.current.getView().getZoom();
+        if (currZoom != newZoom) {
+          console.log("zoom end, new zoom: " + newZoom);
+          currZoom = newZoom;
+        }
+      });
     }
   }, [activeCategory, bigNumberValue, getNextPopupText, regionsLayer, view]);
 
   useEffect(() => {
     let newLayers = [];
+    const renewablePlantsCallback = (features: Feature[]) => {
+      dispatch(
+        setRenewablePlants(features.map((feature) => feature.get("id")))
+      );
+    };
     const params = {
       currentBigNumberId,
       displayedRegions: displayedRegionsArr,
       currentCompanyId,
+      renewablePlantsCallback,
     };
     if (
       currentBigNumberId === "oil_yield" ||
@@ -496,7 +513,10 @@ const AppMap = () => {
       newLayers = [getFieldsLayer(params), getOilGasPipelines(params)];
     } else if (currentBigNumberId === "oil_products_yield") {
       newLayers = [getFactoriesLayer(params)];
-    } else if (currentBigNumberId === "energy_generation" || "renewable_energy") {
+    } else if (
+      currentBigNumberId === "energy_generation" ||
+      currentBigNumberId === "renewable_energy"
+    ) {
       const filteredTransmissionLines = getTransmissionLines(params);
       newLayers = [getPlantsLayer(params), filteredTransmissionLines];
     }
@@ -519,9 +539,17 @@ const AppMap = () => {
 
   useEffect(() => {
     if (currentRegion) {
-      const feature = regionsFeatures.filter(
-        (feature) => feature.get("name_ru") === currentRegion,
-      )[0];
+      let feature;
+      if (activeCategory === 0) {
+        feature = regionsFeatures.filter(
+          (regionsFeature) => regionsFeature.get("name_ru") === currentRegion
+        )[0];
+      } else if (currentBigNumberId === "renewable_energy") {
+        feature = plantsFeatures.filter(
+          (regionsFeature) => regionsFeature.get("id") === currentRegion
+        )[0];
+      }
+
       //.filter(feature => feature.values_.name_ru === currentRegion)
       const extent = feature.getGeometry().getExtent();
       const center = getCenter(extent);
@@ -529,7 +557,7 @@ const AppMap = () => {
       // Call the flyTo function when currentRegion changes
       flyTo(center);
     }
-  }, [currentRegion, flyTo]);
+  }, [activeCategory, currentBigNumberId, currentRegion]);
 
   const getPopupText = (popupText) => {
     const arr = [];

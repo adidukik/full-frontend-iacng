@@ -6,13 +6,13 @@ import { RootState } from "../../../store";
 export const BigNumberButton = ({ bigNumber, onClick }) => {
   const dispatch = useDispatch();
   const currentBigNumberId = useSelector(
-    (state: RootState) => state.bigNumbers.currentBigNumberId,
+    (state: RootState) => state.bigNumbers.currentBigNumberId
   );
   const { title, id, data, tableHeaders } = bigNumber;
   const getTableItem = (bigNumberData) => {
     const formattedValue = formatNumberWithSpaces(bigNumberData.value);
     return (
-      <tr className="big-numbers__data-table" key={bigNumberData.label}>
+      <tr className="big-numbers__data-table" key={id + bigNumberData.label}>
         <td> {bigNumberData.label}</td>
         <td> {formattedValue}</td>
       </tr>

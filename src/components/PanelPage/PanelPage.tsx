@@ -21,9 +21,7 @@ const PanelPage = () => {
         <BigNumbers />
       </div>
       <div className="Regions">
-        {/* <Box></Box> */}
         <Regions></Regions>
-        {/* <Regions /> When redux is implemented*/}
       </div>
       <div className="ScrollingText">
         <ScrollingText />

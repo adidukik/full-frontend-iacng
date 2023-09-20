@@ -16,6 +16,8 @@ import RegionsTableCell from "./RegionsTableCell";
 import { parseRegionName } from "../../utils/parseRegionName";
 import { Category } from "../CategoriesMenu/categoriesSlice";
 import { selectRegion } from "./regionsSlice";
+import plantsData from "../../assets/geo/power_plants.json";
+import GeoJSON from "ol/format/GeoJSON";
 
 export const regionNames = {
   "Абайская обл.": "Абайская область",
@@ -40,20 +42,26 @@ export const regionNames = {
   "Шымкент обл.": "Шымкент",
   ЌАЗАЌСТАН: "Казахстан",
 };
-
+const format = new GeoJSON();
 const Regions = () => {
   const activeCategory: Category = useSelector(
-    (state: RootState) => state.categories,
+    (state: RootState) => state.categories
   );
   const dispatch = useDispatch();
   const onRegionClick = (region) => {
     dispatch(selectRegion(region));
   };
   const currentTimeRange = useSelector(
-    (state: RootState) => state.bigNumbers.currentTimeRange,
+    (state: RootState) => state.bigNumbers.currentTimeRange
   );
   const bigNumberValue = useSelector(
-    (state: RootState) => state.bigNumbers.value,
+    (state: RootState) => state.bigNumbers.value
+  );
+  const currentBigNumberId = useSelector(
+    (state: RootState) => state.bigNumbers.currentBigNumberId
+  );
+  const renewablePlants = useSelector(
+    (state: RootState) => state.map.renewablePlants
   );
   const timeRangeToEnglish = {
     сутки: "day",
@@ -78,90 +86,123 @@ const Regions = () => {
           region: parseRegionName(region),
           Факт: regionDataFact[region] === null ? 0 : regionDataFact[region],
           План: Math.floor(
-            regionDataPlan[region] === null ? 0 : regionDataPlan[region],
+            regionDataPlan[region] === null ? 0 : regionDataPlan[region]
           ), // Use 0 as default value if План data is not available
           Отклонение:
             regionDataFact[region] -
             Math.floor(
-              regionDataPlan[region] === null ? 0 : regionDataPlan[region],
+              regionDataPlan[region] === null ? 0 : regionDataPlan[region]
             ), // Calculate the difference between План and Факт
           Статус: "Работает",
         }));
         setTableData(tableData);
       }
     } else if (activeCategory === 1) {
-      const tableData = [
-        {
-          Станция: "ТОО Экиб. ГРЭС-1",
-          План: 2210,
-          Факт: 2210,
-          Отклонение: 0,
-          Статус: "работает",
-        },
-        {
-          Станция: "АО Экиб. ГРЭС-2",
-          План: 430,
-          Факт: 430,
-          Отклонение: 0,
-          Статус: "работает",
-        },
-        {
-          Станция: "АО ЕЭК(АксуЭС)",
-          План: 1540,
-          Факт: 1470,
-          Отклонение: -70,
-          Статус: "работает",
-        },
-        {
-          Станция: "АО Жамбылская ГРЭС",
-          План: 350,
-          Факт: 350,
-          Отклонение: 0,
-          Статус: "работает",
-        },
-        {
-          Станция: "Карагандинская ГРЭС-2",
-          План: 436,
-          Факт: 436,
-          Отклонение: 0,
-          Статус: "работает",
-        },
-        {
-          Станция: "Бухтарминская ГЭС",
-          План: 247,
-          Факт: 380,
-          Отклонение: 133,
-          Статус: "работает",
-        },
-        {
-          Станция: "Усть-Каменогорская ГЭС",
-          План: 147,
-          Факт: 147,
-          Отклонение: 0,
-          Статус: "работает",
-        },
-        {
-          Станция: "Шульбинская ГЭС",
-          План: 148,
-          Факт: 148,
-          Отклонение: 0,
-          Статус: "работает",
-        },
-      ];
+      let tableData = [];
+      if (
+        currentBigNumberId === "renewable_energy" &&
+        renewablePlants.length !== 0
+      ) {
+        let features = format.readFeatures(plantsData);
+        const renewablePlantsSet = new Set();
+        for (const renewablePlant of renewablePlants) {
+          renewablePlantsSet.add(renewablePlant);
+        }
+        features = features.filter((feature) =>
+          renewablePlantsSet.has(feature.get("id"))
+        );
+        tableData = features.map((feature) => ({
+          Станция: feature.get("name"),
+          Тип: feature.get("type"),
+          Компания: feature.get("company"),
+          id: feature.get("id"),
+        }));
+      } else {
+        tableData = [
+          {
+            Станция: "ТОО Экиб. ГРЭС-1",
+            План: 2210,
+            Факт: 2210,
+            Отклонение: 0,
+            Статус: "работает",
+          },
+          {
+            Станция: "АО Экиб. ГРЭС-2",
+            План: 430,
+            Факт: 430,
+            Отклонение: 0,
+            Статус: "работает",
+          },
+          {
+            Станция: "АО ЕЭК(АксуЭС)",
+            План: 1540,
+            Факт: 1470,
+            Отклонение: -70,
+            Статус: "работает",
+          },
+          {
+            Станция: "АО Жамбылская ГРЭС",
+            План: 350,
+            Факт: 350,
+            Отклонение: 0,
+            Статус: "работает",
+          },
+          {
+            Станция: "Карагандинская ГРЭС-2",
+            План: 436,
+            Факт: 436,
+            Отклонение: 0,
+            Статус: "работает",
+          },
+          {
+            Станция: "Бухтарминская ГЭС",
+            План: 247,
+            Факт: 380,
+            Отклонение: 133,
+            Статус: "работает",
+          },
+          {
+            Станция: "Усть-Каменогорская ГЭС",
+            План: 147,
+            Факт: 147,
+            Отклонение: 0,
+            Статус: "работает",
+          },
+          {
+            Станция: "Шульбинская ГЭС",
+            План: 148,
+            Факт: 148,
+            Отклонение: 0,
+            Статус: "работает",
+          },
+        ];
+      }
+
       setTableData(tableData);
     } else {
       setTableData([]);
     }
-  }, [activeCategory, regionDataFact, regionDataPlan]);
+  }, [
+    activeCategory,
+    currentBigNumberId,
+    regionDataFact,
+    regionDataPlan,
+    renewablePlants,
+  ]);
 
   const getHandleClick = (row) => {
-    if (activeCategory == 0) {
+    if (activeCategory === 0) {
       return () => {
         return regionNames[parseRegionName(row.region)] !== "Казахстан"
           ? onRegionClick(regionNames[row.region])
           : null;
       };
-    } else {
+    } else if (currentBigNumberId === "renewable_energy") {
+      return () => {
+        return onRegionClick(row.id);
+      };
+    }
+    {
       return () => {
         console.log("Other categ");
       };
@@ -176,34 +217,39 @@ const Regions = () => {
       <Table className="table" sx={{ height: "100%" }}>
         <TableHead>
           <TableRow>
-            <TableCell>Регион</TableCell>
-            <TableCell align="right">Факт</TableCell>
-            <TableCell align="right">План</TableCell>
-            <TableCell align="right">Отклонение</TableCell>
-            <TableCell align="right">Статус</TableCell>
+            {tableData[0] &&
+              Object.entries(tableData[0]).map(
+                ([rowKey, rowData]: [string, number], index) => {
+                  const tableCellProps = {};
+                  if (index) tableCellProps.align = "right";
+                  if (rowKey === "id") return <></>;
+                  return <TableCell {...tableCellProps}>{rowKey}</TableCell>;
+                }
+              )}
           </TableRow>
         </TableHead>
         <TableBody>
           {tableData.map((row, index) => (
             <TableRow key={index}>
               {Object.entries(row).map(
-                ([rowKey, rowData]: [string, number], index) =>
-                  index ? (
-                    <RegionsTableCell
-                      key={index}
-                      rowData={rowData}
-                      showDiff={
-                        showDiffElems.indexOf(rowKey) === -1 ? false : true
-                      }
-                    />
-                  ) : (
-                    <RegionsTableCell
-                      key={index}
-                      rowData={rowData}
-                      isButton={true}
-                      onClick={getHandleClick(row)}
-                    />
-                  ),
+                ([rowKey, rowData]: [string, number], index) => {
+                  const regionsTableCellProps = {
+                    key: index,
+                    rowData: rowData,
+                    showDiff: false,
+                    onClick: null,
+                  };
+                  if (index) {
+                    regionsTableCellProps.showDiff =
+                      showDiffElems.indexOf(rowKey) === -1 ? false : true;
+                  } else {
+                    regionsTableCellProps.onClick = getHandleClick(row);
+                  }
+                  if (rowKey === "id") {
+                    return <></>;
+                  }
+                  return <RegionsTableCell {...regionsTableCellProps} />;
+                }
               )}
             </TableRow>
           ))}
