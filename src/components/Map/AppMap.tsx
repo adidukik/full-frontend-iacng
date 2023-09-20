@@ -479,6 +479,14 @@ const AppMap = () => {
         });
       };
       mapRef.current.on("pointermove", onPointerMove);
+      let currZoom = mapRef.current.getView().getZoom();
+      mapRef.current.on("moveend", function (e) {
+        let newZoom = mapRef.current.getView().getZoom();
+        if (currZoom != newZoom) {
+          console.log("zoom end, new zoom: " + newZoom);
+          currZoom = newZoom;
+        }
+      });
     }
   }, [activeCategory, bigNumberValue, getNextPopupText, regionsLayer, view]);
 
@@ -504,7 +512,7 @@ const AppMap = () => {
       newLayers = [getFactoriesLayer(params)];
     } else if (
       currentBigNumberId === "energy_generation" ||
-      "renewable_energy"
+      currentBigNumberId === "renewable_energy"
     ) {
       const filteredTransmissionLines = getTransmissionLines(params);
       newLayers = [getPlantsLayer(params), filteredTransmissionLines];
@@ -546,7 +554,7 @@ const AppMap = () => {
       // Call the flyTo function when currentRegion changes
       flyTo(center);
     }
-  }, [currentRegion, flyTo]);
+  }, [activeCategory, currentBigNumberId, currentRegion]);
 
   const getPopupText = (popupText) => {
     const arr = [];
