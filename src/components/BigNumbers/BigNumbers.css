@@ -29,6 +29,10 @@
   text-align: left;
   font-size: 14px;
 }
+.big-numbers__data-types {
+  text-align: left;
+  font-size: 10px;
+}
 li.big-numbers__data:first-child {
   margin-right: 10px;
 }
@@ -36,7 +40,7 @@ li.big-numbers__data:first-child {
   text-align: left;
 }
 .big-numbers__title {
-  font-size: 14px;
+  font-size: 18px;
 }
 .big-numbers__btn {
   border: 1px solid white !important;
