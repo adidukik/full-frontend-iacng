@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store";
 
-function useFetchData<T>(url: string, isArray: boolean = false): T | null {
+function useFetchData<T>(url: string, isArray: boolean = false, isPrimitive = false): T | null {
   const [data, setData] = useState<T | null>(null);
   const [cachedData, setCachedData] = useState({});
 
@@ -15,8 +15,12 @@ function useFetchData<T>(url: string, isArray: boolean = false): T | null {
         fetch(url)
           .then((response) => response.json())
           .then((fetchedData) => {
-            const value = isArray ? fetchedData : Object.values(fetchedData)[0];
-
+            let value;
+            if(isPrimitive){
+              value = fetchedData;
+            }else{
+              value = isArray ? fetchedData : Object.values(fetchedData)[0];
+            }
             setCachedData((prevCachedData) => ({
               ...prevCachedData,
               [url]: value,

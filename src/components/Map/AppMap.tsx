@@ -30,6 +30,7 @@ import { Circle as CircleStyle } from "ol/style.js";
 import { Category } from "../CategoriesMenu/categoriesSlice";
 import { formatNumberWithSpaces } from "../../utils/formatNumberWithSpaces";
 import { setRenewablePlants } from "./mapSlice";
+import useFetchData from "../../hooks/useFetchData";
 
 const format = new GeoJSON();
 const operatorIdToEmployees = {};
@@ -565,7 +566,8 @@ setCurrentZoom(currZoom);
     }
     return arr;
   };
-
+  const ndpi = Math.floor(useFetchData("http://192.168.0.57:8000/calculate_ndpi/", false, true));
+  console.log("ndpi", ndpi)
   return (
     <>
       <div ref={ref} id="map" />
@@ -585,6 +587,9 @@ setCurrentZoom(currZoom);
           </tbody>
         </table>
       </div>
+      <div className="position-absolute top-0 end-0">
+{ ndpi &&    <div className="p-2 text-white" style={{backgroundColor:"#060b28", borderBottomLeftRadius:"10px"}}>НДПИ: <span style={{color: "#4dffdf"}}>{ndpi}</span> млн. тенге</div>
+}  </div>
     </>
   );
 };
