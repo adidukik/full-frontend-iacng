@@ -10,7 +10,10 @@ function useGraphData(displayedYDataPoints) {
   const oilData = useFetchData(yieldUrls[0], true);
   const gasData = useFetchData(yieldUrls[1], true);
   const opecData = useFetchData(yieldUrls[2], true);
-
+  const eeData = useFetchData(
+    `http://192.168.0.57:8000/calculate_electricity_last_x_elements/${displayedYDataPoints}/`,
+    true
+  );
   const oilPricesData = useFetchData(
     `http://192.168.0.57:8000/calculate_last_x_month_oil_avg_price_yield/${displayedYDataPoints}`,
     true
@@ -47,6 +50,7 @@ function useGraphData(displayedYDataPoints) {
     prices98,
     pricesDtl,
     pricesDtz,
+    eeData
   };
 }
 

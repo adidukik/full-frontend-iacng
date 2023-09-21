@@ -106,6 +106,7 @@ const Graph = () => {
     oilData,
     gasData,
     opecData,
+    eeData,
     oilPricesData,
     oilPricesLocalData,
     prices92,
@@ -114,6 +115,7 @@ const Graph = () => {
     pricesDtl,
     pricesDtz,
   } = useGraphData(displayedYDataPoints);
+  console.log(eeData);
   const oilPricesMonths = useMemo(() => {
     return {
       label: "средняя цена нефти",
@@ -166,6 +168,15 @@ const Graph = () => {
         months.borderColor = datasetOptions[index].color;
         months.backgroundColor = pointColors;
       });
+      let eeMonths = {};
+      console.log(eeData?.data)
+      if (eeData) {
+        eeMonths = {
+          label: "Тарифы на электроэнергию (тг/ кВт)",
+          borderColor: "#FFC300",
+          data: eeData?.data?.reverse().map((eeElement) => eeElement.average_price)
+        }
+      }
 
       const monthsData = {
         oil_yield: [oilMonths],
@@ -204,7 +215,7 @@ const Graph = () => {
         oil_stored: [],
         well_downtime: [],
         losses: [],
-        energy_generation: [],
+        energy_generation: [eeMonths],
         renewable_energy: [],
         energy_consumption: [],
         balance_flow: [],
@@ -216,6 +227,8 @@ const Graph = () => {
         flow_middle_asia_month: [],
         opec: [oilMonths, opecMonths],
       };
+      // const myLatestDate = activeCategory === 1 ? eeData?.data[eeData?.data-1]?.data : latestDate;
+      console.log()
       const data = {
         labels: getGraphLabels(
           latestDate,
@@ -231,6 +244,7 @@ const Graph = () => {
     bigNumberValue,
     currentBigNumberId,
     displayedYDataPoints,
+    eeData,
     gasData,
     latestDate,
     oilData,
@@ -246,12 +260,13 @@ const Graph = () => {
     pricesDtz,
   ]);
 
-  if (activeCategory === 0 || activeCategory === 3) {
+  if (activeCategory !== 2) {
     return (
       <div className="chart-oil">
         <div className="chart-oil__select">
           <label htmlFor="minmax-buttons" className="font-bold block mb-2">
-            Число {currentBigNumberId === "oil_products_prices" ? "дней": "месяцев"}
+            Число{" "}
+            {currentBigNumberId === "oil_products_prices" ? "дней" : "месяцев"}
           </label>
           <InputNumber
             inputId="minmax-buttons"
