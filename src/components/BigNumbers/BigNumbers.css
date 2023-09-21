@@ -27,7 +27,7 @@
 .big-numbers__data,
 .big-numbers__data-table {
   text-align: left;
-  font-size: 14px;
+  font-size: 13px;
 }
 .big-numbers__data-types {
   text-align: left;
@@ -60,6 +60,17 @@ li.big-numbers__data:first-child {
   max-height: 50px;
   display: flex;
   justify-content: space-evenly;
+}
+
+/* Define a class for thead with a 10px font size */
+.table-thead {
+  font-size: 10px;
+  text-align: left;
+}
+
+/* Define a class for tbody with a 14px font size */
+.table-tbody {
+  font-size: 12px;
 }
 
 .BigNumbers .nav-item {

@@ -1,3 +1,4 @@
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { formatNumberWithSpaces } from "../../utils/formatNumberWithSpaces";
 import { Button } from "react-bootstrap";
@@ -6,13 +7,13 @@ import { RootState } from "../../../store";
 export const BigNumberButton = ({ bigNumber, onClick }) => {
   const dispatch = useDispatch();
   const currentBigNumberId = useSelector(
-    (state: RootState) => state.bigNumbers.currentBigNumberId
+    (state: RootState) => state.bigNumbers.currentBigNumberId,
   );
   const { title, id, data, tableHeaders } = bigNumber;
   const getTableItem = (bigNumberData) => {
     const formattedValue = formatNumberWithSpaces(bigNumberData.value);
     return (
-      <tr className="big-numbers__data-table" key={id + bigNumberData.label}>
+      <tr className="big-numbers__data-table" key={bigNumberData.label}>
         <td> {bigNumberData.label}</td>
         <td> {formattedValue}</td>
       </tr>
@@ -29,14 +30,14 @@ export const BigNumberButton = ({ bigNumber, onClick }) => {
     >
       <h5 className="big-numbers__title">{bigNumber.title}</h5>
       <table>
-        <thead>
+        <thead className="table-thead">
           <tr>
             {tableHeaders.map((el) => (
               <td key={el}>{el}</td>
             ))}
           </tr>
         </thead>
-        <tbody>
+        <tbody className="table-tbody">
           {data.map((bigNumberData) => getTableItem(bigNumberData))}
         </tbody>
       </table>

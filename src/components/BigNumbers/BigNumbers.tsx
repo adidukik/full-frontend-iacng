@@ -118,19 +118,19 @@ const BigNumbers = (): JSX.Element => {
             ...manufacturing,
 
             {
-              title: "Цены на нефть (тг/ т)",
+              title: "Цена на нефть (тг / т)",
               id: "oil_prices",
               data: [
                 {
-                  label: "средняя",
+                  label: "внешний",
                   value: avgOilPrice,
                 },
                 {
-                  label: "средняя на внутренний рынок",
+                  label: "внутренний",
                   value: avgOilPriceLocal,
                 },
               ],
-              tableHeaders: [],
+              tableHeaders: ["Рынок", "Тг / тонн"],
             },
             {
               title: "Производство нефтепродуктов",
@@ -153,7 +153,7 @@ const BigNumbers = (): JSX.Element => {
                   value: mt,
                 },
               ],
-              tableHeaders: [],
+              tableHeaders: ["Тип", "Количество"],
             },
             {
               title: "Цены на нефтепродукты",
@@ -180,7 +180,7 @@ const BigNumbers = (): JSX.Element => {
                   value: dtz,
                 },
               ],
-              tableHeaders: [],
+              tableHeaders: ["Тип", "Цена"],
             },
             {
               title: "Остаток НП (дни)",
