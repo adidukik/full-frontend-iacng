@@ -125,7 +125,7 @@ const Regions = () => {
             Факт: 2210,
             Отклонение: 0,
             Статус: "работает",
-            id: 13
+            id: 13,
           },
           {
             Станция: "АО Экиб. ГРЭС-2",
@@ -133,7 +133,7 @@ const Regions = () => {
             Факт: 430,
             Отклонение: 0,
             Статус: "работает",
-            id: 5
+            id: 5,
           },
           {
             Станция: "АО ЕЭК(АксуЭС)",
@@ -141,7 +141,7 @@ const Regions = () => {
             Факт: 1470,
             Отклонение: -70,
             Статус: "работает",
-            id: 30
+            id: 30,
           },
           {
             Станция: "АО Жамбылская ГРЭС",
@@ -149,7 +149,7 @@ const Regions = () => {
             Факт: 350,
             Отклонение: 0,
             Статус: "работает",
-            id: 25
+            id: 25,
           },
           {
             Станция: "Карагандинская ГРЭС-2",
@@ -157,7 +157,7 @@ const Regions = () => {
             Факт: 436,
             Отклонение: 0,
             Статус: "работает",
-            id: 39
+            id: 39,
           },
           {
             Станция: "Бухтарминская ГЭС",
@@ -165,7 +165,7 @@ const Regions = () => {
             Факт: 380,
             Отклонение: 133,
             Статус: "работает",
-            id: 17
+            id: 17,
           },
           {
             Станция: "Усть-Каменогорская ГЭС",
@@ -173,7 +173,7 @@ const Regions = () => {
             Факт: 147,
             Отклонение: 0,
             Статус: "работает",
-            id: 7
+            id: 7,
           },
           {
             Станция: "Шульбинская ГЭС",
@@ -181,7 +181,7 @@ const Regions = () => {
             Факт: 148,
             Отклонение: 0,
             Статус: "работает",
-            id: 35
+            id: 35,
           },
         ];
       }
@@ -201,11 +201,14 @@ const Regions = () => {
   const getHandleClick = (row) => {
     if (activeCategory === 0) {
       return () => {
-        return regionNames[parseRegionName(row.region)] !== "Казахстан"
-          ? onRegionClick(regionNames[row.region])
+        return regionNames[parseRegionName(row["Регион"])] !== "Казахстан"
+          ? onRegionClick(regionNames[row["Регион"]])
           : null;
       };
-    } else if (currentBigNumberId === "energy_generation" || currentBigNumberId === "renewable_energy") {
+    } else if (
+      currentBigNumberId === "energy_generation" ||
+      currentBigNumberId === "renewable_energy"
+    ) {
       return () => {
         return onRegionClick(row.id);
       };
@@ -231,7 +234,11 @@ const Regions = () => {
                   const tableCellProps = {};
                   if (index) tableCellProps.align = "right";
                   if (rowKey === "id") return <></>;
-                  return <TableCell {...tableCellProps} key={rowKey}>{rowKey}</TableCell>;
+                  return (
+                    <TableCell {...tableCellProps} key={rowKey}>
+                      {rowKey}
+                    </TableCell>
+                  );
                 }
               )}
           </TableRow>
