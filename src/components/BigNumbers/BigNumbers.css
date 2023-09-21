@@ -72,6 +72,10 @@ li.big-numbers__data:first-child {
   font-size: 12px;
 }
 
+.table-tbody td:nth-child(even) {
+  color: #4dffdf;
+}
+
 .BigNumbers .nav-item {
   flex: 1;
   text-align: center;
