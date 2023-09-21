@@ -22,7 +22,7 @@ export const BigNumberButton = ({ bigNumber, onClick }) => {
 
   return (
     <Button
-      variant="outline-primary"
+      variant="outline-dark"
       className={`big-numbers__btn ${
         currentBigNumberId === id && "big-numbers__btn-active"
       }`}

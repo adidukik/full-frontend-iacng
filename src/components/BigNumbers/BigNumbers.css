@@ -62,13 +62,12 @@ li.big-numbers__data:first-child {
   justify-content: space-evenly;
 }
 
-/* Define a class for thead with a 10px font size */
 .table-thead {
   font-size: 10px;
   text-align: left;
+  color: #bfb7b7;
 }
 
-/* Define a class for tbody with a 14px font size */
 .table-tbody {
   font-size: 12px;
 }
