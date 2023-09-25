@@ -115,6 +115,6 @@ li.big-numbers__data:first-child {
 }
 .BigNumbers .card-body {
   /* background-color: #041541ff; */
-  background-color: #060b28;
+  background-color: var(--component-background);
 
 }

@@ -19,7 +19,6 @@ import { InputNumber } from "primereact/inputnumber";
 import { Button, getAccordionSummaryUtilityClass } from "@mui/material";
 import { Category } from "../CategoriesMenu/categoriesSlice";
 import { getGraphLabels } from "../../utils/getGraphLabels";
-import useFetchData from "../../hooks/useFetchData";
 import useGraphData from "../../hooks/useGraphData";
 
 //  "#FFC300", // Cyber Yellow
@@ -115,7 +114,6 @@ const Graph = () => {
     pricesDtl,
     pricesDtz,
   } = useGraphData(displayedYDataPoints);
-  console.log(eeData);
   const oilPricesMonths = useMemo(() => {
     return {
       label: "средняя цена нефти",

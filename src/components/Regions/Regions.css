@@ -2,7 +2,7 @@
   overflow-x: hidden;
   overflow-y: auto;
   height: 100vh;
-  background-color: #041541;
+  background-color: var(--component-background);
   color: white;
   padding: 0;
 }
@@ -28,13 +28,13 @@
 
 .table .MuiTableCell-head {
   padding: 5px !important;
-  background-color: #041541;
+  background-color: var(--component-background);
   font-size: 14px;
   color: white;
 }
 
 .table .MuiTableCell-body {
-  background-color: #041541;
+  background-color: var(--component-background);
   font-size: 12px;
   color: white;
   border-spacing: 0;
