@@ -1,6 +1,6 @@
 .Graph {
   margin-right: 14px;
-  background: #041541ff;
+  background: var(--component-background);
   margin: 0;
   height: 100%;
 }

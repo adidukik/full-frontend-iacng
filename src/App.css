@@ -28,6 +28,7 @@ label {
 }
 :root {
   --component-background: #041541;
+  --select-background: #004aad;
 }
 .App > div {
   border-radius: 10px !important;

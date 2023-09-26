@@ -49,12 +49,13 @@ li.big-numbers__data:first-child {
   margin-bottom: 7px;
   border: none;
   border-radius: 10px !important;
+  background-color: var(--component-background);
 }
 
 .big-numbers__btn-active {
   color: var(--bs-btn-hover-color);
-  background-color: var(--bs-btn-hover-bg);
-  border-color: var(--bs-btn-hover-border-color);
+  background-color: var(--bs-btn-bg);
+  border-color:  var(--select-background)
 }
 .BigNumbers .nav-tabs {
   max-height: 50px;
@@ -93,7 +94,7 @@ li.big-numbers__data:first-child {
 
 .BigNumbers .nav-tabs .nav-item.show .nav-link,
 .BigNumbers .nav-tabs .nav-link.active {
-  background-color: #060B28;
+  background-color: var(--select-background);
   color: #ffffff;
   font-weight: 700;
 }
