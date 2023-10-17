@@ -4,6 +4,7 @@ import bigNumbersReducer from "./src/components/BigNumbers/bigNumbersSlice";
 import regionsReducer from "./src/components/Regions/regionsSlice";
 import authReducer from "./src/components/LoginPage/authSlice";
 import mapReducer from "./src/components/Map/mapSlice";
+import opecReducer from "./src/components/OpecGraph/opecSlice";
 
 const rootReducer = combineReducers({
   categories: categoriesReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   regions: regionsReducer,
   auth: authReducer,
   map: mapReducer,
+  opec: opecReducer
 });
 
 const store = configureStore({

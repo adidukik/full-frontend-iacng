@@ -3,10 +3,10 @@ import { RootState } from "../../../store";
 import "./BigNumbers.css";
 import { useEffect, useState } from "react";
 import {
-  BigNumberTimeRange,
+  BigNumberBigNumberTab,
   setBigNumberId,
   setBigNumberValue,
-  setCurrentTimeRange,
+  setCurrentBigNumberTab,
   setLatestDate,
 } from "./bigNumbersSlice";
 import useFetchData from "../../hooks/useFetchData";
@@ -16,16 +16,16 @@ import { Card, Nav, Button } from "react-bootstrap";
 import { getFormattedDate } from "../../utils/getFormattedDate";
 import { BigNumberButton } from "./BigNumberButton";
 import useBigNumbers from "../../hooks/useBigNumbers";
+import OpecTable from "./OpecTable";
 
 export const LATEST_DATE_URL = "http://192.168.0.57:8000/last_day/";
 
 const BigNumbers = (): JSX.Element => {
-  const timeRanges: BigNumberTimeRange[] = ["сутки", "месяц", "год"];
   const activeCategory: Category = useSelector(
     (state: RootState) => state.categories
   );
-  const currentTimeRange = useSelector(
-    (state: RootState) => state.bigNumbers.currentTimeRange
+  const currentBigNumberTab = useSelector(
+    (state: RootState) => state.bigNumbers.currentBigNumberTab
   );
   const latestDate = useSelector(
     (state: RootState) => state.bigNumbers.latestDate
@@ -39,12 +39,12 @@ const BigNumbers = (): JSX.Element => {
 
   const [bigNumbers, setBigNumbers] = useState<BigNumber[]>([]);
 
-  const timeRangeToEnglish = {
+  const BigNumberTabToEnglish = {
     сутки: "date",
     месяц: "month",
     год: "year",
   };
-  const currentTimeRangeInEnglish = timeRangeToEnglish[currentTimeRange];
+  const currentBigNumberTabInEnglish = BigNumberTabToEnglish[currentBigNumberTab];
   const fetchedDate: Date = useFetchData(LATEST_DATE_URL);
   useEffect(() => {
     if (String(fetchedDate) != latestDate) {
@@ -74,10 +74,10 @@ const BigNumbers = (): JSX.Element => {
     price98,
     dtl,
     dtz,
-  } = useBigNumbers(currentTimeRangeInEnglish, currentCompanyIdStr);
+  } = useBigNumbers(currentBigNumberTabInEnglish, currentCompanyIdStr);
 
   useEffect(() => {
-    switch (Number(activeCategory)) {
+    switch (activeCategory) {
       case 0:
         const manufacturing: BigNumber[] = [
           {
@@ -427,32 +427,12 @@ const BigNumbers = (): JSX.Element => {
     skv,
     xr,
   ]);
-  // useEffect(() => {
-  //   console.log(bigNumbers);
-  //   if (bigNumbers[0]) {
-  //     dispatch(setBigNumberId(bigNumbers[0].id));
-  //   }
-  // }, [activeCategory, bigNumbers]);
-
-  return (
-    <Card className="big-numbers app-card">
-      <h3 className="big-numbers__heading">Данные</h3>
-      <h3 className="big-numbers__date">за {formattedDate}</h3>
-      <Card.Header>
-        <Nav variant="tabs" defaultActiveKey="#сутки">
-          {timeRanges.map((item, idx) => (
-            <Nav.Item key={idx}>
-              <Nav.Link
-                href={`#${item}`}
-                onClick={() => dispatch(setCurrentTimeRange(item))}
-              >
-                {item}
-              </Nav.Link>
-            </Nav.Item>
-          ))}
-        </Nav>
-      </Card.Header>
-      <Card.Body>
+  const currentInterface = (activeCategory === 3) ? "opec" : "default"
+  const InterfaceData = {
+    default: {
+      defaultActiveKey: "#сутки",
+      tabs: ["сутки", "месяц", "год"],
+      components: (
         <ul>
           {bigNumbers.map((bigNumber, index) =>
             bigNumber.data.length === 0 ? (
@@ -470,7 +450,37 @@ const BigNumbers = (): JSX.Element => {
             )
           )}
         </ul>
-      </Card.Body>
+      ),
+    },
+    opec: {
+      defaultActiveKey: "#баррели",
+      tabs: ["баррели", "тонны"],
+      components: <OpecTable />
+    },
+  };
+  
+  return (
+    <Card className="big-numbers app-card">
+      <h3 className="big-numbers__heading">Данные</h3>
+      <h3 className="big-numbers__date">за {formattedDate}</h3>
+      <Card.Header>
+        <Nav
+          variant="tabs"
+          defaultActiveKey={InterfaceData[currentInterface].defaultActiveKey}
+        >
+          {InterfaceData[currentInterface].tabs.map((item, idx) => (
+            <Nav.Item key={idx}>
+              <Nav.Link
+                href={`#${item}`}
+                onClick={() => dispatch(setCurrentBigNumberTab(item))}
+              >
+                {item}
+              </Nav.Link>
+            </Nav.Item>
+          ))}
+        </Nav>
+      </Card.Header>
+      <Card.Body>{InterfaceData[currentInterface].components}</Card.Body>
     </Card>
   );
 };

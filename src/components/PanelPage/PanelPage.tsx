@@ -7,19 +7,17 @@ import Graph from "../Graph/Graph";
 import AppMap from "../Map/AppMap";
 import Regions from "../Regions/Regions";
 import ScrollingText from "../ScrollingText/ScrollingText";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store";
+import { Category } from "../CategoriesMenu/categoriesSlice";
+import OpecGraphCountry from "../OpecGraph/OpecGraphCountry";
+import OpecGraphAll from "../OpecGraph/OpecGraphAll";
+import OpecComponents from "../OpecGraph/OpecComponents";
+import ('./PanelPage.css')
 
-const PanelPage = () => {
+const DefaultComponents = () =>{
   return (
-    <div className="App">
-      <div className="Title align-items-center d-flex w-100">
-        <Title />
-      </div>
-      <div className="CategoriesMenu">
-        <CategoriesMenu />
-      </div>
-      <div className="BigNumbers">
-        <BigNumbers />
-      </div>
+    <>
       <div className="Regions">
         <Regions></Regions>
       </div>
@@ -35,6 +33,27 @@ const PanelPage = () => {
       <div className="Graph">
         <Graph />
       </div>
+    </>
+  );
+}
+
+const PanelPage = () => {
+  const activeCategory: Category = useSelector(
+    (state: RootState) => state.categories
+  );
+  console.log(activeCategory)
+  return (
+    <div className="PanelPage">
+      <div className="Title align-items-center d-flex w-100">
+        <Title />
+      </div>
+      <div className="CategoriesMenu">
+        <CategoriesMenu />
+      </div>
+      <div className="BigNumbers">
+        <BigNumbers />
+      </div>
+      {(activeCategory === 3) ? <OpecComponents /> : <DefaultComponents />}
     </div>
   );
 };

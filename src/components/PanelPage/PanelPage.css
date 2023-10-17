@@ -1,0 +1,81 @@
+.PanelPage {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  grid-template-columns: 1.4fr 3.3fr 1.3fr 2fr;
+  grid-template-rows: 1.4fr 1fr 1.6fr 11.37fr 9.84fr;
+  gap: 16px;
+  font-family: "Montserrat", sans-serif !important;
+  padding: 5px 24px;
+  background: url("./src/assets/images/bg1.png") center center no-repeat;
+  background-size: cover;
+}
+th,
+td,
+button {
+  font-family: "Montserrat", sans-serif !important;
+}
+label {
+  color: white;
+}
+:root {
+  --component-background: #041541;
+  --select-background: #004aad;
+}
+.PanelPage > div {
+  border-radius: 10px !important;
+  overflow: hidden;
+}
+
+.Title {
+  grid-column: 1 / span 4; /* This element spans all 4 columns */
+  grid-row: 1;
+  height: 100%;
+}
+
+.CategoriesMenu {
+  grid-column: 1 / span 4; /* This element spans all 4 columns */
+  grid-row: 2;
+}
+
+.BigNumbers {
+  grid-column: 1;
+  grid-row: 3 / span 3;
+}
+
+.ScrollingText {
+  grid-column: 2 / span 3; /* This element spans 3 columns starting from the 2nd column */
+  grid-row: 3;
+}
+
+.Map {
+  grid-column: 2 / span 2; /* This element spans 2 columns starting from the 3rd column */
+  grid-row: 4;
+}
+
+.ChatBot {
+  grid-column: 4;
+  grid-row: 4;
+}
+
+.Regions {
+  grid-column: 2;
+  grid-row: 5;
+}
+
+.Graph {
+  grid-column: 3 / span 2; /* This element spans 2 columns starting from the 3rd column */
+  grid-row: 5;
+}
+.OpecGraphAll {
+  grid-column: 2 / span 3; /* This element spans all 4 columns */
+  grid-row: 5;
+  background-color: red;
+}
+.OpecGraphCountry {
+  grid-column: 2 / span 3; /* This element spans all 4 columns */
+  grid-row: 4;
+  background-color: red;
+}
