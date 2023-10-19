@@ -1,35 +1,13 @@
-// import React, { useState } from 'react';
-// import { TabMenu } from 'primereact/tabmenu';
-// import { MenuItem } from 'primereact/menuitem';
-// import './CategoriesMenu.css';
-
-// const CategoriesMenu = () => {
-//     const items: MenuItem[] = [
-//         {label: 'нефтегазовая отрасль'},
-//         {label: 'электроэнергетика'},
-//         {label: 'урановая промышленность'},
-//     ];
-
-//     return (
-//         <div className="card">
-//             <div className = "center">
-//                 <TabMenu model={items} />
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default CategoriesMenu
-
-// features/categories/CategoriesMenu.tsx
-
-import React from "react";
 import { Nav } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { setCategory } from "./categoriesSlice";
 import "./CategoriesMenu.css";
-import { setBigNumberId, setBigNumberValue } from "../BigNumbers/bigNumbersSlice";
-import { setCurrentCompanyId } from "../LoginPage/authSlice";
+import {
+  setBigNumberId,
+  setBigNumberValue,
+  setCurrentBigNumberTab,
+} from "../BigNumbers/bigNumbersSlice";
+import { useSelector } from "react-redux";
 
 const firstBigNumbers: string[] = [
   "oil_yield",
@@ -52,6 +30,11 @@ const CategoriesMenu = () => {
     dispatch(setCategory(categoryIndex));
     dispatch(setBigNumberValue(0));
     dispatch(setBigNumberId(firstBigNumbers[categoryIndex]));
+    if (categoryIndex === 3) {
+      dispatch(setCurrentBigNumberTab("баррели"));
+    } else {
+      dispatch(setCurrentBigNumberTab("сутки"));
+    }
   };
 
   return (

@@ -514,7 +514,6 @@ const AppMap = () => {
   const ndpi = Math.floor(
     useFetchData("http://192.168.0.57:8000/calculate_ndpi/", false, true),
   );
-  console.log("ndpi", ndpi);
   return (
     <>
       <div ref={ref} id="map" />

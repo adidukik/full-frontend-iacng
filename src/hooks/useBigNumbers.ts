@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import useFetchData from "./useFetchData";
 
 function useBigNumbers(currentTimeRangeInEnglish, currentCompanyIdStr) {
-  const oilPlan = Math.floor(
-    useFetchData(
-      `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_plan/${currentCompanyIdStr}`
-    )
-  );
+    const oilPlan = Math.floor(
+      useFetchData(
+        `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield_plan/${currentCompanyIdStr}`
+      )
+    );
   const oilFact = Math.floor(
     useFetchData(
       `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_oil_yield/${currentCompanyIdStr}`

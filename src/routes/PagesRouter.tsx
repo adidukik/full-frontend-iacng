@@ -9,9 +9,10 @@ export const PagesRouter = (): JSX.Element => {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
-      <Route element={<AuthenticatedRoute />}>
+      {/* <Route element={<AuthenticatedRoute />}>
         <Route path="/" element={<PanelPage />} />
-      </Route>
+      </Route> */}
+      <Route path="/" element={<PanelPage />} />
     </Routes>
   );
 };

@@ -21,9 +21,7 @@ const DefaultComponents = () =>{
       <div className="Regions">
         <Regions></Regions>
       </div>
-      <div className="ScrollingText">
-        <ScrollingText />
-      </div>
+    
       <div className="Map" style={{ background: "#e5e5e5" }}>
         <AppMap />
       </div>
@@ -53,7 +51,10 @@ const PanelPage = () => {
       <div className="BigNumbers">
         <BigNumbers />
       </div>
-      {(activeCategory === 3) ? <OpecComponents /> : <DefaultComponents />}
+      <div className="ScrollingText">
+        <ScrollingText />
+      </div>
+      {activeCategory === 3 ? <OpecComponents /> : <DefaultComponents />}
     </div>
   );
 };

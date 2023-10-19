@@ -1,6 +1,7 @@
 const cachedData: { [url: string]: any } = {};
 
 export const fetchCachedData = async <T>(url: string): Promise<T> => {
+  console.log(url);
   if (cachedData[url]) {
     return cachedData[url];
   } else {

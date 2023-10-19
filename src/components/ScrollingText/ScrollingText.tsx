@@ -7,7 +7,10 @@ import { Category } from "../CategoriesMenu/categoriesSlice";
 
 const ScrollingText = () => {
   const activeCategory: Category = useSelector(
-    (state: RootState) => state.categories,
+    (state: RootState) => state.categories
+  );
+  const currentCountry = useSelector(
+    (state: RootState) => state.opec.currentCountry
   );
   let text;
   switch (activeCategory) {
@@ -25,11 +28,15 @@ const ScrollingText = () => {
     default:
       text = "";
   }
+  if(activeCategory === 3) return <div className="text-slate-50">{currentCountry}</div>;
+    
   return (
-    <div className="card d-flex align-items-center">
-      <marquee>
-        <span className="scrollingText">{text}</span>
-      </marquee>
+        <div className="card d-flex align-items-center">
+      
+        <marquee>
+          <span className="scrollingText">{text}</span>
+        </marquee>
+    
     </div>
   );
 };

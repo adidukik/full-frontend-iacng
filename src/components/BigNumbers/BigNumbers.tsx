@@ -460,9 +460,13 @@ const BigNumbers = (): JSX.Element => {
   };
   
   return (
-    <Card className="big-numbers app-card">
-      <h3 className="big-numbers__heading">Данные</h3>
-      <h3 className="big-numbers__date">за {formattedDate}</h3>
+    <Card className="big-numbers app-card bg-green-500">
+      {activeCategory !== 3 && (
+        <>
+          <h3 className="big-numbers__heading">Данные</h3>
+          <h3 className="big-numbers__date">за {formattedDate}</h3>
+        </>
+      )}
       <Card.Header>
         <Nav
           variant="tabs"
