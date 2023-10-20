@@ -57,4 +57,5 @@ export interface OpecState {
   currentCountry: OpecCountryName;
   currentData: currentDataInteface;
   graphDataByCountryName: GraphDataByCountryName;
+  validCountries: OpecCountryName[];
 }

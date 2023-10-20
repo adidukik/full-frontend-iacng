@@ -55,6 +55,7 @@ const initialState: OpecState = {
     countries_o_plus: [],
   },
   graphDataByCountryName: {},
+  validCountries: [],
 };
 
 const opecSlice = createSlice({
@@ -98,6 +99,9 @@ const opecSlice = createSlice({
       if (!arr.includes(el)) {
         arr.push(el);
       }
+    },
+    setValidCountries: (state, action) => {
+      
     },
   },
 });

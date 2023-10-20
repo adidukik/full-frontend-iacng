@@ -31,6 +31,9 @@ const DefaultComponents = () =>{
       <div className="Graph">
         <Graph />
       </div>
+       <div className="ScrollingText">
+        <ScrollingText />
+      </div>
     </>
   );
 }
@@ -51,9 +54,7 @@ const PanelPage = () => {
       <div className="BigNumbers">
         <BigNumbers />
       </div>
-      <div className="ScrollingText">
-        <ScrollingText />
-      </div>
+     
       {activeCategory === 3 ? <OpecComponents /> : <DefaultComponents />}
     </div>
   );

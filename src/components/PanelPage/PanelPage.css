@@ -77,3 +77,7 @@ label {
   grid-column: 2 / span 3; /* This element spans all 4 columns */
   grid-row: 4;
 }
+.OpecGraphs{
+  grid-column: 2 / span 3;
+  grid-row: 3 / span 3;
+}

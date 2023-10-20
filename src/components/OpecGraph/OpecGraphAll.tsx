@@ -59,7 +59,7 @@ ChartJS.register(
 );
 const textColor = "rgba(255,255,255,1)";
 const lineOptions = {
-  responsive: false,
+  responsive: true,
   maintainAspectRatio: false,
 
   plugins: {
@@ -107,6 +107,9 @@ const OpecGraphCountry = () => {
   const graphDataByCountryName = useSelector(
     (state: RootState) => state.opec.graphDataByCountryName,
   );
+  const currentBigNumberTab = useSelector(
+    (state: RootState) => state.bigNumbers.currentBigNumberTab,
+  );
   const [oilShow, setOilShow] = useState(true);
   const [quotaShow, setQuotaShow] = useState(false);
   const graphDatasets = [];
@@ -117,9 +120,15 @@ const OpecGraphCountry = () => {
   for (const countryName of chosenCountries) {
     const dataPoints = graphDataByCountryName[countryName];
     if (dataPoints) {
-      const factData = dataPoints.map((point) => point.fact_b);
-      const planData = dataPoints.map((point) => point.plan_b);
-      const quotaData = dataPoints.map((point) => point.quota_b);
+      let planData, factData;
+      if (currentBigNumberTab === "баррели") {
+        planData = dataPoints.map((point) => point.plan_b);
+        factData = dataPoints.map((point) => point.fact_b);
+      } else {
+        planData = dataPoints.map((point) => point.plan_t);
+        factData = dataPoints.map((point) => point.fact_t);
+      }
+
       const commonProps = {
         type: "line",
         fill: false,
@@ -159,20 +168,20 @@ const OpecGraphCountry = () => {
   };
 
   return (
-    <div className="d-flex h-100 justify-content-between flex-row align-items-center text-white">
-      <div className="card">
+    <div className="d-flex h-50 justify-content-between flex-row align-items-center text-white">
+      <div className="card w-100 me-1">
         <Line
           data={chartData}
           width={800}
-          height={250}
           options={lineOptions}
           style={{
-            margin: "0 auto",
+            width: "100% !important",
+            height: "100% !important"
           }}
         />
       </div>
 
-      <div className="d-flex card flex-column h-100 w-48 border-primary p-4 border-left">
+      <div className="d-flex card flex-column border-primary p-4 border-left">
         <FormControl component="fieldset" className="!flex flex-row">
           <FormControlLabel
             control={

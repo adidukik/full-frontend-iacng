@@ -13,10 +13,9 @@ const OpecComponents = () => {
   }, [dispatch]);
   return (
     <>
-      <div className="OpecGraphCountry">
+      <div className="OpecGraphs">
         <OpecGraphCountry />
-      </div>
-      <div className="OpecGraphAll">
+     
         <OpecGraphAll />
       </div>
     </>

@@ -39,6 +39,9 @@ const OpecGraphCountry = () => {
   const graphDataByCountryName = useSelector(
     (state: RootState) => state.opec.graphDataByCountryName,
   );
+  const currentBigNumberTab = useSelector(
+    (state: RootState) => state.bigNumbers.currentBigNumberTab,
+  );
   const dataPoints = graphDataByCountryName[currentCountry];
 
   if (dataPoints) {
@@ -46,8 +49,15 @@ const OpecGraphCountry = () => {
     const labels = dataPoints.map((point) =>
       getLabelFromMonthYear(point.year, point.month),
     );
-    const factData = dataPoints.map((point) => point.fact_b);
-    const planData = dataPoints.map((point) => point.plan_b);
+    let factData, planData;
+    if (currentBigNumberTab === "баррели") {
+      factData = dataPoints.map((point) => point.fact_b);
+      planData = dataPoints.map((point) => point.plan_b);
+    } else {
+      factData = dataPoints.map((point) => point.fact_t);
+      planData = dataPoints.map((point) => point.plan_t);
+    }
+
     const textColor = "white";
     //   "#FFC300", // Cyber Yellow
     // "#3B82F6", // Neon Blue
@@ -61,6 +71,14 @@ const OpecGraphCountry = () => {
       maintainAspectRatio: false,
 
       plugins: {
+        title: {
+          display: true,
+          text: currentCountry, 
+          color: "#fff",
+          font: {
+            size: 16
+          }
+        },
         legend: {
           display: true,
           labels: {
@@ -131,11 +149,15 @@ const OpecGraphCountry = () => {
           pointHitRadius: 10,
           data: factData,
         },
-        
       ],
     };
     return (
-      <Card className="p-3">
+      <Card
+        className="p-3 mb-1"
+        style={{
+          height: "50%",
+        }}
+      >
         <Line
           data={chartData}
           style={{ width: "100% !important" }}
@@ -145,7 +167,7 @@ const OpecGraphCountry = () => {
     );
   }
   return (
-    <Card className="p-3">
+    <Card className="p-3 h-100">
       <h1 className="text-center text-slate-50">{currentCountry}</h1>
     </Card>
   );
