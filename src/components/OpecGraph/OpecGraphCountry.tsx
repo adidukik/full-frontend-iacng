@@ -63,7 +63,9 @@ const OpecGraphCountry = () => {
       plugins: {
         legend: {
           display: true,
-          color: textColor,
+          labels: {
+            color: textColor, // Set the legend text color here
+          },
         },
       },
       scales: {

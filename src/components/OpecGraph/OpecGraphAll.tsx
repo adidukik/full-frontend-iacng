@@ -57,7 +57,7 @@ ChartJS.register(
   LineController,
   BarController,
 );
-const textColor = "#fff";
+const textColor = "rgba(255,255,255,1)";
 const lineOptions = {
   responsive: false,
   maintainAspectRatio: false,
@@ -65,7 +65,9 @@ const lineOptions = {
   plugins: {
     legend: {
       display: true,
-      color: textColor,
+      labels: {
+        color: textColor, // Set the legend text color here
+      },
     },
   },
   scales: {
@@ -174,6 +176,9 @@ const OpecGraphCountry = () => {
               <Checkbox
                 checked={oilShow}
                 onChange={() => setOilShow(!oilShow)}
+                style={{
+                  color: "#fff",
+                }}
               />
             }
             label="Добыча нефти"
@@ -184,6 +189,9 @@ const OpecGraphCountry = () => {
               <Checkbox
                 checked={quotaShow}
                 onChange={() => setQuotaShow(!quotaShow)}
+                style={{
+                  color: "#fff",
+                }}
               />
             }
             label="Квота"

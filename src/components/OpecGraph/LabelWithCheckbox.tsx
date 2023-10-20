@@ -3,10 +3,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store";
-import {
-  addChosenCountry,
-  removeChosenCountry,
-} from "./opecSlice";
+import { addChosenCountry, removeChosenCountry } from "./opecSlice";
 import { CountryCurrentOpecData } from "../../interfaces/opecSlice";
 
 interface LabelWithCheckboxProps {
@@ -35,6 +32,9 @@ const LabelWithCheckbox = ({ el }: LabelWithCheckboxProps): JSX.Element => {
           checked={chosenCountries.includes(el.country)}
           onChange={handleCountryCheckboxChange}
           name="checkbox3"
+          style={{
+            color: "#fff",
+          }}
         />
       }
       label={el.country}
