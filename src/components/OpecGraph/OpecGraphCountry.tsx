@@ -93,25 +93,6 @@ const OpecGraphCountry = () => {
       labels,
       datasets: [
         {
-          type: "bar" as const,
-          label: "Добыча нефти",
-          fill: false,
-          lineTension: 0.1,
-          backgroundColor: graphColor1,
-          borderColor: graphColor1,
-          borderCapStyle: "butt",
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: "miter",
-          pointBorderColor: graphColor1,
-          pointBorderWidth: 1,
-          pointHoverRadius: 5,
-          pointHoverBorderWidth: 2,
-          pointRadius: 1,
-          pointHitRadius: 10,
-          data: factData,
-        },
-        {
           type: "line" as const,
 
           label: "Обязательства по ОПЕК",
@@ -131,6 +112,26 @@ const OpecGraphCountry = () => {
           pointHitRadius: 10,
           data: planData,
         },
+        {
+          type: "bar" as const,
+          label: "Добыча нефти",
+          fill: false,
+          lineTension: 0.1,
+          backgroundColor: graphColor1,
+          borderColor: graphColor1,
+          borderCapStyle: "butt",
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: "miter",
+          pointBorderColor: graphColor1,
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBorderWidth: 2,
+          pointRadius: 1,
+          pointHitRadius: 10,
+          data: factData,
+        },
+        
       ],
     };
     return (

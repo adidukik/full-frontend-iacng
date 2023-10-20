@@ -16,7 +16,7 @@ export const fetchCurrentData = createAsyncThunk(
       const data = await fetchCachedData(
         `${SECONDARY_BACKEND_URL}/calculate_opek_countries_quota`
       );
-      // After fetching data, dispatch an action to update the state.
+      console.log("bitch", data);
       dispatch(setCurrentData(data));
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -99,7 +99,6 @@ const opecSlice = createSlice({
         arr.push(el);
       }
     },
-   
   },
 });
 

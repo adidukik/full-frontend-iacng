@@ -72,10 +72,8 @@ label {
 .OpecGraphAll {
   grid-column: 2 / span 3; /* This element spans all 4 columns */
   grid-row: 5;
-  background-color: red;
 }
 .OpecGraphCountry {
   grid-column: 2 / span 3; /* This element spans all 4 columns */
   grid-row: 4;
-  background-color: red;
 }

@@ -159,17 +159,20 @@ const OpecGraphCountry = () => {
   };
 
   return (
-    <div className="card d-flex justify-content-between flex-row align-items-center">
-      <Line
-        data={chartData}
-        width={800}
-        height={250}
-        options={lineOptions}
-        style={{
-          margin: "0 auto",
-        }}
-      />
-      <div className="d-flex flex-column h-100 w-48 border-left p-4">
+    <div className="d-flex h-100 justify-content-between flex-row align-items-center text-white">
+      <div className="card">
+        <Line
+          data={chartData}
+          width={800}
+          height={250}
+          options={lineOptions}
+          style={{
+            margin: "0 auto",
+          }}
+        />
+      </div>
+
+      <div className="d-flex card flex-column h-100 w-48 border-primary p-4 border-left">
         <FormControl component="fieldset" className="!flex flex-row">
           <FormControlLabel
             control={
