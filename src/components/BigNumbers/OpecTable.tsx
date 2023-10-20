@@ -7,7 +7,7 @@ const OpecTable = () => {
   const currentData: CountryCurrentOpecData[] = useSelector(
     (state) => state.opec.currentData
   );
-
+  
   return (
     <div
       style={{
