@@ -112,7 +112,7 @@ const OpecGraphCountry = () => {
         {
           type: "line" as const,
 
-          label: "Запасы квоты",
+          label: "Обязательства по ОПЕК",
           fill: false,
           lineTension: 0.1,
           backgroundColor: graphColor2,
