@@ -28,7 +28,7 @@ const ScrollingText = () => {
     default:
       text = "";
   }
-  if(activeCategory === 3) return <div className="text-slate-50">{currentCountry}</div>;
+  if(activeCategory === 3) return <div className="text-light">{currentCountry}</div>;
     
   return (
         <div className="card d-flex align-items-center">

@@ -25,17 +25,17 @@ const OpecSubTable = ({ name, dataArr }: OpecSubTable) => {
         {dataArr?.map((el) => (
           <li
             className={`w-full ${
-              currentCountry === el.country ? "bg-slate-500" : ""
+              currentCountry === el.country ? "bg-light" : ""
             } `}
           >
             <Button
               onClick={() => handleItemClick(el.country)}
-              className="w-full"
+              className="w-100"
             >
-              <div className="w-full  flex justify-between">
+              <div className="w-100 d-flex justify-content-between">
                 <div className="text-slate-50">{el.country}</div>
                 <div
-                  className={el.isIncreased ? "text-green-500" : "text-red-500"}
+                  className={el.isIncreased ? "text-success" : "text-danger"}
                 >
                   {isTonnes ? Math.round(el.quota_t) : el.quota_b}
                   {el.isIncreased ? <NorthIcon /> : <SouthIcon />}

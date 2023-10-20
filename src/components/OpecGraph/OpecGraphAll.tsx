@@ -65,7 +65,7 @@ const lineOptions = {
   plugins: {
     legend: {
       display: true,
-      color: textColor
+      color: textColor,
     },
   },
   scales: {
@@ -138,14 +138,14 @@ const OpecGraphCountry = () => {
       if (oilShow) {
         graphDatasets.push({
           ...commonProps,
-          label: countryName+"(добыча нефти)",
+          label: countryName + "(добыча нефти)",
           data: factData,
         });
       }
-      if(quotaShow){
+      if (quotaShow) {
         graphDatasets.push({
           ...commonProps,
-          label: countryName+"(запас квоты)",
+          label: countryName + "(запас квоты)",
           data: planData,
         });
       }
@@ -157,7 +157,7 @@ const OpecGraphCountry = () => {
   };
 
   return (
-    <div className="card flex-row justify-between align-items-center">
+    <div className="card d-flex justify-content-between flex-row align-items-center">
       <Line
         data={chartData}
         width={800}
@@ -167,7 +167,7 @@ const OpecGraphCountry = () => {
           margin: "0 auto",
         }}
       />
-      <div className="flex flex-col h-full w-48 border-l p-4">
+      <div className="d-flex flex-column h-100 w-48 border-left p-4">
         <FormControl component="fieldset" className="!flex flex-row">
           <FormControlLabel
             control={
