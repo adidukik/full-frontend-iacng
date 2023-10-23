@@ -22,16 +22,16 @@ export const LATEST_DATE_URL = "http://192.168.0.57:8000/last_day/";
 
 const BigNumbers = (): JSX.Element => {
   const activeCategory: Category = useSelector(
-    (state: RootState) => state.categories
+    (state: RootState) => state.categories,
   );
   const currentBigNumberTab = useSelector(
-    (state: RootState) => state.bigNumbers.currentBigNumberTab
+    (state: RootState) => state.bigNumbers.currentBigNumberTab,
   );
   const latestDate = useSelector(
-    (state: RootState) => state.bigNumbers.latestDate
+    (state: RootState) => state.bigNumbers.latestDate,
   );
   const currentCompanyId = useSelector(
-    (state: RootState) => state.auth.currentCompanyId
+    (state: RootState) => state.auth.currentCompanyId,
   );
   const currentCompanyIdStr =
     currentCompanyId === 0 ? "" : currentCompanyId + "";
@@ -44,7 +44,8 @@ const BigNumbers = (): JSX.Element => {
     месяц: "month",
     год: "year",
   };
-  const currentBigNumberTabInEnglish = BigNumberTabToEnglish[currentBigNumberTab];
+  const currentBigNumberTabInEnglish =
+    BigNumberTabToEnglish[currentBigNumberTab];
   const fetchedDate: Date = useFetchData(LATEST_DATE_URL);
   useEffect(() => {
     if (String(fetchedDate) != latestDate) {
@@ -427,7 +428,7 @@ const BigNumbers = (): JSX.Element => {
     skv,
     xr,
   ]);
-  const currentInterface = (activeCategory === 3) ? "opec" : "default"
+  const currentInterface = activeCategory === 3 ? "opec" : "default";
   const InterfaceData = {
     default: {
       defaultActiveKey: "#сутки",
@@ -447,7 +448,7 @@ const BigNumbers = (): JSX.Element => {
                   }}
                 ></BigNumberButton>
               </li>
-            )
+            ),
           )}
         </ul>
       ),
@@ -455,10 +456,15 @@ const BigNumbers = (): JSX.Element => {
     opec: {
       defaultActiveKey: "#баррели",
       tabs: ["баррели", "тонны"],
-      components: <OpecTable />
+      components: <OpecTable />,
+      postElements: (
+        <div>
+          , 10<sup>3</sup>
+        </div>
+      ),
     },
   };
-  
+
   return (
     <Card className="big-numbers app-card bg-green-500">
       {activeCategory !== 3 && (
@@ -478,7 +484,12 @@ const BigNumbers = (): JSX.Element => {
                 href={`#${item}`}
                 onClick={() => dispatch(setCurrentBigNumberTab(item))}
               >
-                {item}
+                {item}{" "}
+                {InterfaceData[currentInterface].postElements ? (
+                  InterfaceData[currentInterface].postElements
+                ) : (
+                  <></>
+                )}
               </Nav.Link>
             </Nav.Item>
           ))}
