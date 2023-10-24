@@ -51,8 +51,8 @@ const Regions = () => {
   const onRegionClick = (region) => {
     dispatch(selectRegion(region));
   };
-  const currentTimeRange = useSelector(
-    (state: RootState) => state.bigNumbers.currentTimeRange
+  const currentBigNumberTab = useSelector(
+    (state: RootState) => state.bigNumbers.currentBigNumberTab
   );
   const bigNumberValue = useSelector(
     (state: RootState) => state.bigNumbers.value
@@ -70,7 +70,7 @@ const Regions = () => {
   };
   const bigNumberToType = ["oil", "gas"];
   const yieldType = bigNumberToType[bigNumberValue];
-  const currentTimeRangeInEnglish = timeRangeToEnglish[currentTimeRange];
+  const currentTimeRangeInEnglish = timeRangeToEnglish[currentBigNumberTab];
   const factUrl = `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_${yieldType}_yield_by_regions/`;
   const planUrl = `http://192.168.0.57:8000/calculate_last_${currentTimeRangeInEnglish}_${yieldType}_yield_by_regions_plan/`;
   // State to store table data
