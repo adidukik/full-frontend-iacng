@@ -1,21 +1,28 @@
 import Button from "@mui/material/Button";
-import { CountryCurrentOpecData, OpecCountryName, setCurrentCountry } from "../OpecGraph/opecSlice";
+import { setCurrentCountry } from "../OpecGraph/opecSlice";
 import { useDispatch, useSelector } from "react-redux";
 import SouthIcon from "@mui/icons-material/South";
 import NorthIcon from "@mui/icons-material/North";
+import { RootState } from "../../../store";
+import {
+  CountryCurrentOpecData,
+  OpecCountryName,
+} from "../../interfaces/opecSlice";
 
 interface OpecSubTable {
   name: string;
   dataArr: CountryCurrentOpecData[];
 }
-const OpecSubTable = ({ name, dataArr }: OpecSubTable) => {
+const OpecSubTable = ({ name, dataArr }: OpecSubTable): JSX.Element => {
   const dispatch = useDispatch();
   const currentUnits = useSelector(
-    (state) => state.bigNumbers.currentBigNumberTab
+    (state: RootState) => state.bigNumbers.currentBigNumberTab,
   );
-  const currentCountry = useSelector((state) => state.opec.currentCountry);
+  const currentCountry = useSelector(
+    (state: RootState) => state.opec.currentCountry,
+  );
   const isTonnes = currentUnits === "тонны";
-  const handleItemClick = (countryName: OpecCountryName) => {
+  const handleItemClick = (countryName: OpecCountryName): void => {
     dispatch(setCurrentCountry(countryName));
   };
   return (

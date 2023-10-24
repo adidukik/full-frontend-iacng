@@ -29,7 +29,16 @@ import { Category } from "../CategoriesMenu/categoriesSlice";
 import { formatNumberWithSpaces } from "../../utils/formatNumberWithSpaces";
 import { setRenewablePlants } from "./mapSlice";
 import useFetchData from "../../hooks/useFetchData";
-import { displayedRegionsArr, displayedRegionsNamesArr, getFieldsLayer, regionsFeatures } from "./layers/fieldsLayer";
+import LaunchIcon from "@mui/icons-material/Launch";
+import {
+  displayedRegionsArr,
+  displayedRegionsNamesArr,
+  getFieldsLayer,
+  regionsFeatures,
+} from "./layers/fieldsLayer";
+import { APP_CONFIG } from "../../../app.config";
+
+const ADDITIONAL_BACKEND_URL = APP_CONFIG.ADDITIONAL_BACKEND_URL;
 
 const format = new GeoJSON();
 const operatorIdToEmployees = {};
@@ -40,7 +49,6 @@ for (const el of format.readFeatures(employeesData)) {
   ];
 }
 const plantsFeatures = format.readFeatures(plantsData);
-
 
 function drawCircles(
   coordinatesArray,
@@ -113,8 +121,6 @@ function drawLines(
 
   return vectorLayer;
 }
-
-
 
 const getOilGasPipelines = (params): VectorLayer<VectorSource> => {
   const { displayedRegions, currentCompanyId, currentBigNumberId } = params;
@@ -249,7 +255,6 @@ const AppMap = () => {
   );
   const dispatch = useDispatch();
   const popupRef = useRef(null);
-
 
   const regionsLayer = useMemo(
     () =>
@@ -390,7 +395,6 @@ const AppMap = () => {
           selected.setStyle(undefined);
           selected = null;
         }
-        setPopupVisibility(false);
 
         mapRef.current.forEachFeatureAtPixel(e.pixel, (f: Feature) => {
           if (
@@ -398,17 +402,22 @@ const AppMap = () => {
             f.get("type") !== "republic city"
           ) {
             setPopupVisibility(true);
+           
+            console.log("sussy");
+            if (lastIdRef.current !== f.get("id")) {
+              const nextPopupText = getNextPopupText(f);
+              popupOverlayRef.current.setPosition(e.coordinate);
+              setPopupText(nextPopupText);
+              lastIdRef.current = f.get("id");
+              console.log("baka");
+            }
           }
-          if (
-            f.get("type") !== "district" &&
-            f.get("type") !== "republic city" &&
-            lastIdRef.current !== f.get("id")
-          ) {
-            const nextPopupText = getNextPopupText(f);
-            popupOverlayRef.current.setPosition(e.coordinate);
-            setPopupText(nextPopupText);
-            lastIdRef.current = f.get("id");
-          }
+          // else{
+          //    setTimeout(() => {
+          //     setPopupVisibility(false);
+          //   }, 1000);
+          // }
+
           selected = f;
           selectStyle.getFill().setColor(f.get("COLOR") || "#eeeeee");
           f.setStyle(selectStyle);
@@ -517,10 +526,11 @@ const AppMap = () => {
   return (
     <>
       <div ref={ref} id="map" />
+
       <div
         id="popup"
         ref={popupRef}
-        className={popupVisibility ? "" : "hidden"}
+        className={`${popupVisibility ? "" : "hidden"} text-white`}
       >
         <table cellSpacing={0} cellPadding={0}>
           <tbody>
@@ -530,9 +540,29 @@ const AppMap = () => {
                 <td>{keyval[1]}</td>
               </tr>
             ))}
+            <tr>
+              <td>
+                <a
+                  href={`${ADDITIONAL_BACKEND_URL}/search_asset/?name_to_search=${
+                    popupText && popupText["Имя"]
+                  }`}
+                  target="_blank"
+                >
+                  Контракт
+                  <LaunchIcon
+                    style={{
+                      width: "10px",
+                      marginLeft: "5px",
+                    }}
+                  />
+                </a>
+              </td>
+              <td></td>
+            </tr>
           </tbody>
         </table>
       </div>
+
       <div className="position-absolute top-0 end-0">
         {ndpi && (
           <div

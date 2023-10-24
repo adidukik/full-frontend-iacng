@@ -1,13 +1,14 @@
 import React from "react";
-import { CountryCurrentOpecData } from "../OpecGraph/opecSlice";
 import { useSelector } from "react-redux";
 import OpecSubtable from "./OpecSubTable";
+import { CountryCurrentOpecData } from "../../interfaces/opecSlice";
+import { RootState } from "../../../store";
 
 const OpecTable = () => {
   const currentData: CountryCurrentOpecData[] = useSelector(
-    (state) => state.opec.currentData
+    (state: RootState) => state.opec.currentData,
   );
-  
+
   return (
     <div
       style={{

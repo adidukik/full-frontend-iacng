@@ -1,4 +1,6 @@
-
+a{
+  color: white !important;
+}
 .center {
   align-items: center;
 }
