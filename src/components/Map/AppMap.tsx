@@ -27,7 +27,11 @@ import { Feature } from "ol";
 import { Circle as CircleStyle } from "ol/style.js";
 import { Category } from "../CategoriesMenu/categoriesSlice";
 import { formatNumberWithSpaces } from "../../utils/formatNumberWithSpaces";
-import { setRenewablePlants } from "./mapSlice";
+import {
+  setContractVisibility,
+  setCurrentContractor,
+  setRenewablePlants,
+} from "./mapSlice";
 import useFetchData from "../../hooks/useFetchData";
 import LaunchIcon from "@mui/icons-material/Launch";
 import {
@@ -37,6 +41,7 @@ import {
   regionsFeatures,
 } from "./layers/fieldsLayer";
 import { APP_CONFIG } from "../../../app.config";
+import { Button } from "@mui/material";
 
 const ADDITIONAL_BACKEND_URL = APP_CONFIG.ADDITIONAL_BACKEND_URL;
 
@@ -253,6 +258,9 @@ const AppMap = () => {
   const currentBigNumberId = useSelector(
     (state: RootState) => state.bigNumbers.currentBigNumberId,
   );
+  const currentContractor = useSelector(
+    (state: RootState) => state.map.currentContractor,
+  );
   const dispatch = useDispatch();
   const popupRef = useRef(null);
 
@@ -313,10 +321,14 @@ const AppMap = () => {
       Тип: f.get("type"),
       Продукты: f.get("products"),
       "Напряжение (Вольт)": formatNumberWithSpaces(f.get("voltage")),
-      Работники: operator_id && operatorIdToEmployees[operator_id] ? operatorIdToEmployees[operator_id][0] : null,
-      "Работники (граждане РК)": operator_id  && operatorIdToEmployees[operator_id]
-        ? operatorIdToEmployees[operator_id][1]
-        : null,
+      Работники:
+        operator_id && operatorIdToEmployees[operator_id]
+          ? operatorIdToEmployees[operator_id][0]
+          : null,
+      "Работники (граждане РК)":
+        operator_id && operatorIdToEmployees[operator_id]
+          ? operatorIdToEmployees[operator_id][1]
+          : null,
     };
 
     return nextPopupText;
@@ -405,13 +417,15 @@ const AppMap = () => {
       };
       const onMapClick = (e) => {
         mapRef.current.forEachFeatureAtPixel(e.pixel, (f: Feature) => {
+                      setPopupVisibility(false);
+
           if (
             f.get("type") !== "district" &&
             f.get("type") !== "republic city"
           ) {
             setPopupVisibility(true);
 
-            console.log("sussy");
+            dispatch(setCurrentContractor(f.get("name")));
             if (lastIdRef.current !== f.get("id")) {
               const nextPopupText = getNextPopupText(f);
               popupOverlayRef.current.setPosition(e.coordinate);
@@ -419,10 +433,8 @@ const AppMap = () => {
               lastIdRef.current = f.get("id");
               console.log("baka");
             }
-          }
-          else{
-              setPopupVisibility(false);
-          }
+          } 
+          
 
           selected = f;
           selectStyle.getFill().setColor(f.get("COLOR") || "#eeeeee");
@@ -488,7 +500,6 @@ const AppMap = () => {
     currentCompanyId,
     currentZoom,
     dispatch,
-    displayedRegionsArr,
   ]);
 
   useEffect(() => {
@@ -531,6 +542,34 @@ const AppMap = () => {
   const ndpi = Math.floor(
     useFetchData("http://192.168.0.57:8000/calculate_ndpi/", false, true),
   );
+  const [contractValidity, setContractValidity] = useState(false);
+ 
+  useEffect(()=>{
+     const isContractValid = () => {
+    if(!currentContractor) return false;
+    fetch(
+      `http://192.168.0.57:8001/search_asset/?name_to_search=${currentContractor}`,
+    )
+      .then((response) => {
+         if (response.status === 404) {
+      console.log('Resource not found (404 error)');
+          setContractValidity(false) ;
+    }else
+        if (response.ok) {
+          console.log("Success");
+          setContractValidity(true) ;
+        } else {
+          console.log("Error:", response.status);
+          setContractValidity(false) ;
+        }
+      })
+      .catch((error) => {
+        console.log("Fetch error:", error);
+          setContractValidity(false) ;
+      });
+  };
+    isContractValid();
+  }, [currentContractor])
   return (
     <>
       <div ref={ref} id="map" />
@@ -548,25 +587,27 @@ const AppMap = () => {
                 <td>{keyval[1]}</td>
               </tr>
             ))}
-            <tr>
-              <td>
-                <a
-                  href={`${ADDITIONAL_BACKEND_URL}/search_asset/?name_to_search=${
-                    popupText && popupText["Имя"]
-                  }`}
-                  target="_blank"
-                >
-                  Контракт
-                  <LaunchIcon
-                    style={{
-                      width: "10px",
-                      marginLeft: "5px",
+            {contractValidity && (
+              <tr>
+                <td>
+                  <Button
+                    onClick={() => {
+                      dispatch(setContractVisibility(true));
+                      // href={`${ADDITIONAL_BACKEND_URL}/search_asset/?name_to_search=${ popupText && popupText["Имя"]
                     }}
-                  />
-                </a>
-              </td>
-              <td></td>
-            </tr>
+                  >
+                    Контракт
+                    <LaunchIcon
+                      style={{
+                        width: "10px",
+                        marginLeft: "5px",
+                      }}
+                    />
+                  </Button>
+                </td>
+                <td></td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

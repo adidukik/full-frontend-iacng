@@ -3,10 +3,14 @@ import Feature from "ol/Feature";
 
 interface MapState {
   renewablePlants: number[];
+  contractVisibility: boolean;
+  currentContractor: string;
 }
 
 const initialState: MapState = {
   renewablePlants: [],
+  contractVisibility: false,
+  currentContractor: "",
 };
 
 const mapSlice = createSlice({
@@ -18,9 +22,15 @@ const mapSlice = createSlice({
         state.renewablePlants = action.payload;
       }
     },
+    setContractVisibility(state, action: PayloadAction<boolean>) {
+      state.contractVisibility = action.payload;
+    },
+    setCurrentContractor(state, action: PayloadAction<string>) {
+      state.currentContractor = action.payload;
+    },
   },
 });
 
-export const { setRenewablePlants } = mapSlice.actions;
+export const { setRenewablePlants, setContractVisibility, setCurrentContractor } = mapSlice.actions;
 
 export default mapSlice.reducer;
