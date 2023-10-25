@@ -64,7 +64,11 @@ const PanelPage = () => {
       </div>
       <div className={`contract_wrapper white-text ${contractVisibility ? "" : "hidden"}`}>
         <Button
-        variant="contained"
+        variant="text"
+        style={{
+          color: "black",
+          fontWeight: 700
+        }}
           onClick={() => {
             dispatch(setContractVisibility(false));
           }}

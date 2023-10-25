@@ -263,6 +263,7 @@ const AppMap = () => {
   );
   const dispatch = useDispatch();
   const popupRef = useRef(null);
+  const popupNameRef = useRef(null);
 
   const regionsLayer = useMemo(
     () =>
@@ -334,6 +335,7 @@ const AppMap = () => {
     return nextPopupText;
   };
   const popupOverlayRef = useRef(null);
+  const popupNameOverlayRef = useRef(null);
   let selected = null;
   const selectStyle = new Style({
     fill: new Fill({
@@ -345,6 +347,8 @@ const AppMap = () => {
     }),
   });
   const [currentZoom, setCurrentZoom] = useState(DEFAULT_ZOOM);
+  const [hoveredName, setHoveredName] = useState("");
+
   useEffect(() => {
     const base = new TileLayer({
       source: new OSM(),
@@ -401,7 +405,12 @@ const AppMap = () => {
       popupOverlayRef.current = new Overlay({
         element: document.getElementById("popup"),
       });
+      popupNameOverlayRef.current = new Overlay({
+        element: document.getElementById("popupName"),
+      });
       mapRef.current.addOverlay(popupOverlayRef.current);
+            mapRef.current.addOverlay(popupNameOverlayRef.current);
+
       const onPointerMove = (e) => {
         if (selected !== null) {
           selected.setStyle(undefined);
@@ -411,20 +420,24 @@ const AppMap = () => {
           selected = f;
           selectStyle.getFill().setColor(f.get("COLOR") || "#eeeeee");
           f.setStyle(selectStyle);
+          setHoveredName(f.get("name") || f.get("operator_name"));
+          console.log(e.coordinate)
+          const yOffset = 120000;
+          popupNameOverlayRef.current.setPosition([e.coordinate[0], e.coordinate[1]+yOffset]);
 
           return true;
         });
       };
       const onMapClick = (e) => {
-        mapRef.current.forEachFeatureAtPixel(e.pixel, (f: Feature) => {
-                      setPopupVisibility(false);
+        setPopupVisibility(false);
 
+        mapRef.current.forEachFeatureAtPixel(e.pixel, (f: Feature) => {
           if (
             f.get("type") !== "district" &&
             f.get("type") !== "republic city"
           ) {
             setPopupVisibility(true);
-
+            console.log(" setPopupVisibility(true);");
             dispatch(setCurrentContractor(f.get("name")));
             if (lastIdRef.current !== f.get("id")) {
               const nextPopupText = getNextPopupText(f);
@@ -433,8 +446,7 @@ const AppMap = () => {
               lastIdRef.current = f.get("id");
               console.log("baka");
             }
-          } 
-          
+          }
 
           selected = f;
           selectStyle.getFill().setColor(f.get("COLOR") || "#eeeeee");
@@ -543,37 +555,38 @@ const AppMap = () => {
     useFetchData("http://192.168.0.57:8000/calculate_ndpi/", false, true),
   );
   const [contractValidity, setContractValidity] = useState(false);
- 
-  useEffect(()=>{
-     const isContractValid = () => {
-    if(!currentContractor) return false;
-    fetch(
-      `http://192.168.0.57:8001/search_asset/?name_to_search=${currentContractor}`,
-    )
-      .then((response) => {
-         if (response.status === 404) {
-      console.log('Resource not found (404 error)');
-          setContractValidity(false) ;
-    }else
-        if (response.ok) {
-          console.log("Success");
-          setContractValidity(true) ;
-        } else {
-          console.log("Error:", response.status);
-          setContractValidity(false) ;
-        }
-      })
-      .catch((error) => {
-        console.log("Fetch error:", error);
-          setContractValidity(false) ;
-      });
-  };
+
+  useEffect(() => {
+    const isContractValid = () => {
+      if (!currentContractor) {
+        return false;
+      }
+      fetch(
+        `http://192.168.0.57:8001/search_asset/?name_to_search=${currentContractor}`,
+      )
+        .then((response) => {
+          if (response.status === 404) {
+            console.log("Resource not found (404 error)");
+            setContractValidity(false);
+          } else if (response.ok) {
+            console.log("Success");
+            setContractValidity(true);
+          } else {
+            console.log("Error:", response.status);
+            setContractValidity(false);
+          }
+        })
+        .catch((error) => {
+          console.log("Fetch error:", error);
+          setContractValidity(false);
+        });
+    };
     isContractValid();
-  }, [currentContractor])
+  }, [currentContractor]);
   return (
     <>
       <div ref={ref} id="map" />
-
+      <div id="popupName" ref={popupNameRef} className={` ${hoveredName ? "" : "hidden"}`}>{hoveredName}</div>
       <div
         id="popup"
         ref={popupRef}
@@ -593,7 +606,7 @@ const AppMap = () => {
                   <Button
                     onClick={() => {
                       dispatch(setContractVisibility(true));
-                      // href={`${ADDITIONAL_BACKEND_URL}/search_asset/?name_to_search=${ popupText && popupText["Имя"]
+                      document.exitFullscreen();
                     }}
                   >
                     Контракт

@@ -11,6 +11,11 @@
   background: white;
   font-size: 10px;
 }
+#popupName{
+  color: black;
+  pointer-events:none;
+font-weight: 700;
+}
 
 #popup tr:nth-child(2n){
   background-color: #041541;
