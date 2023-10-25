@@ -313,8 +313,8 @@ const AppMap = () => {
       Тип: f.get("type"),
       Продукты: f.get("products"),
       "Напряжение (Вольт)": formatNumberWithSpaces(f.get("voltage")),
-      Работники: operator_id ? operatorIdToEmployees[operator_id][0] : null,
-      "Работники (граждане РК)": operator_id
+      Работники: operator_id && operatorIdToEmployees[operator_id] ? operatorIdToEmployees[operator_id][0] : null,
+      "Работники (граждане РК)": operator_id  && operatorIdToEmployees[operator_id]
         ? operatorIdToEmployees[operator_id][1]
         : null,
     };
@@ -395,14 +395,22 @@ const AppMap = () => {
           selected.setStyle(undefined);
           selected = null;
         }
+        mapRef.current.forEachFeatureAtPixel(e.pixel, (f: Feature) => {
+          selected = f;
+          selectStyle.getFill().setColor(f.get("COLOR") || "#eeeeee");
+          f.setStyle(selectStyle);
 
+          return true;
+        });
+      };
+      const onMapClick = (e) => {
         mapRef.current.forEachFeatureAtPixel(e.pixel, (f: Feature) => {
           if (
             f.get("type") !== "district" &&
             f.get("type") !== "republic city"
           ) {
             setPopupVisibility(true);
-           
+
             console.log("sussy");
             if (lastIdRef.current !== f.get("id")) {
               const nextPopupText = getNextPopupText(f);
@@ -412,11 +420,9 @@ const AppMap = () => {
               console.log("baka");
             }
           }
-          // else{
-          //    setTimeout(() => {
-          //     setPopupVisibility(false);
-          //   }, 1000);
-          // }
+          else{
+              setPopupVisibility(false);
+          }
 
           selected = f;
           selectStyle.getFill().setColor(f.get("COLOR") || "#eeeeee");
@@ -425,7 +431,9 @@ const AppMap = () => {
           return true;
         });
       };
+      mapRef.current.on("click", onMapClick);
       mapRef.current.on("pointermove", onPointerMove);
+
       let currZoom = mapRef.current.getView().getZoom();
       mapRef.current.on("moveend", function (e) {
         const newZoom = mapRef.current.getView().getZoom();
